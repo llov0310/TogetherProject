@@ -8,9 +8,27 @@
 	<title>로그인 페이지</title>
 </th:block>
 
-<th:block layout:fragment="contents">
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/login.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-	<div class="wrapper fadeInDown">
+</th:block>
+
+
+
+<th:block layout:fragment="page_js">
+	<script src="assets/js/login.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</th:block>
+
+
+
+
+
+<th:block layout:fragment="contents">
+	
+	<div class="wrapper fadeInDown" >
 		<div id="formContent">
 			<!-- Tabs Titles -->
 
@@ -24,27 +42,28 @@
 			<div th:if="${session.user == null}">
 				<p th:if="${error != null}" th:text="${error}"></p>
 				<form action="/login" method="post">
-					<input type="text" class="fadeIn second" name="userid"
-						placeholder="login"> <input type="password"
-						class="fadeIn third" name="password" placeholder="password">
-					<input type="submit" value="로그인" id="login" class="fadeIn fourth"
-						style="margin-bottom: 20px;">
-
-					<!-- 			<button id ="login" class="fadeIn fourth" value="로그인" style=margin-bottom:20px;>로그인</button> -->
-					<button class="fadeIn fourth" value="회원가입"
-						style="margin-bottom: 10px; width: 200px; text-align: center;">회원가입</button>
+					<input type="text" id="id" class="fadeIn second" name="userid" placeholder="login"> 
+					<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+					<input type="submit" value="로그인" id="login" class="fadeIn fourth" style="margin-bottom: 20px;">
+				</form>
+				<form action="/signup" method="get">
+				<input type="submit" value="회원가입" id="singup" class="fadeIn fourth" >
 				</form>
 			</div>
+			
 
+<!--     <form> -->
+<!--       <input type="text" id="login" class="fadeIn second" name="login" placeholder="login"> -->
+<!--       <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"> -->
+<!--       <input type="submit" class="fadeIn fourth" value="Log In"> -->
+<!--     </form> -->
 
-			<!-- 			<div th:if="${session.user == null}"> -->
-			<!-- 				<p th:if="${error != null}" th:text="${error}"></p> -->
-			<!-- 				<form action="/login" method="post"> -->
-			<!-- 					<input name="cid" type="text"></input> -->
-			<!-- 					<input name="password" type="password"></input> -->
-			<!-- 					<input type="submit" value="LOGIN"> -->
-			<!-- 				</form> -->
-			<!-- 			</div> -->
+<!--     Remind Passowrd -->
+<!--     <div id="formFooter"> -->
+<!--       <a class="underlineHover" href="#">Forgot Password?</a> -->
+<!--     </div> -->
+
+<!--   </div> -->
 
 
 			<!-- Remind Passowrd -->
@@ -60,18 +79,7 @@
 	</div>
 </th:block>
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <!------ Include the above in your HEAD tag ---------->
 
-<script src="assets/js/login.js"></script>
-
-<link rel="stylesheet" href="assets/css/login.css">
 
 </html>

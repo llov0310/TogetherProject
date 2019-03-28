@@ -24,17 +24,18 @@ public class CustomerServiceImplement implements CustomerService {
 //	}
 
 	
-	@Override
-	public int sign(MemberVO insert) {
-		// TODO Auto-generated method stub
-		return mapper.sign(insert);
-	}
 
 	//로그인
 	@Override
 	public MemberVO login(String userid, String password) {
 		// TODO Auto-generated method stub
 		return mapper.login(userid, password);
+	}
+
+@Override
+	public int signup(MemberVO ins) {
+		// TODO Auto-generated method stub
+		return mapper.signup(ins);
 	}
 
 

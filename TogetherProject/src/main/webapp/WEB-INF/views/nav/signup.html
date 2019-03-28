@@ -1,57 +1,73 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="assets/css/signup.css">
- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
- 
- <script src="assets/js/sign.js"></script>
- 
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
 
-<form>
-<h2>회원가입</h2>
+<th:block layout:fragment="page_head">
+	<title>로그인 페이지</title>
+</th:block>
 
-  <label>
-    <p class="label-txt">아이디를 입력해 주세요</p>
-    <input type="text" class="input" id="id">
-    <div class="line-box">
-      <div class="line"></div>
-    </div>
-  </label>
-  <label>
-    <p class="label-txt">이름을 입력해 주세요</p>
-    <input type="text" class="input" id="name">
-    <div class="line-box">
-      <div class="line"></div>
-    </div>
-  </label>
-  <label>
-    <p class="label-txt">비밀번호를 입력해주세요</p>
-    <input type="password" class="input" id="password">
-    <div class="line-box">
-      <div class="line"></div>
-    </div>
-  </label>
-  <label>
-    <p class="label-txt">이메일을 입력해주세요</p>
-    <input type="text" class="input" id="email" placeholder="ex)xxxx@naver.com">
-    <div class="line-box">
-      <div class="line"></div>
-    </div>
-  </label>
-  
-  <label style="width:50%">
-    <p class="label-txt2">주소를 검색 해 주세요</p>
-    <input type="text" class="input" id="sample4_postcode" placeholder="우편번호">
-     <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-    <span id="guide" style="color:#999;display:none"></span>
-	<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-	<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+<th:block layout:fragment="page_css">
+	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" href="assets/css/signup.css">
+	
+</th:block>
 
-  </label>
-  </form>
-<br>
+<th:block layout:fragment="page_js">
+	 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+ 	 <script src="assets/js/sign.js"></script>
+ 	 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</th:block>
 
-<button id="signup">회원가입</button>
+<th:block layout:fragment="contents">
+
+		<form action="/sign" method="post">
+		<h2>회원가입</h2>
+		
+		  <label>
+		    <p class="label-txt">아이디를 입력해 주세요</p>
+		    <input type="text" class="input" id="id" name="userid">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		    <p class="label-txt">이름을 입력해 주세요</p>
+		    <input type="text" class="input" id="name" name="name">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		    <p class="label-txt">비밀번호를 입력해주세요</p>
+		    <input type="password" class="input" id="password" name="password">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		    <p class="label-txt">이메일을 입력해주세요</p>
+		    <input type="text" class="input" id="email" placeholder="ex)xxxx@naver.com" name="email">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  
+		  <label style="width:50%">
+		    <p class="label-txt2">주소를 검색 해 주세요</p>
+		    <input type="text" class="input" id="sample4_postcode" placeholder="주소">
+		    <input type="text" class="input" id="sample4_roadAddress" placeholder="도로명주소">
+		    <input type="text" class="input" id="sample4_jibunAddress" placeholder="지번주소"><br>
+		    <span id="guide" style="color:#999;display:none"></span>	
+		    <input type="text" class="input" id="sample4_detailAddress" placeholder="상세주소">
+		    <input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" name="adress">
+		    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+		    <input type="submit" value="회원가입"/> 
+		  </label>
+		  </form>
+		<br>
+
+</th:block>
+</html>

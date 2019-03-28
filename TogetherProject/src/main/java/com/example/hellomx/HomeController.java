@@ -47,7 +47,10 @@ public class HomeController {
    
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO userInfo, HttpSession session, Model model) {
+		
 		MemberVO user = customerService.login(userInfo.getUserid(), userInfo.getPassword());
+		
+		
 		if (user != null) {
 			session.setAttribute("user", user);
 			return "home";
@@ -55,6 +58,8 @@ public class HomeController {
 			model.addAttribute("error", "login failed");
 			return "login";
 		}
+		
+		
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -64,22 +69,18 @@ public class HomeController {
 	}
 	//▲▲▲▲▲▲▲로그인을 위한 맵핑▲▲▲▲▲▲▲
 	
-   @RequestMapping("sign.do")
-   	@ResponseBody
-   public String sign(Model model, @RequestParam String id ,@RequestParam String password, @RequestParam String email, @RequestParam String name, @RequestParam String adress) {
+   @RequestMapping(value = "/sign", method = RequestMethod.POST)
+   public String signup(Model model, MemberVO ins) {
 	   
-	   MemberVO insert = new MemberVO();
-	   
-	   insert.setUserid(id);
-	   insert.setPassword(password);
-	   insert.setEmail(email);
-	   insert.setName(name);
-	   insert.setAdress(adress);
-	    
-	   int suc = customerService.sign(insert);
+	   int insert = customerService.signup(ins);
 	  
-	
-	   return "nav/signup";
+	   if(insert != 0) {
+		   return "nav/login";
+	   }else {
+		   return "home";
+	   }
+	 
+	   
 	   
    }
    

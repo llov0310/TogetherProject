@@ -11,5 +11,5 @@ public interface CustomerService {
 	
 	public MemberVO login(String userid, String password);
 
-	public int sign(MemberVO insert);
+	public int signup(MemberVO ins);
 }

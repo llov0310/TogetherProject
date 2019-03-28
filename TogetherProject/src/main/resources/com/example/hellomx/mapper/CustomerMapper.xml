@@ -8,12 +8,11 @@
 	</select> <!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
 	
 	<!-- login sql 추가 -->
-	<select id="login"
-		resultType="com.example.hellomx.domain.MemberVO">
+	<select id="login" resultType="com.example.hellomx.domain.MemberVO">
 		select * from member where userid = #{userid} and password = #{password}
 	</select>
 
-	<insert id="sign" parameterType="com.example.hellomx.domain.MemberVO">
+	<insert id="signup" parameterType="com.example.hellomx.domain.MemberVO">
 		insert into member values (#{userid},#{password},#{email},#{adress},#{name})
 	</insert>
 </mapper>
