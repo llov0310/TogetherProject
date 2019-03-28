@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hellomx.mapper.CustomerMapper">
+	<select id="getList"
+		resultType="com.example.hellomx.domain.CustomerVO">
+		select * from customer
+	</select> <!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
+	
+	<!-- login sql 추가 -->
+	<select id="login"
+		resultType="com.example.hellomx.domain.MemberVO">
+		select * from member where userid = #{userid} and password = #{password}
+	</select>
+
+	<insert id="sign" parameterType="com.example.hellomx.domain.MemberVO">
+		insert into member values (#{userid},#{password},#{email},#{adress},#{name})
+	</insert>
+</mapper>

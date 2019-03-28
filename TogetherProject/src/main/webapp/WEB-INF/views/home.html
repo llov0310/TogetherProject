@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
+
+<th:block layout:fragment="page_head">
+	<title>홈 페이지</title>
+</th:block>
+
+<th:block layout:fragment="contents">
+	<!-- HERO
+    ================================================== -->
+	<section class="section section-top section-full">
+
+		<!-- Cover -->
+		<div class="bg-cover"
+			style="background-image: url(assets/img/dogpage1.png); width: 100%; height: 100%;"></div>
+
+		<!-- Overlay -->
+		<div class="bg-overlay"></div>
+		<!-- Content -->
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-md-10 col-lg-7 ">
+					<div class="banner-content">
+						<!-- Preheading -->
+						<p class="text-white text-uppercase text-center text-xs">
+							<span>Dog Love</span>
+						</p>
+
+						<!-- Heading -->
+						<h1 class="text-white text-center mb-4 display-4 font-weight-bold">
+							반려견 종합 서비스 <br> Together에 오신것을 <br> 환영합니다.
+						</h1>
+
+						<!-- Subheading -->
+						<p class="lead text-white text-center mb-5">
+							반려견에 대한 통합서비스가 주인 투개더에서는 사용자의 편의성과 함께 <br>
+							<br>새로운 서비스를 제공하고 있습니다 분양/짝찾기/병원/장례 등 <br>
+							<br>정보를 확인할수 있으며 커뮤니티를 통해 <br>
+							<br>쉽게 알고자하는 정보를 획득할수 있습니다. <br>
+							<br>반려견과 처음부터 끝까지 책임지는 서비스 플랫폼 입니다.
+						</p>
+
+						<!-- Button -->
+						<div class="text-center mb-0">
+							<a
+								href="https://play.google.com/store/apps?utm_source=apac_med&utm_medium=hasem&utm_content=Jan0219&utm_campaign=Evergreen&pcampaignid=MKT-DR-apac-kr-1003227-med-hasem-ap-Evergreen-Jan0219-Text_Search_BKWS-BKWS%7cONSEM_kwid_43700009359644034_creativeid_96242360585_device_c&gclid=EAIaIQobChMIos6S79qA4QIVhKmWCh3c8wTKEAAYASAAEgJzU_D_BwE&gclsrc=aw.ds"
+								target="_blank" class="btn btn-primary"> Google play
+								Download </a> <a
+								href="https://itunes.apple.com/kr/app/apple-store/id375380948?mt=8"
+								target="_blank" class="btn btn-primary" style="width: 247px;">
+								ios Download </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- / .row -->
+		</div>
+		<!-- / .container -->
+	</section>
+
+
+</th:block>
+</html>
