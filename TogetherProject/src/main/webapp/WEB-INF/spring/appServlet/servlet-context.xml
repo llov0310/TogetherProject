@@ -27,6 +27,7 @@
 	<beans:bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
+		<beans:property name="cacheable" value="false"></beans:property>
 		<beans:property name="characterEncoding" value="UTF-8" />
 	</beans:bean>
 	
