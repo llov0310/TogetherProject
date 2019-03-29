@@ -9,16 +9,12 @@
 }
 
 
-nav {
-	width:100%;
-	hight:20%;
-	text-align: center;
-}
 
 section{
 	width:100%;
 	hight:60%;
 	text-align: center;
+	margin : 15% 0 0 0;
 }
 
 footer{
@@ -36,20 +32,22 @@ footer{
 .total{
 	float:left;
 	width:100%;
-	hight:200px;
+	height:100%;
+	margin-bottom : 10%;
 }
 
 .serv1{
 	float:left;
 	width: 100%;
-	hight: 20%;
+	margin-bottom: 10%;
+	
 }
 
 .serv2{
-	margin-left:3%;
+	margin:0 0 5% 3%;
 	float:left;
 	width: 100%;
-	hight: 20%;
+	
 }
 
 .serv3{

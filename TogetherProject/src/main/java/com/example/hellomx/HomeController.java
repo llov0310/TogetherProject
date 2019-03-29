@@ -95,7 +95,7 @@ public class HomeController {
    @RequestMapping(value = "/page", method=RequestMethod.GET)
    public String menuPage(Model model) {
 	   
-	   return "page";
+	   return "service/page";
    }
    
    //각 기능 페이지 이동 Mapping

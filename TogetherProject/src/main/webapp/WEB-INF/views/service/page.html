@@ -1,15 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta charset="utf-8">
- <link rel="stylesheet" href="assets/css/page/page.css">
- 
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
 
-	<nav class="main-nav">메인의 페이지 들어올예정 네비게이션</nav>
+<th:block layout:fragment="page_head">
+	<title>서비스 메뉴에 오신것을 환영합니다.</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	 <link rel="stylesheet" href="assets/css/page/page.css">
+</th:block>
+
+<th:block layout:fragment="page_js">
 	
+</th:block>
+
+<th:block layout:fragment="contents">
 	
 	<section class="mainmaue" id="sec">
 	<div class="total">
@@ -17,6 +24,7 @@
 				<div class="serv2" >
 					<div class="m1" style="float:left; border:1px solid black; width: 23%;" >
 						<div>
+						호텔
 					 	<a href="hotel"><img src="http://placehold.it/300x200"></a>
 					 	</div> 
 					
@@ -25,17 +33,20 @@
 					
 					<div class="m2" style="float:left; border:1px solid black; width: 23%;">
 					<div>
+						병원
 						<a href="hospital"><img src="http://placehold.it/300x200"></a>
 						</div>					
 					</div>
 					
 					
-					<div class="m3" style="float:left; border:1px solid black; width: 23%;">	
+					<div class="m3" style="float:left; border:1px solid black; width: 23%;">
+						굿바이	
 						<a href="goodbye"><img src="http://placehold.it/300x200"></a>
 					</div>
 					
 					
 					<div class="m4" style="float:left; border:1px solid black; width: 23%;">
+						추모소
 						<a href="goodbye2"><img src="http://placehold.it/300x200"></a>
 					</div>
 				</div>
@@ -55,13 +66,7 @@
 		
 	</div>	
 	</section>
-	
-	
-	
-<footer>
-	하단 소개 내용이 들어갈 공간입니다
-	</footer>
-</body>
+</th:block>
 
 </html>
 
