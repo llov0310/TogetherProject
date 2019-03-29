@@ -1,10 +1,108 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-이야
-</body>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/serviceLayout">
+
+<th:block layout:fragment="page_head">
+	<title>아늑한 공간 펫호텔 서비스에 오신것을 환영합니다.</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	 <link rel="stylesheet" href="assets/css/page/hotel.css">
+	 
+</th:block>
+
+<th:block layout:fragment="page_js">
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+ });
+  </script>
+</th:block>
+
+<th:block layout:fragment="contents">
+
+ 
+	<div class="total-div">
+			<div class="left-div">
+			
+				<div class="address-mm">
+				주소부분
+				</div>
+				<br/>
+				<br/>
+				<br/>
+				<div class="test">
+					<div id="cal1" class="to1">
+					<label for="from">체크인</label>
+					<input type="text" id="from" name="from">
+					</div>
+					
+					<div id="empty" class="to1">
+						
+						
+					</div>
+					
+					<div id="cal2" class="to1">
+					<label for="to">체크아웃</label>
+					<input type="text" id="to" name="to">
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="right-div">
+			
+				<div class="top-bar">
+					<div class="move1">
+						(Total업체 갯수 가 들어옴)
+					</div>
+				 
+					 <div class="move2">
+					 <input type="radio" id="topic" class="set" name="1">인기순
+					 <input type="radio" id="distance" class="set" name="1">거리순
+					 <input type="radio" id="avg" class="set" name="1">평점순
+					 </div>
+				</div>
+				<div class="list-bar">
+					<div></div>
+				</div>
+				
+			</div>
+
+	</div>
+	</th:block>
+
 </html>
