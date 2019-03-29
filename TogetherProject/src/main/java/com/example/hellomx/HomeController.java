@@ -111,10 +111,10 @@ public class HomeController {
 	   
 	   return "service/hospital";
    }
-   @RequestMapping(value = "/goodbye", method=RequestMethod.GET)
-   public String goodbye(Model model) {
+   @RequestMapping(value = "/goodbye1", method=RequestMethod.GET)
+   public String goodbye1(Model model) {
 	   
-	   return "service/goodbye";
+	   return "service/goodbye1/goodbye1_home";
    }
    
    @RequestMapping(value = "/goodbye2", method=RequestMethod.GET)
