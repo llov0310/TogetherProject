@@ -17,39 +17,7 @@
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    var dateFormat = "mm/dd/yy",
-      from = $( "#from" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          numberOfMonths: 3
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
-        }),
-      to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 3
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
-      });
- 
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
- 
-      return date;
-    }
- });
-  </script>
+
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -66,18 +34,13 @@
 				<br/>
 				<div class="test">
 					<div id="cal1" class="to1">
-					<label for="from">체크인</label>
-					<input type="text" id="from" name="from">
+					<label for="from" class="la">체크인</label>
+					<input type="date" id="from" name="from" class="in">
 					</div>
-					
-					<div id="empty" class="to1">
-						
-						
-					</div>
-					
+
 					<div id="cal2" class="to1">
-					<label for="to">체크아웃</label>
-					<input type="text" id="to" name="to">
+					<label for="to" class="la">체크아웃</label>
+					<input type="date" id="to" name="to" class="in">
 					</div>
 				</div>
 				
@@ -97,12 +60,21 @@
 					 </div>
 				</div>
 				<div class="list-bar">
-					<div></div>
+					<div class="company_list_img">
+						<img src="http://placehold.it/150x200">
+						
+					</div>
+					<div class="company_list">
+						<label>업체이름</label><br/>
+						<textarea>업체 소개</textarea>
+					</div>
 				</div>
 				
 			</div>
 
 	</div>
 	</th:block>
+	
+	  
 
 </html>
