@@ -125,7 +125,13 @@ public class HomeController {
    
    
    
-
+   //hotel 관련 이동 Mapping 정보
+   
+   @RequestMapping(value = "/hotelserch", method=RequestMethod.GET)
+   public String hotelserch(Model model) {
+	   
+	   return "service/hotel/hotelserch";
+   }
 		
 
 	

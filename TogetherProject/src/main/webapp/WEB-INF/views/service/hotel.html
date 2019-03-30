@@ -15,9 +15,19 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-
+	<script src="assets/js/hotel.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=590c0507631ccb4fcce21f0b5d9bb6a7&libraries=clusterer"></script>
+  <script>
+  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+  var options = { //지도를 생성할 때 필요한 기본 옵션
+  	center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+  	level: 3 //지도의 레벨(확대, 축소 정도)
+  };
+
+  var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+  </script>
 
 </th:block>
 
@@ -28,11 +38,11 @@
 			<div class="left-div">
 			
 				<div class="address-mm">
-				주소부분
+					<label>대구광역시 복현동 300호</label>
 				</div>
-				<br/>
-				<br/>
-				<br/>
+				<br>
+				<button class="map" onclick="mapserch()"><img src="http://placehold.it/20x20" /></button>
+				
 				<div class="test">
 					<div id="cal1" class="to1">
 					<label for="from" class="la">체크인</label>
@@ -61,12 +71,87 @@
 					 </div>
 				</div>
 				<div class="list-bar">
-					<div class="company_list_img">
-						<img src="http://placehold.it/150x200">
+				
+					<div class="list">
+						<div class="company_list_img">
+							<img src="http://placehold.it/150x200">
+						</div>
+
+						<div class="company_list">
+							<div class="intro">
+							<a href="#">업체이름</a>><label>별점</label><br>
+							<textarea style="width:80%">소개</textarea><br>
+							<br>
+							</div>
+							<div class="money">
+							<label>시간당</label> <label> 10,000원 </label><br>
+							<label>1박</label> <label> 50,000원 </label>
+							</div>
+							
+							
+						</div>
 					</div>
-					<div class="company_list">
-						<label>업체이름</label><br>
-						<textarea>소개</textarea>
+					
+					<div class="list">
+						<div class="company_list_img">
+							<img src="http://placehold.it/150x200">
+						</div>
+
+						<div class="company_list">
+							<div class="intro">
+							<a href="#">업체이름</a>><label>별점</label><br>
+							<textarea style="width:80%">소개</textarea><br>
+							<br>
+							</div>
+							<div class="money">
+							<label>시간당</label> <label> 10,000원 </label><br>
+							<label>1박</label> <label> 50,000원 </label>
+							</div>
+							
+							
+						</div>
+					</div>
+					
+					
+					<div class="list">
+						<div class="company_list_img">
+							<img src="http://placehold.it/150x200">
+						</div>
+
+						<div class="company_list">
+							<div class="intro">
+							<a href="#">업체이름</a>><label>별점</label><br>
+							<textarea style="width:80%">소개</textarea><br>
+							<br>
+							</div>
+							<div class="money">
+							<label>시간당</label> <label> 10,000원 </label><br>
+							<label>1박</label> <label> 50,000원 </label>
+							</div>
+							
+							
+						</div>
+					</div>
+					
+					
+					<div class="list">
+						<div class="company_list_img">
+							<img src="http://placehold.it/150x200">
+						</div>
+
+						<div class="company_list">
+							<div class="intro">
+							<a href="#">업체이름</a>><label>별점</label><br>
+							<textarea style="width:80%">소개</textarea><br>
+							<br>
+							</div>
+							<div class="money">
+							<label>시간당</label> <label> 10,000원 </label><br>
+							<label>1박</label> <label> 50,000원 </label>
+							</div>
+							
+							
+						</div>
 					</div>
 				</div>
 				
