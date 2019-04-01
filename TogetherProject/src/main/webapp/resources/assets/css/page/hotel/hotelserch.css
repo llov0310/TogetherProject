@@ -9,7 +9,23 @@
 	
 	#map{
 		margin-top : 20%;
+		width:100%;
+		height:400px;
 	}
 	
-
+	#menu_wrap{
+		
+		margin-top : 5%;
 	}
+	
+	#placeList{
+		overflow : scroll;
+		height : 100px;
+	}
+	
+	.scroller{
+		overflow: scroll; 
+		height : 100px;
+	}
+	
+}
