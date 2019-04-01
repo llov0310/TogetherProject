@@ -10,5 +10,5 @@ public class MemberVO {
 	private String email;
 	private String adress;
 	private String name;
-
+	private String authority;
 }

@@ -1,8 +1,6 @@
 package com.example.hellomx.mapper;
 
 
-import java.util.ArrayList;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.example.hellomx.domain.MemberVO;

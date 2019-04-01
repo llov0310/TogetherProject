@@ -11,6 +11,6 @@
 	</select>
 
 	<insert id="signup" parameterType="com.example.hellomx.domain.MemberVO">
-		insert into member values (#{userid},#{password},#{email},#{adress},#{name})
+		insert into member values (#{userid},#{password},#{email},#{adress},#{name},'3')
 	</insert>
 </mapper>
