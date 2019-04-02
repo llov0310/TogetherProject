@@ -141,9 +141,9 @@ function displayPlaces(places) {
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
 
-    var el = document.createElement('li'),
+    var el = document.createElement('div'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                '<div class="info">' +
+                '<div class="info" id="ad" ' + //onclick="address_serch()">  
                 '   <h5>' + places.place_name + '</h5>';
 
     if (places.road_address_name) {
@@ -157,7 +157,9 @@ function getListItem(index, places) {
                 '</div>';           
 
     el.innerHTML = itemStr;
-    el.className = 'item';
+    el.className = 'itemList';
+     el.id = 'ite';
+    
 
     return el;
 }
@@ -237,6 +239,37 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+
+
+$(document).ready(function(){
+	$('#placesList').on('click', 'span',function(){
+		alert("ㅇㅇ");
+		var a = $(this).parent().children().eq(1);
+		console.log(a.html());
+	});
+	
+});
+//  		var ii = $(this).children('div');
+ 		
+//  		var ad = $(this).children("li");
+// 		var to = ii.eq(0).text();
+//  		console.log(ad.eq(0).text());
+	
+// 		console.log(to);
+
+// }); 
+	
+// function address_serch(index){
+
+// 	var mother = document.getElementById('ite' + 1);
+// // 	var first = mother.lastChild;
+// // 	var second = first.childNodes;
+// // 	console.log(first);
+// // 	console.log(second);
+// 	console.log(mother);
+
+// 	}
+
 </script>
 </th:block>
 
@@ -255,9 +288,16 @@ function removeAllChildNods(el) {
         </div>
         <hr>
         <div class="scroller">
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
+        <div id="placesList">
+        <div class="itemList" id="ite">
         </div>
+        	
+        </div>
+        </div>
+        <div id="pagination">
+        
+        </div>
+        
     </div>
 </div>
 	</th:block>

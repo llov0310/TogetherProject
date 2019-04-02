@@ -25,7 +25,11 @@
 	
 	.scroller{
 		overflow: scroll; 
-		height : 100px;
+		height : 130px;
+	}
+	.itemList{
+		width : 100%;
+		height : 200px;
 	}
 	
 }
