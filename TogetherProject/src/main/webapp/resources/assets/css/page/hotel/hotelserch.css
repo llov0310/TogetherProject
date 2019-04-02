@@ -18,14 +18,23 @@
 		margin-top : 5%;
 	}
 	
-	#placeList{
+	#placesList{
 		overflow : scroll;
-		height : 100px;
+		height : 150px;
 	}
 	
 	.scroller{
 		overflow: scroll; 
-		height : 100px;
+		
+	}
+	.itemList{
+		margin-top: 7%;
+		width : 100%;
+
+	}
+	
+	#pagination{
+		margin-left : 45%;
 	}
 	
 }
