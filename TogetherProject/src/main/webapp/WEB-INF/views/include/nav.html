@@ -36,23 +36,11 @@
 				<li class="nav-item "><a class="nav-link js-scroll-trigger"
 					href="page"> Page </a></li>
 
-				<li th:if="${session.user == null}"><a href="/login">로그인</a><a href="/signup">회원가입</a></li>
+				<li th:if="${session.user == null}"><a href="/login">로그인</a><a
+					href="/signup">회원가입</a></li>
 				<li th:if="${session.user}"><span
 					th:text="${session.user.name}"></span> <a href="/logout">로그아웃</a>
-					
-				
 			</ul>
-
-
-			<!-- 					<button th:if="${session.id == null}"class="button" id="login" style="vertical-align: middle;" -->
-			<!-- 						onclick="login()">로그인</button> -->
-
-		
-			<!-- 					<button th:if="${session.id}"class="button" id="logout" style="vertical-align: middle;" -->
-			<!-- 						onclick="logout()">로그아웃</button> -->
-
-
-
 
 		</div>
 

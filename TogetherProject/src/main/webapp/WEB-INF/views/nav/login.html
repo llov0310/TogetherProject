@@ -10,7 +10,9 @@
 
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" href="assets/css/login.css">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link
+		href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css">
 
 </th:block>
 
@@ -18,8 +20,10 @@
 
 <th:block layout:fragment="page_js">
 	<script src="assets/js/login.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </th:block>
 
 
@@ -27,8 +31,8 @@
 
 
 <th:block layout:fragment="contents">
-	
-	<div class="wrapper fadeInDown" >
+
+	<div class="wrapper fadeInDown">
 		<div id="formContent">
 			<!-- Tabs Titles -->
 
@@ -42,28 +46,16 @@
 			<div th:if="${session.user == null}">
 				<p th:if="${error != null}" th:text="${error}"></p>
 				<form action="/login" method="post">
-					<input type="text" id="id" class="fadeIn second" name="userid" placeholder="login"> 
-					<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-					<input type="submit" value="로그인" id="login" class="fadeIn fourth" style="margin-bottom: 20px;">
+					<input type="text" id="id" class="fadeIn second" name="userid"
+						placeholder="login"> <input type="password" id="password"
+						class="fadeIn third" name="password" placeholder="password">
+					<input type="submit" value="로그인" id="login" class="fadeIn fourth"
+						style="margin-bottom: 20px;">
 				</form>
 				<form action="/signup" method="get">
-				<input type="submit" value="회원가입" id="singup" class="fadeIn fourth" >
+					<input type="submit" value="회원가입" id="singup" class="fadeIn fourth">
 				</form>
 			</div>
-			
-
-<!--     <form> -->
-<!--       <input type="text" id="login" class="fadeIn second" name="login" placeholder="login"> -->
-<!--       <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"> -->
-<!--       <input type="submit" class="fadeIn fourth" value="Log In"> -->
-<!--     </form> -->
-
-<!--     Remind Passowrd -->
-<!--     <div id="formFooter"> -->
-<!--       <a class="underlineHover" href="#">Forgot Password?</a> -->
-<!--     </div> -->
-
-<!--   </div> -->
 
 
 			<!-- Remind Passowrd -->
@@ -78,8 +70,6 @@
 		<a href="/logout">Logout</a>
 	</div>
 </th:block>
-
-<!------ Include the above in your HEAD tag ---------->
 
 
 </html>
