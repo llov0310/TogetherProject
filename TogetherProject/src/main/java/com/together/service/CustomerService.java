@@ -1,7 +1,8 @@
-package com.example.hellomx.service;
+package com.together.service;
 
 import java.util.ArrayList;
-import com.example.hellomx.domain.MemberVO;
+
+import com.together.domain.MemberVO;
 
 public interface CustomerService {
 	public MemberVO login(String userid, String password);

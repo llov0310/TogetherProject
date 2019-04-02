@@ -1,4 +1,4 @@
-package com.example.hellomx;
+package com.together.hellomx;
 
 import javax.servlet.http.HttpSession;
 
@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.hellomx.domain.MemberVO;
-import com.example.hellomx.service.CustomerService;
+import com.together.domain.MemberVO;
+import com.together.service.CustomerService;
 
 import lombok.AllArgsConstructor;
 

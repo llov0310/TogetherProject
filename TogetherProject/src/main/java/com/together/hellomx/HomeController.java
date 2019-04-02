@@ -1,4 +1,4 @@
-package com.example.hellomx;
+package com.together.hellomx;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

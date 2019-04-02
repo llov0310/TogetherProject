@@ -1,9 +1,9 @@
-package com.example.hellomx.mapper;
+package com.together.mapper;
 
 
 import org.apache.ibatis.annotations.Param;
 
-import com.example.hellomx.domain.MemberVO;
+import com.together.domain.MemberVO;
 
 public interface CustomerMapper {
 	//로그인을 위한 함수 추가

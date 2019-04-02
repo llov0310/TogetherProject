@@ -1,4 +1,4 @@
-package com.example.hellomx.domain;
+package com.together.domain;
 
 import lombok.Data;
 

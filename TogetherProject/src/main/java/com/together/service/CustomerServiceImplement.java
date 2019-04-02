@@ -1,8 +1,10 @@
-package com.example.hellomx.service;
+package com.together.service;
 
 import org.springframework.stereotype.Service;
-import com.example.hellomx.domain.MemberVO;
-import com.example.hellomx.mapper.CustomerMapper;
+
+import com.together.domain.MemberVO;
+import com.together.mapper.CustomerMapper;
+
 import lombok.AllArgsConstructor;
 
 @Service
