@@ -66,7 +66,7 @@ public class HomeController {
    @RequestMapping(value = "/hospital", method=RequestMethod.GET)
    public String hospital(Model model) {
 	   
-	   return "service/hospital";
+	   return "service/hospital/hospital_list";
    }
    
    //펫 장례 페이지 맵핑
