@@ -1,4 +1,4 @@
-package com.together.hellomx;
+package com.together.controller;
 
 import javax.servlet.http.HttpSession;
 
