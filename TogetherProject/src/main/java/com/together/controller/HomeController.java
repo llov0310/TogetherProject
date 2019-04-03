@@ -80,7 +80,7 @@ public class HomeController {
    @RequestMapping(value = "/memorialGallery", method=RequestMethod.GET)
    public String memorialGallery(Model model) {
 	   
-	   return "service/memorialGallery";
+	   return "service/memorial/memorialGallery";
    }
    
    //관리자 홈 페이지 맵핑
