@@ -13,4 +13,11 @@
 	<insert id="signup" parameterType="com.together.domain.MemberVO">
 		insert into member values (#{userid},#{password},#{email},#{adress},#{name},'3')
 	</insert>
+	
+	<select id="list" resultType="com.together.domain.EnterpriceVO">
+		select * from enterprice 
+		where (address = #{address_total} 
+		and
+		enterprice_code like '%'||'h'||'%')
+	</select>
 </mapper>
