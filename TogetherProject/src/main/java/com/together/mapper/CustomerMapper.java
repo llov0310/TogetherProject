@@ -1,8 +1,11 @@
 package com.together.mapper;
 
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.together.domain.EnterpriceVO;
 import com.together.domain.MemberVO;
 
 public interface CustomerMapper {
@@ -10,4 +13,6 @@ public interface CustomerMapper {
 	public MemberVO login(@Param("userid") String userid, @Param("password") String password);
 
 	public int signup(MemberVO ins);
+
+	public ArrayList<EnterpriceVO> list(String address_total);
 }

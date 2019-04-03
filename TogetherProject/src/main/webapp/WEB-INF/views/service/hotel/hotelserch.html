@@ -254,8 +254,12 @@ $(document).ready(function(){
 				url: "hotel_box",      // 클라이언트가 요청을 보낼 서버의 URL 주소
 				data: address,     	 // HTTP 요청과 함께 서버로 보낼 데이터
 				dataType: "text",       // 서버에서 보내줄 데이터의 타입
-				success: function(){
-				    alert("넘어오니?");
+				success: function(data){
+				    if(data != null){
+				    	location.href = "/hotel";
+				    }else{
+				    	alert("검색결과가 없습니다");
+				    }
 				}
 			});
 		
