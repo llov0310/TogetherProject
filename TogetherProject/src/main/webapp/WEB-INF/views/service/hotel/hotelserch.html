@@ -241,9 +241,26 @@ function removeAllChildNods(el) {
 // 검색결과 클릭시 주소값을 반환해 주는 구문
 $(document).ready(function(){
 	$('#placesList').on('click', 'span',function(){
-		alert("ㅇㅇ");
-		var a = $(this).parent().children().eq(1);
-		console.log(a.html());
+		alert("선택됬음");
+		var a = $(this).parent().children().eq(1).text();
+		
+		console.log(a);
+		var address = { address : a }
+			
+			$.ajax({
+				type: "POST", 
+				url: "hotel_box",      // 클라이언트가 요청을 보낼 서버의 URL 주소
+				data: address,     	 // HTTP 요청과 함께 서버로 보낼 데이터
+				dataType: "text",       // 서버에서 보내줄 데이터의 타입
+				success: function(data){
+				    if(data != null){
+				    	location.href = "/hotel";
+				    }else{
+				    	alert("검색결과가 없습니다");
+				    }
+				}
+			});
+		
 	});
 	
 });
@@ -262,7 +279,9 @@ $(document).ready(function(){
                     키워드 : <input type="text" value="펫 호텔" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
+                
             </div>
+           
         </div>
         <hr>
         <div class="scroller">

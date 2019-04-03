@@ -30,7 +30,13 @@
 			<div class="left-div">
 			
 				<div class="address-mm">
-					<label>대구광역시 복현동 300호</label>
+				<ul>
+				<li th:each="lit : ${session.hotel_list}">
+					
+					<span th:text="${lit.address}"></span>
+					</li>
+					</ul>
+					
 				</div>
 				<br>
 				<button class="map" onclick="mapserch()"><img src="http://placehold.it/20x20" /></button>
@@ -84,67 +90,7 @@
 						</div>
 					</div>
 					
-					<div class="list">
-						<div class="company_list_img">
-							<img src="http://placehold.it/150x200">
-						</div>
-
-						<div class="company_list">
-							<div class="intro">
-							<a href="#">업체이름</a>><label>별점</label><br>
-							<textarea style="width:80%">소개</textarea><br>
-							<br>
-							</div>
-							<div class="money">
-							<label>시간당</label> <label> 10,000원 </label><br>
-							<label>1박</label> <label> 50,000원 </label>
-							</div>
-							
-							
-						</div>
-					</div>
 					
-					
-					<div class="list">
-						<div class="company_list_img">
-							<img src="http://placehold.it/150x200">
-						</div>
-
-						<div class="company_list">
-							<div class="intro">
-							<a href="#">업체이름</a>><label>별점</label><br>
-							<textarea style="width:80%">소개</textarea><br>
-							<br>
-							</div>
-							<div class="money">
-							<label>시간당</label> <label> 10,000원 </label><br>
-							<label>1박</label> <label> 50,000원 </label>
-							</div>
-							
-							
-						</div>
-					</div>
-					
-					
-					<div class="list">
-						<div class="company_list_img">
-							<img src="http://placehold.it/150x200">
-						</div>
-
-						<div class="company_list">
-							<div class="intro">
-							<a href="#">업체이름</a>><label>별점</label><br>
-							<textarea style="width:80%">소개</textarea><br>
-							<br>
-							</div>
-							<div class="money">
-							<label>시간당</label> <label> 10,000원 </label><br>
-							<label>1박</label> <label> 50,000원 </label>
-							</div>
-							
-							
-						</div>
-					</div>
 				</div>
 				
 			</div>
