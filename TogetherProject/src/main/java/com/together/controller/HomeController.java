@@ -1,4 +1,4 @@
-package com.together.hellomx;
+package com.together.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,7 +66,7 @@ public class HomeController {
    @RequestMapping(value = "/hospital", method=RequestMethod.GET)
    public String hospital(Model model) {
 	   
-	   return "service/hospital/hospital_list";
+	   return "service/hospital";
    }
    
    //펫 장례 페이지 맵핑
@@ -77,10 +77,10 @@ public class HomeController {
    }
    
    //추모 게시판 페이지 맵핑
-   @RequestMapping(value = "/goodbye2", method=RequestMethod.GET)
-   public String goodbye2(Model model) {
+   @RequestMapping(value = "/memorialGallery", method=RequestMethod.GET)
+   public String memorialGallery(Model model) {
 	   
-	   return "service/goodbye2";
+	   return "service/memorialGallery";
    }
    
    //관리자 홈 페이지 맵핑

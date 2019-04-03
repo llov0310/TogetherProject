@@ -53,5 +53,5 @@
 	</beans:bean>
 
 	<!--패키지 내부의 클래스들을 조사함 -->
-	<context:component-scan base-package="com.together.hellomx" />
+	<context:component-scan base-package="com.together.controller" />
 </beans:beans>
