@@ -95,5 +95,10 @@ public class HomeController {
 	   
 	   return "admin/customerManage";
    }
+   
+   
+   
+  
+   
 
 }
