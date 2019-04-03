@@ -82,18 +82,5 @@ public class HomeController {
 	   
 	   return "service/memorialGallery";
    }
-   
-   //관리자 홈 페이지 맵핑
-   @RequestMapping(value = "/adminHome", method=RequestMethod.GET)
-   public String adminHome(Model model) {
-	   return "admin/adminHome";
-   }
-   
-   //관리자 : 회원 관리 페이지
-   @RequestMapping(value = "/customerManage", method=RequestMethod.GET)
-   public String customerManage(Model model) {
-	   
-	   return "admin/customerManage";
-   }
 
 }

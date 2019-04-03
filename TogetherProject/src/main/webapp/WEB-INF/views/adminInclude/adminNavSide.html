@@ -33,7 +33,7 @@
 	<div class="sidebar-heading"><i class="fas fa-fw fa-cog"></i> 관리</div>
 
 	<!-- Nav Item - 회원 관리 -->
-	<li class="nav-item"><a class="nav-link" href="customerManage"> <i
+	<li class="nav-item" id="getMemberList"><a class="nav-link" href="customerManage"> <i
 			class="fas fa-fw fa-table"></i> <span>회원 관리</span>
 	</a></li>
 
@@ -58,5 +58,20 @@
 
 </ul>
 <!-- End of Sidebar -->
+
+
+<th:block layout:fragment="page_js">
+<!-- 회원 관리 클릭시 작동할 js문 추가 : 회원정보를 테이블로 보여줌 -->
+	<script>
+		$(function(){
+			$("#getMemberList").click(function(){
+				var path = "/getMemberList";
+				
+				console.log(path);
+				
+			});
+		});
+	</script>
+</th:block>
 
 </html>

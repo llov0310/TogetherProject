@@ -1,6 +1,5 @@
 package com.together.service;
 
-import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
@@ -12,11 +11,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AdminServiceImplement implements AdminService{
 	private AdminMapper mapper;
-	
+
 	//회원 리스트 가져오는 함수
 	@Override
-	public ArrayList<MemberVO> getList() {
+	public MemberVO getMemberList() {
 		// TODO Auto-generated method stub
-		return mapper.getList();
+		return mapper.getMemberList();
 	}
 }
