@@ -32,9 +32,9 @@
 				<div class="address-mm">
 				
 				
-					
+				<div th:if="${session.hotel_list != null}">
 				<span th:text="${session.hotel_list[0].address}"></span>
-				
+				</div>
 				
 				</div>
 				<br>
@@ -69,6 +69,8 @@
 				</div>
 				<div class="list-bar">
 				
+				
+				<div th:if="${session.hotel_list != null}">
 					<div class="list" th:each="lit : ${session.hotel_list}">
 						<div class="company_list_img">
 							<img src="http://placehold.it/150x200">
@@ -90,7 +92,7 @@
 							
 						</div>
 					</div>
-					
+					</div>
 					
 				</div>
 				
