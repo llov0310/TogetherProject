@@ -30,13 +30,12 @@
 			<div class="left-div">
 			
 				<div class="address-mm">
-				<ul>
-				<li th:each="lit : ${session.hotel_list}">
+				
+				
 					
-					<span th:text="${lit.address}"></span>
-					</li>
-					</ul>
-					
+				<span th:text="${session.hotel_list[0].address}"></span>
+				
+				
 				</div>
 				<br>
 				<button class="map" onclick="mapserch()"><img src="http://placehold.it/20x20" /></button>
@@ -70,16 +69,18 @@
 				</div>
 				<div class="list-bar">
 				
-					<div class="list">
+					<div class="list" th:each="lit : ${session.hotel_list}">
 						<div class="company_list_img">
 							<img src="http://placehold.it/150x200">
 						</div>
 
 						<div class="company_list">
 							<div class="intro">
-							<a href="#">업체이름</a>><label>별점</label><br>
-							<textarea style="width:80%">소개</textarea><br>
+							
+							<span th:text="${lit.enterprice_name}"></span><label>별점</label><br>
+							<textarea style="width:80%" th:text="${lit.intro}"></textarea><br>
 							<br>
+							
 							</div>
 							<div class="money">
 							<label>시간당</label> <label> 10,000원 </label><br>
