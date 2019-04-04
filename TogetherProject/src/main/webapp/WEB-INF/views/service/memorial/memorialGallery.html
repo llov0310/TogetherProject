@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/serviceLayout">
+
+<th:block layout:fragment="page_head">
+	<title>추모소</title>
+</th:block>
+	
+<th:block layout:fragment="page_css">
+	  <link rel="stylesheet" href="assets/css/page/hotel/hotelserch.css">
+</th:block>
+
+	<th:block layout:fragment="page_js">
+	</th:block>
+	
+	<!-- 내용 -->
+	<th:block layout:fragment="contents">
+	
+  		<div class="title-content">
+		    <h2>삼가 고견의 명복을 빕니다</h2>
+				    <hr />
+			    <div class="intro">Yllamco laboris nisi ut aliquip ex ea commodo.</div>
+			  </div><!-- /.title-content -->
+			  <div class="card-info">
+			    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim. 
+			  </div><!-- /.card-info -->
+			  <div class="utility-info">
+			    <ul class="utility-list">
+			      <li class="comments">12</li>
+			      <li class="date">03.12.2015</li>
+			    </ul>
+			  </div>
+			  <!-- /.utility-info -->
+			  <!-- overlays -->
+			 	 <div class="gradient-overlay"></div>
+			 	 <div class="color-overlay"></div>
+	
+			</div><!-- /.blog-card -->
+			
+	</th:block>
+	
+
+</html>
