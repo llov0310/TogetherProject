@@ -4,42 +4,172 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="include/serviceLayout">
 
+
 <th:block layout:fragment="page_head">
 	<title>추모소</title>
 </th:block>
-	
-<th:block layout:fragment="page_css">
-	  <link rel="stylesheet" href="assets/css/page/hotel/hotelserch.css">
-</th:block>
 
-	<th:block layout:fragment="page_js">
+<div>
+	<th:block layout:fragment="page_css">
+		<link rel="stylesheet" href="assets/css/page/memorial/card.css">
 	</th:block>
-	
-	<!-- 내용 -->
+</div>
+
+
+
+
+<div>
 	<th:block layout:fragment="contents">
-	
-  		<div class="title-content">
-		    <h2>삼가 고견의 명복을 빕니다</h2>
-				    <hr />
-			    <div class="intro">Yllamco laboris nisi ut aliquip ex ea commodo.</div>
-			  </div><!-- /.title-content -->
-			  <div class="card-info">
-			    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim. 
-			  </div><!-- /.card-info -->
-			  <div class="utility-info">
-			    <ul class="utility-list">
-			      <li class="comments">12</li>
-			      <li class="date">03.12.2015</li>
-			    </ul>
-			  </div>
-			  <!-- /.utility-info -->
-			  <!-- overlays -->
-			 	 <div class="gradient-overlay"></div>
-			 	 <div class="color-overlay"></div>
-	
-			</div><!-- /.blog-card -->
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Portfolio 3
+      <small>Subheading</small>
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="index.html">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Portfolio 3</li>
+    </ol>
+
+    <div class="row">
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Project One</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Project Two</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Project Three</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Project Four</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Project Five</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Project Six</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+  
+  </th:block>
+  </div>
+  
+
+
+
+<!-- 내용 -->
+<!-- <div>
+	<th:block layout:fragment="contents">
+		<div class="blog-card spring-fever">
+			<div class="title-content">
+				<h3> 고견의 명복을 빕니다.</h3>
+					<hr />
+					<div class="intro">강아지야 잘있니?</div>
+			</div>
 			
-	</th:block>
+			<div class="card-info">어쩌구 저쩌구 그쩌구, 오동나무 배나무 금나라 은나라 매매, 당신의
+				이야기가 Together에 오신것을 환영합니다. 잘지내.</div>
+		
+			<div class="utility-info">
+				<ul class="utility-list">
+					<li class="comments">27</li>
+					<li class="date">2019.04.04</li>
+				</ul>
+			</div>
+			
+			<div class="gradient-overlay"></div>
+			<div class="color-overlay"></div>
+		</div>
 	
+	</th:block>
+</div> -->
+
+
+
+<body th:replace="include/footer::footer" />
+
 
 </html>
