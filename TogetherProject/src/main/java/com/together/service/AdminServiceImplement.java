@@ -1,6 +1,8 @@
 package com.together.service;
 
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.together.domain.MemberVO;
@@ -14,8 +16,7 @@ public class AdminServiceImplement implements AdminService{
 
    //회원 리스트 가져오는 함수
    @Override
-   public MemberVO getMemberList() {
-      // TODO Auto-generated method stub
-      return mapper.getMemberList();
+   public ArrayList<MemberVO> getMemberList(){
+	   return mapper.getMemberList();
    }
 }
