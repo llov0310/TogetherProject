@@ -1,0 +1,17 @@
+package com.together.domain;
+
+import java.sql.Timestamp;
+
+import lombok.Data;
+
+@Data
+public class ReviewBoard {
+	private String rb_cd;
+	private String user_id;
+	private String etp_cd;
+	private String rb_nm;
+	private String rb_contents;
+	private int rb_like;
+	private Timestamp rb_dt;
+	private int rb_avg;
+}
