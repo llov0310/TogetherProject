@@ -82,6 +82,12 @@ public class HomeController {
 	   
 	   return "service/memorial/memorialGallery";
    }
+   
+   @RequestMapping(value = "/mypage", method=RequestMethod.GET)
+   public String mypage(Model model) {
+	   
+	   return "nav/mypage";
+   }
   
    
    
