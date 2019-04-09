@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Chatting {
+public class ChattingVO {
 	private int chat_cd;
 	private String user_id;
 	private String cr_cd;

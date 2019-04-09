@@ -4,7 +4,7 @@ package com.together.domain;
 import lombok.Data;
 
 @Data
-public class PostAttach {
+public class PostAttachVO {
 	private String pa_cd;
 	private String pt_cd;
 	private int pa_size;

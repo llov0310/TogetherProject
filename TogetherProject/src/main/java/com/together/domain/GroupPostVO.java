@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class GroupPost {
+public class GroupPostVO {
 	private String gp_cd;
 	private String g_cd;
 	private String user_id;

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class PostReply {
+public class PostReplyVO {
 	private String pt_reply_cd;
 	private String user_id;
 	private String pt_cd;

@@ -3,7 +3,7 @@ package com.together.domain;
 import lombok.Data;
 
 @Data
-public class Product {
+public class ProductVO {
 	private String pd_cd;
 	private String etp_cd;
 	private String pd_nm;

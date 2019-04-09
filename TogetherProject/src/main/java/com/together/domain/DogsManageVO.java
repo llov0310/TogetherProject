@@ -2,7 +2,7 @@ package com.together.domain;
 import lombok.Data;
 
 @Data
-public class DogsManage {
+public class DogsManageVO {
 	private String dm_cd;
 	private String d_cd;
 	private String dm_health;

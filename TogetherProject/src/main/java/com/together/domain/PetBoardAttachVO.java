@@ -4,7 +4,7 @@ package com.together.domain;
 import lombok.Data;
 
 @Data
-public class PetBoardAttach {
+public class PetBoardAttachVO {
 	private String pba_cd;
 	private String pb_cd;
 	private int pba_size;

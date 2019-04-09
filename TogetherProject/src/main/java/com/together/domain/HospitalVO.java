@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Hospital {
+public class HospitalVO {
 	private String hpt_cd;
 	private String hpt_addr;
 	private String hpt_ph_no;

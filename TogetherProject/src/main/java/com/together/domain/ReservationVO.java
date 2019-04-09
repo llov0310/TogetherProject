@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Likes {
-	private int like_cd;
-	private Timestamp like_dt;
+public class ReservationVO {
+	private String rsv_cd;
+	private String hpt_cd;
 	private String user_id;
-	private String pt_cd;
+	private Timestamp rsv_dt;
 }

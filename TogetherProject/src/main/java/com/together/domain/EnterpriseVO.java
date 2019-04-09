@@ -2,7 +2,7 @@ package com.together.domain;
 import lombok.Data;
 
 @Data
-public class Enterprise {
+public class EnterpriseVO {
 	private String etp_cd;
 	private String user_id;
 	private String etp_addr;

@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Orders {
-	private String or_cd;
+public class PostVO {
+	private String pt_cd;
 	private String user_id;
-	private String pd_cd;
-	private Timestamp or_dt;
-}	
+	private String pt_content;
+	private Timestamp pt_dt;
+}

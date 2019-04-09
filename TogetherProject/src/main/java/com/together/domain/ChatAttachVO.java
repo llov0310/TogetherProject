@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 
-public class ChatAttach {
+public class ChatAttachVO {
 	private String  ca_cd;
 	private int chat_cd;
 	private int ca_size;

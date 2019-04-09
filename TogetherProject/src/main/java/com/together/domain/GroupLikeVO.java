@@ -1,13 +1,12 @@
 package com.together.domain;
-
 import java.sql.Timestamp;
 
 import lombok.Data;
 
 @Data
-public class Post {
-	private String pt_cd;
+public class GroupLikeVO {
+	private int gl_cd;
+	private Timestamp gl_dt;
 	private String user_id;
-	private String pt_content;
-	private Timestamp pt_dt;
+	private String gp_cd;
 }

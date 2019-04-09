@@ -1,13 +1,12 @@
 package com.together.domain;
-
 import java.sql.Timestamp;
 
 import lombok.Data;
 
 @Data
-public class Reservation {
-	private String rsv_cd;
-	private String hpt_cd;
+public class ChattingRoomVO {
+	private String cr_cd;
 	private String user_id;
-	private Timestamp rsv_dt;
+	private Timestamp cr_dt;
+	private String cr_user;
 }

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Groups {
+public class GroupsVO {
 	private String g_cd;
 	private String user_id;
 	private String g_nm;

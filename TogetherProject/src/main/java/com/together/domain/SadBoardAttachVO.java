@@ -3,7 +3,7 @@ package com.together.domain;
 import lombok.Data;
 
 @Data
-public class SadBoardAttach {
+public class SadBoardAttachVO {
 		private String sba_cd;
 		private String sb_cd;
 		private int sba_size;

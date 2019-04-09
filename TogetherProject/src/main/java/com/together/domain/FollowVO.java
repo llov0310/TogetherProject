@@ -4,9 +4,8 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class ChattingRoom {
-	private String cr_cd;
+public class FollowVO {
 	private String user_id;
-	private Timestamp cr_dt;
-	private String cr_user;
+	private String user_id2;
+	private Timestamp follow_dt;
 }

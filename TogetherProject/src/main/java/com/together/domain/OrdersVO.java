@@ -1,11 +1,13 @@
 package com.together.domain;
+
 import java.sql.Timestamp;
 
 import lombok.Data;
 
 @Data
-public class Follow {
+public class OrdersVO {
+	private String or_cd;
 	private String user_id;
-	private String user_id2;
-	private Timestamp follow_dt;
-}
+	private String pd_cd;
+	private Timestamp or_dt;
+}	
