@@ -33,7 +33,7 @@
 				
 				
 				<div th:if="${session.hotel_list != null}">
-				<span th:text="${session.hotel_list[0].address}"></span>
+				<span th:text="${session.hotel_list[0].etp_addr}"></span>
 				</div>
 				
 				</div>
@@ -79,8 +79,8 @@
 						<div class="company_list">
 							<div class="intro">
 							
-							<span th:text="${lit.enterprice_name}"></span><label>별점</label><br>
-							<textarea style="width:80%" th:text="${lit.intro}"></textarea><br>
+							<span th:text="${lit.etp_nm}"></span><label>별점</label><br>
+							<textarea style="width:80%" th:text="${lit.etp_content}"></textarea><br>
 							<br>
 							
 							</div>

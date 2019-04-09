@@ -17,9 +17,9 @@
 	
 	<select id="list" resultType="com.together.domain.EnterpriseVO">
 		select * from enterprise 
-		where (address = #{address_total} 
+		where (etp_addr = #{address_total} 
 		and
-		enterprice_code like '%'||'h'||'%')
+		etp_cd like '%'||'h'||'%')
 	</select>
 	
 </mapper>
