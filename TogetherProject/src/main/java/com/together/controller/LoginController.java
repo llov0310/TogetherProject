@@ -22,16 +22,16 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO userInfo, HttpSession session, Model model) {
 		
-		MemberVO user = customerService.login(userInfo.getUserid(), userInfo.getPassword());
+		MemberVO user = customerService.login(userInfo.getUser_id(), userInfo.getPassword());
 		
 		
-		if (user.getAuthority().equals("1")) {
+		if (user.getAuthority_no() == 1) {
 			session.setAttribute("user", user);
 			return "admin/adminHome";
-		} else if(user.getAuthority().equals("2")){
+		} else if(user.getAuthority_no() == 2){
 			session.setAttribute("user", user);
 			return "";
-		} else if(user.getAuthority().equals("3")){
+		} else if(user.getAuthority_no() == 3){
 			session.setAttribute("user", user);
 			return "home";
 		} else {

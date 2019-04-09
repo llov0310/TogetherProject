@@ -14,7 +14,7 @@
 		insert into member values (#{userid},#{password},#{email},#{adress},#{name},'3')
 	</insert>
 	
-	<select id="list" resultType="com.together.domain.EnterpriceVO">
+	<select id="list" resultType="com.together.domain.EnterpriseVO">
 		select * from enterprice 
 		where (address = #{address_total} 
 		and

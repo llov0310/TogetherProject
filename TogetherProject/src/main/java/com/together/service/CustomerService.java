@@ -2,7 +2,8 @@ package com.together.service;
 
 import java.util.ArrayList;
 
-import com.together.domain.EnterpriceVO;
+
+import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 
 public interface CustomerService {
@@ -10,5 +11,5 @@ public interface CustomerService {
 
 	public int signup(MemberVO ins);
 
-	public ArrayList<EnterpriceVO> list(String address_total);
+	public ArrayList<EnterpriseVO> list(String address_total);
 }
