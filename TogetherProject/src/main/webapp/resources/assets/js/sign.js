@@ -21,32 +21,39 @@ $(document).ready(function(){
 		  });
 		  //로그인 정보 가져오는 jquery문
 		  
-		  $("#signup").click(function(){
-			 var id = $("#id").val();
-			 var password = $("#password").val();
-			 var name = $("#name").val();
-			 var adress = $("#sample6_extraAddress").val();
-			 var email = $("#email").val();
-			 
-			 var query = {	user_id : id, 
-					 		password:password,
-			 				name:name,
-			 				adress:adress,
-			 				email:email};
-			 
-			 $.ajax({
-				
-				 type : "POST",
-		           dataType : 'text',
-		           data : query,
-		           url : "sign.do",
-		           success : function(data) {
-		        	   alert("회원가입이 완료되었습니다 로그인 페이지로 이동합니다.")
-		        	   window.location.href = "/nav/login"
-		        }
-
-			 });
-		  });
+//		  $("#signup").click(function(){
+//			 var id = $("#id").val();
+//			 var password = $("#password").val();
+//			 var name = $("#name").val();
+//			 var email = $("#email").val();
+//			 var birth = $("#bir").val();
+//			 var address = $("#sample4_roadAddress").val();
+//			 var address2 = $("#sample4_extraAddress").val();
+//			 var phone = $("#ph").val();
+//			 
+//			 
+//			 var query = {	user_id : id, 
+//					 		password:password,
+//			 				user_nm:name,
+//			 				addr_ji:address,
+//			 				addr_dong : address2,
+//			 				birth_dt : birth,
+//			 				ph_no : phone,
+//			 				email:email};
+//			 
+//			 $.ajax({
+//				
+//				 type : "POST",
+//		           dataType : 'text',
+//		           data : query,
+//		           url : "sign.do",
+//		           success : function(data) {
+//		        	   alert("회원가입이 완료되었습니다 로그인 페이지로 이동합니다.")
+//		        	   window.location.href = "/nav/login"
+//		        }
+//
+//			 });
+//		  });
 
 	});
 	

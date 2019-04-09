@@ -11,7 +11,7 @@ import com.together.domain.MemberVO;
 
 public interface CustomerMapper {
 	//로그인을 위한 함수 추가
-	public MemberVO login(@Param("userid") String userid, @Param("password") String password);
+	public MemberVO login(@Param("user_id") String user_id, @Param("password") String password);
 
 	public int signup(MemberVO ins);
 

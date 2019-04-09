@@ -46,9 +46,8 @@
 			<div th:if="${session.user == null}">
 				<p th:if="${error != null}" th:text="${error}"></p>
 				<form action="/login" method="post">
-					<input type="text" id="id" class="fadeIn second" name="userid"
-						placeholder="login"> <input type="password" id="password"
-						class="fadeIn third" name="password" placeholder="password">
+					<input type="text" id="id" class="fadeIn second" name="user_id" placeholder="login"> 
+					<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
 					<input type="submit" value="로그인" id="login" class="fadeIn fourth"
 						style="margin-bottom: 20px;">
 				</form>
@@ -65,10 +64,6 @@
 		</div>
 	</div>
 
-
-	<div th:if="${session.user}">
-		<a href="/logout">Logout</a>
-	</div>
 </th:block>
 
 

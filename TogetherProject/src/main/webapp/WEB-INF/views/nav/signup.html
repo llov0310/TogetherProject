@@ -28,14 +28,14 @@
 		
 		  <label>
 		    <p class="label-txt">아이디를 입력해 주세요</p>
-		    <input type="text" class="input" id="id" >
+		    <input type="text" class="input" id="id" name="user_id">
 		    <div class="line-box">
 		      <div class="line"></div>
 		    </div>
 		  </label>
 		  <label>
 		    <p class="label-txt">이름을 입력해 주세요</p>
-		    <input type="text" class="input" id="name" >
+		    <input type="text" class="input" id="name" name="user_nm">
 		    <div class="line-box">
 		      <div class="line"></div>
 		    </div>
@@ -55,11 +55,27 @@
 		    </div>
 		  </label>
 		  
+		  <label>
+		    <p class="label-txt">핸드폰 번호를 입력해주세요</p>
+		    <input type="text" class="input" id="ph" placeholder="01012345678" name="ph_no">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  
+		   <label style="width:50%;">
+		    <p class="label-txt">생년월일을 기입해주세요</p>
+		    <input type="text" class="input" id="bir" placeholder="주민등록번호 앞자리  + 뒷자리 한자리" maxlength="7" name="birth_dt">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>  
+		  </label>
+		  
 		  <label style="width:50%">
 		    <p class="label-txt2">주소를 검색 해 주세요</p>
 		    <!--  <input type="text" class="input" id="sample4_postcode" placeholder="주소">-->
-		    <input type="text" class="input" id="sample4_roadAddress" placeholder="도로명주소">
-		    <input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" name="adress">
+		    <input type="text" class="input" id="sample4_roadAddress" placeholder="도로명주소" name="addr_ji">
+		    <input type="text" class="input" id="sample4_extraAddress" placeholder="참고항목" name="addr_dong">
 		    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 		    <input type="submit" value="회원가입"/> 
 		  </label>

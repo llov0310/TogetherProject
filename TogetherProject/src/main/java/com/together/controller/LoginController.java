@@ -22,9 +22,10 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO userInfo, HttpSession session, Model model) {
 		
+		
 		MemberVO user = customerService.login(userInfo.getUser_id(), userInfo.getPassword());
 		
-		
+		System.out.println(user.getAuthority_no());
 		if (user.getAuthority_no() == 1) {
 			session.setAttribute("user", user);
 			return "admin/adminHome";

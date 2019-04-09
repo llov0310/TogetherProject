@@ -8,7 +8,7 @@
 	
 	
 	<div th:if="${session.user}">
-		<span th:text="${session.user.name}"></span>
+		<span th:text="${session.user.user_nm}"></span>
 		<a href="/logout">로그아웃</a>
 	</div>
 	

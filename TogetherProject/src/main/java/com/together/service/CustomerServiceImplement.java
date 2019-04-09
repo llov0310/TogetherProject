@@ -18,9 +18,9 @@ public class CustomerServiceImplement implements CustomerService {
 
 	//로그인
 	@Override
-	public MemberVO login(String userid, String password) {
+	public MemberVO login(String user_id, String password) {
 		// TODO Auto-generated method stub
-		return mapper.login(userid, password);
+		return mapper.login(user_id, password);
 	}
 	
 	

@@ -40,7 +40,7 @@
 				<li th:if="${session.user == null}" id="login"><a href="/login" >로그인</a><a
 					href="/signup">회원가입</a></li>
 				<li th:if="${session.user}"><span
-					th:text="${session.user.name}" id="logout"></span><a href="/logout">로그아웃</a>
+					th:text="${session.user.user_nm}" id="logout"></span><a href="/logout">로그아웃</a>
 			</ul>
 
 		</div>
