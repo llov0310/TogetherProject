@@ -1,24 +1,32 @@
 @charset "UTF-8";
-
-
-
-
-
-@media screen and (max-width: 426px) { 
-	
+@media screen and (max-width: 426px) {
 	.test {
-			font-size : 18px;
-			background-color : blue;
-	
-	} 
-
+		font-size: 18px;
+		background-color: blue;
+	}
 }
 
-body{
-	
-	
+body {
 }
 
-.test{
-	font-size : 50px;
+.test {
+	font-size: 50px;
+}
+
+.map {
+	display: inline-block;
+}
+
+.enterpriseinfo {
+	display: inline-block;
+	border: solid 1px blue;
+	width: 50%;
+	height: 75%
+}
+.hideenterpriseinfo {
+	display: inline-block;
+	border: solid 1px blue;
+	height: 75%;
+	/*view페이지 완성하면 다시 활성화*/
+	/*visibility : hidden;*/
 }

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.together.domain.EnterpriceVO;
+
+import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.mapper.CustomerMapper;
 
@@ -17,9 +18,9 @@ public class CustomerServiceImplement implements CustomerService {
 
 	//로그인
 	@Override
-	public MemberVO login(String userid, String password) {
+	public MemberVO login(String user_id, String password) {
 		// TODO Auto-generated method stub
-		return mapper.login(userid, password);
+		return mapper.login(user_id, password);
 	}
 	
 	
@@ -32,7 +33,7 @@ public class CustomerServiceImplement implements CustomerService {
 
 
 	@Override
-	public ArrayList<EnterpriceVO> list(String address_total) {
+	public ArrayList<EnterpriseVO> list(String address_total) {
 		// TODO Auto-generated method stub
 		return mapper.list(address_total);
 	}
