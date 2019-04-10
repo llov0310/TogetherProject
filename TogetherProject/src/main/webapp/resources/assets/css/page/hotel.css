@@ -1,6 +1,119 @@
 @charset "UTF-8";
 
 
+.full-div{
+	width: 100%;
+	height : 100%;
+
+
+}
+
+
+/* 전체페이지 디자인  */
+
+
+#carouselExampleIndicators{
+	
+	width: 100%;
+	height: 80%;
+}
+
+.total-div{
+		width:100%;
+		height:20%;
+		
+	}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 600px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index : 1;
+  
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #9CC9E3;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 0;
+}
+
+
+
+.left-div{
+		
+		margin-left : 25%;
+		width : 100%;
+
+}
+
+.to1{
+	float : left;
+}
+/*검색과 list가 따로움직이지 않도록 묶어주는 div */
+.div_serach_total{
+	float:left;
+	padding-left : 2%;
+}
+
+/* 리스트를 감싸는 큰 div */
+/* #sear2{ */
+/* 	float : left; */
+	
+/* } */
+
+
+
+#searchlist{
+   position: relative;
+   background-color: #fff;
+   z-index: 3; 
+   box-shadow: 0 1px 4px 0 rgba(41,51,57,.5);
+	display: none;
+	bottom: 425px;
+	right: 310px;
+	
+	
+      
+      
+}
+
+#arealist{
+   width : 450px;
+   
+    padding: 12px;
+    display: flex;
+  flex-wrap: wrap;
+    list-style:none;
+    margin-left : 1%;
+     
+}
+
+#arealist li{
+   padding: 20px;
+}
+#arealist span{
+   padding: 15px;
+   
+}
+
+#titlearea{
+ border-bottom: 2px solid gray;
+ margin: 3px;
+ padding: 10px;
+}
+
 
 
 
