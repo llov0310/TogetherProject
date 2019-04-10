@@ -5,10 +5,19 @@
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
 	
-	<!-- login sql 추가 -->
+	<!-- customerManage페이지에 갔을때 회원 목록을 보여주는 sql문 추가 -->
 	<select id="getMemberList" resultType="com.together.domain.MemberVO">
-	select userid, email, name, authority
+	select user_id, email, user_nm, authority_no, ph_no, register_dt, addr_ji, addr_dong
 	from member
-	where authority = 2 or authority = 3
+	where authority_no = 2 or authority_no = 3
 	</select>
+	
+	<!--  -->
+	<select id="getEnterpriseList" resultType="com.together.domain.EnterpriseVO">
+	select m.user_nm, m.authority_no, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
+	from member m, enterprise e
+	where m.user_id = e.user_id and m.authority_no = 3
+	</select>
+	
+	
 </mapper>
