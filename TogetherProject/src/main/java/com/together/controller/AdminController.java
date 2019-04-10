@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.service.AdminService;
 
@@ -24,19 +26,29 @@ public class AdminController {
 		   return "admin/adminHome";
 	   }
 
-	   //관리자 : 회원 관리 페이지
+	   //관리자 : 회원 관리 페이지 맵핑 및 회원 목록 보여줌
 	   @RequestMapping(value = "/customerManage", method=RequestMethod.GET)
-	   
 	   public String customerManage(Model model, HttpSession session) {
 		   
 		   ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();
 		   memberList = adminService.getMemberList();
-		   System.out.println(memberList + "여기까지옴");
+		   //System.out.println(memberList + "여기까지옴");
 		   session.setAttribute("memberList", memberList);
 		   
 		   return "admin/customerManage";
 	   }
 	   
+	   //관리자 : 업체 관리 페이지 맵핑 및 업체 업체 목록 보여줌
+	   @RequestMapping(value = "/enterpriseManage", method=RequestMethod.GET)
+	   public String enterpriseManage(Model model, HttpSession session) {
+		   
+		   ArrayList<EnterpriseVO> enterpriseList = new ArrayList<EnterpriseVO>();
+		   enterpriseList = adminService.getEnterpriseList();
+		   System.out.println(enterpriseList);
+		   session.setAttribute("enterpriseList", enterpriseList);
+		   
+		   return "admin/enterpriseManage";
+	   }
 
 	   
 

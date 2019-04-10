@@ -31,7 +31,7 @@ public class LoginController {
 			return "admin/adminHome";
 		} else if(user.getAuthority_no() == 2){
 			session.setAttribute("user", user);
-			return "";
+			return "home";
 		} else if(user.getAuthority_no() == 3){
 			session.setAttribute("user", user);
 			return "home";
