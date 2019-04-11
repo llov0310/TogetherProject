@@ -36,6 +36,9 @@ public class HotelController {
   
 		   return "service/hotel";
 	   }
+	
+	
+	
 	   
 	
 }

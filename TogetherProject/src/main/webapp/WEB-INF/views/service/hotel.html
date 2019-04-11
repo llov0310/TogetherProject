@@ -23,7 +23,7 @@
 
 </th:block>
 
-<th:block layout:fragment="contents">
+<th:block layout:fragment="contents" scroll="no">
 
  <div class = "full-div">
  
@@ -83,13 +83,16 @@
 					
 							<div class="test">
 									<div id="cal1" class="to1">
+									<form action="/hotelserch" method="GET">
 									<label for="from" class="la">체크인</label>
 									<input type="date" id="from" name="from" class="in">
 									<label for="to" class="la">체크아웃</label>
 									<input type="date" id="to" name="to" class="in">
 									<label for="to" class="la">지역</label>
-									<input type="text" id="searchbar" name="to" class="in">
-									<button id="serchBtn">검색하기</button>
+									<input type="text" id="searchbar" name="toAddress" class="in">
+									<input type="submit" id="searchBtn" value="검색">
+									</form>
+									
 									</div>
 											<div class="div_serach_total">
 														<div id=sear2>

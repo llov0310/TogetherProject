@@ -1,5 +1,7 @@
-  function mapserch(){
-	  location.href = "/hotelserch"
+  function mapsearch(){
+	  var a = $("#searchbar").val();
+	  console.log(a);
+	  
   }
   
 $(document).ready(function() {
@@ -9,6 +11,8 @@ $(document).ready(function() {
          $("#searchlist").toggle(); //천천히 보이기
 
       });
+ 
+      
    }); 
 
 
@@ -19,3 +23,8 @@ function place(text){
 	$("#searchbar").val(a);
 	$("#searchlist").hide();
 }
+
+
+
+/////////////////////////////// serch 바의 지도 api //////////////////////////
+

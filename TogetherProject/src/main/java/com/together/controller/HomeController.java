@@ -1,9 +1,16 @@
 package com.together.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.annotations.Param;
+import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import lombok.AllArgsConstructor;
 
 
@@ -57,9 +64,11 @@ public class HomeController {
    
    //호텔 페이지 관련 이동 맵핑 정보
    @RequestMapping(value = "/hotelserch", method=RequestMethod.GET)
-   public String hotelserch(Model model) {
-	   
-	   return "service/hotel/hotelserch";
+   public String hotelserch(Model model , @RequestParam String toAddress) {
+	  
+	   model.addAttribute("place" , toAddress);
+	  
+	  return  "service/hotel/hotelserch";
    }
    
    //병원 페이지 맵핑
