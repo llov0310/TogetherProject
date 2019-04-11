@@ -10,7 +10,7 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	 <link rel="stylesheet" href="assets/css/page/hotel.css">
+	<link rel="stylesheet" href="assets/css/page/hotel.css">
 	 
 </th:block>
 
@@ -23,50 +23,161 @@
 
 </th:block>
 
-<th:block layout:fragment="contents">
+<th:block layout:fragment="contents" scroll="no">
 
+ <div class = "full-div">
+ 
+ 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1280')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>First Slide</h3>
+            <p>This is a description for the first slide.</p>
+          </div>
+        </div>
+        <!-- Slide Two - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1280')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Second Slide</h3>
+            <p>This is a description for the second slide.</p>
+          </div>
+        </div>
+        <!-- Slide Three - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1280')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Third Slide</h3>
+            <p>This is a description for the third slide.</p>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+ 
+ 
+ 
  
 	<div class="total-div">
 			<div class="left-div">
 			
-				<div class="address-mm">
-				
-				
-				<div th:if="${session.hotel_list != null}">
-				<span th:text="${session.hotel_list[0].etp_addr}"></span>
-				</div>
-				
-				</div>
-				<br>
-				<button class="map" onclick="mapserch()"><img src="http://placehold.it/20x20" /></button>
-				
-				<div class="test">
-					<div id="cal1" class="to1">
-					<label for="from" class="la">체크인</label>
-					<input type="date" id="from" name="from" class="in">
+					<div class="address-mm">
+						<div th:if="${session.hotel_list != null}">
+						<span th:text="${session.hotel_list[0].etp_addr}"></span>
+						</div>
 					</div>
+					<br>
 					
-					<div id="cal2" class="to1">
-					<label for="to" class="la">체크아웃</label>
-					<input type="date" id="to" name="to" class="in">
-					</div>
-				</div>
+	<!-- 				<button class="map" onclick="mapserch()"><img src="http://placehold.it/20x20" /></button> -->
+					
+							<div class="test">
+									<div id="cal1" class="to1">
+									<form action="/hotelserch" method="GET">
+									<label for="from" class="la">체크인</label>
+									<input type="date" id="from" name="from" class="in">
+									<label for="to" class="la">체크아웃</label>
+									<input type="date" id="to" name="to" class="in">
+									<label for="to" class="la">지역</label>
+									<input type="text" id="searchbar" name="toAddress" class="in">
+									<input type="submit" id="searchBtn" value="검색">
+									</form>
+									
+									</div>
+											<div class="div_serach_total">
+														<div id=sear2>
+											               <div id="searchlist">
+											                  <div id="titlearea">
+											                     <h3>자주 찾는 지역</h3>
+											                  </div>
+											                  <ul id="arealist">
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('서울')" >서울</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('인천')">인천</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('여수')">여수</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('대구')">대구</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('강릉')">강릉</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('전주')">전주</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('대전')">대전</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('통영')">통영</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('남해')">남해</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('거제')">거제</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('광주')">광주</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('울산')">울산</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('수원')">수원</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('평창')">평창</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('춘천')">춘천</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('가명')">가명</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('태안')">태안</span>
+											                        </div></li>
+											                     <li><div>
+											                           <span style="cursor:pointer;" onclick="place('제주도')">제주도</span>
+											                        </div></li>
+											                  </ul>
+											               </div>
+											            </div>
+							            	</div>
+									 
+								
+							</div>
 				
 			</div>
 			
 			<div class="right-div">
 			
-				<div class="top-bar">
-					<div class="move1">
-						(Total업체 갯수 가 들어옴)
-					</div>
+<!-- 				<div class="top-bar"> -->
+<!-- 					<div class="move1"> -->
+<!-- 						(Total업체 갯수 가 들어옴) -->
+<!-- 					</div> -->
 				 
-					 <div class="move2">
-					 <input type="radio" id="topic" class="set" name="1">인기순
-					 <input type="radio" id="distance" class="set" name="1">거리순
-					 <input type="radio" id="avg" class="set" name="1">평점순
-					 </div>
-				</div>
+<!-- 					 <div class="move2"> -->
+<!-- 					 <input type="radio" id="topic" class="set" name="1">인기순 -->
+<!-- 					 <input type="radio" id="distance" class="set" name="1">거리순 -->
+<!-- 					 <input type="radio" id="avg" class="set" name="1">평점순 -->
+<!-- 					 </div> -->
+<!-- 				</div> -->
 				<div class="list-bar">
 				
 				
@@ -99,6 +210,8 @@
 			</div>
 
 	</div>
+	</div>
+
 	</th:block>
 
 </html>
