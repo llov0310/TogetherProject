@@ -1,237 +1,232 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:th="http://www.thymeleaf.org"
-   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-   layout:decorator="include/layout">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
 
 <th:block layout:fragment="page_head">
-   <title>서비스 메뉴에 오신것을 환영합니다.</title>
+	<title>서비스 메뉴에 오신것을 환영합니다.</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
-   <link rel="stylesheet"
-      href="assets/css/page/hospital/hospital_list.css">
-   <link rel="stylesheet" href="assets/css/page/page.css">
+	<link rel="stylesheet"
+		href="assets/css/page/hospital/hospital_list.css">
+	<link rel="stylesheet" href="assets/css/page/page.css">
+	<script type="text/javascript" src="assets/js/hospitaljs/hospitaljs.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
+  
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05c43d4dfbbb9572affca8b8f5e8381c"></script>
+
 </th:block>
 <th:block layout:fragment="page_js">
- <script type="text/javascript">
-   $(document).ready(function() {
-       
-       $("#searchbar").click(function() {
-          $("#searchlist").toggle(); //천천히 보이기
-
-       });
-    }); 
-   
-   $(document).ready(function() {
-       $(".ok").on('click' , function() {
-          var fow = $(this).find(".fow");
-          console.log(fow);
-          
-       });
-    }); 
-   
-   
-   $(document).ready(function(){ 
-   
-      $(function() {
-         var selectTarget = $('.selectbox select');
-
-         // focus 가 되었을 때와 focus 를 잃었을 때
-         selectTarget.on({
-            'focus' : function() {
-               $(this).parent().addClass('focus');
-            },
-            'blur' : function() {
-               $(this).parent().removeClass('focus');
-            }
-         });
-
-         selectTarget.change(function() {
-            var select_name = $(this).children('option:selected').text();
-            $(this).siblings('label').text(select_name);
-            $(this).parent().removeClass('focus');
-         });
-      }); 
-   });
-</script>
 </th:block>
 <th:block layout:fragment="contents">
-   <div id="main1">
-      <div id="sear">
-         <div>
-            <input type="search" id="searchbar">
-            <div id=sear2>
-               <div id="searchlist">
-                  <div id="titlearea">
-                     <h3>자주 찾는 지역</h3>
-                  </div>
-                  <ul id="arealist">
-                     <li><div>
-                           <span>서울</span>
-                        </div></li>
-                     <li><div>
-                           <span>인천</span>
-                        </div></li>
-                     <li><div>
-                           <span>여수</span>
-                        </div></li>
-                     <li><div>
-                           <span>대구</span>
-                        </div></li>
-                     <li><div>
-                           <span>강릉</span>
-                        </div></li>
-                     <li><div>
-                           <span>전주</span>
-                        </div></li>
-                     <li><div>
-                           <span>대전</span>
-                        </div></li>
-                     <li><div>
-                           <span>통영</span>
-                        </div></li>
-                     <li><div>
-                           <span>남해</span>
-                        </div></li>
-                     <li><div>
-                           <span>거제</span>
-                        </div></li>
-                     <li><div>
-                           <span>광주</span>
-                        </div></li>
-                     <li><div>
-                           <span>울산</span>
-                        </div></li>
-                     <li><div>
-                           <span>수원</span>
-                        </div></li>
-                     <li><div>
-                           <span>평창</span>
-                        </div></li>
-                     <li><div>
-                           <span>춘천</span>
-                        </div></li>
-                     <li><div>
-                           <span>가명</span>
-                        </div></li>
-                     <li><div>
-                           <span>태안</span>
-                        </div></li>
-                     <li><div>
-                           <span>제주도</span>
-                        </div></li>
-                  </ul>
-               </div>
-            </div>
-         </div>
-      </div>
+	<div id="main1">
+		<div id="sear">
+			<div>
+				<input type="search" id="searchbar">
+				<div id=sear2>
+					<div id="searchlist">
+						<div id="titlearea">
+							<h3>자주 찾는 지역</h3>
+						</div>
+						<ul id="arealist">
+							<li><div>
+									<span>서울</span>
+								</div></li>
+							<li><div>
+									<span>인천</span>
+								</div></li>
+							<li><div>
+									<span>여수</span>
+								</div></li>
+							<li><div>
+									<span>대구</span>
+								</div></li>
+							<li><div>
+									<span>강릉</span>
+								</div></li>
+							<li><div>
+									<span>전주</span>
+								</div></li>
+							<li><div>
+									<span>대전</span>
+								</div></li>
+							<li><div>
+									<span>통영</span>
+								</div></li>
+							<li><div>
+									<span>남해</span>
+								</div></li>
+							<li><div>
+									<span>거제</span>
+								</div></li>
+							<li><div>
+									<span>광주</span>
+								</div></li>
+							<li><div>
+									<span>울산</span>
+								</div></li>
+							<li><div>
+									<span>수원</span>
+								</div></li>
+							<li><div>
+									<span>평창</span>
+								</div></li>
+							<li><div>
+									<span>춘천</span>
+								</div></li>
+							<li><div>
+									<span>가명</span>
+								</div></li>
+							<li><div>
+									<span>태안</span>
+								</div></li>
+							<li><div>
+									<span>제주도</span>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 
-      <div id="main1-1">
-         <div class="selectbox">
-            <label for="select">정렬순서</label> <select id="select">
-               <option selected>거리순</option>
-               <option>추천순</option>
-               <option>리뷰순</option>
-               <option>내마음순</option>
-            </select>
-         </div>
-      </div>
-      <div id="main1-2">
-         <div class="listbox1">
-            <!--리스트 시작  -->
-            <div class="listbox2">
-               <div id="imgbox1">
-                  <div id="img1">
-                     <img src="http://placehold.it/200x200" alt="" id="imgbox">
-                  </div>
-               </div>
-               <div id="context">
-                  <div>
-                     <div>
-                        <h2>동물병원</h2>
-                     </div>
-                     <div class="ok">
-                        	대구광역시 북구 침산로 153 명성푸르지오
-                        <button id="mapbut">지도보기</button>
-                     </div>
-                     <div>053)153-5135</div>
-                     <div>리뷰</div>
-                  </div>
-               </div>
+		<div id="main1-1">
+			<div class="selectbox">
+				<label for="select">정렬순서</label> <select id="select">
+					<option selected>거리순</option>
+					<option>추천순</option>
+					<option>리뷰순</option>
+					<option>내마음순</option>
+				</select>
+			</div>
+		</div>
+		<div id="main1-2">
+			<div class="listbox1">
+				
+				<!--리스트 시작  -->
+				<div class="listbox2">
+					<div id="imgbox1">
+						<div id="img1">
+							<img src="http://placehold.it/200x200" alt="" id="imgbox">
+						</div>
+					</div>
+					<div class="context">
+						<div>
+							<div>
+								<h2>동물병원</h2>
+							</div>
+							<div class="ok">
+								대구광역시 북구 침산로 153 명성푸르지오
+								<button id="mapbut">지도보기</button>
+							</div>
+							<div>053)153-5135</div>
+							<div>리뷰</div>
+						</div>
+					</div>
 
-               <div id="context1">
-                  <div>
-                     <div>진료시간</div>
-                     <div>오전10시~ 오후 9시까지</div>
-                     <div>토 일 공휴일 쉼</div>
-                  </div>
-               </div>
-               <div class="fow">
-                  위치틀
-                  <div>
-                     <div>
-                        위치 <span class="off">닫기</span>
-                     </div>
-                     <div>
-                        <img src="http://placehold.it/1000x500" alt="" id="imgbox">
-                     </div>
-                  </div>
+					<div id="context1">
+						<div>
+							<div>진료시간</div>
+							<div>오전10시~ 오후 9시까지</div>
+							<div>토 일 공휴일 쉼</div>
+						</div>
+					</div>
+					<div class="fow">
+						위치틀
+						<div>
+							<div>
+								위치 <span class="off">닫기</span>
+							</div>
+							
+						 		<div id="map" class="map" style="width:1000px;height:500px;"></div>
+							
+						</div>
 
-               </div>
+					</div>
 
-            </div>
-            <!-- 끝 -->
-            <!--리스트 시작  -->
-            <div class="listbox2">
-               <div id="imgbox1">
-                  <div id="img1">
-                     <img src="http://placehold.it/200x200" alt="" id="imgbox">
-                  </div>
-               </div>
-               <div id="context">
-                  <div>
-                     <div>
-                        <h2>동물병원</h2>
-                     </div>
-                     <div class="ok">
-                    		    대구광역시 북구 침산로 153 명성푸르지오
-                        <button id="mapbut">지도보기</button>
-                     </div>
-                     <div>053)153-5135</div>
-                     <div>리뷰</div>
-                  </div>
-               </div>
+				</div>
+				<!-- 끝 -->
+				<!--리스트 시작  -->
+				<div class="listbox2">
+					<div id="imgbox1">
+						<div id="img1">
+							<img src="http://placehold.it/200x200" alt="" id="imgbox">
+						</div>
+					</div>
+					<div class="context">
+						<div>
+							<div>
+								<h2>동물병원</h2>
+							</div>
+							<div class="ok">
+								대구광역시 북구 침산로 153 명성푸르지오
+								<button id="mapbut">지도보기</button>
+							</div>
+							<div>053)153-5135</div>
+							<div>리뷰</div>
+						</div>
+					</div>
 
-               <div id="context1">
-                  <div>
-                     <div>진료시간</div>
-                     <div>오전10시~ 오후 9시까지</div>
-                     <div>토 일 공휴일 쉼</div>
-                  </div>
-               </div>
-               <div class="fow">
-                  위치틀
-                  <div>
-                     <div>
-                        위치 <span class="off">닫기</span>
-                     </div>
-                     <div>
-                        <img src="http://placehold.it/1000x500" alt="" id="imgbox">
-                     </div>
-                  </div>
+					<div id="context1">
+						<div>
+							<div>진료시간</div>
+							<div>오전10시~ 오후 9시까지</div>
+							<div>토 일 공휴일 쉼</div>
+						</div>
+					</div>
+					<div class="fow">
+						위치틀
+						<div>
+							<div>
+								위치 <span class="off">닫기</span>
+							</div>
+						<div id="map" class="map" style="width:700px;height:500px;"></div>
+						</div>
 
-               </div>
+					</div>
 
-            </div>
-            <!-- 끝 -->
+				</div>
+				<!-- 끝 -->
 
 
-         </div>
-      </div>
-   </div>
+			</div>
+		</div>
+	</div>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(37.56454, 126.97802), // 지도의 중심좌표
+        level: 3, // 지도의 확대 레벨
+        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
+    }; 
 
+// 지도를 생성한다 
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+// 지도에 마커를 생성하고 표시한다
+var marker = new daum.maps.Marker({
+    position: new daum.maps.LatLng(37.56643, 126.97901), // 마커의 좌표
+    map: map // 마커를 표시할 지도 객체
+});
+
+// 지도를 표시하는 div 크기를 변경하는 함수입니다
+function resizeMap() {
+    var mapContainer = document.getElementById('map');
+    mapContainer.style.width = '1000px';
+    mapContainer.style.height = '500px'; 
+}
+
+function relayout() {    
+    
+    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+    map.relayout();
+}
+</script>
 </th:block>
 
 </html>
