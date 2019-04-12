@@ -92,10 +92,18 @@ public class HomeController {
 	   return "service/memorial/memorialGallery";
    }
    
+   //마이 페이지 맵핑
    @RequestMapping(value = "/mypage", method=RequestMethod.GET)
    public String mypage(Model model) {
 	   
 	   return "nav/mypage";
+   }
+   
+   //업체 신청 페이지 맵핑
+   @RequestMapping(value = "/etpApply", method=RequestMethod.GET)
+   public String etpApply(Model model) {
+	   
+	   return "nav/etpApply";
    }
   
    

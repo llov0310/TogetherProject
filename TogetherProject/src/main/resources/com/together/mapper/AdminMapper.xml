@@ -5,19 +5,25 @@
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
 	
-	<!-- customerManage페이지에 갔을때 회원 목록을 보여주는 sql문 추가 -->
+	<!-- customerManage페이지에 갔을 때 회원 목록을 보여주는 sql문 추가 -->
 	<select id="getMemberList" resultType="com.together.domain.MemberVO">
 	select user_id, email, user_nm, authority_no, ph_no, register_dt, addr_ji, addr_dong
 	from member
 	where authority_no = 2 or authority_no = 3
 	</select>
 	
-	<!--  -->
+	<!--  enterpriseManage페이지에 갔을 때 업체 신청 리스트를 보기 위한 sql문 추가-->
 	<select id="getEnterpriseList" resultType="com.together.domain.EnterpriseVO">
 	select m.user_nm, m.authority_no, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
 	from member m, enterprise e
 	where m.user_id = e.user_id and m.authority_no = 3
 	</select>
 	
+	<!-- dogsManage페이지에 갔을 때 반려견 리스트 보기 위한 sql문 추가 -->
+	<select id="getDogsList" resultType="com.together.domain.DogsVO">
+	select d.user_id, m.user_nm, m.ph_no, d.d_gender, d.d_dt, d.d_addr, d.d_kind, d.d_nm, d.d_content
+	from dogs d, member m
+	where d.user_id = m.user_id
+	</select>
 	
 </mapper>
