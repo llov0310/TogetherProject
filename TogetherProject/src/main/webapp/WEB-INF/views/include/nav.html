@@ -8,8 +8,8 @@
 	<div class="container">
 
 		<!-- Brand -->
-		<a class="navbar-brand js-scroll-trigger" href="/"> <img
-			src="assets/img/Together.png">
+		<a class="navbar-brand js-scroll-trigger" href="/"> 
+		<img src="assets/img/Together.png">
 		</a>
 
 		<!-- Toggler -->
@@ -50,12 +50,24 @@
 					</span>
 				</li>
 
-				<li th:if="${session.user == null}" id="login"><a href="/login" >로그인</a><a
-					href="/signup">회원가입</a></li>
-				<li th:if="${session.user}"><span
-					th:text="${session.user.user_nm}" id="logout"></span><a href="/logout">로그아웃</a>
 			</ul>
-
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li th:if="${session.user == null}" id="login">
+					<a href="/login" ><span class="glyphicon glyphicon-user"></span>  로그인</a>
+					<a href="/signup"> <span class="glyphicon glyphicon-log-in"></span> 회원가입</a>
+				</li>
+				
+				
+				
+				<li th:if="${session.user}">
+					<span th:text="${session.user.user_nm}" id="logout">
+					</span>
+					<a href="/logout" class="btn-gradient red mini" >로그아웃</a>
+				</li>
+			</ul>
+			
+			
 		</div>
 
 

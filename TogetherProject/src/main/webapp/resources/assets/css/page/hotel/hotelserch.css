@@ -1,5 +1,61 @@
 @charset "UTF-8";
 
+	
+	#map{
+		margin-top : 3%;
+		width:100%;
+		height: 600px;
+	}
+	
+	
+	.total_div{
+		width: 100%;
+		height: 1000px;
+		margin-top: 5%;
+	}
+	
+	
+	#main1{
+	float : left;
+	width: 50%;
+/* 	background-color: #E6E6E6; */
+	}
+	
+	.map_wrap{
+		float : left;
+		width: 50%;
+		height: 100%;
+	}
+	
+/* dd */
+#ite span{
+	display: none;
+	
+}
+#ite div{
+	display: none;
+}
+
+
+
+.listbox2{
+    border:2px soli; 
+    margin: 10px;
+    box-shadow: 1px 1px 6px ;
+    background-color: white;   
+    display: flex;
+    flex-flow: wrap;
+}
+
+#imgbox{
+   width: 100%;
+   height: 100%;
+
+   padding: 10px;
+}
+
+
+
 
 
 

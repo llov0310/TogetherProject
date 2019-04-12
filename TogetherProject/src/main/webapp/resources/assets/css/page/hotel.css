@@ -59,7 +59,7 @@ h3 {
 }
 
 .to1{
-	float : left;
+	flex: flex-wrap;
 }
 /*검색과 list가 따로움직이지 않도록 묶어주는 div */
 .div_serach_total{

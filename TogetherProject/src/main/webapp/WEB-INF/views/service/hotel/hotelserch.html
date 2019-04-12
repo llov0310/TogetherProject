@@ -11,6 +11,7 @@
 
 <th:block layout:fragment="page_css">
 	  <link rel="stylesheet" href="assets/css/page/hotel/hotelserch.css">
+	  <link rel="stylesheet" href="assets/css/page/hotel.css">
 </th:block>
 
 <th:block layout:fragment="page_js">
@@ -36,6 +37,8 @@ var ps = new daum.maps.services.Places();
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new daum.maps.InfoWindow({zIndex:1});
+
+
 
 // 키워드로 장소를 검색합니다
 searchPlaces();
@@ -152,7 +155,7 @@ function getListItem(index, places) {
     }
                  
       itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>' +'<hr>';           
+                '</div>';           
 
     el.innerHTML = itemStr;
     el.className = 'itemList';
@@ -192,35 +195,35 @@ function removeMarker() {
 }
 
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-function displayPagination(pagination) {
-    var paginationEl = document.getElementById('pagination'),
-        fragment = document.createDocumentFragment(),
-        i; 
+// function displayPagination(pagination) {
+//     var paginationEl = document.getElementById('pagination'),
+//         fragment = document.createDocumentFragment(),
+//         i; 
 
-    // 기존에 추가된 페이지번호를 삭제합니다
-    while (paginationEl.hasChildNodes()) {
-        paginationEl.removeChild (paginationEl.lastChild);
-    }
+//     // 기존에 추가된 페이지번호를 삭제합니다
+//     while (paginationEl.hasChildNodes()) {
+//         paginationEl.removeChild (paginationEl.lastChild);
+//     }
 
-    for (i=1; i<=pagination.last; i++) {
-        var el = document.createElement('a');
-        el.href = "#";
-        el.innerHTML = i;
+//     for (i=1; i<=pagination.last; i++) {
+//         var el = document.createElement('a');
+//         el.href = "#";
+//         el.innerHTML = i;
 
-        if (i===pagination.current) {
-            el.className = 'on';
-        } else {
-            el.onclick = (function(i) {
-                return function() {
-                    pagination.gotoPage(i);
-                }
-            })(i);
-        }
+//         if (i===pagination.current) {
+//             el.className = 'on';
+//         } else {
+//             el.onclick = (function(i) {
+//                 return function() {
+//                     pagination.gotoPage(i);
+//                 }
+//             })(i);
+//         }
 
-        fragment.appendChild(el);
-    }
-    paginationEl.appendChild(fragment);
-}
+//         fragment.appendChild(el);
+//     }
+//     paginationEl.appendChild(fragment);
+// }
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
@@ -238,30 +241,37 @@ function removeAllChildNods(el) {
     }
 }
 
+
+ 
+ 
 // 검색결과 클릭시 주소값을 반환해 주는 구문
 $(document).ready(function(){
-	$('#placesList').on('click', 'span',function(){
-		alert("선택됬음");
-		var a = $(this).parent().children().eq(1).text();
+	
+	
+	
+	
+// 	$('#placesList').on('click', 'span',function(){
+// 		alert("선택됬음");
+// 		var a = $(this).parent().children().eq(1).text();
 		
-		console.log(a);
-		var address = { address : a }
+// 		console.log(a);
+// 		var address = { address : a }
 			
-			$.ajax({
-				type: "POST", 
-				url: "hotel_box",      // 클라이언트가 요청을 보낼 서버의 URL 주소
-				data: address,     	 // HTTP 요청과 함께 서버로 보낼 데이터
-				dataType: "text",       // 서버에서 보내줄 데이터의 타입
-				success: function(data){
-				    if(data != null){
-				    	location.href = "/hotel";
-				    }else{
-				    	alert("검색결과가 없습니다");
-				    }
-				}
-			});
+// 			$.ajax({
+// 				type: "POST", 
+// 				url: "hotel_box",      // 클라이언트가 요청을 보낼 서버의 URL 주소
+// 				data: address,     	 // HTTP 요청과 함께 서버로 보낼 데이터
+// 				dataType: "text",       // 서버에서 보내줄 데이터의 타입
+// 				success: function(data){
+// 				    if(data != null){
+// 				    	location.href = "/hotel";
+// 				    }else{
+// 				    	alert("검색결과가 없습니다");
+// 				    }
+// 				}
+// 			});
 		
-	});
+// 	});
 	
 });
 
@@ -269,32 +279,96 @@ $(document).ready(function(){
 </th:block>
 
 <th:block layout:fragment="contents">
-	<div class="map_wrap">
-    <div id="map"></div>
+<div class="total_div">
+<div id="main1">
+		<div id="sear">
+			<div>
+				<input type="search" id="searchbar">
+				
+			</div>
+		</div>
 
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    주소검색 : <input type="text" value="복현동" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-                
-            </div>
-           
-        </div>
-        <hr>
-        <div class="scroller">
-        <div id="placesList">
-        
-        </div>
-        </div>
-        <div id="pagination">
-        
-        </div>
-        
-    </div>
-</div>
-	</th:block>
+		<div id="main1-1">
+			<div class="selectbox">
+				<label for="select">정렬순서</label> <select id="select">
+					<option selected>거리순</option>
+					<option>추천순</option>
+					<option>리뷰순</option>
+					<option>내마음순</option>
+				</select>
+			</div>
+		</div>
+		<div id="main1-2">
+			<div class="listbox1">
+			
+				<!--리스트 시작  -->
+					<div class="listbox2">
+							<div id="imgbox1">
+								<div id="img1">
+									<img src="http://placehold.it/200x200" alt="" id="imgbox">
+								</div>
+							</div>
+									<div class="context">
+										<div>
+											<div>
+												<h2>동물병원</h2>
+											</div>
+											<div class="ok">
+												대구광역시 북구 침산로 153 명성푸르지오
+												<button id="mapbut">지도보기</button>
+											</div>
+											<div>053)153-5135</div>
+											<div>리뷰</div>
+										</div>
+									</div>
+	
+	
+											<div id="context1">
+												<div>
+													<div>진료시간</div>
+													<div>오전10시~ 오후 9시까지</div>
+													<div>토 일 공휴일 쉼</div>
+												</div>
+											</div>
+	
+						</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	
+<!-- 아래 지도 페이지 -->
+			<div class="map_wrap">
+			    <div id="map"></div>
+			
+			    <div id="menu_wrap" class="bg_white">
+			        <div class="option">
+			            <div>
+			                <form onsubmit="searchPlaces(); return false;">
+			                    주소검색 : <input type="text" th:value="${place}" id="keyword" size="15">
+			                    
+			                    <button type="submit">검색하기</button> 
+			                </form>
+			                
+			            </div>
+			           
+			        </div>
+			        <hr>
+			        <div class="scroller">
+			        <div id="placesList">
+			        
+			        </div>
+			        </div>
+			        <div id="pagination">
+			        
+			        </div>
+			        
+			    </div>
+			</div>
+	</div>	
+</th:block>
 
 </html>

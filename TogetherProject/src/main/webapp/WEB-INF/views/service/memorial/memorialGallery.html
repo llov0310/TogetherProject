@@ -7,18 +7,7 @@
 
 <th:block layout:fragment="page_head">
 	<title>추모소</title>
-</th:block>
-
-<div>
-	<th:block layout:fragment="page_css">
-		<link rel="stylesheet" href="assets/css/page/memorial/card.css">
-		<link rel="stylesheet" href="assets/css/page/memorial/memorial.css">
-	</th:block>
-</div>
-
-<th:block layout:fragment="page_head">
-
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -56,11 +45,19 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-
-
+    </th:block>
+</th:block>
 
 <div>
-	<th:block layout:fragment="contents">
+	<th:block layout:fragment="page_css">
+		<link rel="stylesheet" href="assets/css/page/memorial/card.css">
+		<link rel="stylesheet" href="assets/css/page/memorial/memorial.css">
+		 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</th:block>
+</div>
+
+
+<th:block layout:fragment="contents">
   <!-- Page Content -->
   <div class="container">
 
@@ -70,11 +67,15 @@
     </h1>
 
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
-      </li>
-      <li class="breadcrumb-item active">Portfolio 3</li>
+     	<div>
+	        <a href="writeForm" class="btn btn-info btn-lg">
+	          <span id= "writing" class="glyphicon glyphicon-pencil">
+	          </span> 글쓰기
+	        </a>
+   	 	</div>
     </ol>
+    
+   
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
