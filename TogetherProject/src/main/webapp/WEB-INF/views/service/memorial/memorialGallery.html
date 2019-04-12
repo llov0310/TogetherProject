@@ -3,6 +3,18 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="include/serviceLayout">
+	
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/page/memorial/card.css">
+	<link rel="stylesheet" href="assets/css/page/memorial/memorial.css">
+		 
+</th:block>
+
+
+<th:block layout:fragment="page_js">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../../../assets/js/memorial/memorial.js"></script>
+</th:block>
 
 
 <th:block layout:fragment="page_head">
@@ -48,13 +60,8 @@
     </th:block>
 </th:block>
 
-<div>
-	<th:block layout:fragment="page_css">
-		<link rel="stylesheet" href="assets/css/page/memorial/card.css">
-		<link rel="stylesheet" href="assets/css/page/memorial/memorial.css">
-		 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</th:block>
-</div>
+
+
 
 
 <th:block layout:fragment="contents">
@@ -65,9 +72,9 @@
     <h1 class="mt-4 mb-3">
     	<center>삼가 고견의 명복을 빕니다</center> 
     </h1>
-
+    
     <ol class="breadcrumb">
-     	<div>
+     	<div id="write">
 	        <a href="writeForm" class="btn btn-info btn-lg">
 	          <span id= "writing" class="glyphicon glyphicon-pencil">
 	          </span> 글쓰기
