@@ -3,6 +3,7 @@ package com.together.mapper;
 
 import java.util.ArrayList;
 
+import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 
@@ -12,4 +13,7 @@ public interface AdminMapper {
    
    // 업체 리스트를 가져오기 위한 함수 추가
    public ArrayList<EnterpriseVO> getEnterpriseList();
+   
+   // 반려견 리스트를 가져오기 위한 함수 추가
+   public ArrayList<DogsVO> getDogsList();
 }
