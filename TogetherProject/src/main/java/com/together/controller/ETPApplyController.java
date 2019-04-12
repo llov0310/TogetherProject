@@ -19,20 +19,33 @@ public class ETPApplyController {
 	
 	// 업체 등록 
 	@RequestMapping(value = "/etpApply", method = RequestMethod.POST)
-	public String etpApply(Model model, EnterpriseVO ins) {
+	public String etpApply(Model model, EnterpriseVO ins, @RequestParam String cd) {
 		
-		System.out.println(ins + "아ㅏㅏㅏㅏㅏ즈뱅야ㅑㅑㅑㅑㅑ");
-		int insert = etpApplyService.etpApply(ins);
+		System.out.println(cd);
 		
+		if(cd.equals("h")) {
+				int insert = etpApplyService.etpApply(ins);
+				if (insert != 0) {
+					return "nav/etpApply";
+				} else {
+					return "home";
+				}
 		
-		
-		System.out.println(insert+"반환값은?");
-		// 수정해야 할 부분
-		if (insert != 0) {
-			return "nav/etpApply";
-		} else {
-			return "home";
+		}else if(cd.equals("f")){
+				int insert = etpApplyService.etpApply2(ins);
+				
+				if (insert != 0) {
+					return "nav/etpApply";
+				} else {
+					return "home";
+				}
 		}
+		
+		return "nav/etpApply";
+	
+	
+		// 수정해야 할 부분
+		
 
 	}
 	

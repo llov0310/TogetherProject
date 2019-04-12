@@ -7,12 +7,20 @@
 	
 	<!-- 업체신청시 enterprise테이블에 insert될 쿼리문 -->
 	<insert id="etpApply" parameterType="com.together.domain.EnterpriseVO">
-		insert into enterprise
-		values ('#{etp_cd}'||ENTERPRISE_SEQ.nextval,
+		insert into enterprise VALUES ('h'||ENTERPRISE_SEQ.nextval,
 		#{user_id},#{etp_addr},#{etp_ph_no},
-		#{etp_license_no},#{etp_nm},#{etp_content},
-		#{etp_email});
+		#{etp_license_no},#{etp_nm},
+		#{etp_content},#{etp_email})
 	</insert>
+	
+	
+	<insert id="etpApply2" parameterType="com.together.domain.EnterpriseVO">
+		insert into enterprise VALUES ('f'||ENTERPRISE_SEQ.nextval,
+		#{user_id},#{etp_addr},#{etp_ph_no},
+		#{etp_license_no},#{etp_nm},
+		#{etp_content},#{etp_email})
+	</insert>
+	
 	
 	
 </mapper>

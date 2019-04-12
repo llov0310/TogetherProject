@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ETPApplyServiceImplement implements ETPApplyService{
+	
 	private ETPApplyMapper mapper;
 	
 	
@@ -17,9 +18,15 @@ public class ETPApplyServiceImplement implements ETPApplyService{
 	@Override
 	public int etpApply(EnterpriseVO ins) {
 		
-		System.out.println(ins + "넘어오는거 맞지");
-		// TODO Auto-generated method stub
+		
 		return mapper.etpApply(ins);
+	}
+
+
+	@Override
+	public int etpApply2(EnterpriseVO ins) {
+		// TODO Auto-generated method stub
+		return mapper.etpApply2(ins);
 	}
 	
 }

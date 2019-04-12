@@ -21,13 +21,13 @@
 		<form action="/etpApply" method="post">
 			<label>
 				업체 선택 :
-				<input type="radio" name="etp_cd" value="h" checked="checked"/>호텔
-				<input type="radio" name="etp_cd" value="f"/>장례
+				<input type="radio" name="cd" value="h" checked="checked">호텔
+				<input type="radio" name="cd" value="f">장례
 			</label>
 			<br/><br/>
 			
 			<label th:if="${session.user != null}" style="display: none;">
-				<input th:value="${session.user.user_id}" name="user_id" >
+				<input th:value="${session.user.user_id}" name="user_id">
 			</label>
 			
 			
@@ -39,25 +39,25 @@
 			
 			<label>
 				<p>사업자 번호</p>
-				<input type="text" id="etp_license_no" name="etp_license_no"/>
+				<input type="text" id="etp_license_no" name="etp_license_no">
 			</label>
 			<br/>
 			
 			<label>
 				<p>업체 대표 번호</p>
-				<input type="text" id="etp_ph_no" name="etp_ph_no"/>
+				<input type="text" id="etp_ph_no" name="etp_ph_no">
 			</label>
 			<br/>
 			
 			<label>
 				<p>업체 주소</p>
-				<input type="text" id="etp_addr" name="etp_addr"/>
+				<input type="text" id="etp_addr" name="etp_addr">
 			</label>
 			<br/>
 			
 			<label>
 				<p>업체 이메일</p>
-				<input type="text" id="etp_email" name="etp_email"/>
+				<input type="text" id="etp_email" name="etp_email">
 			</label>
 			<br/>
 			
@@ -68,7 +68,7 @@
 			<br/>
 			
 			<label>
-				<input type="submit" value="신청"/>
+				<input type="submit" value="신청">
 			</label>
 		</form>
 
