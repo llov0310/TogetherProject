@@ -29,12 +29,11 @@ public class MemorialController {
 	   @RequestMapping(value = "/writeFormData", method=RequestMethod.GET)
 	   public String submitPost(
 			   @RequestParam("sb_title") String sb_title, 
-			   @RequestParam("sb_content") String sb_content, Model model) {
-		   	System.out.println("sb_title:::"+ sb_title +"sb_content:::"+sb_content);
-		   	
-		   	
-		  
+			   @RequestParam("sb_content") String sb_content, SadBoardVO sadBoardVom, Model model) {
 		   
+		   System.out.println("sb_title:::"+ sb_title +"sb_content:::"+sb_content);
+		   	
+		   	
 		   return "service/memorial";
 	   }
 	   

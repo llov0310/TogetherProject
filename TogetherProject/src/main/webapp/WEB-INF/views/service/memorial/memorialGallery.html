@@ -73,7 +73,8 @@
     	<center>삼가 고견의 명복을 빕니다</center> 
     </h1>
     
-    <ol class="breadcrumb">
+    
+    <ol class="breadcrumb" th:if="${session.user}">
      	<div id="write">
 	        <a href="writeForm" class="btn btn-info btn-lg">
 	          <span id= "writing" class="glyphicon glyphicon-pencil">
@@ -81,6 +82,8 @@
 	        </a>
    	 	</div>
     </ol>
+    
+    
     
    
 
@@ -186,7 +189,6 @@
   
   </th:block>
   </div>
-  
 
 
 
