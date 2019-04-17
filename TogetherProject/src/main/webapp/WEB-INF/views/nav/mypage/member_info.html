@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/serviceLayout">
+
+<th:block layout:fragment="page_head">
+	<title>정보수정</title>
+</th:block>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+	 $(document).ready(function() {
+		 $("#passok").click(function() {
+			 alert("됨?");
+		 });
+	});  
+	</script>
+<th:block layout:fragment="page_css">
+</th:block>
+
+
+<th:block layout:fragment="page_js">
+</th:block>
+<th:block layout:fragment="contents">
+<div id="ppap">
+	<div id="dddd">
+		<h2>회원정보 수정</h2>
+	</div>
+	프로필 사진 수정
+	<div th:if="${session.user} != null">
+		<div>
+			아이디 : <span th:text="${session.user.user_id}"></span>
+		</div>
+		<div>
+			이름 : <span th:text="${session.user.user_nm}"></span>
+		</div>
+		<div>
+			생년월일 <span th:text="${session.user.birth_dt}"></span>
+		</div>
+		<div>
+			주소 <span th:text="${session.user.addr_ji}"></span>
+		</div>
+
+		<div>
+			비밀번호<br> <input type="password">현재비밀번호 <input
+				type="password" id="pass1">새로 운비밀번호<br> <input
+				type="password" id="pass2">확인 비밀번호<br>
+			<button id="passok">확인</button>
+			
+			<br>
+	
+	
+		</div>
+		<div>
+			이메일 <input type="email"> 변경할 이메일
+		</div>
+		<div>
+			핸드폰번호 <input type="text">변경할 핸드폰번호
+		</div>
+		<div>
+			<button>수정하기</button>
+		</div>
+	</div>
+	</div>
+	<script src="assets/js/mypagejs/mypagejs.js"></script>
+</th:block>

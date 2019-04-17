@@ -31,7 +31,7 @@ public class CustomerServiceImplement implements CustomerService {
 		return mapper.signup(ins);
 	}
 
-
+ 
 	@Override
 	public ArrayList<EnterpriseVO> list(String address_total) {
 		// TODO Auto-generated method stub
