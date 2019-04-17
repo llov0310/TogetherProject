@@ -12,4 +12,6 @@ public interface CustomerService {
 	public int signup(MemberVO ins);
 
 	public ArrayList<EnterpriseVO> list(String address_total);
+
+	public ArrayList<EnterpriseVO> ser(String toAddress);
 }

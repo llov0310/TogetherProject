@@ -16,18 +16,17 @@ $(function() {
 // 등록버튼 클릭
 
 $('#submit').bind('click', function(memorialData) {
-	
 	var query = {
+			
 		sb_title : $("#sb_title").val(),
 		sb_content : $("#sb_content").val()
+		
 	}; 
 	
-	if($("#sb_title").val() == null&&$("#sb_title").val() == ""){
-		alert("제목을 입력해주세요")
-	}else if($("#sb_content").val() == null&&$("#sb_content").val() == ""){
+	if($("#sb_title").val()==""){
+		alert("제목을 입력해주세요");
+	}else if($("#sb_content").val()==""){
 		alert("내용을 입력해주세요");
-	}else{
-		System.out.prinln("입력성공");
 	}
 
 	

@@ -22,4 +22,10 @@
 		etp_cd like '%'||'h'||'%')
 	</select>
 	
+	
+	<select id="ser" resultType="com.together.domain.EnterpriseVO">
+		select * from enterprise
+		where etp_addr = #{toAddress}		
+	</select>
+	
 </mapper>
