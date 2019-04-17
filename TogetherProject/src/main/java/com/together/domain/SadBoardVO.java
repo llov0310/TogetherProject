@@ -12,4 +12,5 @@ public class SadBoardVO {
 	private String sb_content;
 	private int sb_sad;
 	private Timestamp sb_dt;
+	
 }

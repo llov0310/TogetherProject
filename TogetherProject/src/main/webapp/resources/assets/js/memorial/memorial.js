@@ -1,25 +1,27 @@
 /**
  * 추모게시판
+
  */
 
 // 취소버튼 클릭
+
+
+
 $(function() {
 	$('#cancel').click(function() {
 		location.replace('memorialGallery.html');
 	});
 });
 
-
-
-
-
 // 등록버튼 클릭
+
 
 $('#submit').bind('click', function(memorialData) {
 	var query = {
-			
+		user_id	: $("#dd").text(),
 		sb_title : $("#sb_title").val(),
-		sb_content : $("#sb_content").val()
+		sb_content : $("#sb_content").val(),
+		
 		
 	}; 
 	

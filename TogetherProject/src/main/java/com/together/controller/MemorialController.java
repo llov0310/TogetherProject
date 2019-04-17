@@ -1,8 +1,10 @@
 package com.together.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.together.domain.MemberVO;
 import com.together.domain.SadBoardVO;
 import com.together.service.CustomerService;
 import com.together.service.MemorialService;
@@ -37,16 +40,26 @@ public class MemorialController {
 	   @RequestMapping(value = "/writeFormData", method=RequestMethod.GET)
 	   	@ResponseBody
 	   public String submitPost(
-			   @RequestParam("sb_title") String sb_title, 
-			   @RequestParam("sb_content") String sb_content, SadBoardVO sadBoardVom, Model model) {
+			  
+			   @RequestParam("sb_title") String sb_title,
+			   @RequestParam("sb_content") String sb_content, 
+			   Model model, 
+			   HttpSession session) {
 		   
-		   System.out.println("sb_title:::"+ sb_title +"sb_content:::"+sb_content);
+		   MemberVO user =(MemberVO)session.getAttribute("user");
 		   
-		   HashMap<String, Object> hashParam = new HashMap<String, Object>();
+		   System.out.println("sb_title::: "+ sb_title +"sb_content:::"+sb_content   +"user_id::::"+user.getUser_id());
+		   
+		   HashMap<String, Object> sadBoard = new HashMap<String, Object>();
 		   
 		   
-		   	
-		   	
+		   
+		   sadBoard.put("sb_title", sb_title); 
+		   sadBoard.put("sb_content", sb_content);
+		   sadBoard.put("user_id", user.getUser_id());
+		   
+		   
+		   
 		   return "service/memorial";
 	   }
 	   
