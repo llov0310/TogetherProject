@@ -3,6 +3,8 @@ package com.together.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
@@ -17,4 +19,11 @@ public interface AdminService {
    
    // 반려견 리스트를 가져올 함수 선언
    public ArrayList<DogsVO> getDogsList();
+   
+   // 업체 신청 수락을 위한 함수 추가
+   public int etpApplyManage_01(MemberVO mbIns, String arr);
+
+   // 업체 신청 거절을 위한 함수 추가
+   public int etpApplyManage_02(EnterpriseVO etpIns, String arr);
+
 }

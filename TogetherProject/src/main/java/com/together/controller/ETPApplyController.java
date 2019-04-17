@@ -22,7 +22,7 @@ public class ETPApplyController {
 	public String etpApply(Model model, EnterpriseVO ins, @RequestParam String cd) {
 		
 		System.out.println(cd);
-		
+
 		if(cd.equals("h")) {
 				int insert = etpApplyService.etpApply(ins);
 				if (insert != 0) {

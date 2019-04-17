@@ -26,4 +26,22 @@
 	where d.user_id = m.user_id
 	</select>
 	
+	<select id="getETPApplyList" resultType="com.together.domain.MemberVO">
+	select authority_no
+	from member
+	where user_id = #{user_id}
+	</select>
+	
+	
+	<!-- 관리자가 업체 신청 수락시 수행될 sql문 추가 -->
+	<update id="etpApplyManage_01" parameterType="com.together.domain.MemberVO">
+	update member
+	set authority_no = 2
+	where user_id = #{user_id}
+	</update>
+	
+	<!-- 관리자가 업체 신청 거절시 수행될 sql문 추가 -->
+	<delete id="etpApplyManage_02" parameterType="com.together.domain.EnterpriseVO">
+	
+	</delete>
 </mapper>

@@ -16,6 +16,7 @@
 			<a target="_blank" href="https://datatables.net">official
 				DataTables documentation</a>.
 		</p>
+		
 
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">
@@ -26,33 +27,42 @@
 			<div class="card-body">
 				<div class="table-responsive">
 
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>아이디</th>
-								<th>이름</th>
-								<th>이메일</th>
-								<th>회사 대표 번호</th>
-								<th>주소</th>
-								<th>사업자 번호</th>
-								<th>업체 명</th>
-								<th>업체 소개</th>
-							</tr>
-						</thead>
-						<tbody th:each = "etpList : ${session.enterpriseList}">
-							<tr>
-								<td th:text="${etpList.user_id}"></td>
-								<td th:text="${etpList.user_nm}"></td>
-								<td th:text="${etpList.etp_email}"></td>
-								<td th:text="${etpList.etp_ph_no}"></td>
-								<td th:text="${etpList.etp_addr}"></td>
-								<td th:text="${etpList.etp_license_no}"></td>
-								<td th:text="${etpList.etp_nm}"></td>
-								<td th:text="${etpList.etp_content}"></td>
-							</tr>
-						</tbody>
-					</table>
+					
+						<div>
+							<input type="button" name="etpApplyCk" value="수락"/>
+							<input type="button" name="etpApplyCk" value="거절"/>
+						</div>
+					
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>선택</th>
+									<th>아이디</th>
+									<th>이름</th>
+									<th>이메일</th>
+									<th>회사 대표 번호</th>
+									<th>주소</th>
+									<th>사업자 번호</th>
+									<th>업체 명</th>
+									<th>업체 소개</th>
+								</tr>
+							</thead>
+							<tbody th:each="etpList : ${session.enterpriseList}">
+								<tr>
+									<td><input type="checkbox" th:value="${etpList.user_id}" name="user_id"></td>
+									<td th:text="${etpList.user_id}"></td>
+									<td th:text="${etpList.user_nm}"></td>
+									<td th:text="${etpList.etp_email}"></td>
+									<td th:text="${etpList.etp_ph_no}"></td>
+									<td th:text="${etpList.etp_addr}"></td>
+									<td th:text="${etpList.etp_license_no}"></td>
+									<td th:text="${etpList.etp_nm}"></td>
+									<td th:text="${etpList.etp_content}"></td>
+								</tr>
+							</tbody>
+						</table>
+
 				</div>
 			</div>
 		</div>

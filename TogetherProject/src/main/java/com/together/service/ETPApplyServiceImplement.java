@@ -14,15 +14,14 @@ public class ETPApplyServiceImplement implements ETPApplyService{
 	private ETPApplyMapper mapper;
 	
 	
-	// 업체 신청
+	// 업체 신청 (호텔)
 	@Override
 	public int etpApply(EnterpriseVO ins) {
-		
-		
+
 		return mapper.etpApply(ins);
 	}
 
-
+	// 업체 신청 (장례)
 	@Override
 	public int etpApply2(EnterpriseVO ins) {
 		// TODO Auto-generated method stub

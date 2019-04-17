@@ -14,6 +14,6 @@ public class EnterpriseVO {
 	private String etp_email;
 	
 	// 업체 리스트를 볼때 추가적으로 필요한 변수를 선언
-//	private String user_nm;
-//	private int authority_no;
+	private String user_nm;
+	private int authority_no;
 }
