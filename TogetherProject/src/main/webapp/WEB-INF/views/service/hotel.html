@@ -71,16 +71,9 @@
  
 	<div class="total-div">
 			<div class="left-div">
-			
-					<div class="address-mm">
-						<div th:if="${session.hotel_list != null}">
-						<span th:text="${session.hotel_list[0].etp_addr}"></span>
-						</div>
-					</div>
+
 					<br>
-					
-	<!-- 				<button class="map" onclick="mapserch()"><img src="http://placehold.it/20x20" /></button> -->
-					
+
 							<div class="test">
 									<div id="cal1" class="to1">
 									<form action="/hotelserch" method="GET">
@@ -164,50 +157,7 @@
 							</div>
 				
 			</div>
-			
-			<div class="right-div">
-			
-<!-- 				<div class="top-bar"> -->
-<!-- 					<div class="move1"> -->
-<!-- 						(Total업체 갯수 가 들어옴) -->
-<!-- 					</div> -->
-				 
-<!-- 					 <div class="move2"> -->
-<!-- 					 <input type="radio" id="topic" class="set" name="1">인기순 -->
-<!-- 					 <input type="radio" id="distance" class="set" name="1">거리순 -->
-<!-- 					 <input type="radio" id="avg" class="set" name="1">평점순 -->
-<!-- 					 </div> -->
-<!-- 				</div> -->
-				<div class="list-bar">
-				
-				
-				<div th:if="${session.hotel_list != null}">
-					<div class="list" th:each="lit : ${session.hotel_list}">
-						<div class="company_list_img">
-							<img src="http://placehold.it/150x200">
-						</div>
 
-						<div class="company_list">
-							<div class="intro">
-							
-							<span th:text="${lit.etp_nm}"></span><label>별점</label><br>
-							<textarea style="width:80%" th:text="${lit.etp_content}"></textarea><br>
-							<br>
-							
-							</div>
-							<div class="money">
-							<label>시간당</label> <label> 10,000원 </label><br>
-							<label>1박</label> <label> 50,000원 </label>
-							</div>
-							
-							
-						</div>
-					</div>
-					</div>
-					
-				</div>
-				
-			</div>
 
 	</div>
 	</div>

@@ -25,7 +25,7 @@
 	
 	<select id="ser" resultType="com.together.domain.EnterpriseVO">
 		select * from enterprise
-		where etp_addr = #{toAddress}		
+		where etp_addr like '%'||#{toAddress}||'%'
 	</select>
 	
 </mapper>
