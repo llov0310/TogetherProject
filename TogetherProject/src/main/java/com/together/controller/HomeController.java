@@ -1,5 +1,7 @@
 package com.together.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.together.domain.EnterpriseVO;
+import com.together.service.CustomerService;
+
 import lombok.AllArgsConstructor;
 
 
@@ -21,6 +26,8 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class HomeController {
+	
+	private CustomerService customerservice;
 	
    //홈 페이지 맵핑
    @RequestMapping(value = "/", method=RequestMethod.GET)
@@ -64,9 +71,17 @@ public class HomeController {
    
    //호텔 페이지 관련 이동 맵핑 정보
    @RequestMapping(value = "/hotelserch", method=RequestMethod.GET)
-   public String hotelserch(Model model , @RequestParam String toAddress) {
-	  
+   public String hotelserch(Model model ,HttpSession session ,@RequestParam String toAddress, EnterpriseVO ent) {
+	   ArrayList<EnterpriseVO> result = new ArrayList<EnterpriseVO>();
+//	   String[] ad = toAddress.split(" ");
+//	   String address_total = ad[0];
+//	   
+//	   System.out.println(address_total);
+	   
 	   model.addAttribute("place" , toAddress);
+	   result = customerservice.ser(toAddress);
+
+	   session.setAttribute("list_enterprise", result);
 	  
 	  return  "service/hotel/hotelserch";
    }
