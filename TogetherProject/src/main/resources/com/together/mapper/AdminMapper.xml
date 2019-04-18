@@ -11,7 +11,7 @@
 	from member
 	where authority_no = 2 or authority_no = 3
 	</select>
-	
+	 
 	<!--  enterpriseManage페이지에 갔을 때 업체 신청 리스트를 보기 위한 sql문 추가-->
 	<select id="getEnterpriseList" resultType="com.together.domain.EnterpriseVO">
 	select m.user_nm, m.authority_no, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
