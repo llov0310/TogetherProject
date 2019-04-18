@@ -6,20 +6,56 @@
 
 <th:block layout:fragment="page_head">
 	<title>정보수정</title>
+<script>
+$(document).ready(function() {
+	$("#newpass").hide();
+	
+	 $("#passok").click(function() {
+			var password = $("#pass").val();
+			var user_id = $(".id").text();
+			
+			
+			$.ajax({
+				url : "/member_pass_cheak",
+				type : "POST",
+				dataType : 'text',
+				data : {user_id : user_id ,password : password},
+				success : function(data){
+					alert(data);
+					if(data == "success"){
+						alert("비밀번호 체크완료");
+						$("#newpass").show();
+					}else{
+						alert("현재 비밀번호가 맞지 않습니다");
+						 $("#pass").focus();
+					}
+				}
+				
+			});
+		
+	 });
+}); 
+
+
+$(document).ready(function() {
+	 $("#upbtn").click(function() {
+		 var a= $(".phon").text();
+		if($("#newphon").val() ==""){
+			alert(a);
+			
+		}else{
+			
+			alert("변경값");
+		}
+			
+		
+	 });
+}); 
+
+</script>
 </th:block>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript">
-	 $(document).ready(function() {
-		 $("#passok").click(function() {
-			 alert("됨?");
-		 });
-	});  
-	</script> 
 <th:block layout:fragment="page_css">
 </th:block>
-
-
 <th:block layout:fragment="page_js">
 </th:block>
 <th:block layout:fragment="contents">
@@ -30,7 +66,7 @@
 	프로필 사진 수정
 	<div th:if="${session.user} != null">
 		<div>
-			아이디 : <span th:text="${session.user.user_id}"></span>
+			아이디 : <span class="id"  th:text="${session.user.user_id}"></span>
 		</div>
 		<div>
 			이름 : <span th:text="${session.user.user_nm}"></span>
@@ -41,27 +77,31 @@
 		<div>
 			주소 <span th:text="${session.user.addr_ji}"></span>
 		</div>
-
 		<div>
-			비밀번호<br> <input type="password">현재비밀번호 <input
-				type="password" id="pass1">새로 운비밀번호<br> <input
-				type="password" id="pass2">확인 비밀번호<br>
-			<button id="passok">확인</button>
-			
-			<br>
+			폰번호 <span class="phon" th:text="${session.user.ph_no}"></span>
+		</div>
+		<div>
+			정보 변경<br> 
+			현재비밀번호  : <input type="password" id="pass" name="password"><button id="passok">확인</button><br> 
+			<div id="newpass">
+			새로 운비밀번호: <input type="password" id="newpass1"><br> 
+			확인 비밀번호 :<input type="password" id="newpass2"><br>
+			<div>
+			 변경할 이메일 <input type="email" id="newemail">
+		</div>
+		<div>
+			변경할 핸드폰번호<input type="text" id="newphon">
+		</div>
+			<div>
+			주소주소 <input type="text" id="newaddr">주소주소
+		</div>
+		<div>
+			<button id="upbtn">수정하기</button>
+		</div>
+			</div>
 	
 	
 		</div>
-		<div>
-			이메일 <input type="email"> 변경할 이메일
-		</div>
-		<div>
-			핸드폰번호 <input type="text">변경할 핸드폰번호
-		</div>
-		<div>
-			<button>수정하기</button>
 		</div>
 	</div>
-	</div>
-	<script src="assets/js/mypagejs/mypagejs.js"></script>
 </th:block>

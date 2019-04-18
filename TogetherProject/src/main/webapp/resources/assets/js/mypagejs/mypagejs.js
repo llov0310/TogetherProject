@@ -1,5 +1,8 @@
  $(document).ready(function() {
-	 $("#passok").click(function() {
+	
+	 $("#aa").click(function() {
+		 $("#content").load("/member_info" );
 		 alert("됨?");
+		
 	 });
 });  
