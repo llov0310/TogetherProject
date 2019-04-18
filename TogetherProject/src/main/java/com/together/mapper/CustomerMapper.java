@@ -18,4 +18,8 @@ public interface CustomerMapper {
 	public ArrayList<EnterpriseVO> list(String address_total);
 
 	public ArrayList<EnterpriseVO> ser(String toAddress);
+
+	public ArrayList<EnterpriseVO> info(String test);
+	
+	
 }

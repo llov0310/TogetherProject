@@ -16,4 +16,12 @@ public class EnterpriseVO {
 	// 업체 리스트를 볼때 추가적으로 필요한 변수를 선언
 	private String user_nm;
 	private int authority_no;
+	
+	
+	// 업체 상세정보를 볼때 필요한 변수 선언
+	
+	private String etp_if_cd;
+	private String etp_if_info;
+	private String etp_if_intro;
+	private String etp_if_exter;
 }

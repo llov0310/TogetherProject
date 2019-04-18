@@ -46,5 +46,12 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 
 
+	@Override
+	public ArrayList<EnterpriseVO> info(String test) {
+		// TODO Auto-generated method stub
+		return mapper.info(test);
+	}
+
+
 
 }

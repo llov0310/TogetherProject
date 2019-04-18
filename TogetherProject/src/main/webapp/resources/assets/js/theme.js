@@ -28,6 +28,7 @@ $(function() {
   });
 
   // Collapse Navbar
+
 /*	  var navbarCollapse = function() {
 		if ($("#mainNav").offset().top > 100) {
 			$("#mainNav").addClass("navbar-light");
@@ -35,10 +36,22 @@ $(function() {
 			$("#mainNav").removeClass("navbar-light");
 		}
 	};
+=======
+//	  var navbarCollapse = function() {
+//		if ($("#mainNav").offset().top > 100) {
+//			$("#mainNav").addClass("navbar-light");
+//		} else {
+//			$("#mainNav").removeClass("navbar-light");
+//		}
+//	};
+>>>>>>> branch 'master' of https://github.com/llov0310/TogetherProject.git
 	// Collapse now if page is not at top
-	navbarCollapse();
+//	navbarCollapse();
 	// Collapse the navbar when page is scrolled
+<<<<<<< HEAD
 	$(window).scroll(navbarCollapse);*/
+
+//	$(window).scroll(navbarCollapse);
 
  
 
