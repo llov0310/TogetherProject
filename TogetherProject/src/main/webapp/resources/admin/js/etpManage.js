@@ -18,7 +18,7 @@ $(document).ready(function(){
 		$("input[name='user_id']:checked").each(function(i){
 			 user_id.push($(this).val());
 		});
-
+ 
 		console.log(etpCk);
 		console.log(user_id);
 		
