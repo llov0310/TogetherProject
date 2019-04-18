@@ -1,6 +1,7 @@
 package com.together.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
@@ -55,45 +57,47 @@ public class AdminController {
 	   
 	   //업체 신청 수락 및 거절 맵핑
 	   @RequestMapping(value = "/etpApplyManage", method=RequestMethod.POST)
-	   public String etpApplyManage(Model model,
+	   @ResponseBody
+	   public String etpApplyManage(
+			   Model model, HttpSession session,
 			   EnterpriseVO etpIns, MemberVO mbIns,
-			   @RequestParam String etpApplyCk,
-			   @RequestParam String user_id,
-			   HttpSession session){
-	   
-//		   System.out.println(etpIns + "아이디 찍히는건가?");
-//		   System.out.println("AdminController : " + etpApplyCk);
-//		   System.out.println(user_id);
+			   @RequestParam String[] user_id, @RequestParam String etpCk
+			   ) {
 		   
-		   String[] arr = user_id.split(",");
-		   
-		   System.out.println(arr[0] + ": 1번짼데여");
-		   System.out.println(arr[1] + ": 2번짼데여");
-		   
-		   
-		   if(etpApplyCk.equals("수락")) {
+		   //System.out.println(user_id.length);
+		   //System.out.println(etpCk + "옴??????????????");
+		   if(etpCk.equals("수락")) {
+			   for(int i=0; i<user_id.length; i++) {
+				   int update = adminService.etpApplyManage_01(user_id[i]);
+				   
+				   if(update !=0) {
+					   return "admin/enterpriseManage";
+				   } else {
+					   return "admin/enterpriseManage";
+				   }
 			   
-			   for(int i=0; i<arr.length; i++) { 
-				   int update = adminService.etpApplyManage_01(mbIns, arr[i]);
-				   
-				   System.out.println(update+"ㅎㅎㅎ여긴데");
-				   
-//				   if (update != 0) {
-//					   
-//					   return "admin/enterpriseManage";
-//				   } else {
-//					   return "admin/adminHome";
-//				   }
 			   }
-			  
+		   }else if(etpCk.equals("거절")) {
+			   for(int i=0; i<user_id.length; i++) {
+				   int delete = adminService.etpApplyManage_02(user_id[i]);
+				   
+				   if(delete !=0) {
+					   return "admin/enterpriseManage";
+				   } else {
+					   return "admin/enterpriseManage";
+				   }
+			   }
 		   }
 		   
-//		   }else if(etpApplyCk.equals("거절")) {
-//			   
-//		   }
 		   
+		   //System.out.println("넘어는 오시는건가요?");
+		   
+		   
+		  
 		   return "admin/enterpriseManage";
 	   }
+	   
+	   
 	   
 	   //반려견 관리 
 	   @RequestMapping(value= "/dogsManage", method=RequestMethod.GET)

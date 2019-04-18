@@ -19,11 +19,12 @@ public interface AdminService {
    
    // 반려견 리스트를 가져올 함수 선언
    public ArrayList<DogsVO> getDogsList();
-   
+
+
    // 업체 신청 수락을 위한 함수 추가
-   public int etpApplyManage_01(MemberVO mbIns, String arr);
+   public int etpApplyManage_01(String user_id);
 
    // 업체 신청 거절을 위한 함수 추가
-   public int etpApplyManage_02(EnterpriseVO etpIns, String arr);
+   public int etpApplyManage_02(String user_id);
 
 }

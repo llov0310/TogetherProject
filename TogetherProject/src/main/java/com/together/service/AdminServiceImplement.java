@@ -33,18 +33,20 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.getDogsList();
 	}
-
-	// 업체 신청 수락 함수
+	
+	//업체 신청 수락
 	@Override
-	public int etpApplyManage_01(MemberVO mbIns, String arr) {
+	public int etpApplyManage_01(String user_id) {
 		// TODO Auto-generated method stub
-		return mapper.etpApplyManage_01(mbIns, arr);
+		return mapper.etpApplyManage_01(user_id);
 	}
 
-	// 업체 신청 거절 함수
+	//업체 신청 거절
 	@Override
-	public int etpApplyManage_02(EnterpriseVO etpIns, String arr) {
+	public int etpApplyManage_02(String user_id) {
 		// TODO Auto-generated method stub
-		return mapper.etpApplyManage_02(etpIns, arr);
+		return mapper.etpApplyManage_02(user_id);
 	}
+
+
 }

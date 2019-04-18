@@ -29,15 +29,15 @@
 
 					
 						<div>
-							<input type="button" name="etpApplyCk" value="수락"/>
-							<input type="button" name="etpApplyCk" value="거절"/>
+							<input type="button" id = "accept" class ="etpCk" name="etpApplyCk" value="수락"/>
+							<input type="button" id = "reject" class ="etpCk" name="etpApplyCk" value="거절"/>
 						</div>
 					
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
 								<tr>
-									<th>선택</th>
+									<th><input type="checkbox" id="allCheck"/>전체 선택</th>
 									<th>아이디</th>
 									<th>이름</th>
 									<th>이메일</th>
@@ -85,7 +85,7 @@
 
 	<!-- Page level custom scripts -->
 	<script src="admin/js/demo/datatables-demo.js"></script>
-
+	
 </th:block>
 
 <!-- customerManage.html에 필요한 css 추가 설정 -->
@@ -97,8 +97,8 @@
 
 	<!-- page_js -->
 	<th:block layout:fragment="page_js">
-	
-		
+		<script src="admin/js/etpManage.js"></script>
+
 	</th:block>
 
 </html>

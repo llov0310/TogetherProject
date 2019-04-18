@@ -42,6 +42,7 @@
 	
 	<!-- 관리자가 업체 신청 거절시 수행될 sql문 추가 -->
 	<delete id="etpApplyManage_02" parameterType="com.together.domain.EnterpriseVO">
-	
+	delete from enterprise
+	where user_id = #{user_id}
 	</delete>
 </mapper>
