@@ -28,4 +28,11 @@
 		where etp_addr like '%'||#{toAddress}||'%'
 	</select>
 	
+	
+	<select id="info" resultType="com.together.domain.EnterpriseVO">
+		select * from enterprise a , enterprise_info b 
+		where 
+		a.etp_cd = b.etp_cd and a.etp_cd = #{test}
+	</select>
+	
 </mapper>
