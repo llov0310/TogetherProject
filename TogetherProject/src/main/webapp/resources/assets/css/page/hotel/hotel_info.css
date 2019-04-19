@@ -29,7 +29,7 @@ body {
 	background-color: #fafafa;
 }
 
-.container {
+.container1 {
 	
 	max-width: 100rem;
 	margin: 5% auto;
@@ -97,4 +97,74 @@ Remove or comment-out the code block below to see how the browser will fall-back
 	.gallery-item {
 		margin: 0;
 	}
+}
+
+
+
+
+
+/*          여기서 부턴 아래 리스트                           */
+
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+
+/* Make the masthead heading the same height as the navigation */
+.header h1 {
+	font-size : 30px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 3%;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 2%;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+
+  .container1-2{
+  	
+    max-width: 100rem;
+    margin : 5% auto;
+    padding : 0 2rem 2rem;
+  }
+
+.container-narrow > hr {
+  margin: 3% 0;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 3% 0;
+}
+.marketing p + h4 {
+  margin-top: 2%;
+}
+
+/* Responsive: Portrait tablets and up */
+
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 3%;
+    padding-bottom: 2%;
+  	border-bottom: 1px solid #e5e5e5;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  
 }

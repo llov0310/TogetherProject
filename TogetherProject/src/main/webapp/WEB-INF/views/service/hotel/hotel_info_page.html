@@ -3,7 +3,7 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/serviceLayout">
+	layout:decorator="include/layout">
 
 <th:block layout:fragment="page_head">
 	<title>상세 페이지</title>
@@ -18,10 +18,11 @@
 <!-- 	<script src="assets/js/hotel.js"></script> -->
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </th:block>
 
 <th:block layout:fragment="contents" scroll="no">
-	<div class="container">
+	<div class="container1">
 
 	<div class="gallery">
 
@@ -51,11 +52,68 @@
 	</div>
 </div>
 		
-			<div th:each="info :${session.info}">
-				<div th:if="${info} !=null">
-					<div th:text="${info.etp_nm}"></div>
-				</div>
-			</div>
+		
+<!-- 목록 리스트 출력 란 -->		
+
+
+<div class="container1-2" th:each="info : ${session.info}">
+      <div class="header clearfix" th:if="${info} != null">
+        <h1 class="text-muted" th:text="${info.etp_nm}"></h1>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p class="lead">정보 소개</p>
+          <p th:text="${info.etp_if_info}"></p>
+          
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="type" class="col-sm-5 control-label">I'd like to ride</label>   
+              <div class="col-sm-5">
+                <select name="type" id="type" class="form-control">
+                  <option>--Select your ride--</option>
+                  <option value="animals">Animal</option>
+                  <option value="vehicles">Vehicle</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subtype" class="col-sm-5 control-label">More specifically</label>       
+              <div class="col-sm-5">
+                <select name="subtype" id="subtype"  class="form-control">
+                    <option>-- Select type first--</option>
+                </select>
+              </div>
+            </div>         
+          </form>        
+      
+        </div>
+      </div>
+      
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4><span class="glyphicon glyphicon-cloud-download"></span> 대표 </h4>
+          <p th:text="${info.user_nm}"></p>
+         
+          <h4><span class="glyphicon glyphicon-thumbs-up"></span> 사업자 번호</h4>
+          <p th:text="${info.etp_license_no}"></p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4><span class="glyphicon glyphicon-eye-open"></span>대표 번호</h4>
+          <p th:text="${info.etp_ph_no}"></p>
+
+          <h4><span class="glyphicon glyphicon-ok"></span> 이메일 </h4>
+          <p th:text="${info.etp_email}"></p>
+
+
+        </div>
+      </div>
+
+
+    </div> <!-- /container -->
+		
+		
 	
 
 </th:block>

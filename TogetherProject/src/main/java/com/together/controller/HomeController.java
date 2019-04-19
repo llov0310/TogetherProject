@@ -73,11 +73,7 @@ public class HomeController {
    @RequestMapping(value = "/hotelserch", method=RequestMethod.GET)
    public String hotelserch(Model model ,HttpSession session ,@RequestParam String toAddress, EnterpriseVO ent) {
 	   ArrayList<EnterpriseVO> result = new ArrayList<EnterpriseVO>();
-//	   String[] ad = toAddress.split(" ");
-//	   String address_total = ad[0];
-//	   
-//	   System.out.println(address_total);
-	   
+
 	   model.addAttribute("place" , toAddress);
 	   result = customerservice.ser(toAddress);
 
@@ -122,5 +118,26 @@ public class HomeController {
    }
   
    
+ ////////////////////////////////////업체 관리 용////////////////////////////////////  
+   //업체 관리 페이지 맵핑
+   @RequestMapping(value = "/etpManage", method=RequestMethod.GET)
+   public String etp_manage(Model model) {
+	   
+	   return "nav/enterprise_manage/enterprise_manage";
+   }
+   
+   
+   @RequestMapping(value = "/etphome", method=RequestMethod.GET)
+   public String etp_home(Model model) {
+	   
+	   return "nav/enterprise_manage/enterprise_home";
+   }
+   
+   
+   @RequestMapping(value = "/etpimg", method=RequestMethod.GET)
+   public String etp_img(Model model) {
+	   
+	   return "nav/enterprise_manage/enterprise_img";
+   }
    
 }

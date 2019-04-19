@@ -30,9 +30,8 @@
 	
 	
 	<select id="info" resultType="com.together.domain.EnterpriseVO">
-		select * from enterprise a , enterprise_info b 
-		where 
-		a.etp_cd = b.etp_cd and a.etp_cd = #{test}
+		select * from enterprise a, enterprise_info  b, member c 
+		where a.etp_cd = b.etp_cd and c.user_id = a.user_id and b.etp_cd = #{test}
 	</select>
 	
 </mapper>
