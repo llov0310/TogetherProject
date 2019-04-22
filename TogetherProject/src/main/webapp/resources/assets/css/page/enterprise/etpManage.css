@@ -103,7 +103,7 @@ textarea:focus {
   input[type=password],
   textarea,
   select {
-    width: 100%; 
+    width: %; 
   }
 }
 @media (min-width: 1200px) {

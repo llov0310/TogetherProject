@@ -20,6 +20,11 @@
 <script>
 
 	$(document).ready(function() {
+		
+			$("#zero").click(function(){
+				location.reload();
+			});
+		
 	     
 	      $("#first").click(function() {
 	    	 
@@ -52,38 +57,41 @@
 
 
     <div class="sidebar">
-        <img alt="logo" height="200" src=
-        "http://icons.iconarchive.com/icons/visualpharm/icons8-metro-style/512/Plants-Trees-Leaf-icon.png"
-        width="200">
+        <img alt="logo" height="150" width="200" src="assets/img/enterprise_manage/enterpriseIcon.svg" >
 
         <ul>
+            <li class="listItemA" id="zero"><img alt="icon" height="40" src=
+            "http://www.iconsdb.com/icons/preview/black/circle-xxl.png" width=
+            "40">홈화면</li>
+            
             <li class="listItemA" id="first"><img alt="icon" height="40" src=
             "http://www.iconsdb.com/icons/preview/black/circle-xxl.png" width=
-            "40">HOME</li>
-
+            "40">업체 정보</li>
 
             <li class="listItemA" id="second"><img alt="icon" height="40" src=
             "http://www.iconsdb.com/icons/preview/black/circle-xxl.png" width=
-            "40">img select</li>
+            "40">이미지 수정</li>
 
-            <li class="listItemA" id="third"><a href="#"><img alt="icon" height="40" src=
+            <li class="listItemA" id="third"><img alt="icon" height="40" src=
             "http://www.iconsdb.com/icons/preview/black/circle-xxl.png" width=
-            "40">ELEMENTS</a></li>
+            "40">공지사항</li>
 
-            <li class="listItemA"><a href="#"><img alt="icon" height="40" src=
+            <li class="listItemA" id="for"><img alt="icon" height="40" src=
             "http://www.iconsdb.com/icons/preview/black/circle-xxl.png" width=
-            "40">GAMES</a></li>
+            "40">상품 정보</li>
 
-            <li class="listItemA"><a href="#"><img alt="icon" height="40" src=
+            <li class="listItemA" id="five"><img alt="icon" height="40" src=
             "http://www.iconsdb.com/icons/preview/black/circle-xxl.png" width=
-            "40">PAGES</a></li>
+            "40">주문 현황</li>
         </ul>
     </div>
 
 
 
 	<div class="total">
-		
+			<div style="margin-top : 10%; margin-left : 50%;">
+				확인용
+			</div>
 		</div>
 </th:block>
 </html>

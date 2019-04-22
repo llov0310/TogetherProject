@@ -8,35 +8,50 @@
 <body>
 <form action="#">
 		  <header>
-		    <h2>Example Responsive Form</h2>
+		    <h2>업체 설명 수정 폼</h2>
 	
 		  </header>
 		  
-		  <div >
+		  <div>
 		    <label class="desc" id="title1" for="Field1">업체 이름</label>
 		    <div>
 		      <input id="Field1" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1">
 		    </div>
 		  </div>
 		    
-		  <div>
-		    <label class="desc" id="title3" for="Field3">
-		      Email
-		    </label>
-		    <div>
-		      <input id="Field3" name="Field3" type="email" spellcheck="false" value="" maxlength="255" tabindex="3"> 
-		   </div>
-		  </div>
 		    
 		  <div>
-		    <label class="desc" id="title4" for="Field4">
-		      	업체 설명
-		    </label>
-		  
-		    <div>
-		      <textarea id="Field4" name="Field4" spellcheck="true" rows="10" cols="50" tabindex="4"></textarea>
+		    <label class="desc" id="title4" for="Field4">업체 설명</label>
+		     <div>
+		      <textarea id="Field4" name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
 		    </div>
 		  </div>
+		  
+		  <div>
+		    <label class="desc" id="title4" for="Field4">주의 사항</label>
+		     <div>
+		      <textarea id="Field4" name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
+		    </div>
+		  </div>
+		  
+		  
+		   <div>
+		    <label class="desc" id="title106" for="Field106">편의 시설</label>
+		    <div>
+		     <input type="checkbox" />개인실
+		     <input type="checkbox" />침구
+		     <input type="checkbox" />놀이공간
+		     <input type="checkbox" />안심 카메라
+		    </div>
+		  </div>
+		  
+		  <div>
+				<div>
+		  		<input id="saveForm" name="saveForm" type="button" value="수정">
+		    </div>
+			</div>
+		  
+		</form>
 		    
 <!-- 		  <div> -->
 <!-- 		    <fieldset> -->
@@ -85,26 +100,6 @@
 <!-- 		    </fieldset> -->
 <!-- 		  </div> -->
 		  
-		  <div>
-		    <label class="desc" id="title106" for="Field106">
-		    	무언가 들어감
-		    	
-		    </label>
-		    <div>
-		    <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-		      <option value="First Choice">1</option>
-		      <option value="Second Choice">2</option>
-		      <option value="Third Choice">3</option>
-		    </select>
-		    </div>
-		  </div>
-		  
-		  <div>
-				<div>
-		  		<input id="saveForm" name="saveForm" type="submit" value="Submit">
-		    </div>
-			</div>
-		  
-		</form>
+		 
 </body>
 </html>
