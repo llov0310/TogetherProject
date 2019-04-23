@@ -21,5 +21,23 @@ public class MypageServiceImplement implements MypageService {
 		// TODO Auto-generated method stub
 		return myMapper.passCheak(user_id);
 	}
+
 	
+	  @Override 
+	  public Integer passNew(String user_id, String password) { // TODO
+	 return myMapper.passNew(user_id,password); 
+	 }
+
+
+	@Override
+	public Integer infoNew(String user_id ,String email, String addr_ji, String addr_dong, String phon) {
+		// TODO Auto-generated method stub
+		return myMapper.infoNew(user_id,email ,addr_ji,addr_dong, phon);
+	}
+
+
+	
+	
+	 
 }
+

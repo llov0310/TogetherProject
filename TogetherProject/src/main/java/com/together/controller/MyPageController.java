@@ -37,8 +37,6 @@ public class MyPageController {
 			pass_cheak = mypage.passCheak(user_id);
 			
 			String a = pass_cheak.get(0).getPassword();
-			System.out.println(a);
-			System.out.println(user_id);
 		
 			if(a.equals(password)) {
 				return "success";
@@ -74,4 +72,53 @@ public class MyPageController {
 		   
 	   }
 	
+	@RequestMapping(value = "/newpwpopup", method=RequestMethod.GET)
+	   public String newpwpopup(Model model) {
+		   return "nav/mypage/newpwpopup";
+		   
+	   }
+	
+	  //비빌번호 변경
+	  
+	  @RequestMapping(value = "/member_pass_new", method=RequestMethod.POST)
+	  
+	  @ResponseBody 
+	  public String member_pass_new(Model model, @RequestParam String user_id, @RequestParam String password) { 
+	  System.out.println(user_id);
+	  System.out.println(password);
+	  
+	  Integer update = mypage.passNew(user_id , password); 
+	  System.out.println(update);
+	
+	 
+	  
+	 return "nav/mypage/newpwpopup";
+	 }
+	  
+	
+	  //회원 정보수정
+	  
+	  @RequestMapping(value = "/member_info_new", method=RequestMethod.POST)
+	  
+	  @ResponseBody
+	  public String member_info_new(Model model,@RequestParam String user_id, @RequestParam String email, @RequestParam String  addr_ji,@RequestParam String  addr_dong,@RequestParam String phon) {
+	  System.out.println(user_id+"아이디");
+	  System.out.println(email + "이메일");
+	  System.out.println(phon+ "폰");
+	  System.out.println(addr_ji+ "주소1");
+	  System.out.println(addr_dong+ "주소2");
+	  System.out.println("====================");
+	  Integer update = mypage.infoNew(user_id,email ,addr_ji,addr_dong, phon);
+	 System.out.println(update);
+	  
+	  
+	  
+	  return "nav/mypage/mypet_info"; 
+	  }
+	 
+
 }
+
+
+	
+
