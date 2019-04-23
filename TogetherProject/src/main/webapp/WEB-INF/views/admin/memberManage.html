@@ -5,6 +5,7 @@
 	layout:decorator="~{adminInclude/adminLayout}">
 	
 <th:block layout:fragment="contents">
+
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 		
@@ -38,7 +39,7 @@
 								<th>회원 분류</th>
 							</tr>
 						</thead>
-						<tbody th:each = "memberList : ${session.memberList}">
+						<tbody th:each = "memberList : ${memberList}">
 							<tr th:switch="${memberList.authority_no}">
 								<td th:text = "${memberList.user_id}"></td>
 								<td th:text = "${memberList.user_nm}"></td>
@@ -50,7 +51,23 @@
 								<td th:case = "3">회원</td>
 							</tr>
 						</tbody>
+					
+						<tfoot>
+						</tfoot>
 					</table>
+					
+					<!-- 페이징 -->
+					<div class="pagination-container">
+						<nav class="pagination-content">
+							<div class="pagination">
+								<a class="pagination-newer">PREV  </a><span
+									class="pagination-inner" th:each="pageNum : ${pageNum}">
+									<a th:id="${pageNum}" th:text="${pageNum}"></a>
+								</span> <a class="pagination-older">  NEXT</a>
+							</div>
+						</nav>
+					</div>
+					<!-- 페이징 -->
 				</div>
 			</div>
 		</div>
@@ -58,35 +75,52 @@
 	<!-- /.container-fluid -->
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="admin/vendor/jquery/jquery.min.js"></script>
-	<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
 
 	<!-- Core plugin JavaScript-->
-	<script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+	
 
 	<!-- Custom scripts for all pages-->
-	<script src="admin/js/sb-admin-2.min.js"></script>
+	
 
 	<!-- Page level plugins -->
-	<script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
-	<script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<!-- 테이블 관련 js -->
+<!-- 	<script src="admin/vendor/datatables/jquery.dataTables.min.js"></script> -->
+<!-- 	<script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
 
 	<!-- Page level custom scripts -->
-	<script src="admin/js/demo/datatables-demo.js"></script>
+
+	
+
 
 </th:block>
 
 <!-- customerManage.html에 필요한 css 추가 설정 -->
 <th:block layout:fragment="page_css">
 	<!-- Custom styles for this page -->
-	<link href="admin/vendor/datatables/dataTables.bootstrap4.min.css"
+	<link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css"
 		rel="stylesheet">
+
+
+	<link href="/admin/vendor/fontawesome-free/css/all.min.css"
+		rel="stylesheet" type="text/css">
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
+
+	<!-- 공통 styles for this template-->
+	<link href="/admin/css/sb-admin-2.min.css" rel="stylesheet">
+
 </th:block>
 
 	<!-- page_js -->
 	<th:block layout:fragment="page_js">
-	
-		
+<!-- 		<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<!-- 		<script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script> -->
+<!-- 		<script src="admin/js/demo/datatables-demo.js"></script> -->
+<!-- 		<script src="admin/js/sb-admin-2.min.js"></script> -->
+		<script src="/admin/vendor/jquery/jquery.min.js"></script>
+		<script src="/admin/js/memberManage.js"></script>
 	</th:block>
 
 </html>

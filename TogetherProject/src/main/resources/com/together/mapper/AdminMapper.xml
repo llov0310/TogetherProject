@@ -45,4 +45,20 @@
 	delete from enterprise
 	where user_id = #{user_id}
 	</delete>
+	
+	<!-- 페이징을 위한 sql문 추가 -->
+	<select id="memberList" resultType="com.together.domain.MemberVO" parameterType="com.together.domain.Paging">
+	<![CDATA[
+		select x.rnum, x.*
+		from (select rownum as rnum, A.*
+    	from (select * from member) A
+    	where rownum < ${endNum}
+		) x
+		where x.rnum >= ${startNum}	
+	]]>
+	</select>
+	
+	<select id="getPageNum" resultType="int">
+		select count(*) from member
+	</select>
 </mapper>
