@@ -2,7 +2,11 @@
 	
 	 $("#aa").click(function() {
 		 $("#content").load("/member_info" );
-		 alert("됨?");
-		
+	
+	 });
+	 
+	 $("#bb").click(function() {
+		 $("#content").load("/mypet_info" );
+	
 	 });
 });  

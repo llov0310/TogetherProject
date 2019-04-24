@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+
+	 $("#newpwok").click(function() {
+			
+		var pass1 = $("#newpass1").val();
+		var pass2 = $("#newpass2").val();
+		var id = opener.$(".id").text();
+		alert(pass1);
+		
+			$.ajax({
+				url : "/member_pass_new",
+				type : "POST",
+				dataType : 'text',
+				data : {user_id: id ,password : pass1},
+				success : function(data){
+					if(data== "success"){
+						alert("변경완료");
+						close();
+					}else {
+						alert("실패");
+					}
+					
+					},error:function(data){
+				       alert("고장");
+				       console.log();  
+				       }
+				  
+
+			});
+	 });
+}); 
+
+</script>
+<title>비밀번호 변경</title>
+</head>
+<body>
+<div>
+변경할 비밀번호<input type="password" id="newpass1"><br>
+확인 비밀번호<input type="password" id="newpass2">
+</div>
+<button id="newpwok">변경하기</button>
+</body>
+</html>

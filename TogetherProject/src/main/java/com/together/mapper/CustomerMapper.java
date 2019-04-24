@@ -20,6 +20,8 @@ public interface CustomerMapper {
 	public ArrayList<EnterpriseVO> ser(String toAddress);
 
 	public ArrayList<EnterpriseVO> info(String test);
+
+	public ArrayList<EnterpriseVO> textbox(@Param("sess") String sess);
 	
 	
 }
