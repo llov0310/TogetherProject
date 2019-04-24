@@ -40,7 +40,7 @@
 		$(document).ready(function() {
 
 			$("#upbtn").click(function() {
-				var user_id = $(".id").text();
+				
 
 				if ($("#newemail").val() == "") {
 					var email = $(".email").text();
@@ -72,15 +72,21 @@
 					type : "POST",
 					dataType : 'text',
 					data : {
-						user_id : user_id,
+						
 						email : email,
 						addr_ji : addr,
 						addr_dong : addr2,
 						phon : phon
 					},
 					success : function(data) {
-						alert(data);
-						alert("바꿈?");
+						if(data== "success"){
+							alert("변경완료");
+							$("#content").load("/member_info" );
+							
+						}else {
+							alert("실패");
+						}
+						
 					}
 
 				});

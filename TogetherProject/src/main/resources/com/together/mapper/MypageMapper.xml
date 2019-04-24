@@ -7,16 +7,16 @@
 		select * from member where user_id = #{user_id}
 	</select>
 	
-  	<select id="passNew" resultType="com.together.domain.MemberVO">
+  	<update id="passNew" parameterType="com.together.domain.MemberVO">
 		update member set password = #{password} where user_id = #{user_id}
-	</select> 
+	</update> 
 	
-	  	<select id="infoNew" resultType="com.together.domain.MemberVO">
+	  	<update id="infoNew" parameterType="com.together.domain.MemberVO">
 		update member set 
 		email = #{email}, 
 		addr_ji = #{addr_ji},
 		addr_dong = #{addr_dong},
 		ph_no = #{phon} 
 		where user_id = #{user_id}
-	</select>
+	</update>
 </mapper>
