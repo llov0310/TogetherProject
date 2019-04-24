@@ -1,7 +1,5 @@
 package com.together.mapper;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.together.domain.EnterpriseVO;
 
 public interface ETPApplyMapper {

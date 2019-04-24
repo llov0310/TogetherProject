@@ -103,7 +103,7 @@ public class AdminController {
 	   @RequestMapping(value= "/dogsManage", method=RequestMethod.GET)
 	   public String dogsManage(Model model, HttpSession session) {
 
-		   ArrayList<DogsVO> dogsList = new ArrayList<DogsVO>();
+		   ArrayList<DogsVO> dogsList = new ArrayList<DogsVO>(); 
 		   dogsList = adminService.getDogsList();
 		   //System.out.println(dogsList + "db에서 가져왔다@@@");
 		   session.setAttribute("dogsList", dogsList);
