@@ -1,105 +1,124 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	>
 
-</head>
-<body>
+<th:block layout:fragment="page_css">
+<!-- 	<link rel="stylesheet" href="assets/css/page/hotel/hotel_info.css"> -->
+	 
+</th:block>
+
+<th:block layout:fragment="page_js">
+<!-- 	<script src="assets/js/hotel.js"></script> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			
+		});
+		
+	</script>
+</th:block>
+
+<th:block layout:fragment="contents" scroll="no">
 <form action="#">
 		  <header>
 		    <h2>업체 설명 수정 폼</h2>
 	
 		  </header>
-		  
+ <div th:each=" lists :${list}">
 		  <div>
 		    <label class="desc" id="title1" for="Field1">업체 이름</label>
 		    <div>
-		      <input id="Field1" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1">
+		      <input id="Field1" name="Field1" type="text" class="field text fn" th:value="${lists.etp_nm}" size="8" tabindex="1">
 		    </div>
 		  </div>
 		    
 		    
-		  <div>
-		    <label class="desc" id="title4" for="Field4">업체 설명</label>
+		    <div>
+		    <label class="desc" id="title4" for="Field4">업체 간단 설명</label>
 		     <div>
-		      <textarea id="Field4" name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
+		      <textarea id="Field4" th:text="${lists.etp_content}"name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
+		    </div>
+		  </div>
+		    
+		  <div>
+		    <label class="desc" id="title4" for="Field4">업체 상세 설명</label>
+		     <div>
+		      <textarea id="Field4" th:text="${lists.etp_if_intro}"name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
 		    </div>
 		  </div>
 		  
-		  <div>
-		    <label class="desc" id="title4" for="Field4">주의 사항</label>
-		     <div>
-		      <textarea id="Field4" name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
-		    </div>
-		  </div>
 		  
 		  
 		   <div>
-		    <label class="desc" id="title106" for="Field106">편의 시설</label>
-		    <div>
-		     <input type="checkbox" />개인실
-		     <input type="checkbox" />침구
-		     <input type="checkbox" />놀이공간
-		     <input type="checkbox" />안심 카메라
+		    <label class="desc" id="title4" for="Field4">주소</label>
+		     <div>
+		      <input id="Field1" name="Field1" type="text" class="field text fn" th:value="${lists.etp_addr}" size="8" tabindex="1">
 		    </div>
 		  </div>
 		  
 		  <div>
-				<div>
-		  		<input id="saveForm" name="saveForm" type="button" value="수정">
+		    <label class="desc" id="title1" for="Field1">전화번호</label>
+		    <div>
+		      <input id="Field1" name="Field1" type="text" class="field text fn" th:value="${lists.etp_ph_no}" size="8" tabindex="1">
 		    </div>
-			</div>
+		  </div>
+		  
+		  <div>
+		    <label class="desc" id="title1" for="Field1">사업자 번호</label>
+		    <div>
+		      <input id="Field1" name="Field1" type="text" class="field text fn" th:value="${lists.etp_license_no}" size="8" tabindex="1">
+		    </div>
+		  </div>
+		  
+ <div>
+		    <label class="desc" id="title1" for="Field1">영업 시간</label>
+		    <div>
+		      <select>
+		      	<option>09:00
+		      	<option>10:00
+		      	<option>11:00
+		      	<option>12:00
+		      	<option>13:00
+		      	<option>14:00
+		      	<option>15:00
+		      </select>
+		      ~
+		      <select>
+		      	<option>16:00
+		      	<option>17:00
+		      	<option>18:00
+		      	<option>19:00
+		      	<option>20:00
+		      	<option>21:00
+		      	<option>22:00
+		      </select>
+		    </div>
+		  </div>
+	</div>	  
+		  
+		   <div>
+		    <label class="desc" id="title106" for="Field106">편의 시설</label>
+		    <div style="padding-left : 20px;">
+		     <input type="checkbox" value="1"/>개인실
+		     <input type="checkbox" value="2"/>간식 제공
+		     <input type="checkbox" value="3"/>놀이 공간
+		     <input type="checkbox" value="4"/>안심 카메라
+		     <input type="checkbox" value="5"/>와이파이
+		     <input type="checkbox" value="6"/>카페
+		    </div>
+		  </div>
+		  
+				 <div>
+						<div>
+				  			<input id="saveForm" name="saveForm" type="button" value="수정">
+					    </div>
+				</div>
 		  
 		</form>
-		    
-<!-- 		  <div> -->
-<!-- 		    <fieldset> -->
-		    
-<!-- 		      <legend id="title5" class="desc"> -->
-<!-- 		        Select a Choice -->
-<!-- 		      </legend> -->
-		      
-<!-- 		      <div> -->
-<!-- 		      	<input id="radioDefault_5" name="Field5" type="hidden" value=""> -->
-<!-- 		      	<div> -->
-<!-- 		      		<input id="Field5_0" name="Field5" type="radio" value="First Choice" tabindex="5" checked="checked"> -->
-<!-- 		      		<label class="choice" for="Field5_0">First Choice</label> -->
-<!-- 		      	</div> -->
-<!-- 		        <div> -->
-<!-- 		        	<input id="Field5_1" name="Field5" type="radio" value="Second Choice" tabindex="6"> -->
-<!-- 		        	<label class="choice" for="Field5_1">Second Choice</label> -->
-<!-- 		        </div> -->
-<!-- 		        <div> -->
-<!-- 		        	<input id="Field5_2" name="Field5" type="radio" value="Third Choice" tabindex="7"> -->
-<!-- 		        	<label class="choice" for="Field5_2">Third Choice</label> -->
-<!-- 		        </div> -->
-<!-- 		      </div> -->
-<!-- 		    </fieldset> -->
-<!-- 		  </div> -->
-		  
-<!-- 		  <div> -->
-<!-- 		    <fieldset> -->
-<!-- 		      <legend id="title6" class="desc"> -->
-<!-- 		        Check All That Apply -->
-<!-- 		      </legend> -->
-<!-- 		      <div> -->
-<!-- 		      <div> -->
-<!-- 		      	<input id="Field6" name="Field6" type="checkbox" value="First Choice" tabindex="8"> -->
-<!-- 		      	<label class="choice" for="Field6">First Choice</label> -->
-<!-- 		      </div> -->
-<!-- 		      <div> -->
-<!-- 		      	<input id="Field7" name="Field7" type="checkbox" value="Second Choice" tabindex="9"> -->
-<!-- 		      	<label class="choice" for="Field7">Second Choice</label> -->
-<!-- 		      </div> -->
-<!-- 		      <div> -->
-<!-- 		      	<input id="Field8" name="Field8" type="checkbox" value="Third Choice" tabindex="10"> -->
-<!-- 		      	<label class="choice" for="Field8">Third Choice</label> -->
-<!-- 		      </span> -->
-<!-- 		      </div> -->
-<!-- 		    </fieldset> -->
-<!-- 		  </div> -->
-		  
-		 
-</body>
+
+</th:block>
 </html>

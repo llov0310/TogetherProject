@@ -28,21 +28,26 @@
 	     
 	      $("#first").click(function() {
 	    	 
-	         $(".total").load("/etphome"); //천천히 보이기
+	         $(".total").load("/etphome"); 
+	         
 
 	      });
 	      
 
 	      $("#second").click(function() {
 	    	 
-	         $(".total").load("/etpimg"); //천천히 보이기
+	         $(".total").load("/etpimg"); 
 
 	      });
-	          
-	   }); 
+	      
+
+	      
+	 }); 
 	
 	
 	// 임시 //
+	
+	
 	
 	
 	
@@ -88,10 +93,18 @@
 
 
 
-	<div class="total">
+<div class="total">
+	<div th:each=" user : ${session.user}">
+		<div th:if = "${user} !=null">
 			<div style="margin-top : 10%; margin-left : 50%;">
 				확인용
+				
+				
+					<span th:text="${user.user_id}"></span>
 			</div>
 		</div>
+	</div>
+			
+</div>
 </th:block>
 </html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.mapper.MemorialMapper">
+
+   <!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
+
+
+
+   
+   <!--  글 넣기 -->
+   <insert id="insert" parameterType="com.together.domain.SadBoardVO">
+      insert into sadboard (sb_cd, sb_title, sb_content, user_id) values
+        (seq_sadboard.nextval, #{sb_title}, #{sb_content}, #{user_id})
+   </insert>
+
+    
+
+    <!-- 글 리스트 출력 -->
+    <select id="listAll" resultType="com.together.domain.SadBoardVO">
+      select sb_title, sb_content, user_id, sb_dt
+        from sadboard
+      order by sb_dt asc;
+   </select>
+     
+
+   
+   
+</mapper>

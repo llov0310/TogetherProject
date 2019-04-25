@@ -16,4 +16,6 @@ public interface CustomerService {
 	public ArrayList<EnterpriseVO> ser(String toAddress);
 
 	public ArrayList<EnterpriseVO> info(String test);
+
+	public ArrayList<EnterpriseVO> textbox(String sess);
 }

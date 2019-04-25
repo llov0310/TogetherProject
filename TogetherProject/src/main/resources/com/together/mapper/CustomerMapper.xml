@@ -17,7 +17,7 @@
 	
 	<select id="list" resultType="com.together.domain.EnterpriseVO">
 		select * from enterprise 
-		where (etp_addr = #{address_total} 
+		where (etp_addr = #{address_t otal} 
 		and
 		etp_cd like '%'||'h'||'%')
 	</select>
@@ -32,6 +32,11 @@
 	<select id="info" resultType="com.together.domain.EnterpriseVO">
 		select * from enterprise a, enterprise_info  b, member c 
 		where a.etp_cd = b.etp_cd and c.user_id = a.user_id and b.etp_cd = #{test}
+	</select>
+	
+	<select id="textbox" resultType="com.together.domain.EnterpriseVO">
+		select * from enterprise a , enterprise_info b 
+		where a.etp_cd = b.etp_cd and a.user_id = #{sess}
 	</select>
 	
 </mapper>

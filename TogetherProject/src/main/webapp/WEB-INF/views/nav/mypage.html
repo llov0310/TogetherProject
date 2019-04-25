@@ -2,7 +2,7 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/layout">
+	layout:decorator="include/serviceLayout">
 
 <th:block layout:fragment="page_head">
 	<title>마이 페이지</title>
@@ -61,10 +61,14 @@
 			<div id="snb">메뉴
 				<h2>마이 페이지</h2>
 				<div><img src="http://placehold.it/150x150" alt="" id="imgbox"></div>
-				<div>안녕하세요 **님</div>
+		<div th:if="${session.user} != null">
+			<div>
+				 <span class="id" th:text="${session.user.user_id}"></span>님 안녕하세요
+			</div>
+			</div>
 				<ul>
-					<li id="aa">회원정보</li>
-					<li id="bb">반려견 정보</li>
+					<li id="aa"><span style="cursor:pointer">회원정보</span></li>
+					<li id="bb"><span style="cursor:pointer">반려견정보</span></li>
 					<li>예약 현황</li>
 					<li>작성글 확인</li>
 					<li>회원탈퇴</li>

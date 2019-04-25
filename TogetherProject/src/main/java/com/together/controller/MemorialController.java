@@ -1,27 +1,22 @@
 package com.together.controller;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.together.domain.MemberVO;
 import com.together.domain.SadBoardVO;
-import com.together.service.CustomerService;
 import com.together.service.MemorialService;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
-
-
 
 
 @Controller
@@ -37,28 +32,37 @@ public class MemorialController {
 	   }
 	   
 	   
+	   MemorialService memorialService;
+	   
+	   //글 목록 출력
+	   @RequestMapping(value = "list.do", method=RequestMethod.GET)
+	   public ModelAndView list() throws Exception {
+		   
+		   List<SadBoardVO> list = memorialService.listAll(0, 0); // 목록 
+		   
+		   ModelAndView mav = new ModelAndView();
+		   mav.setViewName("service/memorial"); // 이동할 페이지 지정 
+		   Map<String, Object> map = new HashMap<>();
+		   map.put("list", list); // 맵에 자료 저장 
+		   ((ModelAndView) map).addObject("map", map); // 데이터 저장 
+		   return mav; // 페이지 이동(출력) 
+		   
+	   }
+	   
+	
+	   // 글쓰기 Form에서 데이터 받기
 	   @RequestMapping(value = "/writeFormData", method=RequestMethod.GET)
-	   	@ResponseBody
-	   public String submitPost(
-			  
-			   @RequestParam("sb_title") String sb_title,
-			   @RequestParam("sb_content") String sb_content, 
-			   Model model, 
-			   HttpSession session) {
-		   
-		   MemberVO user =(MemberVO)session.getAttribute("user");
-		   
-		   System.out.println("sb_title::: "+ sb_title +"sb_content:::"+sb_content   +"user_id::::"+user.getUser_id());
-		   
-		   HashMap<String, Object> sadBoard = new HashMap<String, Object>();
+	   public String insert(
+			   @ModelAttribute SadBoardVO sadVO, 
+			   HttpSession session) throws Exception {
 		   
 		   
+		   //로그인 사용자 아이디 받자  
+		   String user_id = (String) session.getAttribute("user_id");
+		   sadVO.setUser_id(user_id);
 		   
-		   sadBoard.put("sb_title", sb_title); 
-		   sadBoard.put("sb_content", sb_content);
-		   sadBoard.put("user_id", user.getUser_id());
-		   
-		   
+		   System.out.println("sb_title::: "+ sadVO.getSb_title() +"sb_content:::"+sadVO.getSb_content()  
+		   +"user_id::::"+sadVO.getUser_id());
 		   
 		   return "service/memorial";
 	   }

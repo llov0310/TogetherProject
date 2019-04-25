@@ -159,7 +159,6 @@ public class AdminController {
 		   //sql 쿼리문
 		   model.addAttribute("dogsList", adminService.dogsList(page));
 		   
-		   
 		   return "admin/dogsManage";
 	   }
 

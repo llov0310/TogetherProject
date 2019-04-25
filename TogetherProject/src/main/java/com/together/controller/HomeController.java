@@ -2,7 +2,9 @@ package com.together.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 import org.apache.ibatis.annotations.Param;
 import org.omg.CORBA.Request;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.MemberVO;
 import com.together.service.CustomerService;
 
 import lombok.AllArgsConstructor;
@@ -123,12 +126,26 @@ public class HomeController {
    @RequestMapping(value = "/etpManage", method=RequestMethod.GET)
    public String etp_manage(Model model) {
 	   
+	   
+	   
 	   return "nav/enterprise_manage/enterprise_manage";
    }
    
    
    @RequestMapping(value = "/etphome", method=RequestMethod.GET)
-   public String etp_home(Model model) {
+   public String etp_home(Model model, HttpSession session, HttpServletRequest request) {
+	   
+	   
+	  String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+	  	
+	   
+	   ArrayList<EnterpriseVO> ent = new ArrayList<EnterpriseVO>();
+	   
+	   ent = customerservice.textbox(sess);
+	   
+	   model.addAttribute("list", ent);
+	   
+	   
 	   
 	   return "nav/enterprise_manage/enterprise_home";
    }
