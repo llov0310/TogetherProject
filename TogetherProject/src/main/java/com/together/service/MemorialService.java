@@ -1,12 +1,8 @@
 package com.together.service;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import com.together.domain.DogsVO;
-import com.together.domain.EnterpriseVO;
-import com.together.domain.MemberVO;
 import com.together.domain.SadBoardVO;
 
 public interface MemorialService {

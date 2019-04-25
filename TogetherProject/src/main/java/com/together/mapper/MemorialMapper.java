@@ -5,6 +5,7 @@ import java.util.List;
 import com.together.domain.SadBoardVO;
 
 public interface MemorialMapper {
+
    
       // 첨부파일 삭제
       public void deleteFile(String fullName);
@@ -31,3 +32,4 @@ public interface MemorialMapper {
       public List<SadBoardVO> listAll(int start, int end) throws Exception;
    
 }
+
