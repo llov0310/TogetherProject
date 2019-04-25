@@ -5,13 +5,6 @@
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
 	
-	<!-- customerManage페이지에 갔을 때 회원 목록을 보여주는 sql문 추가 -->
-	<select id="getMemberList" resultType="com.together.domain.MemberVO">
-	select user_id, email, user_nm, authority_no, ph_no, register_dt, addr_ji, addr_dong
-	from member
-	where authority_no = 2 or authority_no = 3
-	</select>
-	 
 	<!--  enterpriseManage페이지에 갔을 때 업체 신청 리스트를 보기 위한 sql문 추가-->
 	<select id="getEnterpriseList" resultType="com.together.domain.EnterpriseVO">
 	select m.user_nm, m.authority_no, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
@@ -26,12 +19,27 @@
 	where d.user_id = m.user_id
 	</select>
 	
+	<!-- 반려견 페이징을 위한 sql문 추가 -->
+	<select id="dogsList" resultType="com.together.domain.DogsVO" parameterType="com.together.domain.Paging">
+	<![CDATA[
+	select x.rnum, x.*
+	from (
+    	select rownum as rnum, A.*
+        	from (select d.user_id, m.user_nm, m.ph_no, d.d_gender, d.d_dt, d.d_addr, d.d_kind, d.d_nm, d.d_content
+            	from dogs d, member m where d.user_id = m.user_id
+        	) A
+            	where rownum < ${endNum}
+	) x
+	where x.rnum >= ${startNum}
+	]]>
+	</select>
+	
+	<!-- 업체 신청관리 페이지 : 업체 신청 리스트를 보여주는 sql문 -->
 	<select id="getETPApplyList" resultType="com.together.domain.MemberVO">
 	select authority_no
 	from member
 	where user_id = #{user_id}
 	</select>
-	
 	
 	<!-- 관리자가 업체 신청 수락시 수행될 sql문 추가 -->
 	<update id="etpApplyManage_01" parameterType="com.together.domain.MemberVO">
@@ -46,7 +54,7 @@
 	where user_id = #{user_id}
 	</delete>
 	
-	<!-- 페이징을 위한 sql문 추가 -->
+	<!-- 회원관리 페이징을 위한 sql문 추가 -->
 	<select id="memberList" resultType="com.together.domain.MemberVO" parameterType="com.together.domain.Paging">
 	<![CDATA[
 		select x.rnum, x.*

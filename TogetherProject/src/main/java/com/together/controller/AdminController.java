@@ -34,33 +34,7 @@ public class AdminController {
 		   return "admin/adminHome";
 	   }
    
-//	    //회원관리 페이징 맵핑 실패
-//	   @RequestMapping(value = "/memberManage", method=RequestMethod.GET)
-//	   public String memberManage(Model model, HttpSession session) {
-//		   System.out.println("어드민 컨트롤러로 오시나요");
-//		   PageMaker pagemaker = new PageMaker();
-//		   int pagenum = 1; //초기 페이지 1로 설정
-//		   
-//		   pagemaker.setTotalcount(adminMapper.memberCount());
-//		   pagemaker.setPagenum(pagenum); // 현재 페이지를 페이지 객체에 지정
-//		   pagemaker.setStartNum(pagenum); // 컨텐츠 시작 번호 지정
-//		   pagemaker.setEndNum(pagenum); // 컨텐츠 끝 번호 지정
-//		   pagemaker.setCurrentblock(pagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해 지정
-//		   pagemaker.setLastblock(pagemaker.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해 정함
-//		   pagemaker.prevnext(pagenum); // 현재 페이지 번호로 화살표를 나타낼지 정함
-//		   pagemaker.setStartPage(pagemaker.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정함
-//		   pagemaker.setEndPage(pagemaker.getLastblock(), pagemaker.getCurrentblock()); // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록으로 정함
-//		   
-//		   
-//		   ArrayList<MemberVO> memberList = adminService.memberList(pagemaker.getStartNum(), pagemaker.getEndNum());
-//		   model.addAttribute("memberList", memberList);
-//		   model.addAttribute("pagemaker", pagemaker);
-//		   System.out.println(pagemaker + " 3");
-//		   
-//		   return "admin/memberManage";
-//	   }
-
-	   // 회원관리 페이징 맵핑
+	   // 회원관리 페이징 맵핑 (페이징 적용)
 	   @RequestMapping(value = "/memberManage" + "/{num}", method = RequestMethod.GET)
 	   public String memberManage(@PathVariable String num, Model model, HttpSession session) {
 
@@ -153,14 +127,38 @@ public class AdminController {
 	   
 	   
 	   
-	   //반려견 관리 
-	   @RequestMapping(value= "/dogsManage", method=RequestMethod.GET)
-	   public String dogsManage(Model model, HttpSession session) {
-
-		   ArrayList<DogsVO> dogsList = new ArrayList<DogsVO>();
-		   dogsList = adminService.getDogsList();
-		   //System.out.println(dogsList + "db에서 가져왔다@@@");
-		   session.setAttribute("dogsList", dogsList);
+	   //반려견 관리 (페이징 적용)
+	   @RequestMapping(value= "/dogsManage" + "/{num}", method=RequestMethod.GET)
+	   public String dogsManage(@PathVariable String num, Model model, HttpSession session) {
+		   
+		   Paging page = new Paging();
+		   int pageNum = 0;
+		   ArrayList<Integer> arr = new ArrayList<Integer>();
+		   int realNum = Integer.parseInt(num);
+		   page.setTotalNum(adminService.getPageNum());
+		   
+		   if(page.getTotalNum() <= page.getOnePageBoard()) {
+			   pageNum = 1;
+		   }else {
+			   pageNum = page.getTotalNum() / page.getOnePageBoard();
+			   if(page.getTotalNum() % page.getOnePageBoard() > 0) {
+				   pageNum = pageNum + 1;
+			   }
+		   }
+		   
+		   //for 문으로 pageNum만큼 arr에
+		   //arr[i] 저장
+		   for(int i=0; i<pageNum; i++) {
+			   arr.add(i+1);
+		   }
+		   
+		   page.setEndNum((realNum*10) + 1);
+		   page.setStartNum(page.getEndNum() - 10);
+		   
+		   model.addAttribute("pageNum", arr);
+		   //sql 쿼리문
+		   model.addAttribute("dogsList", adminService.dogsList(page));
+		   
 		   
 		   return "admin/dogsManage";
 	   }

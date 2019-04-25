@@ -11,18 +11,15 @@ import com.together.domain.MemberVO;
 import com.together.domain.Paging;
 
 public interface AdminService {
-	
-   // 회원정보를 얻어올 함수 선언
-   public ArrayList<MemberVO> getMemberList();
-
-//   // 페이징을 이용하여 회원정보를 얻어올 함수 선언
-//   public ArrayList<MemberVO> memberList(@Param("startNum") int startNum, @Param("endNum") int endNum);
-//   //public int memberCount();
-   
-   // 진짜 페이징 처리
-   public ArrayList<MemberVO> memberList(Paging p);
-
+   // 페이징 처리에 필요한 함수
    public int getPageNum();
+   
+   // 회원정보를 가져오는 memberList 페이징 처리 함수 선언
+   public ArrayList<MemberVO> memberList(Paging p);
+   
+   // 반려견 정보를 가져오는 dogsList 페이징 처리 함수 선언
+   public ArrayList<DogsVO> dogsList(Paging p);
+   
    
    
    // 업체 리스트를 가져올 함수 선언

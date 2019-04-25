@@ -16,13 +16,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AdminServiceImplement implements AdminService {
 	private AdminMapper mapper;
-
-	// 회원 리스트 가져오는 함수
-	@Override
-	public ArrayList<MemberVO> getMemberList() {
-		return mapper.getMemberList();
-	}
-
 	// 업체 리스트 가져오는 함수
 	@Override
 	public ArrayList<EnterpriseVO> getEnterpriseList() {
@@ -50,24 +43,25 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.etpApplyManage_02(user_id);
 	}
 
-//	//페이징 처리_01
-//	@Override
-//	public ArrayList<MemberVO> memberList(@Param("startNum") int startNum, @Param("endNum") int endNum) {
-//		// TODO Auto-generated method stub
-//		return mapper.memberList(startNum, endNum);
-//	}
-
-	//진짜 페이징 처리
+	// 페이징에 필요한 함수 선언
+	@Override
+	public int getPageNum() {
+		// TODO Auto-generated method stub
+		return mapper.getPageNum();
+	}
+	
+	// 회원 정보를 가져오는 함수 (페이징 처리)
 	@Override
 	public ArrayList<MemberVO> memberList(Paging p) {
 		// TODO Auto-generated method stub
 		return mapper.memberList(p);
 	}
-
+	
+	// 반려견 정보를 가져오는 함수 (페이징 처리)
 	@Override
-	public int getPageNum() {
+	public ArrayList<DogsVO> dogsList(Paging p) {
 		// TODO Auto-generated method stub
-		return mapper.getPageNum();
+		return mapper.dogsList(p);
 	}
 
 
