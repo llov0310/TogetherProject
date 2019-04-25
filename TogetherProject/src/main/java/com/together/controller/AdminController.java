@@ -53,7 +53,7 @@ public class AdminController {
 			   if(page.getTotalNum() %page.getOnePageBoard() > 0 ) {	// 그리고 21 % 10 나머지 1이 0보다 크기때문에 pageNum에 2+1=3이 들어감
 				   pageNum = pageNum + 1;
 			   }
-		   }
+		   } 
 		   
 		   // for문으로 pageNum만큼 arr에 
 		   // arr[0] = 1, arr[1] = 2, arr[2] = 3 을 저장
