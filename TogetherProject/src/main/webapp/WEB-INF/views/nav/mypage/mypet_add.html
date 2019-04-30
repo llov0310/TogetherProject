@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+	$("#addpet").click(function() {
+		alert("클릭");
+
+		});
+
+	
+});
+</script>
+<title>애견 추가</title>
+</head>
+<body>
+<div>
+<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
+애견이름<input type="text"><br>
+성별 <br>
+<input type="radio" name="chk_info" value="수컷">수컷
+<input type="radio" name="chk_info" value="암컷">암컷
+<br>
+나이<input type="text"><br>
+품종<input type="text"><br>
+코멘트<input type="text">
+</div>
+<button id="addpet">추가하기</button>
+</body>
+</html>

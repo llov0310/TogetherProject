@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 
 import com.together.mapper.MypageMapper;
@@ -36,8 +37,6 @@ public class MypageServiceImplement implements MypageService {
 	}
 
 
-	
-	
 	 
 }
 

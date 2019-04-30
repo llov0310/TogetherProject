@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 
 public interface MypageMapper {
@@ -20,9 +21,5 @@ public interface MypageMapper {
 			@Param("addr_dong") String addr_dong, 
 			@Param("phon") String phon
 			);
-
-
-	
-	
 
 }

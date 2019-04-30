@@ -19,4 +19,13 @@
 		ph_no = #{phon} 
 		where user_id = #{user_id}
 	</update>
+	
+	<!-- <select id="petinfo" resultType="com.together.domain.DogsVO">
+		select * from dogs where user_id = #{user_id}
+	</select> -->
+	
+	<!-- 
+	<insert id="addDog"  parameterType="com.together.domain.DogsVO">
+	
+	</insert> -->
 </mapper>

@@ -9,4 +9,6 @@
 		 $("#content").load("/mypet_info" );
 	
 	 });
+	 
+	
 });  
