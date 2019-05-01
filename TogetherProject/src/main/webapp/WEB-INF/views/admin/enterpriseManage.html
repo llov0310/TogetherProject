@@ -38,6 +38,7 @@
 							<thead>
 								<tr>
 									<th><input type="checkbox" id="allCheck"/>전체 선택</th>
+									<th>업체 구분</th>									
 									<th>아이디</th>
 									<th>이름</th>
 									<th>이메일</th>
@@ -51,7 +52,12 @@
 							<tbody th:each="etpList : ${enterpriseList}">
 								<tr>
 									<td><input type="checkbox" th:value="${etpList.user_id}" name="user_id"></td>
-									<td th:text="${etpList.user_id}"></td>
+									
+<!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
+									<td th:if="${etpList.etp_cd_substr == 'h'}">호텔</td>
+									<td th:if="${etpList.etp_cd_substr == 'f'}">장례</td>
+									
+									<td th:text="${etpList.user_id}"></td>					
 									<td th:text="${etpList.user_nm}"></td>
 									<td th:text="${etpList.etp_email}"></td>
 									<td th:text="${etpList.etp_ph_no}"></td>

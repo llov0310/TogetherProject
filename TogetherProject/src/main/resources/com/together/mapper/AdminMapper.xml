@@ -13,7 +13,7 @@
 	from(
     	select rownum as rnum, A.*
     	from(
-        	select m.user_nm, m.authority_no, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
+        	select m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
         	from member m, enterprise e
         	where m.user_id = e.user_id and m.authority_no = 3
     	) A
