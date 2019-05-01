@@ -71,16 +71,50 @@ public class AdminController {
 	   }
 	   
 	   //업체 관리 페이지 맵핑 및 업체 업체 목록 보여줌
-	   @RequestMapping(value = "/enterpriseManage", method=RequestMethod.GET)
-	   public String enterpriseManage(Model model, HttpSession session) {
+	   @RequestMapping(value = "/enterpriseManage" + "/{num}", method=RequestMethod.GET)
+	   public String enterpriseManage(@PathVariable String num, Model model, HttpSession session) {
 		   
-		   ArrayList<EnterpriseVO> enterpriseList = new ArrayList<EnterpriseVO>();
-		   enterpriseList = adminService.getEnterpriseList();
-		   //System.out.println(enterpriseList + "db에서 가져왔다@@@");
+		   Paging page = new Paging();
+		   int pageNum = 0;
+		   ArrayList<Integer> arr = new ArrayList<Integer>();
+		   int realNum = Integer.parseInt(num);
+		   page.setTotalNum(adminService.getPageNum());
 		   
-		   session.setAttribute("enterpriseList", enterpriseList);
+		   //OnePageBorad => 한 페이지에 보여줄 멤버(글) 수
+		   if(page.getTotalNum() <= page.getOnePageBoard()) { // totalnum이 10보다 작으면 pageNum을 1로 설정
+			   pageNum = 1;
+		   }else { // totalnum이 더 클 경우
+			   pageNum = page.getTotalNum() / page.getOnePageBoard(); //totalnum / 10
+			   															// ex) 21/ 10 = 2가 pageNum에 들어감
+			   if(page.getTotalNum() %page.getOnePageBoard() > 0 ) {	// 그리고 21 % 10 나머지 1이 0보다 크기때문에 pageNum에 2+1=3이 들어감
+				   pageNum = pageNum + 1;
+			   }
+		   } 
 		   
+		   // for문으로 pageNum만큼 arr에 
+		   // arr[0] = 1, arr[1] = 2, arr[2] = 3 을 저장
+		   for(int i=0; i<pageNum; i++) {
+			   arr.add(i+1);
+		   }
+		   
+		   page.setEndNum((realNum*10) +1);
+		   page.setStartNum(page.getEndNum()-10);
+		   
+		   //
+		   model.addAttribute("pageNum", arr);
+		   model.addAttribute("enterpriseList", adminService.enterpriseList(page));
 		   return "admin/enterpriseManage";
+		   
+		   
+		   
+//		   //기존 코드
+//		   ArrayList<EnterpriseVO> enterpriseList = new ArrayList<EnterpriseVO>();
+//		   enterpriseList = adminService.getEnterpriseList();
+//		   //System.out.println(enterpriseList + "db에서 가져왔다@@@");
+//		   
+//		   session.setAttribute("enterpriseList", enterpriseList);
+//		   
+//		   return "admin/enterpriseManage";
 	   }
 	   
 	   //업체 신청 수락 및 거절 맵핑
@@ -97,11 +131,12 @@ public class AdminController {
 		   if(etpCk.equals("수락")) {
 			   for(int i=0; i<user_id.length; i++) {
 				   int update = adminService.etpApplyManage_01(user_id[i]);
-				   
+				   System.out.println(update);
 				   if(update !=0) {
-					   return "admin/enterpriseManage";
+					   System.out.println("넘어는 오시는건가요?");
+					   return "success1";
 				   } else {
-					   return "admin/enterpriseManage";
+					   return "fail1";
 				   }
 			   
 			   }
@@ -110,19 +145,15 @@ public class AdminController {
 				   int delete = adminService.etpApplyManage_02(user_id[i]);
 				   
 				   if(delete !=0) {
-					   return "admin/enterpriseManage";
+					   System.out.println("넘어는 오시는건가요?" + "혹시이거니?");
+					   return "success2";
 				   } else {
-					   return "admin/enterpriseManage";
+					   return "fail2";
 				   }
 			   }
+			   
 		   }
-		   
-		   
-		   //System.out.println("넘어는 오시는건가요?");
-		   
-		   
-		  
-		   return "admin/enterpriseManage";
+		   return "all_fail";
 	   }
 	   
 	   

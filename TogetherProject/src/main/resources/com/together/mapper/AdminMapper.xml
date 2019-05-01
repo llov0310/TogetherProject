@@ -4,20 +4,25 @@
 <mapper namespace="com.together.mapper.AdminMapper">
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
+
 	
-	<!--  enterpriseManage페이지에 갔을 때 업체 신청 리스트를 보기 위한 sql문 추가-->
-	<select id="getEnterpriseList" resultType="com.together.domain.EnterpriseVO">
-	select m.user_nm, m.authority_no, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
-	from member m, enterprise e
-	where m.user_id = e.user_id and m.authority_no = 3
+	<!-- 업체 신청 관리 페이징을 위한 sql문 추가 -->
+	<select id="enterpriseList" resultType="com.together.domain.EnterpriseVO" parameterType="com.together.domain.Paging">
+	<![CDATA[
+	select x.rnum, x.*
+	from(
+    	select rownum as rnum, A.*
+    	from(
+        	select m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
+        	from member m, enterprise e
+        	where m.user_id = e.user_id and m.authority_no = 3
+    	) A
+    	where rownum < ${endNum}
+	) x
+	where x.rnum >= ${startNum}
+	]]>
 	</select>
 	
-	<!-- dogsManage페이지에 갔을 때 반려견 리스트 보기 위한 sql문 추가 -->
-	<select id="getDogsList" resultType="com.together.domain.DogsVO">
-	select d.user_id, m.user_nm, m.ph_no, d.d_gender, d.d_dt, d.d_addr, d.d_kind, d.d_nm, d.d_content
-	from dogs d, member m
-	where d.user_id = m.user_id
-	</select>
 	
 	<!-- 반려견 페이징을 위한 sql문 추가 -->
 	<select id="dogsList" resultType="com.together.domain.DogsVO" parameterType="com.together.domain.Paging">
@@ -34,12 +39,12 @@
 	]]>
 	</select>
 	
-	<!-- 업체 신청관리 페이지 : 업체 신청 리스트를 보여주는 sql문 -->
-	<select id="getETPApplyList" resultType="com.together.domain.MemberVO">
-	select authority_no
-	from member
-	where user_id = #{user_id}
-	</select>
+<!-- 업체 신청관리 페이지 : 업체 신청 리스트를 보여주는 sql문 -->
+<!-- 	<select id="getETPApplyList" resultType="com.together.domain.MemberVO"> -->
+<!-- 	select authority_no -->
+<!-- 	from member -->
+<!-- 	where user_id = #{user_id} -->
+<!-- 	</select> -->
 	
 	<!-- 관리자가 업체 신청 수락시 수행될 sql문 추가 -->
 	<update id="etpApplyManage_01" parameterType="com.together.domain.MemberVO">

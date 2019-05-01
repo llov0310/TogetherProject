@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.service.MypageService;
 
@@ -33,28 +34,61 @@ public class MyPageController {
 	
 	//패스워드 값을 비교하는 구문
 	@RequestMapping(value = "/member_pass_cheak", method=RequestMethod.POST)
-		@ResponseBody
-	   public String member_pass_cheak(Model model, @RequestParam String password, @RequestParam String user_id) {
-		  
-			ArrayList<MemberVO> pass_cheak = new ArrayList<MemberVO>();
-			System.out.println(password);
-			pass_cheak = mypage.passCheak(user_id);
-			
-			String a = pass_cheak.get(0).getPassword();
-		
-			if(a.equals(password)) {
-				return "success";
-			}else {
-				return "fail";
-			
-			}
-
-	}
+	@ResponseBody
+   public String member_pass_cheak(Model model,HttpSession session,HttpServletRequest request, @RequestParam String password) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		ArrayList<MemberVO> pass_cheak = new ArrayList<MemberVO>();
+		System.out.println(password);
+		System.out.println(user_id +"아이디");
+		pass_cheak = mypage.passCheak(user_id);
 	
+		String a = pass_cheak.get(0).getPassword();
+	
+		if(a.equals(password)) {
+			return "success";
+		}else {
+			return "fail";
+		
+		}
+
+}
+	
+	/*
+	 * @RequestMapping(value = "/mypet_info", method=RequestMethod.GET) public
+	 * String mypet_info(Model model,HttpSession session,HttpServletRequest request)
+	 * { String user_id =
+	 * ((MemberVO)request.getSession().getAttribute("user")).getUser_id();
+	 * System.out.println(user_id); ArrayList<DogsVO> pet_list = new
+	 * ArrayList<DogsVO>();
+	 * 
+	 * 
+	 * System.out.println("아니아니"); System.out.println(pet_list);
+	 * 
+	 * 
+	 * return "nav/mypage/mypet_info"; }
+	 */
+	
+	/*
+	 * @RequestMapping(value = "/pet_list", method=RequestMethod.POST)
+	 * 
+	 * @ResponseBody public String pet_list(Model model,HttpSession
+	 * session,HttpServletRequest request) { String user_id = ((MemberVO)
+	 * request.getSession().getAttribute("user")).getUser_id(); 
+	 * ArrayList<DogsVO>pet_list = new ArrayList<DogsVO>(); pet_list = mypage.petinfo(); return
+	 * "fail";
+	 * 
+	 * }
+	 */
 	@RequestMapping(value = "/mypet_info", method=RequestMethod.GET)
 	 public String mypet_info(Model model) {
 		   return "nav/mypage/mypet_info";   
-	   }
+	   } 
+	
+	@RequestMapping(value = "/mypet_add", method=RequestMethod.GET)
+	 public String mypet_add(Model model) {
+		   return "nav/mypage/mypet_add";   
+	   } 
+	
 	
 	@RequestMapping(value = "/myreservation", method=RequestMethod.GET)
 	   public String myreservation(Model model) {
@@ -86,8 +120,9 @@ public class MyPageController {
 	  
 	  @RequestMapping(value = "/member_pass_new", method=RequestMethod.POST)
 	  @ResponseBody 
-	  public String member_pass_new(Model model, @RequestParam String user_id, @RequestParam String password) { 
-	  System.out.println(user_id);
+	  public String member_pass_new(Model model,HttpSession session,HttpServletRequest request, @RequestParam String password) { 
+	  String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		 System.out.println(user_id);
 	  System.out.println(password);
 	  
 	  Integer update = mypage.passNew(user_id , password); 

@@ -5,11 +5,33 @@
 	layout:decorator="include/serviceLayout">
 
 <th:block layout:fragment="page_head">
-	<title>서비스 메뉴에 오신것을 환영합니다.</title>
+	<title>펫 관리</title>
 </th:block>
-
 <th:block layout:fragment="page_css">
+	<script>
+	$(document).ready(
+			function() {
+				$("#adddog").click(function() {
+					window.open("/mypet_add", "newpass","width=500,height=350,left=600");
+						});
+			});
 	
+	
+	</script>
+	
+	<style>
+	.asd{
+	display:inline-block;
+	border: 1px solid gray;
+	}
+	#imgbox1{
+	   position: relative;
+    display: inline-block;
+    background: url(cat.jpg) center center no-repeat;
+    border-radius: 50%;
+   
+	}
+	</style>
 </th:block>
 
 <th:block layout:fragment="page_js">
@@ -17,15 +39,33 @@
 </th:block>
 
 <th:block layout:fragment="contents">
+
 	<div>
 		<h2>강아지 정보</h2>
-		<button>강아지 추가</button>
+		<button id="adddog">강아지 추가</button>
+		<th:text>
 	</div>
-	<div>
-	<div>개사진</div>
-	<div>개정보a</div>
-	<div></div>
+	<div class="asd">
+	개 
+	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
+	<div>개정보aaaaaaaaaaaaaaa</div>
+	<div>ㅂㅈㄷ</div>
+	개
+	</div>
 	
+<div class="asd">
+	개 
+	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
+	<div>개정보aaaaaaaaaaaaa</div>
+	<div>ㅂㅈㄷ</div>
+	개
 	</div>
-
+	
+	<div class="asd">
+	개 
+	<div><img src="http://placehold.it/150x150" alt="" id="imgbox"></div>
+	<div>개정보aaaaaaaaaaaaa</div>
+	<div>ㅂㅈㄷ</div>
+	개
+	</div>
 </th:block>
