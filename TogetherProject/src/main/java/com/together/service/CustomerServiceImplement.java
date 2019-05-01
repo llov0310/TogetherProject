@@ -60,5 +60,16 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 
 
+	@Override
+	public int etpupdate(String etp_nm, String etp_if_info, 
+			String etp_if_intro, 
+			String etp_addr, String etp_ph_no,
+			String etp_license_no, String etp_email, 
+			String time1, String time2) {
+		// TODO Auto-generated method stub
+		return mapper.etpupdate(etp_nm,etp_if_info,etp_if_intro,etp_addr,etp_ph_no,etp_license_no,etp_email,time1,time2);
+	}
+
+
 
 }

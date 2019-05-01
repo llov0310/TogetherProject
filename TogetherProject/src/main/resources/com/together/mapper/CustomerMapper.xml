@@ -39,4 +39,9 @@
 		where a.etp_cd = b.etp_cd and a.user_id = #{sess}
 	</select>
 	
+	
+	<update id="etpupdate" parameterType="com.together.domain.EnterpriseVO">
+		
+	</update>
+	
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.together.domain.EnterpriseVO;
@@ -155,6 +156,22 @@ public class HomeController {
    public String etp_img(Model model) {
 	   
 	   return "nav/enterprise_manage/enterprise_img";
+   }
+   
+   //업체정보 업데이트 컨트롤러
+   @RequestMapping(value = "/etpupdate", method=RequestMethod.POST)
+   @ResponseBody
+   public String etpUpdate(Model model,@RequestParam String etp_nm,
+		   @RequestParam String etp_if_info,@RequestParam String etp_if_intro
+		   ,@RequestParam String etp_addr,@RequestParam String etp_ph_no
+		   ,@RequestParam String etp_license_no,@RequestParam String etp_email,
+		   @RequestParam String time1,@RequestParam String time2) {
+	   
+	   int etp_update = customerservice.etpupdate(etp_nm,etp_if_info,etp_if_intro,etp_addr,etp_ph_no,etp_license_no,etp_email,time1,time2);
+	   		
+	   	
+	   
+	   return "";
    }
    
 }
