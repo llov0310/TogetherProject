@@ -16,18 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AdminServiceImplement implements AdminService {
 	private AdminMapper mapper;
-	// 업체 리스트 가져오는 함수
-	@Override
-	public ArrayList<EnterpriseVO> getEnterpriseList() {
-		return mapper.getEnterpriseList();
-	}
-	
-	// 반려견 리스트 가져오는 함수
-	@Override
-	public ArrayList<DogsVO> getDogsList() {
-		// TODO Auto-generated method stub
-		return mapper.getDogsList();
-	}
+
 	
 	//업체 신청 수락
 	@Override
@@ -62,6 +51,13 @@ public class AdminServiceImplement implements AdminService {
 	public ArrayList<DogsVO> dogsList(Paging p) {
 		// TODO Auto-generated method stub
 		return mapper.dogsList(p);
+	}
+
+	// 업체 정보를 가져오는 함수 (페이징 처리)
+	@Override
+	public ArrayList<EnterpriseVO> enterpriseList(Paging p) {
+		// TODO Auto-generated method stub
+		return mapper.enterpriseList(p);
 	}
 
 
