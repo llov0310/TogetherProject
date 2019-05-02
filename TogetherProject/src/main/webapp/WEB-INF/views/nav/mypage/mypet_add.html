@@ -7,8 +7,40 @@
 <script>
 $(document).ready(function() {
 	$("#addpet").click(function() {
-		alert("클릭");
+		var d_nm = $("#dname").val();
+		var d_gender = $('input[name="gender"]:checked').val();
+		var d_age = $("#age").val();
+		var d_kind = $("#kind").val();
+		var d_content = $("#content").val();
+		
+		alert(d_nm);
+		alert(d_gender);
+		alert(d_age);
+		alert(d_kind);
+		alert(d_content);
+		
+		$.ajax({
+			url : "/mypet_add_info",
+			type : "POST",
+			dataType : 'text',
+			data : {
+				d_nm : d_nm,
+				d_gender : d_gender,
+				d_age : d_age,
+				d_kind : d_kind
+				d_content : d_content
+			},
+			success : function(data) {
+					alert("항");
+				
+					
+				}else {
+					alert("실패");
+				}
+				
+			}
 
+			});  */
 		});
 
 	
@@ -19,14 +51,15 @@ $(document).ready(function() {
 <body>
 <div>
 <div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
-애견이름<input type="text"><br>
+애견이름<input type="text" id="dname"><br>
 성별 <br>
-<input type="radio" name="chk_info" value="수컷">수컷
-<input type="radio" name="chk_info" value="암컷">암컷
+<input type="radio" name="gender" value="1">수컷
+<input type="radio" name="gender" value="2">암컷
 <br>
-나이<input type="text"><br>
-품종<input type="text"><br>
-코멘트<input type="text">
+나이<input type="text" id="age"><br>
+품종<input type="text" id="kind"><br>
+코멘트<br>
+<textarea style="resize: none"; rows="5" cols="25" id="content" ></textarea>
 </div>
 <button id="addpet">추가하기</button>
 </body>

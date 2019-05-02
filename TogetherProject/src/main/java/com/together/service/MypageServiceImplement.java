@@ -37,6 +37,20 @@ public class MypageServiceImplement implements MypageService {
 	}
 
 
+	@Override
+	public ArrayList<DogsVO> petlist(String user_id) {
+		// TODO Auto-generated method stub
+		return myMapper.petlist(user_id);
+	}
+
+
+	@Override
+	public ArrayList<MemberVO> memberinfo(String user_id) {
+		// TODO Auto-generated method stub
+		return myMapper.memberinfo(user_id);
+	}
+
+
 	 
 }
 

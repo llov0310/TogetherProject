@@ -7,6 +7,10 @@
 		select * from member where user_id = #{user_id}
 	</select>
 	
+	<select id="memberinfo" resultType="com.together.domain.MemberVO">
+		select * from member where user_id = #{user_id}
+	</select> 
+	
   	<update id="passNew" parameterType="com.together.domain.MemberVO">
 		update member set password = #{password} where user_id = #{user_id}
 	</update> 
@@ -20,12 +24,13 @@
 		where user_id = #{user_id}
 	</update>
 	
-	<!-- <select id="petinfo" resultType="com.together.domain.DogsVO">
+	<select id="petlist" resultType="com.together.domain.DogsVO">
 		select * from dogs where user_id = #{user_id}
-	</select> -->
+	</select> 
 	
-	<!-- 
+
 	<insert id="addDog"  parameterType="com.together.domain.DogsVO">
-	
-	</insert> -->
+	insert into dogs(d_cd, user_id,d_gender,d_dt,d_addr,d_kind,d_nm,d_content,d_age)
+	values()
+	</insert>
 </mapper>

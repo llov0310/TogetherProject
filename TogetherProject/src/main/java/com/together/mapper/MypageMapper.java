@@ -10,7 +10,8 @@ import com.together.domain.MemberVO;
 public interface MypageMapper {
 
 	public ArrayList<MemberVO> passCheak(@Param("user_id") String user_id);
-
+	
+	public ArrayList<MemberVO> memberinfo(@Param("user_id") String user_id);
 	
 	  public Integer passNew(@Param("user_id") String user_id, @Param("password")String password);
 
@@ -21,5 +22,11 @@ public interface MypageMapper {
 			@Param("addr_dong") String addr_dong, 
 			@Param("phon") String phon
 			);
+
+
+	public ArrayList<DogsVO> petlist(@Param("user_id") String user_id);
+
+
+	
 
 }

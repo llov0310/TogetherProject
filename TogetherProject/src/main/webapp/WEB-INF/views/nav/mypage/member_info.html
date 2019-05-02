@@ -173,26 +173,27 @@
 			<h2>회원정보 수정</h2>
 		</div>
 		프로필 사진 수정
-		<div th:if="${session.user} != null">
+			<div class="asd" th:each="memberinfo : ${memberinfo}">
 			<div>
-				아이디 : <span class="id" th:text="${session.user.user_id}"></span>
+				아이디 : <span class="id" th:text="${memberinfo.user_id}"></span>
 			</div>
 			<div>
-				이름 : <span th:text="${session.user.user_nm}"></span>
+				이름 : <span th:text="${memberinfo.user_nm}"></span>
+			</div>
+				<div>
+				생년월일 <span th:text="${memberinfo.birth_dt}"></span>
 			</div>
 			<div>
-				생년월일 <span th:text="${session.user.birth_dt}"></span>
+				주소 <span class="addr_ji" th:text="${memberinfo.addr_ji}"></span> 
+				<span class="addr_dong" th:text="${memberinfo.addr_dong}"></span>
+			</div>
+				<div>
+				이메일 <span class="email" th:text="${memberinfo.email}"></span>
 			</div>
 			<div>
-				주소 <span class="addr_ji" th:text="${session.user.addr_ji}"></span> <span
-					class="addr_dong" th:text="${session.user.addr_dong}"></span>
+				폰번호 <span class="phon" th:text="${memberinfo.ph_no}"></span>
 			</div>
-			<div>
-				이메일 <span class="email" th:text="${session.user.email}"></span>
-			</div>
-			<div>
-				폰번호 <span class="phon" th:text="${session.user.ph_no}"></span>
-			</div>
+			
 			<div>
 				정보 변경<br> 현재비밀번호 : <input type="password" id="pass" name="password">
 				<button id="passok">확인</button>

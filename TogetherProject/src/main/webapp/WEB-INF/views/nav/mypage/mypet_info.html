@@ -12,7 +12,7 @@
 	$(document).ready(
 			function() {
 				$("#adddog").click(function() {
-					window.open("/mypet_add", "newpass","width=500,height=350,left=600");
+					window.open("/mypet_add", "newpass","width=500,height=500,left=600");
 						});
 			});
 	
@@ -43,17 +43,22 @@
 	<div>
 		<h2>강아지 정보</h2>
 		<button id="adddog">강아지 추가</button>
-		<th:text>
-	</div>
-	<div class="asd">
-	개 
-	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
-	<div>개정보aaaaaaaaaaaaaaa</div>
-	<div>ㅂㅈㄷ</div>
-	개
+		
 	</div>
 	
-<div class="asd">
+	<div class="asd" th:each="pet : ${pet}">
+	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
+	<div>개정보</div>
+	 <div>이름:<span th:text="${pet.d_nm}"></span></div>
+	<div>품종:<span th:text="${pet.d_kind}"> </span></div>
+	<div><span th:if="${pet.d_gender}==1">성별:수컷</span></div>
+	<div><span th:if="${pet.d_gender}==2">성별:암컷</span></div>
+	<div>나이<span th:text="${pet.d_age}"></span></div>
+	<div>인사말<br><span th:text="${pet.d_content}"></span></div>
+	</div>
+ </th:each>
+
+<!-- <div class="asd">
 	개 
 	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
 	<div>개정보aaaaaaaaaaaaa</div>
@@ -67,5 +72,5 @@
 	<div>개정보aaaaaaaaaaaaa</div>
 	<div>ㅂㅈㄷ</div>
 	개
-	</div>
+	</div> -->
 </th:block>
