@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 public class AdminServiceImplement implements AdminService {
 	private AdminMapper mapper;
 
-	
 	//업체 신청 수락
 	@Override
 	public int etpApplyManage_01(String user_id) {
@@ -58,6 +57,27 @@ public class AdminServiceImplement implements AdminService {
 	public ArrayList<EnterpriseVO> enterpriseList(Paging p) {
 		// TODO Auto-generated method stub
 		return mapper.enterpriseList(p);
+	}
+
+	// 관리자 홈페이지 : 회원수를 가져오는 함수 추가
+	@Override
+	public int memberCnt() {
+		// TODO Auto-generated method stub
+		return mapper.memberCnt();
+	}
+	
+	// 관리자 홈페이지 : 업체 신청 수를 가져오는 함수 추가
+	@Override
+	public int etpApplyCnt() {
+		// TODO Auto-generated method stub
+		return mapper.etpApplyCnt();
+	}
+	
+	// 관리자 홈페이지 : 반려견 수를 가져오는 함수 추가
+	@Override
+	public int dogsCnt() {
+		// TODO Auto-generated method stub
+		return mapper.dogsCnt();
 	}
 
 

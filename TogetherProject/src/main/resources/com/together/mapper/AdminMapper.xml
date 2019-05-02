@@ -4,7 +4,42 @@
 <mapper namespace="com.together.mapper.AdminMapper">
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
-
+	
+	<!-- 관리자 홈페이지 : 총 회원수를 보여주는 sql문 -->
+	<select id="memberCnt" resultType="int">
+	<![CDATA[
+	select count(*) 
+	from member
+	where user_id not in('admin')
+	]]>
+	</select>
+	
+	<!-- 관리자 홈페이지 : 업체 신청 수를 보여주는 sql문 -->
+	<select id="etpApplyCnt" resultType="int">
+	<![CDATA[
+	select count(*)
+	from member m, enterprise e
+	where m.user_id = e.user_id and m.authority_no = 3
+	]]>
+	</select>
+	
+	<!-- 관리자 홈페이지 : 반려견 수를 보여주는 sql문 -->
+	<select id="dogsCnt" resultType="int">
+	<![CDATA[
+	select count(*)
+	from dogs
+	]]>
+	</select>
+	
+	<!-- 관리자 홈페이지 : 월 별 가입자 수를 보여주는 sql문 -->
+	<select id="Cnt" resultType="com.together.domain.MemberVO">
+	<![CDATA[
+	select count(*) as count, to_char(register_dt, 'YYYY-MM') as register_dt
+	from member
+	group by to_char(register_dt, 'YYYY-MM')
+	order by register_dt
+	]]>
+	</select>
 	
 	<!-- 업체 신청 관리 페이징을 위한 sql문 추가 -->
 	<select id="enterpriseList" resultType="com.together.domain.EnterpriseVO" parameterType="com.together.domain.Paging">
@@ -38,13 +73,6 @@
 	where x.rnum >= ${startNum}
 	]]>
 	</select>
-	
-<!-- 업체 신청관리 페이지 : 업체 신청 리스트를 보여주는 sql문 -->
-<!-- 	<select id="getETPApplyList" resultType="com.together.domain.MemberVO"> -->
-<!-- 	select authority_no -->
-<!-- 	from member -->
-<!-- 	where user_id = #{user_id} -->
-<!-- 	</select> -->
 	
 	<!-- 관리자가 업체 신청 수락시 수행될 sql문 추가 -->
 	<update id="etpApplyManage_01" parameterType="com.together.domain.MemberVO">

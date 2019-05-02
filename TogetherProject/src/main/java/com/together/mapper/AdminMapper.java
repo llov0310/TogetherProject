@@ -30,4 +30,13 @@ public interface AdminMapper {
    // 업체 정보를 가져오는 함수 맵핑 (페이징)
    public ArrayList<EnterpriseVO> enterpriseList(Paging p);
    
+   // 관리자 홈페이지 : 회원수를 가져오는 함수 맵핑
+   public int memberCnt();
+   
+   // 관리자 홈페이지 : 업체 신청 수를 가져오는 함수 맵핑
+   public int etpApplyCnt();
+   
+   // 관리자 홈페이지 : 반려견 수를 가져오는 함수 맵핑
+   public int dogsCnt();
+   
 }

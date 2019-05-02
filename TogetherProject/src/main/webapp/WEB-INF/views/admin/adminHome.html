@@ -32,9 +32,8 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings
-										(Monthly)</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+										class="text-xs font-weight-bold text-primary text-uppercase mb-1">회원 수</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${memberCnt}명|"></div>
 								</div>
 								<div class="col-auto">
 									<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -51,9 +50,8 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings
-										(Annual)</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+										class="text-xs font-weight-bold text-success text-uppercase mb-1">업체 신청 수</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${etpApplyCnt}건|"></div>
 								</div>
 								<div class="col-auto">
 									<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -70,10 +68,10 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+										class="text-xs font-weight-bold text-info text-uppercase mb-1">반려견 수</div>
 									<div class="row no-gutters align-items-center">
 										<div class="col-auto">
-											<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+											<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" th:text="|${dogsCnt}마리|"></div>
 										</div>
 										<div class="col">
 											<div class="progress progress-sm mr-2">
@@ -122,8 +120,7 @@
 						<!-- Card Header - Dropdown -->
 						<div
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">Earnings
-								Overview</h6>
+							<h6 class="m-0 font-weight-bold text-primary">월 별 가입자 수</h6>
 							<div class="dropdown no-arrow">
 								<a class="dropdown-toggle" href="#" role="button"
 									id="dropdownMenuLink" data-toggle="dropdown"
@@ -143,9 +140,14 @@
 						</div>
 						<!-- Card Body -->
 						<div class="card-body">
+						
 							<div class="chart-area">
-								<canvas id="myAreaChart"></canvas>
+							<!-- 차트 그리는 부분 -->
+<!-- 								<canvas id="myAreaChart"></canvas> -->
+								<div id="chartdiv"></div>
 							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -203,24 +205,36 @@
 	</div>
 	<!-- End of Main Content -->
 
-		<!-- Bootstrap core JavaScript-->
+
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link href="/admin/css/adminHome.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="page_js">
+			<!-- Bootstrap core JavaScript-->
 		<script src="admin/vendor/jquery/jquery.min.js"></script>
 		<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 		<!-- Core plugin JavaScript-->
 		<script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-		<!-- Custom scripts for all pages-->
-		<script src="admin/js/sb-admin-2.min.js"></script>
+<!-- 		<!-- Custom scripts for all pages -->
+<!-- 		<script src="admin/js/sb-admin-2.min.js"></script> -->
 
-		<!-- Page level plugins -->
-		<script src="admin/vendor/chart.js/Chart.min.js"></script>
+<!-- 		<!-- Page level plugins --> 
+<!-- 		<script src="admin/vendor/chart.js/Chart.min.js"></script> -->
 
-		<!-- Page level custom scripts -->
-		<script src="admin/js/demo/chart-area-demo.js"></script>
-		<script src="admin/js/demo/chart-pie-demo.js"></script>
-
-
+<!-- 		<!-- Page level custom scripts --> 
+<!-- 		<script src="admin/js/demo/chart-area-demo.js"></script> -->
+<!-- 		<script src="admin/js/demo/chart-pie-demo.js"></script> -->
+		
+		<!-- AM차트 사용을 위한 js -->
+		<script src="/admin/chart/core.js"></script>
+		<script src="/admin/chart/charts.js"></script>
+		<script src="/admin/chart/themes/animated.js"></script>
+		<script src="/admin/js/adminHome.js"></script>
 </th:block>
 
 

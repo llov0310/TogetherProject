@@ -1,8 +1,6 @@
 package com.together.controller;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,12 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
-import com.together.domain.PageMaker;
 import com.together.domain.Paging;
-import com.together.mapper.AdminMapper;
 import com.together.service.AdminService;
 
 import lombok.AllArgsConstructor;
@@ -27,10 +22,22 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AdminController {
 	private AdminService adminService;
-	private AdminMapper adminMapper;
-	   //관리자 홈 페이지 맵핑
+	//관리자 홈 페이지 맵핑
 	   @RequestMapping(value = "/adminHome", method=RequestMethod.GET)
-	   public String adminHome(Model model) {
+	   public String adminHome(Model model) {  
+		   
+		int memberCnt = adminService.memberCnt(); // 총 회원수를 담기 위한 변수 선언
+		int etpApplyCnt = adminService.etpApplyCnt(); // 총 업체 신청를 담기 위한 변수 선언
+		int dogsCnt = adminService.dogsCnt();// 반려견 수를 담기 위한 변수 선언
+
+		System.out.println(memberCnt + "멤버수 : 로그인 컨트롤러");
+		System.out.println(etpApplyCnt + "업체 신청 수 : 로그인 컨트롤러");
+		System.out.println(dogsCnt + "반려견 수 : 로그인 컨트롤러");
+
+		model.addAttribute("etpApplyCnt", etpApplyCnt);
+		model.addAttribute("memberCnt", memberCnt);
+		model.addAttribute("dogsCnt", dogsCnt);
+		   
 		   return "admin/adminHome";
 	   }
    
@@ -104,17 +111,6 @@ public class AdminController {
 		   model.addAttribute("pageNum", arr);
 		   model.addAttribute("enterpriseList", adminService.enterpriseList(page));
 		   return "admin/enterpriseManage";
-		   
-		   
-		   
-//		   //기존 코드
-//		   ArrayList<EnterpriseVO> enterpriseList = new ArrayList<EnterpriseVO>();
-//		   enterpriseList = adminService.getEnterpriseList();
-//		   //System.out.println(enterpriseList + "db에서 가져왔다@@@");
-//		   
-//		   session.setAttribute("enterpriseList", enterpriseList);
-//		   
-//		   return "admin/enterpriseManage";
 	   }
 	   
 	   //업체 신청 수락 및 거절 맵핑
