@@ -63,7 +63,7 @@ public class MyPageController {
 	  @RequestMapping(value = "/mypet_info", method=RequestMethod.GET) 
 	  public String mypet_info(Model model,HttpSession session,HttpServletRequest request){ 
 	  String user_id = ((MemberVO)request.getSession().getAttribute("user")).getUser_id();
-	  System.out.println(user_id+"변경확인아이디"); 
+	  System.out.println(user_id+"개리스트"); 
 	  ArrayList<DogsVO> pet_list = new ArrayList<DogsVO>();
 	  pet_list =  mypage.petlist(user_id);
 	 
@@ -78,10 +78,16 @@ public class MyPageController {
 	  @RequestMapping(value = "/mypet_add_info", method = RequestMethod.POST)
 		@ResponseBody
 		public String mypet_add_info(Model model, HttpSession session, HttpServletRequest request,
-				@RequestParam String d_nm,@RequestParam int d_gender,@RequestParam String d_kind,@RequestParam String d_content) {
+				@RequestParam String d_nm,@RequestParam int d_gender,@RequestParam String d_kind,@RequestParam String d_content,@RequestParam String d_age) {
 		  String user_id = ((MemberVO)request.getSession().getAttribute("user")).getUser_id();
-	
-			System.out.println("====================");
+		  System.out.println(user_id+"개주인");
+		  System.out.println(d_nm+"개이름");
+		  System.out.println(d_gender+"개성별");
+		  System.out.println(d_kind+"품종");
+		  System.out.println(d_age+"나이");
+		  System.out.println(d_content+"설명");
+		  Integer adddog = mypage.addDog(user_id, d_nm, d_gender, d_kind, d_content,d_age);
+		  System.out.println("====================");
 
 			return "success";
 		}

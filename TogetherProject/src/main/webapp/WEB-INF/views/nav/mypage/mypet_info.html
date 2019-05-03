@@ -9,11 +9,12 @@
 </th:block>
 <th:block layout:fragment="page_css">
 	<script>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 				$("#adddog").click(function() {
-					window.open("/mypet_add", "newpass","width=500,height=500,left=600");
+					window.open("/mypet_add", "newpass","width=500,height=500,left=600, top=250" );
 						});
+				
+				
 			});
 	
 	
@@ -47,6 +48,7 @@
 	</div>
 	
 	<div class="asd" th:each="pet : ${pet}">
+	<button>삭제</button>
 	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
 	<div>개정보</div>
 	 <div>이름:<span th:text="${pet.d_nm}"></span></div>

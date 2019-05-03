@@ -29,8 +29,17 @@
 	</select> 
 	
 
-	<insert id="addDog"  parameterType="com.together.domain.DogsVO">
-	insert into dogs(d_cd, user_id,d_gender,d_dt,d_addr,d_kind,d_nm,d_content,d_age)
-	values()
+	
+<insert id="addDog"  parameterType="com.together.domain.DogsVO">
+	insert into dogs(d_cd, user_id,d_nm,d_dt,d_kind,d_gender,d_content,d_age)
+	values('d'||DOG_SEQ.nextval,
+			#{user_id},
+			#{d_nm},
+			systimestamp,
+			#{d_kind},
+			#{d_gender},
+			#{d_content},
+			#{d_age})
+   
 	</insert>
 </mapper>

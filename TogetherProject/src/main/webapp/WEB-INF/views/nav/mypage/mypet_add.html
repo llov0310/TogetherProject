@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 $(document).ready(function() {
 	$("#addpet").click(function() {
@@ -13,13 +15,13 @@ $(document).ready(function() {
 		var d_kind = $("#kind").val();
 		var d_content = $("#content").val();
 		
-		alert(d_nm);
+	 	alert(d_nm);
 		alert(d_gender);
 		alert(d_age);
 		alert(d_kind);
 		alert(d_content);
 		
-		$.ajax({
+	 	$.ajax({
 			url : "/mypet_add_info",
 			type : "POST",
 			dataType : 'text',
@@ -27,25 +29,20 @@ $(document).ready(function() {
 				d_nm : d_nm,
 				d_gender : d_gender,
 				d_age : d_age,
-				d_kind : d_kind
+				d_kind : d_kind,
 				d_content : d_content
 			},
 			success : function(data) {
-					alert("항");
-				
-					
-				}else {
-					alert("실패");
+				opener.parent.location.reload(mypet_info);
+				close();				
 				}
-				
-			}
-
-			});  */
-		});
-
-	
+			});   
+		
+	});
 });
 </script>
+
+
 <title>애견 추가</title>
 </head>
 <body>
@@ -59,7 +56,7 @@ $(document).ready(function() {
 나이<input type="text" id="age"><br>
 품종<input type="text" id="kind"><br>
 코멘트<br>
-<textarea style="resize: none"; rows="5" cols="25" id="content" ></textarea>
+<textarea style="resize: none" rows="5" cols="25" id="content" ></textarea>
 </div>
 <button id="addpet">추가하기</button>
 </body>

@@ -26,7 +26,13 @@ public interface MypageMapper {
 
 	public ArrayList<DogsVO> petlist(@Param("user_id") String user_id);
 
+	public Integer addDog(@Param("user_id")String user_id,
+						  @Param("d_nm") String d_nm,
+						  @Param("d_gender")int d_gender,
+						  @Param("d_kind")String d_kind,
+						  @Param("d_content") String d_content,
+						  @Param("d_age")String d_age);
 
-	
+
 
 }

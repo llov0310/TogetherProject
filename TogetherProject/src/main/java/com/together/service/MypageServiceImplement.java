@@ -51,6 +51,13 @@ public class MypageServiceImplement implements MypageService {
 	}
 
 
+	@Override
+	public Integer addDog(String user_id, String d_nm, int d_gender, String d_kind, String d_content, String d_age) {
+		// TODO Auto-generated method stub
+		return myMapper.addDog(user_id,d_nm,d_gender,d_kind,d_content, d_age);
+	}
+
+
 	 
 }
 

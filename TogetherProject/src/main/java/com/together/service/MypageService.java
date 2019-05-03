@@ -14,6 +14,9 @@ public interface MypageService {
 
 	public ArrayList<DogsVO> petlist(String user_id);
 
+	public Integer addDog(String user_id, String d_nm, int d_gender, String d_kind, String d_content, String d_age);
+
+
 ;
 
 	
