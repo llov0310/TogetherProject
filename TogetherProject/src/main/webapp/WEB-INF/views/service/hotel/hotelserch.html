@@ -40,7 +40,7 @@ map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 var geocoder = new daum.maps.services.Geocoder();
 
 //주소값을 받아옵니다
-var map_name = $("#map_name").text();
+var map_names =  $(".map_arr").text();
 
 var map_test = $("#main1-2").children("div.listbox1").find("span.ok").text();
 
@@ -106,7 +106,7 @@ function displayMarker(locPosition, message) {
   infowindow.open(map, marker);
   
   // 지도 중심좌표를 접속위치로 변경합니다
-  map.setCenter(locPosition);
+//   map.setCenter(locPosition);
 }    
 
 
@@ -114,17 +114,24 @@ function displayMarker(locPosition, message) {
 
 
 
+var map_name = map_names.split("-");
 
+// for(var i =0; i<map_address.length-1; i++){
+// 	console.log(map_name[i]+ "나와라잇");	
+// }
 
-
+console.log(map_address.length);
+var count = 0;
 //업체 정보를 지도에 마커형태로 찍어주는 함수
 for(var i=0; i<map_address.length; i++){
 // 주소로 좌표를 검색합니다
-		geocoder.addressSearch(map_address[i], function(result, status) {
-	
+		
+		geocoder.addressSearch(map_address[i],function(result, status) {
+		
+		
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === daum.maps.services.Status.OK) {
-	
+	    	 
 	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 	
 	        // 결과값으로 받은 위치를 마커로 표시합니다
@@ -134,19 +141,25 @@ for(var i=0; i<map_address.length; i++){
 	        });
 	
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        
 	        var infowindow = new daum.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+map_name+'</div>'
+	      
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+map_name[count]+'</div>'
+	        	
 	        });
+	        count = count + 1;
 	        infowindow.open(map, marker);
-	
+	        
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-// 	        map.setCenter(coords);
-	       
-	  	  } 
+	        map.setCenter(coords);
+	            
+	  	  }
+
 	 
 		});
-		
+	
 }
+count = 0;
 
 
 
@@ -209,10 +222,10 @@ $(document).ready(function(){
 		
 		
 				<div id="main1-2">
-					<div class="listbox1" th:each ="list : ${session.list_enterprise}">
+					<div class="listbox1">
 						
 						<!--리스트 시작  -->
-							<div class="listbox2">
+							<div class="listbox2" th:each ="list : ${etp_list}">
 									<div id="imgbox1">
 										<div id="img1">
 											<img src="http://placehold.it/200x200" alt="" id="imgbox">
@@ -224,7 +237,7 @@ $(document).ready(function(){
 											<div>
 												<div>
 													<h3 style="display:none"th:text="${list.etp_cd}"></h3>
-													<h2 id="map_name" th:text ="${list.etp_nm}"></h2>
+													<h2 id="map_name" class="map_arr" th:text ="${list.etp_nm} + '-'"></h2>
 												</div>
 												<span class="ok" id="addd" th:text ="${list.etp_addr} + '.'" th:value="${list.etp_addr}"></span>
 												<div th:text ="${list.etp_ph_no}"></div>
@@ -236,7 +249,7 @@ $(document).ready(function(){
 												<div id="context1">
 													<div>
 														<div>진료시간</div>
-														<div>오전10시~ 오후 9시까지</div>
+														<div th:text="${list.etp_if_time1} + '~' + ${list.etp_if_time2}"></div>														
 														<div>토 일 공휴일 쉼</div>
 													</div>
 												

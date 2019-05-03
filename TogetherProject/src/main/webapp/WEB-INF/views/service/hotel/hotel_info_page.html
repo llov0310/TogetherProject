@@ -18,6 +18,28 @@
 <!-- 	<script src="assets/js/hotel.js"></script> -->
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script type="text/javascript">
+
+  function onFitSizeOfTextArea()
+
+      {
+
+          var textArea = event.srcElement;
+
+          while( textArea.clientHeight < textArea.scrollHeight )
+
+          {
+
+              textArea.rows = textArea.rows + 1;
+
+          }
+
+          textArea.className = "NoScroll";
+
+      }
+
+  </script>
 
 </th:block>
 
@@ -58,7 +80,7 @@
 
 <div class="container1-2" th:each="info : ${session.info}">
       <div class="header clearfix" th:if="${info} != null">
-        <h1 class="text-muted" th:text="${info.etp_nm}"></h1>
+        <h1 class="text-muted" th:text="${info.etp_nm}"></h1> <!-- 업체이름 -->
       </div>
 
       <div class="row">
@@ -66,29 +88,42 @@
           <p class="lead">정보 소개</p>
           <p th:text="${info.etp_if_info}"></p>
           
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label for="type" class="col-sm-5 control-label">I'd like to ride</label>   
-              <div class="col-sm-5">
-                <select name="type" id="type" class="form-control">
-                  <option>--Select your ride--</option>
-                  <option value="animals">Animal</option>
-                  <option value="vehicles">Vehicle</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="subtype" class="col-sm-5 control-label">More specifically</label>       
-              <div class="col-sm-5">
-                <select name="subtype" id="subtype"  class="form-control">
-                    <option>-- Select type first--</option>
-                </select>
-              </div>
-            </div>         
-          </form>        
+<!--           <form class="form-horizontal"> -->
+<!--             <div class="form-group"> -->
+<!--               <label for="type" class="col-sm-5 control-label">I'd like to ride</label>    -->
+<!--               <div class="col-sm-5"> -->
+<!--                 <select name="type" id="type" class="form-control"> -->
+<!--                   <option>--Select your ride--</option> -->
+<!--                   <option value="animals">Animal</option> -->
+<!--                   <option value="vehicles">Vehicle</option> -->
+<!--                 </select> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--             <div class="form-group"> -->
+<!--               <label for="subtype" class="col-sm-5 control-label">More specifically</label>        -->
+<!--               <div class="col-sm-5"> -->
+<!--                 <select name="subtype" id="subtype"  class="form-control"> -->
+<!--                     <option>-- Select type first--</option> -->
+<!--                 </select> -->
+<!--               </div> -->
+<!--             </div>          -->
+<!--           </form>         -->
       
         </div>
       </div>
+      
+      <hr>
+      
+      <div class = "info_main">
+      	<p>상세 정보</p>
+      	<pre th:text="${info.etp_if_intro}"></pre>
+      </div>
+      
+      <hr>
+      <div class = "product">
+      <p>상품 목록</p>
+      </div>
+      <hr>
       
       <div class="row marketing">
         <div class="col-lg-6">

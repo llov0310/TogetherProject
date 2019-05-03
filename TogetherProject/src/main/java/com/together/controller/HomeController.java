@@ -75,14 +75,15 @@ public class HomeController {
    
    //호텔 페이지 관련 이동 맵핑 정보
    @RequestMapping(value = "/hotelserch", method=RequestMethod.GET)
-   public String hotelserch(Model model ,HttpSession session ,@RequestParam String toAddress, EnterpriseVO ent) {
+   public String hotelserch(Model model ,HttpServletRequest request,HttpSession session ,@RequestParam String toAddress, EnterpriseVO ent) {
 	   ArrayList<EnterpriseVO> result = new ArrayList<EnterpriseVO>();
-
+	   
+//	   int Auto = ((MemberVO) request.getSession().getAttribute("user")).getAuthority_no();
+	   
 	   model.addAttribute("place" , toAddress);
 	   result = customerservice.ser(toAddress);
-
-	   session.setAttribute("list_enterprise", result);
-	  
+//	   session.setAttribute("etp_list" , result);
+	   model.addAttribute("etp_list", result);
 	  return  "service/hotel/hotelserch";
    }
    
@@ -125,10 +126,10 @@ public class HomeController {
  ////////////////////////////////////업체 관리 용////////////////////////////////////  
    //업체 관리 페이지 맵핑
    @RequestMapping(value = "/etpManage", method=RequestMethod.GET)
-   public String etp_manage(Model model) {
-	   
-	   
-	   
+   public String etp_manage(Model model,HttpServletRequest request,HttpSession session) {
+
+	  
+
 	   return "nav/enterprise_manage/enterprise_manage";
    }
    
@@ -138,13 +139,13 @@ public class HomeController {
 	   
 	   
 	  String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-	  	
-	   
+	 
 	   ArrayList<EnterpriseVO> ent = new ArrayList<EnterpriseVO>();
 	   
 	   ent = customerservice.textbox(sess);
 	   
 	   model.addAttribute("list", ent);
+	   
 	   
 	   
 	   
@@ -165,13 +166,15 @@ public class HomeController {
 		   @RequestParam String etp_if_info,@RequestParam String etp_if_intro
 		   ,@RequestParam String etp_addr,@RequestParam String etp_ph_no
 		   ,@RequestParam String etp_license_no,@RequestParam String etp_email,
-		   @RequestParam String time1,@RequestParam String time2) {
+		   @RequestParam String time1,@RequestParam String time2,@RequestParam String etp_cd) {
 	   
-	   int etp_update = customerservice.etpupdate(etp_nm,etp_if_info,etp_if_intro,etp_addr,etp_ph_no,etp_license_no,etp_email,time1,time2);
-	   		
-	   	
+	   Integer update = customerservice.update(etp_nm,etp_addr,etp_ph_no,etp_license_no,etp_email,etp_cd);
+	   Integer update2 = customerservice.update2(etp_if_info,etp_if_intro,time1,time2,etp_cd);
 	   
-	   return "";
+	    
+	   
+	   return "tq";		
+	   
    }
    
 }

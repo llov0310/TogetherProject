@@ -18,17 +18,15 @@
 	
 	
 		$('#update').on('click' , function(){
-			
-		
+			alert("클릭은되나;");
+		var etp_cd = $("#code").text();
 		var etp_nm = $("#Field1").val(); //업체이름
-		var etp_if_info = $("#Field2").text(); // 간단 설명
-		var etp_if_intro = $("#Field3").text(); // 업체 상세 설명
+		var etp_if_info = $("#Field2").val(); // 간단 설명
+		var etp_if_intro = $("#Field3").val(); // 업체 상세 설명
 		var etp_addr = $("#Field4").val(); // 주소
 		var etp_ph_no = $("#Field5").val(); // 전화번호
 		var etp_license_no = $("#Field6").val(); //사업자 번호
 		var etp_email = $("#Field7").val(); //이메일
-		
-		
 		var time1 = $("#s1 option:selected").val().concat(":").concat($("#m1 option:selected").val());
 		var time2 = $("#s2 option:selected").val().concat(":").concat($("#m2 option:selected").val());
 				
@@ -36,7 +34,7 @@
 				$.ajax({
 					type : "POST",
 					url : "/etpupdate",
-					data : {etp_nm,
+					data : {etp_nm,etp_cd,
 							etp_if_info,
 							etp_if_intro,
 							etp_addr,
@@ -44,12 +42,11 @@
 							etp_license_no,
 							etp_email,
 							time1,
-							time2}
+							time2},
 					dataType : "text",
 					success : function(){
-					
+						alert("되나");
 					}
-						
 					
 				});
 	
@@ -66,6 +63,9 @@
 	
 		  </header>
  <div th:each=" lists :${list}">
+ 		
+ 			<div id="code" style="display:none" th:text="${lists.etp_cd}">
+ 			</div>
 		  <div>
 		    <label class="desc" id="title1" for="Field1">업체 이름</label>
 		    <div>
@@ -179,6 +179,7 @@
 				 <div>
 						<div>
 				  			<input id="update" name="saveForm" type="button" value="수정">
+				  			
 					    </div>
 				</div>
 		  
