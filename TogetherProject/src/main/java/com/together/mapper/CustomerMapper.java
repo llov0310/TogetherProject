@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ProductVO;
 
 public interface CustomerMapper {
 	//로그인을 위한 함수 추가
@@ -41,6 +42,15 @@ public interface CustomerMapper {
 	public  ArrayList<EnterpriseVO> info_select(String user_id);
 
 	public int ent_info(String code);
+
+	public ArrayList<ProductVO> product_select(@Param ("code") String code);
+
+	public int del(@Param("code") String code, @Param("nm") String nm);
+
+	public int insert_product( @Param("code") String code, 
+			@Param("pd_nm") String pd_nm, 
+			@Param("pd_price") int pd_price, 
+			@Param("pd_content") String pd_content);
 
 	
 	

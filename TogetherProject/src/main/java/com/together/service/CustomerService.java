@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ProductVO;
 
 public interface CustomerService {
 	public MemberVO login(String user_id, String password);
@@ -27,6 +28,12 @@ public interface CustomerService {
 	public  ArrayList<EnterpriseVO> info_select(String user_id);
 
 	public int ent_info(String code);
+
+	public ArrayList<ProductVO> product_select(String code);
+
+	public int del(String code, String nm);
+
+	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content);
 
 	
 	

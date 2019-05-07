@@ -40,17 +40,22 @@
 
 	      });
 	      
+	      $("#third").click(function(){
+	    	  
+	    	  $(".total").load("/etpproduct"); 
+	    	  
+	      });
+	      
+ 		 $("#four").click(function(){
+	    	  
+	    	  $(".total").load("/etporder"); 
+	    	  
+	      });
+	      
 
 	      
 	 }); 
-	
-	
-	// 임시 //
-	
-	
-	
-	
-	
+
 </script>
 </th:block>
 
@@ -77,11 +82,11 @@
             "assets/img/enterprise_manage/circle-xxl.png" width=
             "40">이미지 수정</li>
 
-            <li class="listItemA" id="for"><img alt="icon" height="40" src=
+            <li class="listItemA" id="third"><img alt="icon" height="40" src=
             "assets/img/enterprise_manage/circle-xxl.png" width=
             "40">상품 정보</li>
 
-            <li class="listItemA" id="five"><img alt="icon" height="40" src=
+            <li class="listItemA" id="four"><img alt="icon" height="40" src=
             "assets/img/enterprise_manage/circle-xxl.png" width=
             "40">주문 현황</li>
         </ul>
@@ -89,7 +94,7 @@
 
 
 
-<div class="total">
+<div class="total" id="total">
 	<div th:each=" user : ${session.user}">
 		<div th:if = "${user} !=null">
 			<div style="margin-top : 10%; margin-left : 50%;">

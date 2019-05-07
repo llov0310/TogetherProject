@@ -8,20 +8,20 @@
   box-sizing: border-box;
 }
 .total h2{
-	margin : 0 0 0 20%;
 	border-bottom: 1px solid black;
 	width: 70%;
 }
 .total{
 	width:  100%;
-	margin : 5% auto;
+	margin : 5% 0 0 15%;
 }
 form{
 	width: 90%;
+	
 }
 
 form header {
-  margin: 0 0 20px 0; 
+ 
 }
 form header div {
   font-size: 90%;
@@ -32,21 +32,21 @@ form > div {
   clear: both;
   overflow: hidden;
   padding: 1px;
-  margin: 0 0 10px 0;
+  
 }
 form > div > fieldset > div > div {
-  margin: 0 0 5px 0;
+  
 }
 form > div > label,
 legend {
 	width: 25%;
   float: left;
-  padding-right: 10px;
+
 }
 form > div > div,
 form > div > fieldset > div {
   width: 75%;
-  float: right;
+  float: left;
 }
 form > div > fieldset label {
 	font-size: 90%;
@@ -90,7 +90,7 @@ textarea:focus {
   legend {
 	  width: 100%;
     float: none;
-    margin: 0 0 5px 0;
+    
   }
   form > div > div,
   form > div > fieldset > div {
@@ -284,3 +284,20 @@ textarea:focus {
     font-size: 3em;
   }
 }
+
+
+
+
+
+/* product Tab */
+
+#price_table{
+	width:90%;
+}
+
+.ttab th {
+	width : 20%;
+}
+
+
+

@@ -74,4 +74,16 @@
 		insert into enterprise_info(etp_if_cd,etp_cd) values (ENTINFO_SEQ.nextval,#{code})		
 	</insert>
 	
+	<select id="product_select" resultType="com.together.domain.ProductVO">
+		select * from product where etp_cd = #{code}
+	</select>
+	
+	<delete id="del" parameterType="com.together.domain.ProductVO">
+	delete from product where etp_cd = #{code} and pd_nm = #{nm}
+	</delete>
+	
+	<insert id="insert_product" parameterType="com.together.domain.ProductVO">
+		insert into product values (PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},null)
+	</insert>
+	
 </mapper>

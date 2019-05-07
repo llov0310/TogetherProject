@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ProductVO;
 import com.together.service.CustomerService;
 
 import lombok.AllArgsConstructor;
@@ -152,7 +153,7 @@ public class HomeController {
 	   return "nav/enterprise_manage/enterprise_home";
    }
    
-   
+   // 업체 이미지 변경
    @RequestMapping(value = "/etpimg", method=RequestMethod.GET)
    public String etp_img(Model model) {
 	   
@@ -176,5 +177,79 @@ public class HomeController {
 	   return "tq";		
 	   
    }
+   
+   //업체 상품 정보 추가/삭제/수정
+   @RequestMapping(value = "/etpproduct", method=RequestMethod.GET)
+   public String etp_product(Model model,HttpServletRequest request) {
+	   
+	   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+	   
+	   ArrayList<EnterpriseVO> info = customerservice.info_select(id);
+	   ArrayList<ProductVO> product = new ArrayList<ProductVO>();
+	   
+	   
+	   String code = info.get(0).getEtp_cd();
+
+	   product = customerservice.product_select(code);
+	   
+	   model.addAttribute("product_info", product);
+	   
+	   return "nav/enterprise_manage/enterprise_product";
+   }
+   
+   // 업체 주문 현황
+   @RequestMapping(value = "/etporder", method=RequestMethod.GET)
+   public String etp_order(Model model) {
+	   
+	   return "nav/enterprise_manage/enterprise_order";
+   }
+   
+   //업체 상품 추가 팝업창
+   
+   @RequestMapping(value = "/orderPopup", method=RequestMethod.GET)
+   public String etp_order_pop(Model model) {
+	   
+	   return "nav/enterprise_manage/enterprise_order_pop";
+   }
+   
+   //팝업창  상품  추가 버튼
+   @RequestMapping(value = "/orderPopup_add", method=RequestMethod.GET)
+   @ResponseBody
+   public String etp_pop_add(HttpServletRequest request,Model model,@RequestParam String pd_nm,@RequestParam int pd_price,@RequestParam String pd_content) {
+	  
+	   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+	   
+	   ArrayList<EnterpriseVO> info = customerservice.info_select(id);
+	   
+	   String code = info.get(0).getEtp_cd();
+	   
+	   System.out.println(code + "혹시 왓나");
+	   
+	   int product_insert = customerservice.insert_pro(code,pd_nm,pd_price,pd_content); //이미지 업로드가되면 추가로 넣을예정
+	   
+	   return "success";
+   }
+   
+   
+   
+   
+   // 업체 상품 제거 
+   @RequestMapping(value = "/order_del", method=RequestMethod.POST)
+   @ResponseBody
+   public String etp_order_del(Model model,HttpServletRequest request,@RequestParam String nm) {
+	   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+	   
+	   ArrayList<EnterpriseVO> info = customerservice.info_select(id);
+	   
+	   String code = info.get(0).getEtp_cd();
+	   	System.out.println(code + "코드번호");
+	   int order_del = customerservice.del(code,nm);
+	   
+	   System.out.println(order_del + "왓습니까?");
+	   return "success";
+   }
+   
+   
+  
    
 }

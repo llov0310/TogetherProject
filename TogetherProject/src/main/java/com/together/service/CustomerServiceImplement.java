@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ProductVO;
 import com.together.mapper.CustomerMapper;
 
 import lombok.AllArgsConstructor;
@@ -87,6 +88,27 @@ public class CustomerServiceImplement implements CustomerService {
 	public int ent_info(String code) {
 		// TODO Auto-generated method stub
 		return mapper.ent_info(code);
+	}
+
+
+	@Override
+	public ArrayList<ProductVO> product_select(String code) {
+		// TODO Auto-generated method stub
+		return mapper.product_select(code);
+	}
+
+
+	@Override
+	public int del(String code, String nm) {
+		// TODO Auto-generated method stub
+		return mapper.del(code,nm);
+	}
+
+
+	@Override
+	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content) {
+		// TODO Auto-generated method stub
+		return mapper.insert_product(code,pd_nm,pd_price,pd_content);
 	}
 
 

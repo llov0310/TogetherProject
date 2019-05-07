@@ -27,4 +27,15 @@ public class EnterpriseVO {
 	private String etp_if_time1;
 	private String etp_if_time2;
 	
+	
+	
+	//업체 상품을볼때 필요한 변수
+	
+	private String pd_cd;
+	
+	private String pd_nm;
+	private int pd_price;
+	private String pd_content;
+	private String pd_img_path;
+	
 }
