@@ -69,12 +69,22 @@ public class MyPageController {
 	 
 	 
 	  model.addAttribute("pet", pet_list);
-	
-	
 	 
 	 	  return "nav/mypage/mypet_info"; 
 	 }
 	  
+		@RequestMapping(value = "/pet_delete", method = RequestMethod.POST)
+		@ResponseBody
+		public String pet_delete(Model model, HttpSession session, HttpServletRequest request,@RequestParam String d_nm) {
+			
+			String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+			System.out.println(user_id + "아이디");
+			System.out.println(d_nm+"개이름");	
+			Integer petdelete = mypage.petdelete(user_id, d_nm);
+				return "success";
+		}
+
+		
 	  @RequestMapping(value = "/mypet_add_info", method = RequestMethod.POST)
 		@ResponseBody
 		public String mypet_add_info(Model model, HttpSession session, HttpServletRequest request,
@@ -99,6 +109,11 @@ public class MyPageController {
 		return "nav/mypage/mypet_add";
 	}
 
+	@RequestMapping(value = "/petinfo_up", method = RequestMethod.GET)
+	public String petinfo_up(Model model) {
+		return "nav/mypage/petinfo_up";
+	}
+	
 	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)
 	public String myreservation(Model model) {
 		return "nav/mypage/myreservation";

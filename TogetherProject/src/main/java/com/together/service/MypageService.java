@@ -16,12 +16,6 @@ public interface MypageService {
 
 	public Integer addDog(String user_id, String d_nm, int d_gender, String d_kind, String d_content, String d_age);
 
-
-;
-
-	
-
-
-
+	public Integer petdelete(String user_id, String d_nm);
 
 }

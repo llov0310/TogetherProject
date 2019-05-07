@@ -17,7 +17,33 @@
 				
 			});
 	
+	$(document).ready(function() {
+		$(".updog").click(function() {
+			window.open("/petinfo_up", "newpass","width=500,height=500,left=600, top=250" );
+				});
+	});
 	
+ 	$(document).ready(function() {
+		$(".deldog").click(function() {
+			var d_nm = $(this).parent().parent().find('.dname').find('span').text();
+			console.log(d_nm);
+			
+			$.ajax({
+				url : "/pet_delete",
+				type : "POST",
+				dataType : 'text',
+				data : {
+					d_nm : d_nm
+				},
+				success : function(data) {
+					alert(data);	
+					}
+				});   
+			
+				});
+		
+		
+	}); 
 	</script>
 	
 	<style>
@@ -48,10 +74,13 @@
 	</div>
 	
 	<div class="asd" th:each="pet : ${pet}">
-	<button>삭제</button>
+	<div class="bts">
+	<button class="deldog">삭제</button>
+	<button class="updog">수정</button>
+	</div>
 	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
-	<div>개정보</div>
-	 <div>이름:<span th:text="${pet.d_nm}"></span></div>
+	<br>개정보<br>
+	<div class="dname">이름:<span th:text="${pet.d_nm}" id="dognm"></span></div>
 	<div>품종:<span th:text="${pet.d_kind}"> </span></div>
 	<div><span th:if="${pet.d_gender}==1">성별:수컷</span></div>
 	<div><span th:if="${pet.d_gender}==2">성별:암컷</span></div>

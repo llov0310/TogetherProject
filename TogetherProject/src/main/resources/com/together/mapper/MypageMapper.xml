@@ -42,4 +42,8 @@
 			#{d_age})
    
 	</insert>
+	
+	<delete id="petdelete" parameterType="com.together.domain.DogsVO">
+		delete from dogs where d_nm = #{d_nm} and user_id = #{user_id}
+	</delete>   
 </mapper>

@@ -33,6 +33,10 @@ public interface MypageMapper {
 						  @Param("d_content") String d_content,
 						  @Param("d_age")String d_age);
 
+	public Integer petdelete(@Param("user_id") String user_id, @Param("d_nm") String d_nm);
+
+
+
 
 
 }

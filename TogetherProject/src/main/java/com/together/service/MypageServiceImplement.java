@@ -58,6 +58,12 @@ public class MypageServiceImplement implements MypageService {
 	}
 
 
+	@Override
+	public Integer petdelete(String user_id, String d_nm) {
+		// TODO Auto-generated method stub
+		return myMapper.petdelete(user_id,d_nm);
+	}
+
 	 
 }
 
