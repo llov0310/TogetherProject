@@ -144,6 +144,15 @@
 							<div class="chart-area">
 							<!-- 차트 그리는 부분 -->
 								<div id="morrisChart"></div>
+								
+								<div>
+									<select id="yearSelectBox">
+										<option selected>-- 연도 선택 --</option>
+										<option class="yearOption" value="19">2019</option>
+										<option class="yearOption" value="20">2020</option>
+										<option class="yearOption" value="21">2021</option>
+									</select>
+								</div>
 							</div>
 							
 							
@@ -222,8 +231,11 @@
 		<script src="/admin/chart/morris.min.js"></script>
 		<script src="/admin/chart/raphael.min.js"></script>
 		
-		<!-- 데이터를 처리할 js -->
-		<script src="/admin/js/adminHome.js"></script>
+		<!-- 라인 차트를 그리기 위한  js -->
+		<script src="/admin/js/lineChart_01.js"></script>
+		
+		<!--  -->
+		<script src="/admin/js/yearSelect.js"></script>
 </th:block>
 
 
