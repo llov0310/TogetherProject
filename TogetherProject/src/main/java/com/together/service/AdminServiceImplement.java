@@ -80,5 +80,12 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.dogsCnt();
 	}
 
+	// 관리자 홈페이지 : 차트 사용을 위한 함수 추가
+	@Override
+	public ArrayList<MemberVO> monthMemberCnt(String year) {
+		// TODO Auto-generated method stub
+		return mapper.monthMemberCnt(year);
+	}
+
 
 }

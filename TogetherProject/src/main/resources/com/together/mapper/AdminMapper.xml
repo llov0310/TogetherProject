@@ -32,12 +32,13 @@
 	</select>
 	
 	<!-- 관리자 홈페이지 : 월 별 가입자 수를 보여주는 sql문 -->
-	<select id="Cnt" resultType="com.together.domain.MemberVO">
+	<select id="monthMemberCnt" resultType="com.together.domain.MemberVO">
 	<![CDATA[
-	select count(*) as count, to_char(register_dt, 'YYYY-MM') as register_dt
+	select count(*) as count, to_char(register_dt, 'YYYY-MM') as month
 	from member
+	where register_dt like #{year}||'%'
 	group by to_char(register_dt, 'YYYY-MM')
-	order by register_dt
+	order by month
 	]]>
 	</select>
 	

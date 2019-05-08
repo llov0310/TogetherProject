@@ -18,4 +18,9 @@ public class MemberVO {
 	private int sign_no;
 	private String addr_ji;
 	private String addr_dong;
+	
+	// 관리자 페이지 : json을 사용하여 차트를 그릴 때 필요한 변수 선언 
+	private String count;
+	private String month;
+	
 }

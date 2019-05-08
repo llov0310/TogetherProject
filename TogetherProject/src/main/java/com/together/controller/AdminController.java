@@ -30,14 +30,15 @@ public class AdminController {
 		int etpApplyCnt = adminService.etpApplyCnt(); // 총 업체 신청를 담기 위한 변수 선언
 		int dogsCnt = adminService.dogsCnt();// 반려견 수를 담기 위한 변수 선언
 
-		System.out.println(memberCnt + "멤버수 : 로그인 컨트롤러");
-		System.out.println(etpApplyCnt + "업체 신청 수 : 로그인 컨트롤러");
-		System.out.println(dogsCnt + "반려견 수 : 로그인 컨트롤러");
+		System.out.println(memberCnt + "멤버수 : 어드민 컨트롤러");
+		System.out.println(etpApplyCnt + "업체 신청 수 : 어드민 컨트롤러");
+		System.out.println(dogsCnt + "반려견 수 : 어드민 컨트롤러");
 
 		model.addAttribute("etpApplyCnt", etpApplyCnt);
 		model.addAttribute("memberCnt", memberCnt);
 		model.addAttribute("dogsCnt", dogsCnt);
-		   
+		
+		System.out.println("어드민 컨트롤러");
 		   return "admin/adminHome";
 	   }
    
