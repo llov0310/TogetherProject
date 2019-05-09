@@ -39,7 +39,13 @@ public interface AdminMapper {
    // 관리자 홈페이지 : 반려견 수를 가져오는 함수 맵핑
    public int dogsCnt();
    
+   // 관리자 홈페이지 : 등록 된 업체 수를 가져오는 함수 맵핑
+   public int etpCnt();
+   
    // 관리자 홈페이지 : 월 별 가입자 수를 가져오는 함수 맵핑 
    public ArrayList<MemberVO> monthMemberCnt(String year);
+   
+   // 관리자 홈페이지 : 도넛 차트를 그리기 위해 회원 생년월일 + 숫자를 가져오는 함수 맵핑
+   public ArrayList<MemberVO> memberAge();
    
 }

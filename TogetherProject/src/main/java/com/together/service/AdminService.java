@@ -38,6 +38,13 @@ public interface AdminService {
    // 관리자 홈페이지 : 반려견 수를 가져오는 함수 추가
    public int dogsCnt();
    
+   // 관리자 홈페이지 : 등록 된 업체 수를 가져오는 함수 추가
+   public int etpCnt();
+   
    // 관리자 홈페이지 : 연도별 회원 가입 수를 가져오는 함수 추가
    public ArrayList<MemberVO> monthMemberCnt(String year);
+   
+   // 관리자 홈페이지 : 도넛 차트를 그리기 위해 회원 생년월일 + 숫자를 가져오는 함수 추가
+   public ArrayList<MemberVO> memberAge();
+   
 }

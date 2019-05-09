@@ -18,7 +18,7 @@
 			<!-- Page Heading -->
 			<div
 				class="d-sm-flex align-items-center justify-content-between mb-4">
-				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+				<h1 class="h3 mb-0 text-gray-800">요약</h1>
 
 			</div>
 
@@ -32,7 +32,7 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-primary text-uppercase mb-1">회원 수</div>
+										class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size:40px;">회원 수</div>
 									<div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${memberCnt}명|"></div>
 								</div>
 								<div class="col-auto">
@@ -50,7 +50,7 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-success text-uppercase mb-1">업체 신청 수</div>
+										class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size:40px;">업체 신청 수</div>
 									<div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${etpApplyCnt}건|"></div>
 								</div>
 								<div class="col-auto">
@@ -68,7 +68,7 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-info text-uppercase mb-1">반려견 수</div>
+										class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-size:40px;">반려견 수</div>
 									<div class="row no-gutters align-items-center">
 										<div class="col-auto">
 											<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" th:text="|${dogsCnt}마리|"></div>
@@ -97,9 +97,8 @@
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div
-										class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending
-										Requests</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+										class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="font-size:40px;">등록 된 업체 수</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${etpCnt}개|"></div>
 								</div>
 								<div class="col-auto">
 									<i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -120,22 +119,15 @@
 						<!-- Card Header - Dropdown -->
 						<div
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">월 별 가입자 수</h6>
-							<div class="dropdown no-arrow">
-								<a class="dropdown-toggle" href="#" role="button"
-									id="dropdownMenuLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> <i
-									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-								</a>
-								<div
-									class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-									aria-labelledby="dropdownMenuLink">
-									<div class="dropdown-header">Dropdown Header:</div>
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</div>
+							<h6 class="m-0 font-weight-bold text-primary" style="font-size:40px;">월 별 가입자 수</h6>
+							
+							<div>
+								<select id="yearSelectBox">
+									<option value="0" selected>-- 연도 선택 --</option>
+									<option class="yearOption" value="19">2019</option>
+									<option class="yearOption" value="20">2020</option>
+									<option class="yearOption" value="21">2021</option>
+								</select>
 							</div>
 						</div>
 						<!-- Card Body -->
@@ -143,16 +135,9 @@
 						
 							<div class="chart-area">
 							<!-- 차트 그리는 부분 -->
-								<div id="morrisChart"></div>
+								<div id="lineChart_01"></div>
 								
-								<div>
-									<select id="yearSelectBox">
-										<option selected>-- 연도 선택 --</option>
-										<option class="yearOption" value="19">2019</option>
-										<option class="yearOption" value="20">2020</option>
-										<option class="yearOption" value="21">2021</option>
-									</select>
-								</div>
+
 							</div>
 							
 							
@@ -166,38 +151,16 @@
 						<!-- Card Header - Dropdown -->
 						<div
 							class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">Revenue
-								Sources</h6>
-							<div class="dropdown no-arrow">
-								<a class="dropdown-toggle" href="#" role="button"
-									id="dropdownMenuLink" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> <i
-									class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-								</a>
-								<div
-									class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-									aria-labelledby="dropdownMenuLink">
-									<div class="dropdown-header">Dropdown Header:</div>
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</div>
-							</div>
+							<h6 class="m-0 font-weight-bold text-primary" style="font-size:40px;">연령 대별 가입자</h6>
 						</div>
 						<!-- Card Body -->
 						<div class="card-body">
-							<div class="chart-pie pt-4 pb-2">
-								<canvas id="myPieChart"></canvas>
-							</div>
-							<div class="mt-4 text-center small">
-								<span class="mr-2"> <i class="fas fa-circle text-primary"></i>
-									Direct
-								</span> <span class="mr-2"> <i
-									class="fas fa-circle text-success"></i> Social
-								</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-									Referral
-								</span>
+							<div class="chart-area">
+								<!-- 차트 그리는 부분 -->
+								<div id="donutChart_01">
+								
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -216,6 +179,7 @@
 
 </th:block>
 
+
 <th:block layout:fragment="page_css">
 	<link href="/admin/css/adminHome.css" rel="stylesheet">
 	
@@ -224,6 +188,10 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
+		<!-- Custom scripts for all pages-->
+		<!-- navSidebar의 <- 버튼 작동을 위한  js -->
+		<script src="admin/js/sb-admin-2.min.js"></script>
+
 		<!-- Bootstrap core JavaScript-->
 		<script src="admin/vendor/jquery/jquery.min.js"></script>
 		
@@ -234,7 +202,10 @@
 		<!-- 라인 차트를 그리기 위한  js -->
 		<script src="/admin/js/lineChart_01.js"></script>
 		
-		<!--  -->
+		<!-- 도넛 차트를 그리기 위한 js -->
+		<script src="/admin/js/donutChart_01.js"></script>
+		
+		<!-- 원하는 연도의 가입자 수를 보기 위한 js-->
 		<script src="/admin/js/yearSelect.js"></script>
 </th:block>
 

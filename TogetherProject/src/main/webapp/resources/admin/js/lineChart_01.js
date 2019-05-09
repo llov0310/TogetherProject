@@ -18,9 +18,9 @@ $(document).ready(function(){
 			dataType : "json",
 			success : function(data) {
 //				alert("하이 ajax");
-				console.log(data);
-				console.log(data[0].count);
-				console.log(data[0].month);
+//				console.log(data);
+//				console.log(data[0].count);
+//				console.log(data[0].month);
 				
 				for(i=0; i<data.length; i++){
 					monthMemberCnt[i] = {
@@ -33,11 +33,12 @@ $(document).ready(function(){
 				json = JSON.parse(obj);
 
 				new Morris.Line({
-			        element: 'morrisChart',
+			        element: 'lineChart_01',
 				    data: json,
 			        xkey: 'month',
 			        ykeys: ['count'],
-			        labels: ['value']			
+			        labels: ['value'],
+			        resize : true
 				}); // morris차트
 
 			},
@@ -48,4 +49,4 @@ $(document).ready(function(){
 		
 		// ajax 두번 호출 방지를 위해 true로 변경
 		isloaded = true;
-}); // function
+}); // document function

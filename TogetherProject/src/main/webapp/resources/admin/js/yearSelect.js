@@ -16,10 +16,10 @@ $(document).ready(function(){
 	// 연도 선택 시
 	$("#yearSelectBox").on('change',function(){
 		var year = this.value;
-		//console.log(year);
+//		console.log(year);
 		
 		// 기존에 그려진 차트를 지움
-		$("#morrisChart").empty();
+		$("#lineChart_01").empty();
 		
 		
 		$.ajax({
@@ -28,39 +28,42 @@ $(document).ready(function(){
 			dataType : "json",
 			data : {year},
 			success : function(data){
-				console.log(data);
+//				console.log(data);
 //				console.log(data[0].count);
-				console.log("확인"+jQuery.type(data));
+//				console.log("확인"+jQuery.type(data));
+//				console.log("길이 체크1 : " + data.length);
+				
 				
 				if(data.length == 0){
-					console.log("값이 없음");
-					
+//					console.log("값이 없음");
 					var noData = "";
 					noData = "<div>데이터가 존재하지 않습니다.</div>";
 					
-					$("#morrisChart").append(noData);
+					$("#lineChart_01").append(noData);
 				}else{
-					
-				}
-				
-				for(i=0; i<data.length; i++){
-					monthMemberCnt[i] = {
-						month : data[i].month,
-						count : data[i].count
+					for(i=0; i<data.length; i++){
+						monthMemberCnt[i] = {
+							month : data[i].month,
+							count : data[i].count
+						}
 					}
+					
+					//파싱 해줘야함
+					var obj = JSON.stringify(monthMemberCnt);
+					json = JSON.parse(obj);
+
+						new Morris.Line({
+							element: 'lineChart_01',
+							data: json,
+							xkey: 'month',
+							ykeys: ['count'],
+							labels: ['value'],
+							resize : true
+						}); // morris차트
+					
+					//변수 초기화
+					monthMemberCnt = [];
 				}
-				//파싱 해줘야함
-
-				var obj = JSON.stringify(monthMemberCnt);
-				json = JSON.parse(obj);
-
-					new Morris.Line({
-						element: 'morrisChart',
-						data: json,
-						xkey: 'month',
-						ykeys: ['count'],
-						labels: ['value']			
-					}); // morris차트
 				
 			},
 			error : function(){

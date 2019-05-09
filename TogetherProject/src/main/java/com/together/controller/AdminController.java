@@ -32,44 +32,22 @@ public class AdminController {
 		int memberCnt = adminService.memberCnt(); // 총 회원수를 담기 위한 변수 선언
 		int etpApplyCnt = adminService.etpApplyCnt(); // 총 업체 신청를 담기 위한 변수 선언
 		int dogsCnt = adminService.dogsCnt();// 반려견 수를 담기 위한 변수 선언
-
+		int etpCnt = adminService.etpCnt(); // 등록 된 업체 수를 담기 위한 변수 선언
+		
 		System.out.println(memberCnt + "멤버수 : 어드민 컨트롤러");
 		System.out.println(etpApplyCnt + "업체 신청 수 : 어드민 컨트롤러");
 		System.out.println(dogsCnt + "반려견 수 : 어드민 컨트롤러");
-
+		System.out.println(etpCnt + "반려견 수 : 어드민 컨트롤러");
+		
 		model.addAttribute("etpApplyCnt", etpApplyCnt);
 		model.addAttribute("memberCnt", memberCnt);
 		model.addAttribute("dogsCnt", dogsCnt);
+		model.addAttribute("etpCnt", etpCnt);
 		
 		System.out.println("어드민 컨트롤러");
 		   return "admin/adminHome";
 	   }
-   
-	   // Morrisjs 차트 사용 (라인 차트 : 연도별 가입자 수를 나타냄)
-	   @ResponseBody
-	   @RequestMapping(value = "/lineChart_01", method = RequestMethod.POST)
-		public ArrayList<MemberVO> monthMemberCnt(){
-			Date today = new Date(); // 현재 일시를 받아옴 
-			SimpleDateFormat date = new SimpleDateFormat("yyyy"); // 날짜 포맷을 yyyy로 변경 함
-			String subStrYear = date.format(today); // yyyy 포맷으로 저장된 today를 year 변수에 담는다
-			subStrYear = subStrYear.substring(2);
-			String year = subStrYear;
-			System.out.println("현재 연도 : " + year);
-			
-			System.out.println("로그인 Json 컨트롤러");
-			return adminService.monthMemberCnt(year);
-		}
-	   
-	   @ResponseBody
-	   @RequestMapping(value="/yearSelectChart", method=RequestMethod.POST)
-	   public ArrayList<MemberVO> monthMemberCnt(@RequestParam String year){
-		   
-		   System.out.println(year);
-		   
-		   return adminService.monthMemberCnt(year);
-	   }
-	   
-	   
+
 	   // 회원관리 페이징 맵핑 (페이징 적용)
 	   @RequestMapping(value = "/memberManage" + "/{num}", method = RequestMethod.GET)
 	   public String memberManage(@PathVariable String num, Model model, HttpSession session) {
@@ -217,5 +195,39 @@ public class AdminController {
 		   
 		   return "admin/dogsManage";
 	   }
+	   
+	   // 라인 차트 : 연도별 가입자 수를 나타냄 -  Morrisjs 차트 사용
+	   @ResponseBody
+	   @RequestMapping(value = "/lineChart_01", method = RequestMethod.POST)
+		public ArrayList<MemberVO> monthMemberCnt(){
+			Date today = new Date(); // 현재 일시를 받아옴 
+			SimpleDateFormat date = new SimpleDateFormat("yyyy"); // 날짜 포맷을 yyyy로 변경 함
+			String subStrYear = date.format(today); // yyyy 포맷으로 저장된 today를 year 변수에 담는다
+			subStrYear = subStrYear.substring(2);
+			String year = subStrYear;
+//			System.out.println("현재 연도 : " + year);
+			
+//			System.out.println("로그인 Json 컨트롤러");
+			return adminService.monthMemberCnt(year);
+		}
+	   
+	   // 라인 차트 : 원하는 연도의 가입자 수를 보기 위해 선언
+	   @ResponseBody
+	   @RequestMapping(value="/yearSelectChart", method=RequestMethod.POST)
+	   public ArrayList<MemberVO> monthMemberCnt(@RequestParam String year){
+		   
+		   System.out.println(year);
+		   
+		   return adminService.monthMemberCnt(year);
+	   }
+	   
+	   // 도넛 차트 : 연령대별 가입자 수를 나타냄
+	   @ResponseBody
+	   @RequestMapping(value = "/donutChart_01", method = RequestMethod.POST)
+	   public ArrayList<MemberVO> memberAge(){
+
+		   return adminService.memberAge();
+	   }
+	   
 
 }

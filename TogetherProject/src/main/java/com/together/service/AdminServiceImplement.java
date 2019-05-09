@@ -79,6 +79,13 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.dogsCnt();
 	}
+	
+	// 관리자 홈페이지 : 등록 된 업체 수를 가져오는 함수 추가
+	@Override
+	public int etpCnt() {
+		// TODO Auto-generated method stub
+		return mapper.etpCnt();
+	}
 
 	// 관리자 홈페이지 : 차트 사용을 위한 함수 추가
 	@Override
@@ -86,6 +93,14 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.monthMemberCnt(year);
 	}
+
+	// 관리자 홈페이지 : 도넛 차트를 그리기 위해 회원 생년월일 + 숫자를 가져오는 함수 추가
+	@Override
+	public ArrayList<MemberVO> memberAge() {
+		// TODO Auto-generated method stub
+		return mapper.memberAge();
+	}
+	
 
 
 }
