@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script>
+	
+/* 	var _tempUrl = window.location.search.substring(1);
+	var _tempArray = _tempUrl.split('&');
+	var aa = decodeURIComponent(_tempUrl);
+	console.log(aa); */
+	function getQuerystring(paramName){ 
+		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
+		var _tempUrl1 =decodeURIComponent(_tempUrl);	
+				var _tempArray = _tempUrl1.split('&'); // '&'을 기준으로 분리하기 
+				for(var i = 0; _tempArray.length; i++) {
+					var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기 
+					if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명 // _keyValuePair[1] : 파라미터 값
+	
+						return _keyValuePair[1]; 
+					
+					} 
+	
+					} 
+				
+				}
+	$(document).ready(function() {
+        $('#dname').text(getQuerystring('d_nm'));
+        $('#age').val(getQuerystring('d_age'));
+        $('#kind').val(getQuerystring('d_kind'));
+        $('#gender').val(getQuerystring('d_gender'));
+        if(getQuerystring('d_gender')!="수컷"){
+        	console.log(getQuerystring('d_gender'));
+        	$("input:radio[name='gender']").prop("checked", true); 
+        }else{
+        	$("input:radio[name='gender']:radio[value='1']").prop("checked", true);
+        }
+    });
+	console.log(getQuerystring('d_nm'));
+	console.log(getQuerystring('d_gender'));
+	console.log(getQuerystring('d_age'));
+
+	$(document).ready(function() {
+		$("#petupdata").click(function() {
+			var d_nm = $("#dname").text();
+			var d_gender = $('input[name="gender"]:checked').val();
+			var d_age = $("#age").val();
+			var d_kind = $("#kind").val();
+			var d_content = $("#content").val();
+			
+			
+		 	$.ajax({
+				url : "/pet_info_up",
+				type : "POST",
+				dataType : 'text',
+				data : {
+					d_nm : d_nm,
+					d_gender : d_gender,
+					d_age : d_age,
+					d_kind : d_kind,
+					d_content : d_content
+				},
+				success : function(data) {
+					alert("등록완료");
+					close();				
+					}
+				});   
+			
+		});
+	});
+	</script>
+
+<title>애견 정보 변경</title>
+</head>
+<body>
+<div>
+<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
+애견이름:<span id="dname"><br></span><br>
+
+성별 <br>
+<input type="radio" name="gender" value="1">수컷
+<input type="radio" name="gender" value="2">암컷
+<br>
+나이<input type="text" id="age"><br>
+품종<input type="text" id="kind"><br>
+코멘트<br>
+<textarea style="resize: none" rows="5" cols="25" id="content" ></textarea>
+</div>
+<button id="petupdata">변경하기</button>
+</body>
+</html>

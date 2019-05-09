@@ -1,25 +1,76 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/serviceLayout">
+<html>
+<head>
+<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<title>Insert title here</title>
+<style type="text/css">
+table.type11 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px 10px;
+}
+table.type11 th {
+    width: 155px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #ce4869 ;
+}
+table.type11 td {
+    width: 155px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+}
+</style>
+</head>
 
-<th:block layout:fragment="page_head">
-	<title>서비스 메뉴에 오신것을 환영합니다.</title>
-</th:block>
-
-<th:block layout:fragment="page_css">
-	
-</th:block>
-
-<th:block layout:fragment="page_js">
-
-</th:block>
-
-<th:block layout:fragment="contents">
-	<div>
-		<h2>강아지 정보</h2>
-	</div>
-	<div>크르르릉크크킁컹ㅋ컹 멍머</div>
-
-</th:block>
+<body>
+<button>내 작성글</button>
+<button>내가쓴 댓글보기</button>
+<table class="type11">
+    <thead>
+    <tr>
+        <th scope="cols">체크박스</th>
+        <th scope="cols">제목</th>
+        <th scope="cols">작성일</th>
+        <th scope="cols">삭제/수정</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+    </tr>
+    <tr>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+    </tr>
+    <tr>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+    </tr>
+     <tr>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+        <td>내용</th>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

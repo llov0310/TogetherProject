@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
+import com.together.domain.OrdersVO;
+import com.together.domain.PostVO;
 import com.together.service.MypageService;
 
 import lombok.AllArgsConstructor;
@@ -110,21 +112,65 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "/petinfo_up", method = RequestMethod.GET)
-	public String petinfo_up(Model model) {
+	public String petinfo_up(Model model){
+		
+		/* model.addAttribute("d_nm", d_nm); */
 		return "nav/mypage/petinfo_up";
 	}
 	
+	@RequestMapping(value = "/pet_info_up", method = RequestMethod.POST)
+	@ResponseBody
+	public String pet_info_up(Model model, HttpSession session, HttpServletRequest request,
+			@RequestParam String d_nm,@RequestParam int d_gender,@RequestParam String d_kind,@RequestParam String d_content,@RequestParam String d_age) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		
+		  System.out.println(user_id+"개주인");
+		  System.out.println(d_nm+"개이름");
+		  System.out.println(d_gender+"개성별");
+		  System.out.println(d_kind+"품종");
+		  System.out.println(d_age+"나이");
+		  System.out.println(d_content+"설명");
+		  System.out.println("개정보 변경");
+	  Integer petup = mypage.petup(user_id, d_nm, d_gender, d_kind, d_content,d_age);
+		return "success";
+	}
+	
+	
 	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)
-	public String myreservation(Model model) {
+	public String myreservation(Model model, HttpSession session, HttpServletRequest request) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
+		 order_list = mypage.orderlist(user_id);
+		System.out.println(order_list);
+		
+		  model.addAttribute("order_list", order_list);
 		return "nav/mypage/myreservation";
 
 	}
-
+	
+//	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)
+//	public String myreservation(Model model) {
+//		return "nav/mypage/myreservation";
+//
+//	}
+	
 	@RequestMapping(value = "/mypost", method = RequestMethod.GET)
-	public String mypost(Model model) {
+	public String mypost(Model model, HttpSession session, HttpServletRequest request) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		 ArrayList<PostVO> post_list = new ArrayList<PostVO>(); 
+//		 post_list = mypage.postlist(user_id);
+		System.out.println("뜸?");
+		
+//		  model.addAttribute("order_list", order_list);
 		return "nav/mypage/mypost";
 
 	}
+	
+//	@RequestMapping(value = "/mypost", method = RequestMethod.GET)
+//	public String mypost(Model model) {
+//		return "nav/mypage/mypost";
+//
+//	}
 
 	@RequestMapping(value = "/deleteaccount", method = RequestMethod.GET)
 	public String DeleteAccount(Model model) {

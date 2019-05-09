@@ -19,9 +19,16 @@
 	
 	$(document).ready(function() {
 		$(".updog").click(function() {
-			window.open("/petinfo_up", "newpass","width=500,height=500,left=600, top=250" );
+			var d_nm = $(this).parent().parent().find('.dname').find('span').text();
+			var d_kind = $(this).parent().parent().find('.dkind').find('span').text();
+			var d_age = $(this).parent().parent().find('.dage').find('span').text();
+			var d_gender = $(this).parent().parent().find('.dgender').find('span').text();
+	      
+			console.log(d_gender);
+			window.open("/petinfo_up?d_nm="+d_nm+"&d_kind="+d_kind+"&d_age="+d_age+"&d_gender="+d_gender,"_blank","toolbar=yes,menubar=yes,newpass,width=500,height=500,left=600, top=250" );
 				});
-	});
+	}); 
+
 	
  	$(document).ready(function() {
 		$(".deldog").click(function() {
@@ -80,11 +87,11 @@
 	</div>
 	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
 	<br>개정보<br>
-	<div class="dname">이름:<span th:text="${pet.d_nm}" id="dognm"></span></div>
-	<div>품종:<span th:text="${pet.d_kind}"> </span></div>
-	<div><span th:if="${pet.d_gender}==1">성별:수컷</span></div>
-	<div><span th:if="${pet.d_gender}==2">성별:암컷</span></div>
-	<div>나이<span th:text="${pet.d_age}"></span></div>
+	<div class="dname">이름:<span th:text="${pet.d_nm}" class="dognm"></span></div>
+	<div class="dkind">품종:<span th:text="${pet.d_kind}"> </span></div>
+	<div class="dgender"><span th:if="${pet.d_gender}==1">수컷</span></div>
+	<div class="dgender"><span th:if="${pet.d_gender}==2">암컷</span></div>
+	<div class="dage">나이<span th:text="${pet.d_age}"></span></div>
 	<div>인사말<br><span th:text="${pet.d_content}"></span></div>
 	</div>
  </th:each>

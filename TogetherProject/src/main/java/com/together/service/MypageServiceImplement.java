@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
-
+import com.together.domain.OrdersVO;
 import com.together.mapper.MypageMapper;
 
 import lombok.AllArgsConstructor;
@@ -62,6 +62,20 @@ public class MypageServiceImplement implements MypageService {
 	public Integer petdelete(String user_id, String d_nm) {
 		// TODO Auto-generated method stub
 		return myMapper.petdelete(user_id,d_nm);
+	}
+
+
+	@Override
+	public Integer petup(String user_id, String d_nm, int d_gender, String d_kind, String d_content, String d_age) {
+		// TODO Auto-generated method stub
+		return myMapper.petup(user_id,d_nm,d_gender,d_kind,d_content, d_age);
+	}
+
+
+	@Override
+	public ArrayList<OrdersVO> orderlist(String user_id) {
+		// TODO Auto-generated method stub
+		return myMapper.orderlist(user_id);
 	}
 
 	 

@@ -2,9 +2,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+table.type11 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px 10px;
+}
+table.type11 th {
+    width: 155px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #ce4869 ;
+}
+table.type11 td {
+    width: 155px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+}
+</style>
 </head>
+
 <body>
-예약예약
+<table class="type11">
+    <thead>
+    <tr>
+        <th scope="cols">주문코드</th>
+        <th scope="cols">상품</th>
+        <th scope="cols">주문일시</th>
+        <th scope="cols">삭제</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    
+    <tr th:each="order_list : ${order_list}">
+        <td><span th:text="${order_list.or_cd}"></span></th>
+        <td><span th:text="${order_list.pd_cd}"></span></th>
+        <td><span th:text="${order_list.or_dt}"></span></th>
+        <td><button>삭제</button></th>
+    </tr>
+    </th:each>
+  
+    </tbody>
+</table>
 </body>
 </html>

@@ -10,5 +10,18 @@
 	
 	 });
 	 
+	 $("#cc").click(function() {
+		 $("#content").load("/myreservation" );
 	
+	 });
+	
+	 $("#dd").click(function() {
+		 $("#content").load("/mypost" );
+	
+	 });
+	 
+	 $("#ff").click(function() {
+		 $("#content").load("/deleteaccount" );
+	
+	 });
 });  

@@ -45,5 +45,27 @@
 	
 	<delete id="petdelete" parameterType="com.together.domain.DogsVO">
 		delete from dogs where d_nm = #{d_nm} and user_id = #{user_id}
-	</delete>   
+	</delete>  
+	
+	 	<update id="petup" parameterType="com.together.domain.DogsVO">
+		update dogs set 
+		d_age = #{d_age},
+		d_gender = #{d_gender},
+		d_kind = #{d_kind},
+		d_content = #{d_content}
+		where user_id = #{user_id} and d_nm = #{d_nm}
+	</update> 
+	
+	 <select id="orderlist" resultType="com.together.domain.OrdersVO">
+		select * from orders where user_id = #{user_id}
+	</select>
+	
+	<!--  <select id="postlist" resultType="com.together.domain.PostVO">
+		select * from post where user_id = #{user_id}
+	</select>
+	
+	 <select id="postlist" resultType="com.together.domain.PostVO">
+		select * from post where user_id = #{user_id}
+	</select> -->
+	
 </mapper>
