@@ -52,6 +52,8 @@ public interface CustomerMapper {
 			@Param("pd_price") int pd_price, 
 			@Param("pd_content") String pd_content);
 
+	public ArrayList<EnterpriseVO> getList(String code);
+
 	
 	
 	

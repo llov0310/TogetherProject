@@ -113,6 +113,15 @@ public class CustomerServiceImplement implements CustomerService {
 
 
 	
+	//상품목록조회
+	@Override
+	public ArrayList<EnterpriseVO> getList(String code) {
+		// TODO Auto-generated method stub
+		return mapper.getList(code);
+	}
+
+
+	
 
 
 

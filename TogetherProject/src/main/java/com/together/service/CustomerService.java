@@ -35,6 +35,8 @@ public interface CustomerService {
 
 	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content);
 
+	public ArrayList<EnterpriseVO> getList(String code); //상품목록 조회
+
 	
 	
 }

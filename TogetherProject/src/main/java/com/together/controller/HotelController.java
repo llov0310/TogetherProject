@@ -42,13 +42,16 @@ public class HotelController {
 		@ResponseBody
 		public String hotel_info(Model model, HttpSession session, @RequestParam String test) {
 			
-			ArrayList<EnterpriseVO> hotel_info = new ArrayList<EnterpriseVO>();
+			ArrayList<EnterpriseVO> hotel_info = HotelService.info(test);
+			ArrayList<EnterpriseVO> hotel_product = new ArrayList<EnterpriseVO>();
 			
-			System.out.println(test);
+			String code = hotel_info.get(0).getEtp_cd();
 			
-			hotel_info = HotelService.info(test);
-
-			model.addAttribute("m_info", hotel_info);
+			hotel_product = HotelService.getList(code);
+			
+			
+//			model.addAttribute("m_info", hotel_info);
+			session.setAttribute("product", hotel_product);
 			session.setAttribute("info", hotel_info);
 			
 		   return "success";

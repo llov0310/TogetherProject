@@ -38,7 +38,7 @@
 	
 	
 	<select id="info" resultType="com.together.domain.EnterpriseVO">
-		select * from enterprise a, enterprise_info  b, member c 
+		select * from enterprise a, enterprise_info  b, member c
 		where a.etp_cd = b.etp_cd and c.user_id = a.user_id and b.etp_cd = #{test}
 	</select>
 	
@@ -85,5 +85,9 @@
 	<insert id="insert_product" parameterType="com.together.domain.ProductVO">
 		insert into product values (PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},null)
 	</insert>
+	
+	<select id="getList" resultType="com.together.domain.ProductVO">
+		select * from product where etp_cd = #{code}
+	</select>
 	
 </mapper>
