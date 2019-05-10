@@ -51,7 +51,7 @@ $(document).ready(function(){
 		
 		/*pagination*/
 		   var num = 0;
-
+		   
 		   var newURL =  window.location.pathname;
 
 		   var url = newURL.split('/');
@@ -61,6 +61,7 @@ $(document).ready(function(){
 		   }
 
 		   $('.pagination-inner a').on('click', function() {
+			  
 		      var a = $(".pagination-inner a").index(this);
 		      num = a;
 		      window.location.href = "/enterpriseManage/"+(num+1);
@@ -74,9 +75,6 @@ $(document).ready(function(){
 		   });
 
 		   $('.pagination-older').click(function(){
-		      if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-		         window.location.href = "/enterpriseManage/"+(parseInt(url[2]));
-		      else
 		         window.location.href = "/enterpriseManage/"+(parseInt(url[2])+1);
 		   });
 }); 

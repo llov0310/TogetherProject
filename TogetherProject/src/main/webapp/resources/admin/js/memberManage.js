@@ -24,9 +24,6 @@ $(document).ready(function(){
 	   });
 
 	   $('.pagination-older').click(function(){
-	      if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-	         window.location.href = "/memberManage/"+(parseInt(url[2]));
-	      else
 	         window.location.href = "/memberManage/"+(parseInt(url[2])+1);
 	   });
 });

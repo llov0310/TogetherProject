@@ -12,15 +12,21 @@ import com.together.domain.Paging;
 
 public interface AdminMapper {
 
-   // 업체 신청 수락을 위한 함수 추가
+   // 업체 신청 수락을 위한 함수 맵핑
    public int etpApplyManage_01(@Param("user_id") String user_id);
    
-   // 업체 신청 거절을 위한 함수 추가
+   // 업체 신청 거절을 위한 함수 맵핑
    public int etpApplyManage_02(@Param("user_id") String user_id);
    
-   // 페이징에 필요한 함수 맵핑
-   public int getPageNum();
+   // 회원관리 페이지 넘버를 계산하기 위해 사용하는 함수 맵핑
+   public int memberPageNum();
    
+   // 반려견 관리 페이지 넘버를 계산하기 위해 사용하는  함수 맵핑
+   public int dogsPageNum();
+   
+   // 업체 신청 관리 페이지 넘버를 계산하기 위해 사용하는 함수 맵핑
+   public int etpPageNum();
+
    // 회원 정보를 가져오는 함수 맵핑 (페이징)
    public ArrayList<MemberVO> memberList(Paging p);
    
@@ -28,7 +34,7 @@ public interface AdminMapper {
    public ArrayList<DogsVO> dogsList(Paging p);
    
    // 업체 정보를 가져오는 함수 맵핑 (페이징)
-   public ArrayList<EnterpriseVO> enterpriseList(Paging p);
+   public ArrayList<EnterpriseVO> enterpriseManage(Paging p);
    
    // 관리자 홈페이지 : 회원수를 가져오는 함수 맵핑
    public int memberCnt();

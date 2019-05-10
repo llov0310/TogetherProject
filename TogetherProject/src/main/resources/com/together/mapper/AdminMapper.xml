@@ -81,7 +81,7 @@
 	</select>
 	
 	<!-- 업체 신청 관리 페이징을 위한 sql문 추가 -->
-	<select id="enterpriseList" resultType="com.together.domain.EnterpriseVO" parameterType="com.together.domain.Paging">
+	<select id="enterpriseManage" resultType="com.together.domain.EnterpriseVO" parameterType="com.together.domain.Paging">
 	<![CDATA[
 	select x.rnum, x.*
 	from(
@@ -138,7 +138,24 @@
 	]]>
 	</select>
 	
-	<select id="getPageNum" resultType="int">
+	<!-- 회원관리 페이지 넘버를 계산하기 위해 사용하는 sql문 -->
+	<select id="memberPageNum" resultType="int">
 		select count(*) from member
 	</select>
+	
+	<!-- 반려견 관리 페이지 넘버를 계산하기 위해 사용하는 sql문 -->
+	<select id="dogsPageNum" resultType="int">
+		select count(*) from dogs
+	</select>
+	
+	<!-- 업체 신청 관리 페이지 넘버를 계산하기 위해 사용하는 sql문 -->
+	<select id="etpPageNum" resultType="int">
+	<![CDATA[
+	select count(*)
+	from member m, enterprise e
+	where m.user_id = e.user_id and m.authority_no = 3
+	]]>
+	</select>
+	
+	
 </mapper>

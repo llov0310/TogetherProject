@@ -9,20 +9,12 @@
 	<div class="container-fluid">
 		
 		<!-- Page Heading -->
-		<h1 class="h3 mb-2 text-gray-800">업체 신청 관리</h1>
-		<p class="mb-4">
-			DataTables is a third party plugin that is used to generate the demo
-			table below. For more information about DataTables, please visit the
-			<a target="_blank" href="https://datatables.net">official
-				DataTables documentation</a>.
-		</p>
-		
+		<h1 class="h3 mb-2 text-gray-800"></h1>
 
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">DataTables
-					Example</h6>
+				<h1 class="m-0 font-weight-bold text-primary">업체 신청 관리</h1>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -49,22 +41,22 @@
 									<th>업체 소개</th>
 								</tr>
 							</thead>
-							<tbody th:each="etpList : ${enterpriseList}">
+							<tbody th:each="etpManage : ${enterpriseManage}">
 								<tr>
-									<td><input type="checkbox" th:value="${etpList.user_id}" name="user_id"></td>
+									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
-									<td th:if="${etpList.etp_cd_substr == 'h'}">호텔</td>
-									<td th:if="${etpList.etp_cd_substr == 'f'}">장례</td>
+									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td>
+									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td>
 									
-									<td th:text="${etpList.user_id}"></td>					
-									<td th:text="${etpList.user_nm}"></td>
-									<td th:text="${etpList.etp_email}"></td>
-									<td th:text="${etpList.etp_ph_no}"></td>
-									<td th:text="${etpList.etp_addr}"></td>
-									<td th:text="${etpList.etp_license_no}"></td>
-									<td th:text="${etpList.etp_nm}"></td>
-									<td th:text="${etpList.etp_content}"></td>
+									<td th:text="${etpManage.user_id}"></td>					
+									<td th:text="${etpManage.user_nm}"></td>
+									<td th:text="${etpManage.etp_email}"></td>
+									<td th:text="${etpManage.etp_ph_no}"></td>
+									<td th:text="${etpManage.etp_addr}"></td>
+									<td th:text="${etpManage.etp_license_no}"></td>
+									<td th:text="${etpManage.etp_nm}"></td>
+									<td th:text="${etpManage.etp_content}"></td>
 								</tr>
 							</tbody>
 						</table>

@@ -3,6 +3,8 @@ package com.together.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,17 +36,16 @@ public class AdminController {
 		int dogsCnt = adminService.dogsCnt();// 반려견 수를 담기 위한 변수 선언
 		int etpCnt = adminService.etpCnt(); // 등록 된 업체 수를 담기 위한 변수 선언
 		
-		System.out.println(memberCnt + "멤버수 : 어드민 컨트롤러");
-		System.out.println(etpApplyCnt + "업체 신청 수 : 어드민 컨트롤러");
-		System.out.println(dogsCnt + "반려견 수 : 어드민 컨트롤러");
-		System.out.println(etpCnt + "반려견 수 : 어드민 컨트롤러");
+//		System.out.println(memberCnt + "멤버수 : 어드민 컨트롤러");
+//		System.out.println(etpApplyCnt + "업체 신청 수 : 어드민 컨트롤러");
+//		System.out.println(dogsCnt + "반려견 수 : 어드민 컨트롤러");
+//		System.out.println(etpCnt + "반려견 수 : 어드민 컨트롤러");
 		
 		model.addAttribute("etpApplyCnt", etpApplyCnt);
 		model.addAttribute("memberCnt", memberCnt);
 		model.addAttribute("dogsCnt", dogsCnt);
 		model.addAttribute("etpCnt", etpCnt);
-		
-		System.out.println("어드민 컨트롤러");
+
 		   return "admin/adminHome";
 	   }
 
@@ -56,7 +57,13 @@ public class AdminController {
 		   int pageNum = 0;
 		   ArrayList<Integer> arr = new ArrayList<Integer>();
 		   int realNum = Integer.parseInt(num);
-		   page.setTotalNum(adminService.getPageNum());
+		   page.setTotalNum(adminService.memberPageNum());
+		   
+		   //추가내용
+		   Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		   int mapNum=0;
+		   int sendPageNum=0;
+		   
 		   
 		   //OnePageBorad => 한 페이지에 보여줄 멤버(글) 수
 		   if(page.getTotalNum() <= page.getOnePageBoard()) { // totalnum이 10보다 작으면 pageNum을 1로 설정
@@ -69,56 +76,114 @@ public class AdminController {
 			   }
 		   } 
 		   
-		   // for문으로 pageNum만큼 arr에 
-		   // arr[0] = 1, arr[1] = 2, arr[2] = 3 을 저장
-		   for(int i=0; i<pageNum; i++) {
-			   arr.add(i+1);
-		   }
+		   //추가내용
+		   if(pageNum%5 != 0) {
+		         mapNum=pageNum/5+1;
+		      }else {
+		         mapNum=pageNum/5;
+		      }
+
+		      for(int i=0; i<mapNum; i++) {
+		         arr = new ArrayList<Integer>();
+		         for(int j=0; j<5; j++) {
+		            
+		            if((i*5)+j+1 > pageNum) {
+		               break;
+		            }
+		            
+		            arr.add((i*5)+j+1);
+		         }
+		         map.put(i,arr);
+		      }
+
+		      sendPageNum = (realNum-1)/5;
+		   
+		   
 		   
 		   page.setEndNum((realNum*10) +1);
 		   page.setStartNum(page.getEndNum()-10);
 		   
-		   //
-		   model.addAttribute("pageNum", arr);
+		   //추가내용
+		   model.addAttribute("pageNum", map.get(sendPageNum));
 		   model.addAttribute("memberList", adminService.memberList(page));
+		   
+		   //추가내용
+		   
+		   if(realNum > pageNum) {
+		         System.out.println("pageNum : " + pageNum);
+		         return "redirect:/memberManage/" + pageNum;
+		      }
+		   
+		   
 		   return "admin/memberManage";
 	   }
 	   
-	   //업체 관리 페이지 맵핑 및 업체 업체 목록 보여줌
-	   @RequestMapping(value = "/enterpriseManage" + "/{num}", method=RequestMethod.GET)
-	   public String enterpriseManage(@PathVariable String num, Model model, HttpSession session) {
-		   
-		   Paging page = new Paging();
-		   int pageNum = 0;
-		   ArrayList<Integer> arr = new ArrayList<Integer>();
-		   int realNum = Integer.parseInt(num);
-		   page.setTotalNum(adminService.getPageNum());
-		   
-		   //OnePageBorad => 한 페이지에 보여줄 멤버(글) 수
-		   if(page.getTotalNum() <= page.getOnePageBoard()) { // totalnum이 10보다 작으면 pageNum을 1로 설정
-			   pageNum = 1;
-		   }else { // totalnum이 더 클 경우
-			   pageNum = page.getTotalNum() / page.getOnePageBoard(); //totalnum / 10
-			   															// ex) 21/ 10 = 2가 pageNum에 들어감
-			   if(page.getTotalNum() %page.getOnePageBoard() > 0 ) {	// 그리고 21 % 10 나머지 1이 0보다 크기때문에 pageNum에 2+1=3이 들어감
-				   pageNum = pageNum + 1;
-			   }
-		   } 
-		   
-		   // for문으로 pageNum만큼 arr에 
-		   // arr[0] = 1, arr[1] = 2, arr[2] = 3 을 저장
-		   for(int i=0; i<pageNum; i++) {
-			   arr.add(i+1);
-		   }
-		   
-		   page.setEndNum((realNum*10) +1);
-		   page.setStartNum(page.getEndNum()-10);
-		   
-		   //
-		   model.addAttribute("pageNum", arr);
-		   model.addAttribute("enterpriseList", adminService.enterpriseList(page));
-		   return "admin/enterpriseManage";
-	   }
+	// 업체 관리 페이지 (페이징)
+	@RequestMapping(value = "/enterpriseManage" + "/{num}", method = RequestMethod.GET)
+	public String enterpriseManage(@PathVariable String num, Model model, HttpSession session) {
+		Paging page = new Paging();
+		int pageNum = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		page.setTotalNum(adminService.etpPageNum());
+		// 추가내용
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+		int mapNum = 0;
+		int sendPageNum = 0;
+
+		
+		// OnePageBorad => 한 페이지에 보여줄 멤버(글) 수
+		if (page.getTotalNum() <= page.getOnePageBoard()) { // totalnum이 10보다 작으면 pageNum을 1로 설정
+			pageNum = 1;
+		} else { // totalnum이 더 클 경우
+			pageNum = page.getTotalNum() / page.getOnePageBoard(); // totalnum / 10
+																	// ex) 21/ 10 = 2가 pageNum에 들어감
+			if (page.getTotalNum() % page.getOnePageBoard() > 0) { // 그리고 21 % 10 나머지 1이 0보다 크기때문에 pageNum에 2+1=3이 들어감
+				pageNum = pageNum + 1;
+			}
+		}
+
+		
+		// 추가내용
+		if (pageNum % 5 != 0) {
+			mapNum = pageNum / 5 + 1;
+		} else {
+			mapNum = pageNum / 5;
+		}
+
+		for (int i = 0; i < mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for (int j = 0; j < 5; j++) {
+
+				if ((i * 5) + j + 1 > pageNum) {
+					break;
+				}
+
+				arr.add((i * 5) + j + 1);
+			}
+			map.put(i, arr);
+		}
+
+		sendPageNum = (realNum - 1) / 5;
+
+		page.setEndNum((realNum * 10) + 1);
+		page.setStartNum(page.getEndNum() - 10);
+
+		// model.addAttribute("pageNum", map.get(sendPageNum));
+
+		model.addAttribute("pageNum", map.get(sendPageNum));
+		model.addAttribute("enterpriseManage", adminService.enterpriseManage(page));
+
+		// 추가내용
+
+		if (realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/enterpriseManage/" + pageNum;
+		}
+		
+		
+		return "admin/enterpriseManage";
+	}
 	   
 	   //업체 신청 수락 및 거절 맵핑
 	   @RequestMapping(value = "/etpApplyManage", method=RequestMethod.POST)
@@ -169,8 +234,12 @@ public class AdminController {
 		   int pageNum = 0;
 		   ArrayList<Integer> arr = new ArrayList<Integer>();
 		   int realNum = Integer.parseInt(num);
-		   page.setTotalNum(adminService.getPageNum());
-		   
+		   page.setTotalNum(adminService.dogsPageNum());
+		   // 추가내용
+		   Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+		   int mapNum = 0;
+		   int sendPageNum = 0;
+		     
 		   if(page.getTotalNum() <= page.getOnePageBoard()) {
 			   pageNum = 1;
 		   }else {
@@ -180,18 +249,46 @@ public class AdminController {
 			   }
 		   }
 		   
-		   //for 문으로 pageNum만큼 arr에
-		   //arr[i] 저장
-		   for(int i=0; i<pageNum; i++) {
-			   arr.add(i+1);
-		   }
+		// 추가내용
+		if (pageNum % 5 != 0) {
+			mapNum = pageNum / 5 + 1;
+		} else {
+			mapNum = pageNum / 5;
+		}
+
+		for (int i = 0; i < mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for (int j = 0; j < 5; j++) {
+
+				if ((i * 5) + j + 1 > pageNum) {
+					break;
+				}
+
+				arr.add((i * 5) + j + 1);
+			}
+			map.put(i, arr);
+		}
+
+		sendPageNum = (realNum - 1) / 5;
+		   
+		   
+
 		   
 		   page.setEndNum((realNum*10) + 1);
 		   page.setStartNum(page.getEndNum() - 10);
 		   
-		   model.addAttribute("pageNum", arr);
+		   model.addAttribute("pageNum", map.get(sendPageNum));
 		   //sql 쿼리문
 		   model.addAttribute("dogsList", adminService.dogsList(page));
+		   
+		   // 추가내용
+
+			if (realNum > pageNum) {
+				System.out.println("pageNum : " + pageNum);
+				return "redirect:/enterpriseManage/" + pageNum;
+			}
+		   
+		   
 		   
 		   return "admin/dogsManage";
 	   }

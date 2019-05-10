@@ -31,12 +31,26 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.etpApplyManage_02(user_id);
 	}
 
-	// 페이징에 필요한 함수 선언
+	// 회원관리 페이지 넘버를 계산하기 위해 사용하는 함수 선언 (페이징)
 	@Override
-	public int getPageNum() {
+	public int memberPageNum() {
 		// TODO Auto-generated method stub
-		return mapper.getPageNum();
+		return mapper.memberPageNum();
 	}
+	
+	// 반려견 관리 페이지 넘버를 계산하기 위해 사용하는  함수 선언 (페이징)
+	@Override
+	public int dogsPageNum() {
+		// TODO Auto-generated method stub
+		return mapper.dogsPageNum();
+	}
+	
+	// 업체 신청 관리 페이지 넘버를 계산하기 위해 사용하는 함수 선언 (페이징)
+	@Override
+	public int etpPageNum() {
+		// TODO Auto-generated method stub
+		return mapper.etpPageNum();
+	}	
 	
 	// 회원 정보를 가져오는 함수 (페이징 처리)
 	@Override
@@ -54,9 +68,9 @@ public class AdminServiceImplement implements AdminService {
 
 	// 업체 정보를 가져오는 함수 (페이징 처리)
 	@Override
-	public ArrayList<EnterpriseVO> enterpriseList(Paging p) {
+	public ArrayList<EnterpriseVO> enterpriseManage(Paging p) {
 		// TODO Auto-generated method stub
-		return mapper.enterpriseList(p);
+		return mapper.enterpriseManage(p);
 	}
 
 	// 관리자 홈페이지 : 회원수를 가져오는 함수 추가
@@ -100,7 +114,4 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.memberAge();
 	}
-	
-
-
 }
