@@ -2,6 +2,7 @@ package com.together.mapper;
 
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -9,6 +10,7 @@ import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
+import com.together.domain.Search;
 
 public interface AdminMapper {
 
@@ -54,4 +56,10 @@ public interface AdminMapper {
    // 관리자 홈페이지 : 도넛 차트를 그리기 위해 회원 생년월일 + 숫자를 가져오는 함수 맵핑
    public ArrayList<MemberVO> memberAge();
    
+   // 회원정보 검색을 위한 맵핑
+   public ArrayList<MemberVO> memberSearch(Search s);
+
+   // 검색 결과 맵핑
+   public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
+
 }

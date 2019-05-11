@@ -1,6 +1,7 @@
 package com.together.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
+import com.together.domain.Search;
 import com.together.mapper.AdminMapper;
 import lombok.AllArgsConstructor;
 
@@ -113,5 +115,19 @@ public class AdminServiceImplement implements AdminService {
 	public ArrayList<MemberVO> memberAge() {
 		// TODO Auto-generated method stub
 		return mapper.memberAge();
+	}
+	
+	// 회원정보 검색을 위한 함수 추가
+	@Override
+	public ArrayList<MemberVO> memberSearch(Search s) {
+		// TODO Auto-generated method stub
+		return mapper.memberSearch(s);
+	}
+	
+	// 검색 결과
+	@Override
+	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm) {
+		// TODO Auto-generated method stub
+		return mapper.getSearchResult(parm);
 	}
 }

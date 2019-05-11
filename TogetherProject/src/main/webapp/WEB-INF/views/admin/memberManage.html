@@ -32,7 +32,7 @@
 								<th>회원 분류</th>
 							</tr>
 						</thead>
-						<tbody th:each = "memberList : ${memberList}">
+						<tbody th:if="${memberSearch == null}" th:each = "memberList : ${memberList}">
 							<tr th:switch="${memberList.authority_no}">
 								<td th:text = "${memberList.user_id}"></td>
 								<td th:text = "${memberList.user_nm}"></td>
@@ -46,7 +46,24 @@
 								<td th:case = null>알 수 없음</td>
 							</tr>
 						</tbody>
-					
+						
+						<!-- 검색 할 때 사용 하는 테이블 -->
+						<tbody th:if="${memberSearch != null}" th:each="memberList : ${memberList}">
+							<tr th:switch="${memberList.authority_no}">
+								<td th:text="${memberList.user_id}"></td>
+								<td th:text="${memberList.user_nm}"></td>
+								<td th:text="${memberList.email}"></td>
+								<td th:text="${memberList.ph_no}"></td>
+								<td th:text="${memberList.register_dt}"></td>
+								<td th:text="|${memberList.addr_ji} ${memberList.addr_dong}|"></td>
+								<td th:case="1">관리자</td>
+								<td th:case="2">업체 회원</td>
+								<td th:case="3">회원</td>
+								<td th:case=null>알 수 없음</td>
+							</tr>
+						</tbody>
+
+
 						<tfoot>
 						</tfoot>
 					</table>
@@ -71,7 +88,7 @@
 					<div class="search">
 						<div class="select">
 							<select id="search-select">
-								<option value="name">이름</option>
+								<option value="user_nm">이름</option>
 								<option value="user_id">아이디</option>
 							</select>
 						</div>

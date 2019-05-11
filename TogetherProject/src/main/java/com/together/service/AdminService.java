@@ -1,6 +1,7 @@
 package com.together.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -8,6 +9,7 @@ import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
+import com.together.domain.Search;
 
 public interface AdminService {
 	// 회원관리 페이지 넘버를 계산하기 위해 사용하는 함수 선언
@@ -51,5 +53,11 @@ public interface AdminService {
 
 	// 관리자 홈페이지 : 도넛 차트를 그리기 위해 회원 생년월일 + 숫자를 가져오는 함수 추가
 	public ArrayList<MemberVO> memberAge();
+	
+	// 회원정보 검색을 위한 함수 추가
+	public ArrayList<MemberVO> memberSearch(Search s);
+	
+	// 검색 결과
+	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
 
 }

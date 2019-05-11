@@ -1,5 +1,7 @@
 package com.together.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
+import com.together.domain.Search;
 import com.together.service.AdminService;
 
 import lombok.AllArgsConstructor;
@@ -54,17 +57,15 @@ public class AdminController {
 	   public String memberManage(@PathVariable String num, Model model, HttpSession session) {
 
 		   Paging page = new Paging();
-		   int pageNum = 0;
-		   ArrayList<Integer> arr = new ArrayList<Integer>();
-		   int realNum = Integer.parseInt(num);
-		   page.setTotalNum(adminService.memberPageNum());
-		   
-		   //추가내용
+		   ArrayList<Integer> arr = new ArrayList<Integer>();   
 		   Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		   int pageNum = 0;
 		   int mapNum=0;
 		   int sendPageNum=0;
+		   int realNum = Integer.parseInt(num);
 		   
 		   
+		   page.setTotalNum(adminService.memberPageNum());
 		   //OnePageBorad => 한 페이지에 보여줄 멤버(글) 수
 		   if(page.getTotalNum() <= page.getOnePageBoard()) { // totalnum이 10보다 작으면 pageNum을 1로 설정
 			   pageNum = 1;
@@ -118,6 +119,94 @@ public class AdminController {
 		   return "admin/memberManage";
 	   }
 	   
+	// 회원관리 페이지 : 회원 검색   
+	@RequestMapping(value="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
+	public String memberSearch(
+			@PathVariable int page, @PathVariable String searchType,
+			@PathVariable String keyword, Model model) {
+		Paging p = new Paging();
+		Search s = new Search();
+		ArrayList<MemberVO> searchArr = new ArrayList<MemberVO>();
+	    ArrayList<Integer> arr = new ArrayList<Integer>();
+	    Map<Object, Object> parm = new HashMap<Object, Object>();
+	    Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		
+        s.setPage(page);
+        s.setKeyword(keyword);
+        s.setSearchType(searchType);
+        
+        System.out.println(page); //현재 페이지 번호
+        System.out.println(searchType); //검색 옵션
+        System.out.println(keyword); //검색 키워드
+        
+        searchArr = adminService.memberSearch(s);
+        
+        System.out.println("사용자 관리 검색 :" + searchArr);
+        
+        int pageNum = 0;
+        int mapNum=0;
+        int sendPageNum=0;
+        int realNum = page;
+        p.setTotalNum(searchArr.size());		
+		
+        //
+        
+        if(p.getTotalNum() <= p.getOnePageBoard() ) {
+            pageNum = 1;
+         }else {
+            pageNum = p.getTotalNum()/p.getOnePageBoard();
+            if(p.getTotalNum()%p.getOnePageBoard() > 0) {
+               pageNum = pageNum + 1;
+            }
+         }
+        
+        if(pageNum%5 != 0) {
+            mapNum=pageNum/5+1;
+         }else {
+            mapNum=pageNum/5;
+         }
+
+         for(int i=0; i<mapNum; i++) {
+            arr = new ArrayList<Integer>();
+            for(int j=0; j<5; j++) {
+               
+               if((i*5)+j+1 > pageNum) {
+                  break;
+               }
+               
+               arr.add((i*5)+j+1);
+            }
+            map.put(i,arr);
+         }
+        
+        p.setEndNum((realNum*10)+1);
+        p.setStartNum(p.getEndNum()-10);
+        
+        parm.put("Paging", p);
+        parm.put("Search", s);
+        
+        model.addAttribute("pageNum",map.get(sendPageNum));
+        model.addAttribute("memberSearch",adminService.getSearchResult(parm));
+        System.out.println("사용자 관리검색 결과 :" + adminService.getSearchResult(parm));
+        
+        if(realNum > pageNum) {
+            System.out.println("pageNum : " + pageNum);
+            System.out.println("keyword : " + keyword);
+            try {
+               keyword = URLEncoder.encode(keyword, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+            }
+            return "redirect:/memberSearch/search/"+pageNum+"/"+searchType+"/"+keyword+"";
+         }
+        
+		return "admin/memberSearch";
+	}
+	
+	
+	
+	
 	// 업체 관리 페이지 (페이징)
 	@RequestMapping(value = "/enterpriseManage" + "/{num}", method = RequestMethod.GET)
 	public String enterpriseManage(@PathVariable String num, Model model, HttpSession session) {
