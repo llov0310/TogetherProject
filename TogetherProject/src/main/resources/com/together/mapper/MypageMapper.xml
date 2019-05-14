@@ -57,15 +57,16 @@
 	</update> 
 	
 	 <select id="orderlist" resultType="com.together.domain.OrdersVO">
-		select * from orders where user_id = #{user_id}
+		select * from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
+        
+	</select>
+	
+	  <select id="postlist" resultType="com.together.domain.PostVO">
+		select * from post where user_id = #{user_id}
 	</select>
 	
 	<!--  <select id="postlist" resultType="com.together.domain.PostVO">
 		select * from post where user_id = #{user_id}
-	</select>
-	
-	 <select id="postlist" resultType="com.together.domain.PostVO">
-		select * from post where user_id = #{user_id}
-	</select> -->
+	</select> --> 
 	
 </mapper>

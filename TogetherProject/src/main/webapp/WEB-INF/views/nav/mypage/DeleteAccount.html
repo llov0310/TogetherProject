@@ -2,11 +2,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+	<script>
+	$(document).ready(function() {
+		$("#delbt").click(function() {
+			if ($("input:checkbox[name='del']").is(":checked") == true){
+				var result = confirm('정말 탈퇴 하시겠습니까?'); 
+				if(result) {
+					alert("진짜?"); 
+			 	$.ajax({
+					url : "/deletid",
+					type : "POST",
+					dataType : 'text',
+					data : {
+					
+					},
+					success : function(data) {
+						alert("삭제");
+										 
+					}
+					});  
+				} else {
+					alert("고마워"); 
+						}
+			}else{
+			alert("체크 해주세요");
+			}
+		});
+	});
+		
+	</script>
+	
 <title>Insert title here</title>
 </head>
 <body>
 아이디삭제의 동의합니까 <hr>
-<input type="checkbox">약관 동의하기
-
+<input type="checkbox" name="del">약관 동의하기
+<button id="delbt">탈퇴하기</button>
 </body>
 </html>

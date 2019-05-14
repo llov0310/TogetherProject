@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
+import com.together.domain.PostVO;
 import com.together.mapper.MypageMapper;
 
 import lombok.AllArgsConstructor;
@@ -76,6 +77,13 @@ public class MypageServiceImplement implements MypageService {
 	public ArrayList<OrdersVO> orderlist(String user_id) {
 		// TODO Auto-generated method stub
 		return myMapper.orderlist(user_id);
+	}
+
+
+	@Override
+	public ArrayList<PostVO> postlist(String user_id) {
+		// TODO Auto-generated method stub
+		return myMapper.postlist(user_id);
 	}
 
 	 

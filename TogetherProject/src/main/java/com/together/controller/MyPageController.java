@@ -141,9 +141,10 @@ public class MyPageController {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
 		 order_list = mypage.orderlist(user_id);
-		System.out.println(order_list);
 		
 		  model.addAttribute("order_list", order_list);
+		  	System.out.println(user_id);
+	
 		return "nav/mypage/myreservation";
 
 	}
@@ -157,11 +158,11 @@ public class MyPageController {
 	@RequestMapping(value = "/mypost", method = RequestMethod.GET)
 	public String mypost(Model model, HttpSession session, HttpServletRequest request) {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-//		 ArrayList<PostVO> post_list = new ArrayList<PostVO>(); 
-//		 post_list = mypage.postlist(user_id);
-		System.out.println("뜸?");
+		 ArrayList<PostVO> post_list = new ArrayList<PostVO>(); 
+		 post_list = mypage.postlist(user_id);
+
 		
-//		  model.addAttribute("order_list", order_list);
+		  model.addAttribute("post_list", post_list);
 		return "nav/mypage/mypost";
 
 	}
@@ -177,7 +178,13 @@ public class MyPageController {
 		return "nav/mypage/DeleteAccount";
 
 	}
+	@RequestMapping(value = "/deletid", method = RequestMethod.POST)
+	@ResponseBody
+	public String Deleteid(Model model) {
+		System.out.println("삭제");
+		return "success";
 
+	}
 	@RequestMapping(value = "/newpwpopup", method = RequestMethod.GET)
 	public String newpwpopup(Model model) {
 		return "nav/mypage/newpwpopup";

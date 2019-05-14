@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
+import com.together.domain.PostVO;
 public interface MypageService {
 	
 	//비밀번호체크
@@ -24,6 +25,8 @@ public interface MypageService {
 	public Integer petup(String user_id, String d_nm, int d_gender, String d_kind, String d_content, String d_age);
 	//주문리스트
 	public ArrayList<OrdersVO> orderlist(String user_id);
+	//작성글 리스트
+	public ArrayList<PostVO> postlist(String user_id);
 
 
 

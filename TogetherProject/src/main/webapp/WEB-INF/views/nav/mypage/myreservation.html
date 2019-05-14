@@ -38,6 +38,8 @@ table.type11 td {
     <tr>
         <th scope="cols">주문코드</th>
         <th scope="cols">상품</th>
+        <th scope="cols">가격</th>
+        <th scope="cols">업체</th>
         <th scope="cols">주문일시</th>
         <th scope="cols">삭제</th>
         
@@ -47,7 +49,9 @@ table.type11 td {
     
     <tr th:each="order_list : ${order_list}">
         <td><span th:text="${order_list.or_cd}"></span></th>
-        <td><span th:text="${order_list.pd_cd}"></span></th>
+        <td><span th:text="${order_list.pd_nm}"></span></th>
+        <td><span th:text="${order_list.pd_price}"></span></th>
+        <td><span th:text="${order_list.etp_nm}"></span></th>
         <td><span th:text="${order_list.or_dt}"></span></th>
         <td><button>삭제</button></th>
     </tr>

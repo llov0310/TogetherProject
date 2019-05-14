@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
+import com.together.domain.PostVO;
 
 public interface MypageMapper {
 
@@ -44,6 +45,8 @@ public interface MypageMapper {
 						  @Param("d_age")String d_age);
 
 	public ArrayList<OrdersVO> orderlist(@Param("user_id") String user_id);
+
+	public ArrayList<PostVO> postlist(@Param("user_id") String user_id);
 
 
 
