@@ -19,8 +19,8 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.js"></script><!-- 팝업창 스크립트  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"></script> <!-- 달력 pricker -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script> <!-- 달력 pricker js -->
+  
+  
   <script>
   	$(document).ready(function(){
   		var count = 0;
@@ -43,6 +43,16 @@
   			
   			
   			$('.product_order_list').on('click',function(){
+  				
+  				var pro_nm = $(this).find('span').eq(0).text();
+  				var pro_price = $(this).find('span').eq(1).text();
+  				var pro_cont = $(this).find('span').eq(2).text();
+  				
+  				$('#pnm').text(pro_nm);
+  				$('#ppri').text(pro_price);
+  				$('#pcon').text(pro_cont);
+  				
+  			
   				$ ('#popup').bPopup({
   					follow : [false,false],
   					positionStyle : 'fixed'
@@ -57,8 +67,71 @@
   				$ ('#popup').bPopup().close();
   			});
   	
-  		  				
+//   			<span>시작일 : <label id="first_day"></label></span><br/>
+//   			<span>종료일 : <label id="second_day"></label></span><br/>
+//   			<span>총 일수 : <label id="total_day"></label></span><br/>
+//   			<span>상품명 : <label id ="pnm"></label></span><br/>
+//   			<span>상품가격 : <label id = "ppri"></label></span><br/>
+//   			<span>상품정보 : <label id = "pcon"></label></span><br/>
+//   			<span>총가격 : <label id = "total_price"></label></span>
+  		  $('#add_btn').on('click',function(){
+  			var a = $('#first_day').text();
+  			var b = $('#second_day').text();
+  			var c = $('#total_day').text();
+  			var cmin = Number(c) - 1;
+  			var d = $('#pnm').text();
+  			var e = $('#ppri').text();
+  			var f = $('#pcon').text();
+  			var g = $('#total_price').text();
+  			$('#form_test').append('<div class="list_num">'+'<span class="first_day">' + a + 
+  									'</span>' + '~' + '<span class="last_day">' + b + '</span>' + 
+  									'// 총일수 ' + cmin + '박' + 
+  									'<span class="num2">' + c + '일' +'</span>' +'// 상품명 ' + d + 
+  									'// 가격 ' + '<span class="num">' + e + '원' + '</span>' + 
+  									'// 상품설명 ' + f +  '</div>');
+  			
+  			var price_list = $('.num').text().split('원');
+  			var day_list = $('.num2').text().split('일');
+  			var sum = 0;
+  			for(var i=0; i<price_list.length-1; i++){
+  			sum = Number(price_list[i]) * Number(day_list[i]) + sum;
+  			}
+  			$('#top_total_price').text("총가격 : " + sum + "KRW");
+  			$ ('#popup').bPopup().close(); 
+  		  });
   		  
+  		  
+  		  $('#sel').on('click',function(){
+  			  //insert 필요한 내용  
+  			  // 1. 예약 날짜의 첫날 ~ 마지막날
+  			  // 2. 몇박 몇일인지 일수 계산해서 가격 계산
+  			  // 3. 상품명
+  			  // 4. 어떤 유저가 주문햇는지
+  			  // 5. 그유저의 핸드폰번호
+  			  // 6. 그상품의 가격
+  			  
+  			  //1
+  			  var form_len = $('#form_test').children(); // 추가된 상품의 갯수
+  			  var first = [];
+  			  var last = [];
+  			  var num = [];
+  			  var price = [];
+  			  
+  			 for(var i=0; i<form_len.length; i++){
+  			  first[i] = form_len.eq(i).find('.first_day').text(); //첫날
+  			  last[i] = form_len.eq(i).find('.last_day').text(); //마지막
+  			  num[i] = form_len.eq(i).find('.num2').text(); //총 일수
+  			  price[i] = form_len.eq(i).find('.num').text(); //총 일수
+  			 }
+				
+  			 console.log(first);
+  			console.log(last);
+  			console.log(num);
+  			console.log(price);
+  			 
+  			 //2
+  			  
+  		  });
   			
   			
   	});
@@ -201,19 +274,54 @@
 				
 				selectDates(selected);
 				
-				var first_key = Object.values(selected["2019"]);
-// 				var first_value = Object.keys(first_key);
 				
-				console.log();
-				console.log(first_key); 
-				console.log(first_key[0].length);
-// 				console.log(first_value);
+				var select_year = Object.keys(selected)[0];
+				var DataArray = Object.values(selected[select_year]); //날짜배열
+
+				var first_Day = DataArray[0][0]; //첫번째날
+				
+				var second_Day_reverse = DataArray[0].reverse();
+				var second_Day = second_Day_reverse[0];
+				
+				if(DataArray[1] != null){
+				var two_clarendar = DataArray[1].reverse()[0];
+				var second_Total_Date = DataArray[1].length; //두 번째 달력 총날짜
+				}
+
+				var Total_Date = DataArray[0].length; // 총 날짜
+				
+				
+
+				var year = passed_year; //현재 년도
+				var month = passed_month + 1; // 선택 달
+				var month2 = month - 1;
+				
+				
+				if(second_Total_Date != null){
+				document.getElementById('total_day').innerHTML = Total_Date + second_Total_Date;
+				}else{
+					document.getElementById('total_day').innerHTML = Total_Date;
+				}
+
+				if(two_clarendar == null){
+				document.getElementById('first_day').innerHTML = year + "-" + month + "-" + first_Day;
+				document.getElementById('second_day').innerHTML = year + "-" + month + "-" + second_Day;
+				}else{
+				document.getElementById('first_day').innerHTML = year + "-" + month2 + "-" + first_Day;
+				document.getElementById('second_day').innerHTML = year + "-" + month + "-" + two_clarendar;
+				}
+				
+				
+				
+				var T_day = parseInt(document.getElementById('total_day').innerHTML);
+				var price = parseInt(document.getElementById('ppri').innerHTML);
+				document.getElementById('total_price').innerHTML = T_day * price;
 				
 			});			
 
 		}
 		
-		
+
 		
 		
 		function selectDates(selected) {
@@ -590,11 +698,21 @@
 </div> <!-- End Calendar -->
 
 
+	<!-- 날짜 폼 -->
+	<div>
+		<span>시작일 : <label id="first_day"></label></span><br/>
+		<span>종료일 : <label id="second_day"></label></span><br/>
+		<span>총 일수 : <label id="total_day"></label></span><br/>
+		<span>상품명 : <label id ="pnm"></label></span><br/>
+		<span>상품가격 : <label id = "ppri"></label></span><br/>
+		<span>상품정보 : <label id = "pcon"></label></span><br/>
+		<span>총가격 : <label id = "total_price"></label></span>
+	</div>
 
 		
 		
 		<input type="button" id="btn_close" value="닫 기">
-		
+		<input type="button" id="add_btn" value = "추가">
 		</div>
 		
 			
@@ -627,18 +745,18 @@
 	<footer class="foo">
 		<div class="top-list">
 			<button class="drop_top"><img src="assets/img/hotel/square-box-outline.svg"></button>
+			<div id="top_total_price" style="float:left; margin-left : 100px; color:black;">
 				
+			</div>
 			<div class="footer_first">
 			<button id="sel" class="btn btn-info book_buy">예약하기</button>
 			</div>
 		</div>
 		
-		<div>
-		내용이 잇나
+		<div style="color:black" id="form_test">
+		
 		</div>
-		<div>
-		들어갓뿌노;
-		</div>
+		
 	</footer>
 	
 

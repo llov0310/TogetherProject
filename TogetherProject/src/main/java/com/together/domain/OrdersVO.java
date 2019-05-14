@@ -10,6 +10,10 @@ public class OrdersVO {
 	private String user_id;
 	private String pd_cd;
 	private Timestamp or_dt;
+	private Timestamp th_dt;
+	private String or_stat;
+	private String or_check;
+
 	
 	
 	//주문리스트 보기위한변수
