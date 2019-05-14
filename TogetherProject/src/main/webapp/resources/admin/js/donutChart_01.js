@@ -1,9 +1,9 @@
 // ajax 두번 호출 방지를 위해 변수 선언
 // 설명 : 3. <head> 바깥에 사용할 경우에는 isloaded 변수를 정의해서 ready() 함수가 끝나는 부분에 true로 하고 강제적으로 1번만 호출될 수 있도록 한다.
-var isloaded3 = false;
+var isloaded_DC_01 = false;
 $(document).ready(function(){
 	// ajax 두번 호출 방지를 위해 if문 선언
-	if (isloaded3) {
+	if (isloaded_DC_01) {
 
 	return;
 
@@ -56,5 +56,5 @@ $(document).ready(function(){
 	}); // ajax
 	
 	// ajax 두번 호출 방지를 위해 true로 변경
-	isloaded3 = true;
+	isloaded_DC_01 = true;
 }); // document function

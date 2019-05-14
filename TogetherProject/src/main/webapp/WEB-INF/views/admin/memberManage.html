@@ -48,7 +48,7 @@
 						</tbody>
 						
 						<!-- 검색 할 때 사용 하는 테이블 -->
-						<tbody th:if="${memberSearch != null}" th:each="memberList : ${memberList}">
+						<tbody th:if="${memberSearch != null}" th:each="memberList : ${memberSearch}">
 							<tr th:switch="${memberList.authority_no}">
 								<td th:text="${memberList.user_id}"></td>
 								<td th:text="${memberList.user_nm}"></td>

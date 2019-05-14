@@ -120,7 +120,7 @@ public class AdminController {
 	   }
 	   
 	// 회원관리 페이지 : 회원 검색   
-	@RequestMapping(value="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
+	@RequestMapping(value= "/memberManage" + "/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
 	public String memberSearch(
 			@PathVariable int page, @PathVariable String searchType,
 			@PathVariable String keyword, Model model) {
@@ -189,6 +189,10 @@ public class AdminController {
         model.addAttribute("memberSearch",adminService.getSearchResult(parm));
         System.out.println("사용자 관리검색 결과 :" + adminService.getSearchResult(parm));
         
+        for(int i=0; i<adminService.getSearchResult(parm).size(); i++) {
+        	System.out.println(adminService.getSearchResult(parm).get(i).getUser_id());
+        }
+        
         if(realNum > pageNum) {
             System.out.println("pageNum : " + pageNum);
             System.out.println("keyword : " + keyword);
@@ -198,10 +202,10 @@ public class AdminController {
                // TODO Auto-generated catch block
                e.printStackTrace();
             }
-            return "redirect:/memberSearch/search/"+pageNum+"/"+searchType+"/"+keyword+"";
+            return "redirect:/memberManage/search/"+pageNum+"/"+searchType+"/"+keyword+"";
          }
         
-		return "admin/memberSearch";
+		return "admin/memberManage";
 	}
 	
 	

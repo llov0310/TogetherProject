@@ -74,9 +74,9 @@ $(document).ready(function(){
 		            alert("검색내용을 입력하세요");
 		            $("#keyword").val("");
 		            $("#keyword").focus();
-		            return false;
 		         }
 		         window.location.href = "/memberManage/search/"+page+"/"+searchType+"/"+keyword;
+		         
 		      } else{
 		         var page = 1; // 현재 페이지 번호
 		         var searchType = $("#search-select option:selected").val();
@@ -99,4 +99,6 @@ $(document).ready(function(){
 
 			}
 		});
-});
+		
+		
+}); //document ready

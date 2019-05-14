@@ -162,7 +162,7 @@
 	<![CDATA[
 	select * from member
 	where ${searchType} like '%' || '${keyword}' || '%'
-	order by user_nm		
+	order by user_nm
 	]]>
 	</select>
 	
