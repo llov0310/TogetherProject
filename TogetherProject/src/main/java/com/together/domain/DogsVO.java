@@ -15,8 +15,11 @@ public class DogsVO {
 	private String d_nm;
 	private String d_content;
 	private String d_age;
+	
 	// 반려견 리스트를 볼때 추가적으로 필요한 변수를 선언
 	private String user_nm;
-	private String ph_no;
+	private String ph_no; //검색할때도 필요한 변수
+	
+	
 	
 }

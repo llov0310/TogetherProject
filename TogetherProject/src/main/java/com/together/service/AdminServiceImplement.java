@@ -124,10 +124,38 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.memberSearch(s);
 	}
 	
-	// 검색 결과
+	// 회원정보 검색 결과
 	@Override
-	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm) {
+	public ArrayList<MemberVO> memberSearchResult(Map<Object, Object> parm) {
 		// TODO Auto-generated method stub
-		return mapper.getSearchResult(parm);
+		return mapper.memberSearchResult(parm);
+	}
+	
+	// 반려견 정보 검색을 위한 함수 추가
+	@Override
+	public ArrayList<DogsVO> dogsSearch(Search s) {
+		// TODO Auto-generated method stub
+		return mapper.dogsSearch(s);
+	}
+	
+	// 반려견 정보 검색 결과
+	@Override
+	public ArrayList<DogsVO> dogsSearchResult(Map<Object, Object> parm) {
+		// TODO Auto-generated method stub
+		return mapper.dogsSearchResult(parm);
+	}
+	
+	// 업체 신청 검색을 위한 함수 추가
+	@Override
+	public ArrayList<EnterpriseVO> etpApplySearch(Search s) {
+		// TODO Auto-generated method stub
+		return mapper.etpApplySearch(s);
+	}
+	
+	// 업체 신청 검색 결과
+	@Override
+	public ArrayList<EnterpriseVO> etpApplySearchResult(Map<Object, Object> parm) {
+		// TODO Auto-generated method stub
+		return mapper.etpApplySearchResult(parm);
 	}
 }

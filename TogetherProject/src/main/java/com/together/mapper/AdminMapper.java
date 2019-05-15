@@ -59,7 +59,19 @@ public interface AdminMapper {
    // 회원정보 검색을 위한 맵핑
    public ArrayList<MemberVO> memberSearch(Search s);
 
-   // 검색 결과 맵핑
-   public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
+   // 회원정보 검색 결과 맵핑
+   public ArrayList<MemberVO> memberSearchResult(Map<Object, Object> parm);
+   
+   // 반려견 정보 검색을 위한 맵핑
+   public ArrayList<DogsVO> dogsSearch(Search s);
+   
+   // 반려견 정보 검색 결과 맵핑
+   public ArrayList<DogsVO> dogsSearchResult(Map<Object, Object> parm);
 
+   // 업체 신청 검색을 위한 맵핑
+   public ArrayList<EnterpriseVO> etpApplySearch(Search s);
+	
+   // 업체 신청 검색 결과 맵핑
+   public ArrayList<EnterpriseVO> etpApplySearchResult(Map<Object, Object> parm);
+   
 }

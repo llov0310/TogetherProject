@@ -41,7 +41,27 @@
 									<th>업체 소개</th>
 								</tr>
 							</thead>
-							<tbody th:each="etpManage : ${enterpriseManage}">
+							<tbody th:if="${etpApplySearch == null}" th:each="etpManage : ${enterpriseManage}">
+								<tr>
+									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
+									
+<!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
+									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td>
+									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td>
+									
+									<td th:text="${etpManage.user_id}"></td>					
+									<td th:text="${etpManage.user_nm}"></td>
+									<td th:text="${etpManage.etp_email}"></td>
+									<td th:text="${etpManage.etp_ph_no}"></td>
+									<td th:text="${etpManage.etp_addr}"></td>
+									<td th:text="${etpManage.etp_license_no}"></td>
+									<td th:text="${etpManage.etp_nm}"></td>
+									<td th:text="${etpManage.etp_content}"></td>
+								</tr>
+							</tbody>
+							
+							<!-- 검색 할 때 사용하는 테이블 -->
+							<tbody th:if="${etpApplySearch != null}" th:each="etpManage : ${etpApplySearch}">
 								<tr>
 									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
 									
@@ -77,6 +97,25 @@
 					</div>
 					<!-- 페이징 -->
 					
+					<!-- 검색 -->
+					<div class="search">
+						<div class="select">
+							<select id="search-select">
+								<option value="e.user_id">아이디</option>
+								<option value="e.etp_license_no">사업자 번호</option>
+								<option value="e.etp_ph_no">회사 대표 번호</option>
+							</select>
+						</div>
+						<section class="search-box">
+							<div class="search-content">
+								<input type="text" id="keyword" />
+							</div>
+							<div class="search-button">
+								<button id="search">검색</button>
+							</div>
+						</section>
+					</div>
+					<!-- 검색 -->
 				</div>
 			</div>
 		</div>
@@ -105,10 +144,8 @@
 
 <!-- customerManage.html에 필요한 css 추가 설정 -->
 <th:block layout:fragment="page_css">
-	<!-- Custom styles for this page -->
-<!-- 	<link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" -->
-<!-- 		rel="stylesheet"> -->
-
+	<!-- enterpriseManage.css 임포트 (서치바 가운데 정렬을 위함) -->
+	<link href="/admin/css/enterpriseManage.css" rel="stylesheet">
 
 	<!-- 페이징 처리후 adminHead.html에 있는 공통 css가 적용되지 않아 추가로 선언 ▼-->
 	<link href="/admin/vendor/fontawesome-free/css/all.min.css"
@@ -126,8 +163,7 @@
 	<!-- page_js -->
 	<th:block layout:fragment="page_js">
 		<script src="/admin/vendor/jquery/jquery.min.js"></script>
-		<script src="/admin/js/etpManage.js"></script>
-		
+		<script src="/admin/js/etpManageApply.js"></script>
 	</th:block>
 
 </html>
