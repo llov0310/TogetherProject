@@ -65,7 +65,12 @@
 				},
 				success : function(data) {
 					alert("등록완료");
-					close();				
+					opener.parent.repet();
+					if(opener.repet){
+					 }else{
+						alert("실패");
+					}
+					window.close();
 					}
 				});   
 			

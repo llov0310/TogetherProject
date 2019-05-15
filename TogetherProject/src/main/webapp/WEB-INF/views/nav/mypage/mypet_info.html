@@ -1,13 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/serviceLayout">
-
-<th:block layout:fragment="page_head">
-	<title>펫 관리</title>
-</th:block>
-<th:block layout:fragment="page_css">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script>
 	$(document).ready(function() {
 				$("#adddog").click(function() {
@@ -34,7 +27,8 @@
 		$(".deldog").click(function() {
 			var d_nm = $(this).parent().parent().find('.dname').find('span').text();
 			console.log(d_nm);
-			
+			var result = confirm('정말 삭제 하시겠습니까?'); 
+			if(result) {
 			$.ajax({
 				url : "/pet_delete",
 				type : "POST",
@@ -44,36 +38,47 @@
 					
 				},
 				success : function(data) {
-					alert(data);	
+					alert("삭제되었습니다");
+					$("#content").load("/mypet_info" );
 					}
 				});   
-			
+			}else{
+				alert("삭제취소"); 
+			}
 				});
-		
-		
 	}); 
 	</script>
 	
 	<style>
-	.asd{
-	display:inline-block;
+.asd {
+	display: inline-block;
 	border: 1px solid gray;
-	}
-	#imgbox1{
-	   position: relative;
-    display: inline-block;
-    background: url(cat.jpg) center center no-repeat;
-    border-radius: 50%;
-   
-	}
-	</style>
-</th:block>
+}
 
-<th:block layout:fragment="page_js">
+#imgbox1 {
+	position: relative;
+	display: inline-block;
+	background: url(cat.jpg) center center no-repeat;
+	border-radius: 50%;
+}
 
-</th:block>
-
-<th:block layout:fragment="contents">
+#comment {
+	/* 한 줄 자르기 */
+	display: inline-block;
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; /* 여러 줄 자르기 추가 스타일 */
+	white-space: normal;
+	line-height: 1.2;
+	height: 3.6em;
+	text-align: left;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+</style>
 
 	<div>
 		<h2>강아지 정보</h2>
@@ -93,23 +98,6 @@
 	<div class="dgender"><span th:if="${pet.d_gender}==1">수컷</span></div>
 	<div class="dgender"><span th:if="${pet.d_gender}==2">암컷</span></div>
 	<div class="dage">나이<span th:text="${pet.d_age}"></span></div>
-	<div>인사말<br><span th:text="${pet.d_content}"></span></div>
+	<div>인사말<br><span id="comment"th:text="${pet.d_content}"></span></div>
 	</div>
  </th:each>
-
-<!-- <div class="asd">
-	개 
-	<div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
-	<div>개정보aaaaaaaaaaaaa</div>
-	<div>ㅂㅈㄷ</div>
-	개
-	</div>
-	
-	<div class="asd">
-	개 
-	<div><img src="http://placehold.it/150x150" alt="" id="imgbox"></div>
-	<div>개정보aaaaaaaaaaaaa</div>
-	<div>ㅂㅈㄷ</div>
-	개
-	</div> -->
-</th:block>

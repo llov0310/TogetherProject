@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -13,7 +12,7 @@ $(document).ready(function() {
 		var d_gender = $('input[name="gender"]:checked').val();
 		var d_age = $("#age").val();
 		var d_kind = $("#kind").val();
-		var d_content = $("#content").val();
+		var d_content = $("#comment").val();
 		
 	 	$.ajax({
 			url : "/mypet_add_info",
@@ -28,8 +27,13 @@ $(document).ready(function() {
 			},
 			success : function(data) {
 				alert("등록완료");
-				opener.parent.location.reload(mypet_info);
-				close();				
+				opener.parent.repet();
+				if(opener.repet){
+				 }else{
+					alert("실패");
+				}
+
+				window.close();		
 				}
 			});   
 		
@@ -39,8 +43,7 @@ $(document).ready(function() {
 
 
 <title>애견 추가</title>
-</head>
-<body>
+
 <div>
 <div><img src="http://placehold.it/150x150" alt="" id="imgbox1"></div>
 애견이름<input type="text" id="dname"><br>
@@ -51,8 +54,6 @@ $(document).ready(function() {
 나이<input type="text" id="age"><br>
 품종<input type="text" id="kind"><br>
 코멘트<br>
-<textarea style="resize: none" rows="5" cols="25" id="content" ></textarea>
+<textarea style="resize: none" rows="5" cols="25" id="comment" ></textarea>
 </div>
 <button id="addpet">추가하기</button>
-</body>
-</html>

@@ -31,7 +31,7 @@ public class MyPageController {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<MemberVO> member_info = new ArrayList<MemberVO>();
 		 member_info =  mypage.memberinfo(user_id);
-		 System.out.println("회원정보" + member_info);
+		/* System.out.println("회원정보" + member_info); */
 		 
 		 model.addAttribute("memberinfo", member_info);
 		 
