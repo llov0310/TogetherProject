@@ -60,28 +60,7 @@ public class CustomerServiceImplement implements CustomerService {
 		return mapper.textbox(sess);
 	}
 
-
-	@Override
-	public Integer update(String etp_nm, String etp_addr,
-			String etp_ph_no, String etp_license_no, String etp_email,
-			String etp_cd) {
-		// TODO Auto-generated method stub
-		return mapper.update(etp_nm,etp_addr,etp_ph_no,etp_email,etp_license_no,etp_cd);
-	}
-
-
-	@Override
-	public Integer update2(String etp_if_info, String etp_if_intro, String time1, String time2, String etp_cd) {
-		// TODO Auto-generated method stub
-		return mapper.update2(etp_if_info,etp_if_intro,time1,time2,etp_cd);
-	}
-
-
-	@Override
-	public  ArrayList<EnterpriseVO> info_select(String user_id) {
-		// TODO Auto-generated method stub
-		return mapper.info_select(user_id);
-	}
+	
 
 
 	@Override
@@ -90,34 +69,25 @@ public class CustomerServiceImplement implements CustomerService {
 		return mapper.ent_info(code);
 	}
 
-
-	@Override
-	public ArrayList<ProductVO> product_select(String code) {
-		// TODO Auto-generated method stub
-		return mapper.product_select(code);
-	}
-
-
-	@Override
-	public int del(String code, String nm) {
-		// TODO Auto-generated method stub
-		return mapper.del(code,nm);
-	}
-
-
-	@Override
-	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content) {
-		// TODO Auto-generated method stub
-		return mapper.insert_product(code,pd_nm,pd_price,pd_content);
-	}
-
-
-	
 	//상품목록조회
 	@Override
 	public ArrayList<EnterpriseVO> getList(String code) {
 		// TODO Auto-generated method stub
 		return mapper.getList(code);
+	}
+
+	//예약을 하기위한 조회
+	@Override
+	public ArrayList<EnterpriseVO> info_list(String code,String name) {
+		// TODO Auto-generated method stub
+		return mapper.getcd(code,name);
+	}
+
+
+	@Override
+	public int insert_order(String user, String pdcode, String first_day, String last_day, int price) {
+		// TODO Auto-generated method stub
+		return mapper.insert_order(user,pdcode,first_day,last_day,price);
 	}
 
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.mapper.ETPManageMapper">
+<update id="update" parameterType = "com.together.domain.EnterpriseVO">
+		update enterprise set etp_email = #{etp_email},
+		etp_addr = #{etp_addr},
+		etp_ph_no = #{etp_ph_no},
+		etp_license_no = #{etp_license_no},
+		etp_nm = #{etp_nm}
+		where etp_cd = #{etp_cd}
+		
+	</update>
+	<update id="update2" parameterType="com.together.domain.EnterpriseVO">
+		update enterprise_info set etp_if_info = #{etp_if_info},
+		etp_if_intro = #{etp_if_intro},
+		etp_if_time1 = #{time1},
+		etp_if_time2 = #{time2}
+		where etp_cd = #{etp_cd}
+	</update>
+	
+	<select id="info_select" resultType="com.together.domain.EnterpriseVO">
+	select *from member a, enterprise b 
+	where a.user_id = b.user_id and b.user_id = #{user_id}
+	</select>
+	
+	<select id="product_select" resultType="com.together.domain.ProductVO">
+		select * from product where etp_cd = #{code}
+	</select>
+	
+	<delete id="del" parameterType="com.together.domain.ProductVO">
+	delete from product where etp_cd = #{code} and pd_nm = #{nm}
+	</delete>
+	
+	<insert id="insert_product" parameterType="com.together.domain.ProductVO">
+		insert into product values (PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},null)
+	</insert> 
+</mapper>

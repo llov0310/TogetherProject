@@ -86,8 +86,8 @@
   			$('#form_test').append('<div class="list_num">'+'<span class="first_day">' + a + 
   									'</span>' + '~' + '<span class="last_day">' + b + '</span>' + 
   									'// 총일수 ' + cmin + '박' + 
-  									'<span class="num2">' + c + '일' +'</span>' +'// 상품명 ' + d + 
-  									'// 가격 ' + '<span class="num">' + e + '원' + '</span>' + 
+  									'<span class="num2">' + '<label class="d">'+c+'</label>' + '일' +'</span>' +'// 상품명 ' +'<span class="nm">'+ d +'</span>'+ 
+  									'// 가격 ' + '<span class="num">' + '<label class="n">'+e+'</label>' + '원' + '</span>' + 
   									'// 상품설명 ' + f +  '</div>');
   			
   			var price_list = $('.num').text().split('원');
@@ -111,26 +111,42 @@
   			  // 6. 그상품의 가격
   			  
   			  //1
+  			  var test = $('.code').text();
   			  var form_len = $('#form_test').children(); // 추가된 상품의 갯수
-  			  var first = [];
-  			  var last = [];
-  			  var num = [];
-  			  var price = [];
   			  
-  			 for(var i=0; i<form_len.length; i++){
-  			  first[i] = form_len.eq(i).find('.first_day').text(); //첫날
-  			  last[i] = form_len.eq(i).find('.last_day').text(); //마지막
-  			  num[i] = form_len.eq(i).find('.num2').text(); //총 일수
-  			  price[i] = form_len.eq(i).find('.num').text(); //총 일수
-  			 }
-				
-  			 console.log(first);
-  			console.log(last);
-  			console.log(num);
-  			console.log(price);
-  			 
-  			 //2
+  			  var array = [];
   			  
+  			  for(var i=0; i<form_len.length; i++){
+  			  var Obj = {};
+  			  Obj.etp_cd = test;
+  			  Obj.pd_nm = form_len.eq(i).find('.nm').text();
+  			  Obj.first = form_len.eq(i).find('.first_day').text();
+  			  Obj.last = form_len.eq(i).find('.last_day').text();
+  			  Obj.num = form_len.eq(i).find('.num2').find('label').text();
+  			  Obj.price = form_len.eq(i).find('.num').find('label').text();
+  			  array.push(Obj);
+  			  }
+  			
+			$.ajax({
+				type : "POST",
+				url : "/buy_book",
+				data : JSON.stringify(array),
+				contentType:"application/json;charset=UTF-8",
+		        traditional:true,
+				success : function(data){
+					if(data == "success"){
+						alert("예약완료");
+						window.location.reload();
+					}else{
+						console.log("실패");
+					}
+					
+				}
+			});
+  			  
+//   			  array.push(Obj);
+  			  console.log(array);
+
   		  });
   			
   			
@@ -625,6 +641,7 @@
         <div class="col-sm-12">
           <p class="lead">정보 소개</p>
           <p th:text="${info.etp_if_info}"></p>
+          <p style="display:none" class="code" th:text="${info.etp_cd}"></p>
 
       
         </div>

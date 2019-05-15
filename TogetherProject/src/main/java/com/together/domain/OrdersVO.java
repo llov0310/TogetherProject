@@ -10,9 +10,11 @@ public class OrdersVO {
 	private String user_id;
 	private String pd_cd;
 	private Timestamp or_dt;
+	private Timestamp or_dt2;
 	private Timestamp th_dt;
 	private String or_stat;
 	private String or_check;
+	private int or_price;
 
 	
 	
