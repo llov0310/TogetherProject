@@ -53,6 +53,8 @@
 .asd {
 	display: inline-block;
 	border: 1px solid gray;
+	margin: 10px;
+	width: 180px;
 }
 
 #imgbox1 {
@@ -65,17 +67,16 @@
 #comment {
 	/* 한 줄 자르기 */
 	display: inline-block;
-	width: 200px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis; /* 여러 줄 자르기 추가 스타일 */
 	white-space: normal;
 	line-height: 1.2;
-	height: 3.6em;
+	height: 6em;
 	text-align: left;
 	word-wrap: break-word;
 	display: -webkit-box;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 }
 </style>

@@ -57,7 +57,7 @@
 	</update> 
 	
 	 <select id="orderlist" resultType="com.together.domain.OrdersVO">
-		select * from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
+	select o.*,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2, 'YYYY-MM-DD') as last_day,e.*,p.*  from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
         
 	</select>
 	

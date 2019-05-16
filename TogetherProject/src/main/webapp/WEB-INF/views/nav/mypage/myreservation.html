@@ -6,6 +6,35 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <title>Insert title here</title>
+<script>
+$(function () {	
+	tab('#tab',0);	
+});
+
+function tab(e, num){
+    var num = num || 0;
+    var menu = $(e).children();
+    var con = $(e+'_con').children();
+    var select = $(menu).eq(num);
+    var i = num;
+
+    select.addClass('on');
+    con.eq(num).show();
+
+    menu.click(function(){
+        if(select!==null){
+            select.removeClass("on");
+            con.eq(i).hide();
+        }
+
+        select = $(this);	
+        i = $(this).index();
+
+        select.addClass('on');
+        con.eq(i).show();
+    });
+}
+</script>
 <style type="text/css">
 table.type11 {
     border-collapse: separate;
@@ -15,7 +44,7 @@ table.type11 {
     margin: 20px 10px;
 }
 table.type11 th {
-    width: 155px;
+    width: 200px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -23,16 +52,60 @@ table.type11 th {
     background: #ce4869 ;
 }
 table.type11 td {
-    width: 155px;
+    width: 200px;
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
     background: #eee;
 }
+
+.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
+.tab li { float:left; width:33.3%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+.tab li { display:inline-block; padding:20px; cursor:pointer; }
+.tab li.on { background-color:#eee; color:#f00; }
+
+.tab_con div { display:none; background:#fff; line-height:100px; text-align:center; }
 </style>
 </head>
-
 <body>
+<div>검색하기위한</div>
+<ul class="tab" id="tab">
+    <li>호텔</li>
+    <li>병원</li>
+    <li>장례업체</li>	
+</ul>
+<div class="tab_con" id="tab_con">
+<div>
+<table class="type11">
+    <thead>
+    <tr>
+        <th scope="cols">주문코드</th>
+        <th scope="cols">상품</th>
+        <th scope="cols">예약일</th>
+        <th scope="cols">가격</th>
+        <th scope="cols">업체</th>
+        <th scope="cols">주문일시</th>
+        <th scope="cols">상태</th>
+        <th scope="cols">삭제</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    
+    <tr th:each="order_list : ${order_list}">
+        <td><span th:text="${order_list.or_cd}"></span></th>
+        <td><span th:text="${order_list.pd_nm}"></span></th>
+        <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
+        <td><span th:text="${order_list.pd_price}"></span></th>
+        <td><span th:text="${order_list.etp_nm}"></span></th>
+
+        <td><button>삭제</button></th>
+    </tr>
+    </th:each>
+    </tbody>
+</table>
+</div>
+<div>2
 <table class="type11">
     <thead>
     <tr>
@@ -56,8 +129,37 @@ table.type11 td {
         <td><button>삭제</button></th>
     </tr>
     </th:each>
-  
     </tbody>
 </table>
+</div>
+<div>3
+
+<table class="type11">
+    <thead>
+    <tr>
+        <th scope="cols">주문코드</th>
+        <th scope="cols">상품</th>
+        <th scope="cols">가격</th>
+        <th scope="cols">업체</th>
+        <th scope="cols">주문일시</th>
+        <th scope="cols">삭제</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    
+    <tr th:each="order_list : ${order_list}">
+        <td><span th:text="${order_list.or_cd}"></span></th>
+        <td><span th:text="${order_list.pd_nm}"></span></th>
+        <td><span th:text="${order_list.pd_price}"></span></th>
+        <td><span th:text="${order_list.etp_nm}"></span></th>
+        <td><span th:text="${order_list.or_dt}"></span></th>
+        <td><button>삭제</button></th>
+    </tr>
+    </th:each>
+    </tbody>
+</table>
+</div>
+</div>
 </body>
 </html>

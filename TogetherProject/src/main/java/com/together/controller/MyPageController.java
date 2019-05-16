@@ -1,5 +1,6 @@
 package com.together.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -141,10 +142,9 @@ public class MyPageController {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
 		 order_list = mypage.orderlist(user_id);
-		
 		  model.addAttribute("order_list", order_list);
 		  	System.out.println(user_id);
-	
+		  	System.out.println(order_list);
 		return "nav/mypage/myreservation";
 
 	}
