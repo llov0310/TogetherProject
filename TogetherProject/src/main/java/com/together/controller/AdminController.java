@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ import com.together.domain.Search;
 import com.together.service.AdminService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
 
 @Controller
 @AllArgsConstructor
@@ -283,37 +286,44 @@ public class AdminController {
 	   public String etpApplyManage(
 			   Model model, HttpSession session,
 			   EnterpriseVO etpIns, MemberVO mbIns,
-			   @RequestParam String[] user_id, @RequestParam String etpCk
+			   @RequestBody String param
 			   ) {
+		   List<Map<String,Object>> etpApplyMap = new ArrayList<Map<String,Object>>();
+		   etpApplyMap = JSONArray.fromObject(param);
+		   String user_id = null;
+		   int update = 0;
+		   int delete = 0;
 		   
-		   System.out.println("업체 신청 확인 : " + user_id.length);
-		   System.out.println(user_id);
-		   //System.out.println(etpCk + "옴??????????????");
-		   if(etpCk.equals("수락")) {
-			   for(int i=0; i<user_id.length; i++) {
-				   int update = adminService.etpApplyManage_01(user_id[i]);
-				   System.out.println(update);
-				   if(update !=0) {
-					   System.out.println("넘어는 오시는건가요?");
-					   return "success1";
-				   } else {
-					   return "fail1";
-				   }
-			   
+		   System.out.println(etpApplyMap);
+		   System.out.println("수락 및 거절 여부 : " + etpApplyMap.get(0).get("etpCk"));
+		   System.out.println(etpApplyMap.get(0).get("user_id"));
+		   System.out.println(etpApplyMap.size());
+		   
+		if (etpApplyMap.get(0).get("etpCk").equals("수락")) {
+			for (int i = 0; i < etpApplyMap.size(); i++) {
+				user_id = (String) etpApplyMap.get(i).get("user_id");
+				update = adminService.etpApplyManage_01(user_id);
+			}
+			   if(update !=0) {
+				   System.out.println("넘어는 오시는건가요?");
+				   return "success1";
+			   } else {
+				   return "fail1";
 			   }
-		   }else if(etpCk.equals("거절")) {
-			   for(int i=0; i<user_id.length; i++) {
-				   int delete = adminService.etpApplyManage_02(user_id[i]);
-				   
-				   if(delete !=0) {
-					   System.out.println("넘어는 오시는건가요?" + "혹시이거니?");
-					   return "success2";
-				   } else {
-					   return "fail2";
-				   }
+			
+		}else if(etpApplyMap.get(0).get("etpCk").equals("거절")) {
+			for (int i = 0; i < etpApplyMap.size(); i++) {
+				user_id = (String) etpApplyMap.get(i).get("user_id");
+				delete = adminService.etpApplyManage_01(user_id);
+			}
+			   if(delete !=0) {
+				   System.out.println("넘어는 오시는건가요?" + "혹시이거니?");
+				   return "success2";
+			   } else {
+				   return "fail2";
 			   }
-			   
-		   }
+		}
+		   
 		   return "all_fail";
 	   }
 	   

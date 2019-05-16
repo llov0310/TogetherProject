@@ -14,28 +14,36 @@ $(document).ready(function(){
 		$(".etpCk").off().on('click',function(){
 			// name이 같은 체크박스의 값들을 배열에 담는다
 			// off() : 이벤트 제거하기
-			var user_id = [];
+			var user_id = []; // 체크 된 아이디를 담을 배열 선언
+			var array = []; // Obj (키,밸류) 형식으로 된 변수를 담을 배열 선언
 			var etpCk = $(this).val();
-			
-			
-			console.log(etpCk);
-			console.log("첫 번째 테스트 : " + user_id);
-			
 			
 			$("input[name='user_id']:checked").each(function(i){
 				 user_id.push($(this).val());
 			});
 			
-			console.log("두 번째 테스트 : " + user_id);
+			console.log(user_id.length);
+			console.log("테스트" + user_id[0]);
+			
+			for(var i=0; i<user_id.length; i++){
+				var Obj = {}; // 오브젝트 변수 선언과 동시에 초기화
+				Obj.etpCk = etpCk;
+				Obj.user_id = user_id[i];
+				array.push(Obj);
+			}
+			
+			console.log(array);
+			console.log(etpCk);
+			
+			
 			//jQuery.ajaxSettings.traditional = true; // arr전송하기
 			
 			$.ajax({
 				url : "/etpApplyManage",
 				type : "POST",
-				dataType : "text",
-				data : {user_id : user_id, etpCk : etpCk},
+				contentType:"application/json;charset=UTF-8",
+				data : JSON.stringify(array),
 				traditional: true, //배열 때문에 쓰는거
-				
 				success : function(data){
 					alert("완료");
 					console.log(data + "넘어오는지 테스트");
