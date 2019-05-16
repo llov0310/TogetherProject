@@ -24,35 +24,17 @@ public interface CustomerMapper {
 
 	public ArrayList<EnterpriseVO> textbox(@Param("sess") String sess);
 
-	
-	//업체 정보 수정
-	public Integer update(@Param("etp_nm") String etp_nm, 
-			@Param("etp_addr") String etp_addr, 
-			@Param("etp_ph_no") String etp_ph_no, 
-			@Param("etp_email") String etp_email, 
-			@Param("etp_license_no") String etp_license_no,
-			@Param("etp_cd") String etp_cd);
-
-	public Integer update2(@Param("etp_if_info") String etp_if_info, 
-			@Param("etp_if_intro") String etp_if_intro, 
-			@Param("time1") String time1, 
-			@Param("time2") String time2, 
-			@Param("etp_cd")String etp_cd);
-
-	public  ArrayList<EnterpriseVO> info_select(String user_id);
-
 	public int ent_info(String code);
 
-	public ArrayList<ProductVO> product_select(@Param ("code") String code);
-
-	public int del(@Param("code") String code, @Param("nm") String nm);
-
-	public int insert_product( @Param("code") String code, 
-			@Param("pd_nm") String pd_nm, 
-			@Param("pd_price") int pd_price, 
-			@Param("pd_content") String pd_content);
-
 	public ArrayList<EnterpriseVO> getList(String code);
+
+	public ArrayList<EnterpriseVO> getcd(@Param("code") String code, @Param("name") String name);
+
+	public int insert_order(@Param("user") String user, 
+			@Param("pdcode") String pdcode, 
+			@Param("first") String first_day, 
+			@Param("last") String last_day, 
+			@Param("price") int price);
 
 	
 	

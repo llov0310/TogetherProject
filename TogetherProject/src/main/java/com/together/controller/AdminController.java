@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
@@ -186,11 +187,11 @@ public class AdminController {
         parm.put("Search", s);
         
         model.addAttribute("pageNum",map.get(sendPageNum));
-        model.addAttribute("memberSearch",adminService.getSearchResult(parm));
-        System.out.println("사용자 관리검색 결과 :" + adminService.getSearchResult(parm));
+        model.addAttribute("memberSearch",adminService.memberSearchResult(parm));
+        System.out.println("사용자 관리검색 결과 :" + adminService.memberSearchResult(parm));
         
-        for(int i=0; i<adminService.getSearchResult(parm).size(); i++) {
-        	System.out.println(adminService.getSearchResult(parm).get(i).getUser_id());
+        for(int i=0; i<adminService.memberSearchResult(parm).size(); i++) {
+        	System.out.println(adminService.memberSearchResult(parm).get(i).getUser_id());
         }
         
         if(realNum > pageNum) {
@@ -207,9 +208,7 @@ public class AdminController {
         
 		return "admin/memberManage";
 	}
-	
-	
-	
+		
 	
 	// 업체 관리 페이지 (페이징)
 	@RequestMapping(value = "/enterpriseManage" + "/{num}", method = RequestMethod.GET)
@@ -287,7 +286,8 @@ public class AdminController {
 			   @RequestParam String[] user_id, @RequestParam String etpCk
 			   ) {
 		   
-		   //System.out.println(user_id.length);
+		   System.out.println("업체 신청 확인 : " + user_id.length);
+		   System.out.println(user_id);
 		   //System.out.println(etpCk + "옴??????????????");
 		   if(etpCk.equals("수락")) {
 			   for(int i=0; i<user_id.length; i++) {
@@ -324,15 +324,14 @@ public class AdminController {
 	   public String dogsManage(@PathVariable String num, Model model, HttpSession session) {
 		   
 		   Paging page = new Paging();
-		   int pageNum = 0;
 		   ArrayList<Integer> arr = new ArrayList<Integer>();
-		   int realNum = Integer.parseInt(num);
-		   page.setTotalNum(adminService.dogsPageNum());
-		   // 추가내용
 		   Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+		   int pageNum = 0;
 		   int mapNum = 0;
 		   int sendPageNum = 0;
-		     
+		   int realNum = Integer.parseInt(num);
+		   
+		   page.setTotalNum(adminService.dogsPageNum());
 		   if(page.getTotalNum() <= page.getOnePageBoard()) {
 			   pageNum = 1;
 		   }else {
@@ -378,7 +377,7 @@ public class AdminController {
 
 			if (realNum > pageNum) {
 				System.out.println("pageNum : " + pageNum);
-				return "redirect:/enterpriseManage/" + pageNum;
+				return "redirect:/dogsManage/" + pageNum;
 			}
 		   
 		   
@@ -386,6 +385,191 @@ public class AdminController {
 		   return "admin/dogsManage";
 	   }
 	   
+	// 반려견 관리 페이지 : 반려견 정보 검색
+	@RequestMapping(value = "/dogsManage" + "/search" + "/{page}" + "/{searchType}"
+			+ "/{keyword}", method = RequestMethod.GET)
+	public String dogsSearch(@PathVariable int page, @PathVariable String searchType, @PathVariable String keyword,
+			Model model) {
+		Paging p = new Paging();
+		Search s = new Search();
+		ArrayList<DogsVO> searchArr = new ArrayList<DogsVO>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		Map<Object, Object> parm = new HashMap<Object, Object>();
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+
+		s.setPage(page);
+		s.setKeyword(keyword);
+		s.setSearchType(searchType);
+
+		System.out.println(page); // 현재 페이지 번호
+		System.out.println(searchType); // 검색 옵션
+		System.out.println(keyword); // 검색 키워드
+
+		searchArr = adminService.dogsSearch(s);
+
+		System.out.println("사용자 관리 검색 :" + searchArr);
+
+		int pageNum = 0;
+		int mapNum = 0;
+		int sendPageNum = 0;
+		int realNum = page;
+		p.setTotalNum(searchArr.size());
+
+		//
+
+		if (p.getTotalNum() <= p.getOnePageBoard()) {
+			pageNum = 1;
+		} else {
+			pageNum = p.getTotalNum() / p.getOnePageBoard();
+			if (p.getTotalNum() % p.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
+		}
+
+		if (pageNum % 5 != 0) {
+			mapNum = pageNum / 5 + 1;
+		} else {
+			mapNum = pageNum / 5;
+		}
+
+		for (int i = 0; i < mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for (int j = 0; j < 5; j++) {
+
+				if ((i * 5) + j + 1 > pageNum) {
+					break;
+				}
+
+				arr.add((i * 5) + j + 1);
+			}
+			map.put(i, arr);
+		}
+
+		p.setEndNum((realNum * 10) + 1);
+		p.setStartNum(p.getEndNum() - 10);
+
+		parm.put("Paging", p);
+		parm.put("Search", s);
+
+		model.addAttribute("pageNum", map.get(sendPageNum));
+		model.addAttribute("dogsSearch", adminService.dogsSearchResult(parm));
+		System.out.println("사용자 관리검색 결과 :" + adminService.dogsSearchResult(parm));
+
+		for (int i = 0; i < adminService.dogsSearchResult(parm).size(); i++) {
+			System.out.println(adminService.dogsSearchResult(parm).get(i).getUser_id());
+		}
+
+		if (realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			System.out.println("keyword : " + keyword);
+			try {
+				keyword = URLEncoder.encode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "redirect:/dogsManage/search/" + pageNum + "/" + searchType + "/" + keyword + "";
+		}
+		
+		System.out.println("서치타입확인"+s.getSearchType());
+		return "admin/dogsManage";
+	}
+	   
+	
+	// 업체신청 관리 페이지 : 업체신청 검색
+	@RequestMapping(value = "/enterpriseManage" + "/search" + "/{page}" + "/{searchType}"
+			+ "/{keyword}", method = RequestMethod.GET)
+	public String etpApplySearch(@PathVariable int page, @PathVariable String searchType, @PathVariable String keyword,
+			Model model) {
+		Paging p = new Paging();
+		Search s = new Search();
+		ArrayList<EnterpriseVO> searchArr = new ArrayList<EnterpriseVO>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		Map<Object, Object> parm = new HashMap<Object, Object>();
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+
+		s.setPage(page);
+		s.setKeyword(keyword);
+		s.setSearchType(searchType);
+
+		System.out.println(page); // 현재 페이지 번호
+		System.out.println(searchType); // 검색 옵션
+		System.out.println(keyword); // 검색 키워드
+
+		searchArr = adminService.etpApplySearch(s);
+
+		System.out.println("사용자 관리 검색 :" + searchArr);
+
+		int pageNum = 0;
+		int mapNum = 0;
+		int sendPageNum = 0;
+		int realNum = page;
+		p.setTotalNum(searchArr.size());
+
+		//
+
+		if (p.getTotalNum() <= p.getOnePageBoard()) {
+			pageNum = 1;
+		} else {
+			pageNum = p.getTotalNum() / p.getOnePageBoard();
+			if (p.getTotalNum() % p.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
+		}
+
+		if (pageNum % 5 != 0) {
+			mapNum = pageNum / 5 + 1;
+		} else {
+			mapNum = pageNum / 5;
+		}
+
+		for (int i = 0; i < mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for (int j = 0; j < 5; j++) {
+
+				if ((i * 5) + j + 1 > pageNum) {
+					break;
+				}
+
+				arr.add((i * 5) + j + 1);
+			}
+			map.put(i, arr);
+		}
+
+		p.setEndNum((realNum * 10) + 1);
+		p.setStartNum(p.getEndNum() - 10);
+
+		parm.put("Paging", p);
+		parm.put("Search", s);
+
+		model.addAttribute("pageNum", map.get(sendPageNum));
+		model.addAttribute("etpApplySearch", adminService.etpApplySearchResult(parm));
+		System.out.println("사용자 관리검색 결과 :" + adminService.etpApplySearchResult(parm));
+
+		for (int i = 0; i < adminService.etpApplySearchResult(parm).size(); i++) {
+			System.out.println(adminService.etpApplySearchResult(parm).get(i).getUser_id());
+		}
+
+		if (realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			System.out.println("keyword : " + keyword);
+			try {
+				keyword = URLEncoder.encode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "redirect:/enterpriseManage/search/" + pageNum + "/" + searchType + "/" + keyword + "";
+		}
+		
+		System.out.println("서치타입확인"+s.getSearchType());
+		return "admin/enterpriseManage";
+	}
+	
+	
+	
+	
+
 	   // 라인 차트 : 연도별 가입자 수를 나타냄 -  Morrisjs 차트 사용
 	   @ResponseBody
 	   @RequestMapping(value = "/lineChart_01", method = RequestMethod.POST)

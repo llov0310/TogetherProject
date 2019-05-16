@@ -14,6 +14,7 @@ public class OrdersVO {
 	private Timestamp th_dt;
 	private String or_stat;
 	private String or_check;
+	private int or_price;
 
 	
 	//주문리스트 보기위한변수

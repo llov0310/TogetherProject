@@ -48,46 +48,24 @@
 	</select>
 	
 	
-	<update id="update" parameterType = "com.together.domain.EnterpriseVO">
-		update enterprise set etp_email = #{etp_email},
-		etp_addr = #{etp_addr},
-		etp_ph_no = #{etp_ph_no},
-		etp_license_no = #{etp_license_no},
-		etp_nm = #{etp_nm}
-		where etp_cd = #{etp_cd}
-		
-	</update>
-	<update id="update2" parameterType="com.together.domain.EnterpriseVO">
-		update enterprise_info set etp_if_info = #{etp_if_info},
-		etp_if_intro = #{etp_if_intro},
-		etp_if_time1 = #{time1},
-		etp_if_time2 = #{time2}
-		where etp_cd = #{etp_cd}
-	</update>
-	
-	<select id="info_select" resultType="com.together.domain.EnterpriseVO">
-	select *from member a, enterprise b 
-	where a.user_id = b.user_id and b.user_id = #{user_id}
-	</select> 
 	
 	<insert id="ent_info" parameterType="com.together.domain.EnterpriseInfoVO">
 		insert into enterprise_info(etp_if_cd,etp_cd) values (ENTINFO_SEQ.nextval,#{code})		
 	</insert>
 	
-	<select id="product_select" resultType="com.together.domain.ProductVO">
-		select * from product where etp_cd = #{code}
-	</select>
 	
-	<delete id="del" parameterType="com.together.domain.ProductVO">
-	delete from product where etp_cd = #{code} and pd_nm = #{nm}
-	</delete>
-	
-	<insert id="insert_product" parameterType="com.together.domain.ProductVO">
-		insert into product values (PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},null)
-	</insert>
 	
 	<select id="getList" resultType="com.together.domain.ProductVO">
 		select * from product where etp_cd = #{code}
 	</select>
+	
+	<select id="getcd" resultType="com.together.domain.EnterpriseVO">
+	select * from Product where etp_cd = #{code} and pd_nm = #{name}
+	</select>
+	
+	<insert id="insert_order" parameterType="com.together.domain.OrdersVO">
+	insert into orders(or_cd, user_id, pd_cd, or_dt, or_dt2, th_dt, or_stat, or_check, or_price)
+ 	values(ORDER_SEQ.nextval,#{user},#{pdcode},to_timestamp(#{first}),to_timestamp(#{last}),sysdate,'1','1',#{price})
+	</insert>
 	
 </mapper>

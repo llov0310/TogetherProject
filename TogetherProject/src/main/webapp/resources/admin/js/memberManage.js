@@ -1,14 +1,22 @@
+// ready 두번 호출 방지를 위해 변수 선언
+// 설명 : 3. <head> 바깥에 사용할 경우에는 isloaded 변수를 정의해서 ready() 함수가 끝나는 부분에 true로 하고 강제적으로 1번만 호출될 수 있도록 한다.
+var isloaded_M_Manage = false;
+
 $(document).ready(function(){
+	// ready 두번 호출 방지를 위해 if문 선언
+	if (isloaded_M_Manage) {
+
+	return;
+
+	}
+	
 	//★뭐지 이건★
 	   $('.pagination-inner a').on('click', function() {
 	      $(this).siblings().removeClass('pagination-active');
 	      $(this).addClass('pagination-active');
 	   });
 	
-	
-	/*pagination*/
-	   
-	   
+	/*pagination*/	   
 	   var num = 0;
 
 	   var newURL =  window.location.pathname;
@@ -74,9 +82,9 @@ $(document).ready(function(){
 		            alert("검색내용을 입력하세요");
 		            $("#keyword").val("");
 		            $("#keyword").focus();
+		            return false;
 		         }
 		         window.location.href = "/memberManage/search/"+page+"/"+searchType+"/"+keyword;
-		         
 		      } else{
 		         var page = 1; // 현재 페이지 번호
 		         var searchType = $("#search-select option:selected").val();
@@ -100,5 +108,6 @@ $(document).ready(function(){
 			}
 		});
 		
-		
+		// ready함수 두번 호출 방지를 위해 true로 변경
+		isloaded_M_Manage = true;
 }); //document ready

@@ -14,6 +14,7 @@ import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.service.CustomerService;
 import com.together.service.ETPApplyService;
+import com.together.service.ETPManageService;
 
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,7 @@ public class ETPApplyController {
 	
 	private ETPApplyService etpApplyService;
 	private CustomerService customerservice;
+	private ETPManageService ManageService;
 	
 	// 업체 등록 
 	@RequestMapping(value = "/etpApply", method = RequestMethod.POST)
@@ -32,7 +34,7 @@ public class ETPApplyController {
 
 		if(cd.equals("h")) {
 				int insert = etpApplyService.etpApply(ins);
-				prise = customerservice.info_select(user_id);
+				prise = ManageService.info_select(user_id);
 				String code = prise.get(0).getEtp_cd();
 				int ins1 = customerservice.ent_info(code);
 				if (insert != 0) {
@@ -43,7 +45,7 @@ public class ETPApplyController {
 		
 		}else if(cd.equals("f")){
 				int insert = etpApplyService.etpApply2(ins);
-				prise = customerservice.info_select(user_id);
+				prise = ManageService.info_select(user_id);
 				String code = prise.get(0).getEtp_cd();
 				int ins2 = customerservice.ent_info(code);
 				if (insert != 0) {

@@ -166,7 +166,8 @@
 	]]>
 	</select>
 	
-	<select id="getSearchResult" resultType="com.together.domain.MemberVO" parameterType="map">
+	<!-- 회원정보 검색 결과 -->
+	<select id="memberSearchResult" resultType="com.together.domain.MemberVO" parameterType="map">
 	<![CDATA[
 	select x.rnum, x.*
 	from (select rownum as rnum, before_ord.*
@@ -177,5 +178,58 @@
 	order by x.user_nm
 	]]>
 	</select>
+	
+	<!-- 반려견 관리 검색을 위해 사용하는 sql문 -->
+	<select id="dogsSearch" resultType="com.together.domain.DogsVO">
+	<![CDATA[
+	select m.ph_no, m.user_nm, d.user_id, d.d_gender, d.d_dt, d.d_addr, d.d_kind, d.d_nm, d.d_content
+	from member m, dogs d
+	where m.user_id = d.user_id and ${searchType} like '%' || '${keyword}' || '%'
+	order by d.user_id
+	]]>
+	</select>
+	
+	<!-- 반려견 정보 검색 결과 -->
+	<select id="dogsSearchResult" resultType="com.together.domain.DogsVO">
+	<![CDATA[
+	select x.rnum, x.*
+	from (select rownum as rnum, before_ord.*
+    	from (select m.ph_no, m.user_nm, d.user_id, d.d_gender, d.d_dt, d.d_addr, d.d_kind, d.d_nm, d.d_content
+    	from member m, dogs d
+    	where m.user_id = d.user_id and
+    	${Search.searchType} like '%' || '${Search.keyword}' || '%') before_ord
+    		where rownum < #{Paging.endNum}) x
+	where x.rnum >= #{Paging.startNum}
+	order by x.user_id
+	]]>
+	</select>
+	
+	
+	<!-- 업체신청 관리 검색을 위해 사용하는 sql문 -->
+	<select id="etpApplySearch" resultType="com.together.domain.EnterpriseVO">
+	<![CDATA[
+	select m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
+	from member m, enterprise e
+	where m.user_id = e.user_id and m.authority_no = 3 and ${searchType} like '%' || '${keyword}' || '%'
+	order by e.user_id
+	]]>
+	
+
+	</select>
+	
+	<!-- 업체신청 검색 결과 -->
+	<select id="etpApplySearchResult" resultType="com.together.domain.EnterpriseVO">
+	<![CDATA[
+	select x.rnum, x.*
+	from (select rownum as rnum, before_ord.*
+    	from (select m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content
+    	from member m, enterprise e
+    	where m.user_id = e.user_id and m.authority_no = 3 and ${Search.searchType} like '%' || '${Search.keyword}' || '%') before_ord
+    		where rownum < #{Paging.endNum}) x
+	where x.rnum >= #{Paging.startNum}
+	order by x.user_id
+	]]>
+	</select>
+	
 	
 </mapper>

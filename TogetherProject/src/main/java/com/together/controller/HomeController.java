@@ -84,6 +84,7 @@ public class HomeController {
 	   model.addAttribute("place" , toAddress);
 	   result = customerservice.ser(toAddress);
 //	   session.setAttribute("etp_list" , result);
+	   
 	   model.addAttribute("etp_list", result);
 	  return  "service/hotel/hotelserch";
    }
@@ -153,101 +154,7 @@ public class HomeController {
 	   return "nav/enterprise_manage/enterprise_home";
    }
    
-   // 업체 이미지 변경
-   @RequestMapping(value = "/etpimg", method=RequestMethod.GET)
-   public String etp_img(Model model) {
-	   
-	   return "nav/enterprise_manage/enterprise_img";
-   }
-   
-   //업체정보 업데이트 컨트롤러
-   @RequestMapping(value = "/etpupdate", method=RequestMethod.POST)
-   @ResponseBody
-   public String etpUpdate(Model model,@RequestParam String etp_nm,
-		   @RequestParam String etp_if_info,@RequestParam String etp_if_intro
-		   ,@RequestParam String etp_addr,@RequestParam String etp_ph_no
-		   ,@RequestParam String etp_license_no,@RequestParam String etp_email,
-		   @RequestParam String time1,@RequestParam String time2,@RequestParam String etp_cd) {
-	   
-	   Integer update = customerservice.update(etp_nm,etp_addr,etp_ph_no,etp_license_no,etp_email,etp_cd);
-	   Integer update2 = customerservice.update2(etp_if_info,etp_if_intro,time1,time2,etp_cd);
-	   
-	    
-	   
-	   return "tq";		
-	   
-   }
-   
-   //업체 상품 정보 추가/삭제/수정
-   @RequestMapping(value = "/etpproduct", method=RequestMethod.GET)
-   public String etp_product(Model model,HttpServletRequest request) {
-	   
-	   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-	   
-	   ArrayList<EnterpriseVO> info = customerservice.info_select(id);
-	   ArrayList<ProductVO> product = new ArrayList<ProductVO>();
-	   
-	   
-	   String code = info.get(0).getEtp_cd();
-
-	   product = customerservice.product_select(code);
-	   
-	   model.addAttribute("product_info", product);
-	   
-	   return "nav/enterprise_manage/enterprise_product";
-   }
-   
-   // 업체 주문 현황
-   @RequestMapping(value = "/etporder", method=RequestMethod.GET)
-   public String etp_order(Model model) {
-	   
-	   return "nav/enterprise_manage/enterprise_order";
-   }
-   
-   //업체 상품 추가 팝업창
-   
-   @RequestMapping(value = "/orderPopup", method=RequestMethod.GET)
-   public String etp_order_pop(Model model) {
-	   
-	   return "nav/enterprise_manage/enterprise_order_pop";
-   }
-   
-   //팝업창  상품  추가 버튼
-   @RequestMapping(value = "/orderPopup_add", method=RequestMethod.GET)
-   @ResponseBody
-   public String etp_pop_add(HttpServletRequest request,Model model,@RequestParam String pd_nm,@RequestParam int pd_price,@RequestParam String pd_content) {
-	  
-	   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-	   
-	   ArrayList<EnterpriseVO> info = customerservice.info_select(id);
-	   
-	   String code = info.get(0).getEtp_cd();
-	   
-	   System.out.println(code + "혹시 왓나");
-	   
-	   int product_insert = customerservice.insert_pro(code,pd_nm,pd_price,pd_content); //이미지 업로드가되면 추가로 넣을예정
-	   
-	   return "success";
-   }
-   
-   
-   
-   
-   // 업체 상품 제거 
-   @RequestMapping(value = "/order_del", method=RequestMethod.POST)
-   @ResponseBody
-   public String etp_order_del(Model model,HttpServletRequest request,@RequestParam String nm) {
-	   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-	   
-	   ArrayList<EnterpriseVO> info = customerservice.info_select(id);
-	   
-	   String code = info.get(0).getEtp_cd();
-	   	System.out.println(code + "코드번호");
-	   int order_del = customerservice.del(code,nm);
-	   
-	   System.out.println(order_del + "왓습니까?");
-	   return "success";
-   }
+  
    
    
   

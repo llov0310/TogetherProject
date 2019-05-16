@@ -35,14 +35,32 @@
 								<th>반려견 소개</th>
 							</tr>
 						</thead>
-						<tbody th:each = "dogsList : ${dogsList}">
+						<tbody th:if="${dogsSearch == null}" th:each = "dogsList : ${dogsList}">
 							<tr>
 								<td th:text="${dogsList.user_id}"></td>
 								<td th:text="${dogsList.ph_no}"></td>
 								<td th:text="${dogsList.user_nm}"></td>
 								
-								<td th:if="${dogsList.d_gender == 1}">남</td>
-								<td th:unless="${dogsList.d_gender == 1}">여</td>
+								<td th:if="${dogsList.d_gender == 1}">수컷</td>
+								<td th:unless="${dogsList.d_gender == 1}">암컷</td>
+								
+								<td th:text="${dogsList.d_dt}"></td>
+								<td th:text="${dogsList.d_addr}"></td>
+								<td th:text="${dogsList.d_kind}"></td>
+								<td th:text="${dogsList.d_nm}"></td>
+								<td th:text="${dogsList.d_content}"></td>
+							</tr>
+						</tbody>
+						
+						<!-- 검색 할 때 사용하는 테이블 -->
+						<tbody th:if="${dogsSearch != null}" th:each = "dogsList : ${dogsSearch}">
+							<tr>
+								<td th:text="${dogsList.user_id}"></td>
+								<td th:text="${dogsList.ph_no}"></td>
+								<td th:text="${dogsList.user_nm}"></td>
+								
+								<td th:if="${dogsList.d_gender == 1}">수컷</td>
+								<td th:unless="${dogsList.d_gender == 1}">암컷</td>
 								
 								<td th:text="${dogsList.d_dt}"></td>
 								<td th:text="${dogsList.d_addr}"></td>
@@ -69,6 +87,25 @@
 					</div>
 					<!-- 페이징 -->
 					
+					<!-- 검색 -->
+					<div class="search">
+						<div class="select">
+							<select id="search-select">
+								<option value="d.user_id">아이디</option>
+								<option value="d.d_nm">반려견 이름</option>
+								<option value="m.ph_no">견주 전화번호</option>
+							</select>
+						</div>
+						<section class="search-box">
+							<div class="search-content">
+								<input type="text" id="keyword" />
+							</div>
+							<div class="search-button">
+								<button id="search">검색</button>
+							</div>
+						</section>
+					</div>
+					<!-- 검색 -->
 					
 				</div>
 			</div>
@@ -81,6 +118,9 @@
 
 <!-- customerManage.html에 필요한 css 추가 설정 -->
 <th:block layout:fragment="page_css">
+	<!-- dogsManage.css 임포트 (서치바 가운데 정렬을 위함) -->
+	<link href="/admin/css/dogsManage.css" rel="stylesheet">
+
 	<!-- Custom styles for this page -->
 	<link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css"
 		rel="stylesheet">

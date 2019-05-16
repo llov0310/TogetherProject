@@ -88,8 +88,9 @@
 					<div class="search">
 						<div class="select">
 							<select id="search-select">
-								<option value="user_nm">이름</option>
 								<option value="user_id">아이디</option>
+								<option value="user_nm">이름</option>	
+								<option value="ph_no">휴대폰 번호</option>
 							</select>
 						</div>
 						<section class="search-box">
@@ -97,7 +98,7 @@
 								<input type="text" id="keyword" />
 							</div>
 							<div class="search-button">
-								<button id="search">Search</button>
+								<button id="search">검사</button>
 							</div>
 						</section>
 					</div>
@@ -131,6 +132,9 @@
 
 <!-- customerManage.html에 필요한 css 추가 설정 -->
 <th:block layout:fragment="page_css">
+	<!-- memberManage.css 임포트 (서치바 가운데 정렬을 위함) -->
+	<link href="/admin/css/memberManage.css" rel="stylesheet">
+
 	<!-- Custom styles for this page -->
 	<link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css"
 		rel="stylesheet">
@@ -146,7 +150,6 @@
 	<link href="/admin/css/sb-admin-2.min.css" rel="stylesheet">
 	
 	<!-- 페이징 처리후 adminHead.html에 있는 공통 css가 적용되지 않아 추가로 선언 ▲-->
-	
 </th:block>
 
 	<!-- page_js -->
