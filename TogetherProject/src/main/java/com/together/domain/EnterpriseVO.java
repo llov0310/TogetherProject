@@ -51,7 +51,5 @@ public class EnterpriseVO {
 	private String chardate2;
 	private String charthisdate;
 	private String price;
-	//member
-	private String ph_no;
-	
+
 }
