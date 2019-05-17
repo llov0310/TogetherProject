@@ -15,10 +15,11 @@ public class EnterpriseVO {
 	private String etp_content;
 	private String etp_email;
 	
-	// 업체 리스트를 볼때 추가적으로 필요한 변수를 선언
+	// 업체 정보를 볼때 추가적으로 필요한 변수를 선언 (etpManage 페이지)
 	private String user_nm;
 	private int authority_no;
 	private String etp_cd_substr; // 오라클 substring을 사용하여서 변수 추가
+	private String ph_no;
 	
 	// 업체 상세정보를 볼때 필요한 변수 선언
 	

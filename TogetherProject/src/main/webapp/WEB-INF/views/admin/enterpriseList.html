@@ -14,15 +14,14 @@
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h1 class="m-0 font-weight-bold text-primary">업체 신청 관리</h1>
+				<h1 class="m-0 font-weight-bold text-primary">업체 목록</h1>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 
 					
 						<div>
-							<input type="button" id = "accept" class ="etpCk" name="etpApplyCk" value="수락"/>
-							<input type="button" id = "reject" class ="etpCk" name="etpApplyCk" value="거절"/>
+							<input type="button" id="delete" class="etpCk" name="etpApplyCk" value="삭제"/>
 						</div>
 					
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -42,44 +41,44 @@
 									<th>휴대폰 번호</th>
 								</tr>
 							</thead>
-							<tbody th:if="${etpApplySearch == null}" th:each="etpManage : ${enterpriseManage}">
+							<tbody th:if="${etpListSearch == null}" th:each="enterpriseList : ${enterpriseList}">
 								<tr>
-									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
+									<td><input type="checkbox" th:value="${enterpriseList.user_id}" name="user_id"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
-									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td>
-									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td>
+									<td th:if="${enterpriseList.etp_cd_substr == 'h'}">호텔</td>
+									<td th:if="${enterpriseList.etp_cd_substr == 'f'}">장례</td>
 									
-									<td th:text="${etpManage.user_id}"></td>					
-									<td th:text="${etpManage.user_nm}"></td>
-									<td th:text="${etpManage.etp_email}"></td>
-									<td th:text="${etpManage.etp_ph_no}"></td>
-									<td th:text="${etpManage.etp_addr}"></td>
-									<td th:text="${etpManage.etp_license_no}"></td>
-									<td th:text="${etpManage.etp_nm}"></td>
-									<td th:text="${etpManage.etp_content}"></td>
-									<td th:text="${etpManage.ph_no}"></td>
+									<td th:text="${enterpriseList.user_id}"></td>					
+									<td th:text="${enterpriseList.user_nm}"></td>
+									<td th:text="${enterpriseList.etp_email}"></td>
+									<td th:text="${enterpriseList.etp_ph_no}"></td>
+									<td th:text="${enterpriseList.etp_addr}"></td>
+									<td th:text="${enterpriseList.etp_license_no}"></td>
+									<td th:text="${enterpriseList.etp_nm}"></td>
+									<td th:text="${enterpriseList.etp_content}"></td>
+									<td th:text="${enterpriseList.ph_no}"></td>
 								</tr>
 							</tbody>
 							
 							<!-- 검색 할 때 사용하는 테이블 -->
-							<tbody th:if="${etpApplySearch != null}" th:each="etpManage : ${etpApplySearch}">
+							<tbody th:if="${etpListSearch != null}" th:each="enterpriseList : ${etpListSearch}">
 								<tr>
-									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
+									<td><input type="checkbox" th:value="${enterpriseList.user_id}" name="user_id"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
-									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td>
-									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td>
+									<td th:if="${enterpriseList.etp_cd_substr == 'h'}">호텔</td>
+									<td th:if="${enterpriseList.etp_cd_substr == 'f'}">장례</td>
 									
-									<td th:text="${etpManage.user_id}"></td>					
-									<td th:text="${etpManage.user_nm}"></td>
-									<td th:text="${etpManage.etp_email}"></td>
-									<td th:text="${etpManage.etp_ph_no}"></td>
-									<td th:text="${etpManage.etp_addr}"></td>
-									<td th:text="${etpManage.etp_license_no}"></td>
-									<td th:text="${etpManage.etp_nm}"></td>
-									<td th:text="${etpManage.etp_content}"></td>
-									<td th:text="${etpManage.ph_no}"></td>
+									<td th:text="${enterpriseList.user_id}"></td>					
+									<td th:text="${enterpriseList.user_nm}"></td>
+									<td th:text="${enterpriseList.etp_email}"></td>
+									<td th:text="${enterpriseList.etp_ph_no}"></td>
+									<td th:text="${enterpriseList.etp_addr}"></td>
+									<td th:text="${enterpriseList.etp_license_no}"></td>
+									<td th:text="${enterpriseList.etp_nm}"></td>
+									<td th:text="${enterpriseList.etp_content}"></td>
+									<td th:text="${enterpriseList.ph_no}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -149,7 +148,7 @@
 <!-- customerManage.html에 필요한 css 추가 설정 -->
 <th:block layout:fragment="page_css">
 	<!-- enterpriseManage.css 임포트 (서치바 가운데 정렬을 위함) -->
-	<link href="/admin/css/enterpriseManage.css" rel="stylesheet">
+	<link href="/admin/css/enterpriseList.css" rel="stylesheet">
 
 	<!-- 페이징 처리후 adminHead.html에 있는 공통 css가 적용되지 않아 추가로 선언 ▼-->
 	<link href="/admin/vendor/fontawesome-free/css/all.min.css"
@@ -167,7 +166,7 @@
 	<!-- page_js -->
 	<th:block layout:fragment="page_js">
 		<script src="/admin/vendor/jquery/jquery.min.js"></script>
-		<script src="/admin/js/etpManageApply.js"></script>
+		<script src="/admin/js/enterpriseList.js"></script>
 	</th:block>
 
 </html>

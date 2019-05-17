@@ -1,7 +1,7 @@
 // ready 두번 호출 방지를 위해 변수 선언
 // 설명 : 3. <head> 바깥에 사용할 경우에는 isloaded 변수를 정의해서 ready() 함수가 끝나는 부분에 true로 하고 강제적으로 1번만 호출될 수 있도록 한다.
-var isloaded_etpManageApply = false;
-$(document).ready(function(){
+var isloaded_etpList = false;
+$(document).ready(function(){	   
 		//체크박스 전체 선택
 		$("#allCheck").click(function(){
 			//클릭 되었으면
@@ -38,10 +38,11 @@ $(document).ready(function(){
 			console.log(array);
 			console.log(etpCk);
 			
+			
 			//jQuery.ajaxSettings.traditional = true; // arr전송하기
 			if(confirm("정말 " + etpCk +"하시겠습니까?") == true){
 				$.ajax({
-					url : "/etpApplyManage",
+					url : "/etpListDelete",
 					type : "POST",
 					contentType:"application/json;charset=UTF-8",
 					data : JSON.stringify(array),
@@ -49,7 +50,7 @@ $(document).ready(function(){
 					success : function(data){
 						alert("완료");
 						console.log(data + "넘어오는지 테스트");
-						window.location.href= "/enterpriseManage/"  + (num+1);
+						window.location.href= "/enterpriseList/"  + (num+1);
 					},
 					error:function(jqXHR, textStatus, errorThrown){
 						alert('에러 발생 \n' + textStatus + ' : ' + errorThrown);
@@ -84,18 +85,18 @@ $(document).ready(function(){
 				   $('.pagination-inner a').on('click', function() {
 				      var a = $(".pagination-inner a").index(this);
 				      num = a;
-				      window.location.href = "/enterpriseManage/"+(num+1);
+				      window.location.href = "/enterpriseList/"+(num+1);
 				   });
 
 				   $('.pagination-newer').click(function(){
 				      if(1 > parseInt(url[2])-1 )
-				         window.location.href = "/enterpriseManage/"+(parseInt(url[2]));
+				         window.location.href = "/enterpriseList/"+(parseInt(url[2]));
 				      else
-				         window.location.href = "/enterpriseManage/"+(parseInt(url[2])-1);
+				         window.location.href = "/enterpriseList/"+(parseInt(url[2])-1);
 				   });
 
 				   $('.pagination-older').click(function(){
-				         window.location.href = "/enterpriseManage/"+(parseInt(url[2])+1);
+				         window.location.href = "/enterpriseList/"+(parseInt(url[2])+1);
 				   });
 			   
 		   }else{ //검색 일 때
@@ -107,23 +108,23 @@ $(document).ready(function(){
 			          var a = $(".pagination-inner a").index(this);
 			          var b = $(".pagination-inner a:eq("+a+")").attr("id");
 			          num = b;
-			          window.location.href = "/enterpriseManage/search/"+num+"/"+url[4]+"/"+url[5];
+			          window.location.href = "/enterpriseList/search/"+num+"/"+url[4]+"/"+url[5];
 			       });
 
 			       $('.pagination-newer').click(function(){
 			          if(1 > parseInt(url[3])-1 )
-			             window.location.href = "/enterpriseManage/search/"+(parseInt(url[3]))+"/"+url[4]+"/"+url[5];
+			             window.location.href = "/enterpriseList/search/"+(parseInt(url[3]))+"/"+url[4]+"/"+url[5];
 			          else
-			             window.location.href = "/enterpriseManage/search/"+(parseInt(url[3])-1)+"/"+url[4]+"/"+url[5];
+			             window.location.href = "/enterpriseList/search/"+(parseInt(url[3])-1)+"/"+url[4]+"/"+url[5];
 			       });
 
 			       $('.pagination-older').click(function(){
-			          window.location.href = "/enterpriseManage/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
+			          window.location.href = "/enterpriseList/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
 			       });
 		   } // else 끝
 		   
 			// ready 두번 호출 방지를 위해 if문 선언
-			if (isloaded_etpManageApply) {
+			if (isloaded_etpList) {
 
 			return;
 
@@ -141,7 +142,7 @@ $(document).ready(function(){
 			            $("#keyword").focus();
 			            return false;
 			         }
-			         window.location.href = "/enterpriseManage/search/"+page+"/"+searchType+"/"+keyword;
+			         window.location.href = "/enterpriseList/search/"+page+"/"+searchType+"/"+keyword;
 			      } else{
 			         var page = 1; // 현재 페이지 번호
 			         var searchType = $("#search-select option:selected").val();
@@ -153,12 +154,11 @@ $(document).ready(function(){
 			            $("#keyword").focus();
 			            return false;
 			         }
-			         window.location.href = "/enterpriseManage/search/"+page+"/"+searchType+"/"+keyword;
+			         window.location.href = "/enterpriseList/search/"+page+"/"+searchType+"/"+keyword;
 			      }
 			   }); // 검색 이벤트 종료
 			// ready함수 두번 호출 방지를 위해 true로 변경
-			isloaded_etpManageApply = true;
-		   
+			isloaded_etpList = true;
 		   
 		   // 엔터치면 검색 되게 하는 함수
 			$('#keyword').keypress(function(event) {

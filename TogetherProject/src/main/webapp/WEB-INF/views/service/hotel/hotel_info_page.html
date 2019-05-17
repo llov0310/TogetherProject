@@ -114,18 +114,21 @@
   			  var test = $('.code').text();
   			  var form_len = $('#form_test').children(); // 추가된 상품의 갯수
   			  
-  			  var array = [];
+  			  var array = []; // 배열 변수 선언
   			  
   			  for(var i=0; i<form_len.length; i++){
-  			  var Obj = {};
+  			  var Obj = {}; // 오브젝트 변수 선언과 동시에 초기화
   			  Obj.etp_cd = test;
   			  Obj.pd_nm = form_len.eq(i).find('.nm').text();
   			  Obj.first = form_len.eq(i).find('.first_day').text();
   			  Obj.last = form_len.eq(i).find('.last_day').text();
   			  Obj.num = form_len.eq(i).find('.num2').find('label').text();
   			  Obj.price = form_len.eq(i).find('.num').find('label').text();
-  			  array.push(Obj);
+  			  array.push(Obj); // 한번 반복될때 정렬된 obj 값 배열 에 하나씩 넣어주기
   			  }
+  			  
+  			  console.log(array);
+  			  
   			
 			$.ajax({
 				type : "POST",
@@ -135,8 +138,8 @@
 		        traditional:true,
 				success : function(data){
 					if(data == "success"){
-						alert("예약완료");
-						window.location.reload();
+// 						alert("예약완료");
+// 						window.location.reload();
 					}else{
 						console.log("실패");
 					}
