@@ -18,4 +18,10 @@ public interface ETPManageService {
 	public int del(String code, String nm);
 
 	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content);
+	
+	public ArrayList<EnterpriseVO> textbox(String sess);
+
+	public ArrayList<EnterpriseVO> etpcheck(String sess);
+
+	public ArrayList<EnterpriseVO> select_order_list(String code);
 }

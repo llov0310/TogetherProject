@@ -42,13 +42,7 @@
 		where a.etp_cd = b.etp_cd and c.user_id = a.user_id and b.etp_cd = #{test}
 	</select>
 	
-	<select id="textbox" resultType="com.together.domain.EnterpriseVO">
-		select * from enterprise a , enterprise_info b 
-		where a.etp_cd = b.etp_cd and a.user_id = #{sess}
-	</select>
-	
-	
-	
+
 	<insert id="ent_info" parameterType="com.together.domain.EnterpriseInfoVO">
 		insert into enterprise_info(etp_if_cd,etp_cd) values (ENTINFO_SEQ.nextval,#{code})		
 	</insert>
@@ -65,7 +59,7 @@
 	
 	<insert id="insert_order" parameterType="com.together.domain.OrdersVO">
 	insert into orders(or_cd, user_id, pd_cd, or_dt, or_dt2, th_dt, or_stat, or_check, or_price)
- 	values(ORDER_SEQ.nextval,#{user},#{pdcode},to_timestamp(#{first}),to_timestamp(#{last}),sysdate,'1','1',#{price})
+ 	values(ORDER_SEQ.nextval,#{user},#{pdcode},to_timestamp(#{first}),to_timestamp(#{last}),to_char(sysdate,'YYYY-MM-DD HH24:mi:ss'),'1','1',#{price})
 	</insert>
 	
 </mapper>

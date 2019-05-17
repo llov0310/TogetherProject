@@ -67,6 +67,7 @@
 
 
     <div class="sidebar">
+    	
         <img alt="logo" height="150" width="200" src="assets/img/enterprise_manage/enterpriseIcon.svg" >
 
         <ul>
@@ -95,13 +96,13 @@
 
 
 <div class="total" id="total">
-	<div th:each=" user : ${session.user}">
-		<div th:if = "${user} !=null">
+	<div th:each=" if : ${etpInfo}">
+		<div th:if = "${if} !=null">
 			<div style="margin-top : 10%; margin-left : 50%;">
 				확인용 
 				
 				
-					<span th:text="${user.user_id}"></span>
+					<span th:text="${if.etp_cd}"></span>
 			</div>
 		</div>
 	</div>

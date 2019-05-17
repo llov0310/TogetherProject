@@ -32,6 +32,43 @@ public class ETPManageController {
 	
 	private ETPManageService ManageService;
 	
+	
+	
+		////////////////////////////////////업체 관리 용////////////////////////////////////  
+		//업체 관리 페이지 맵핑
+		@RequestMapping(value = "/etpManage", method=RequestMethod.GET)
+		public String etp_manage(Model model,HttpServletRequest request,HttpSession session) {
+		
+		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		
+		ArrayList<EnterpriseVO> ent_info = new ArrayList<EnterpriseVO>();
+		
+		ent_info = ManageService.etpcheck(sess);
+		
+		model.addAttribute("etpInfo", ent_info);
+		
+		return "nav/enterprise_manage/enterprise_manage";
+		}
+		
+		
+		@RequestMapping(value = "/etphome", method=RequestMethod.GET)
+		public String etp_home(Model model, HttpSession session, HttpServletRequest request) {
+		
+		
+		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		
+		ArrayList<EnterpriseVO> ent = new ArrayList<EnterpriseVO>();
+		
+		ent = ManageService.textbox(sess);
+		
+		model.addAttribute("list", ent);
+		
+		
+		
+		
+		return "nav/enterprise_manage/enterprise_home";
+		}
+		
 	 //업체정보 업데이트 컨트롤러
 	   @RequestMapping(value = "/etpupdate", method=RequestMethod.POST)
 	   @ResponseBody
@@ -74,15 +111,33 @@ public class ETPManageController {
 
 		   product = ManageService.product_select(code);
 		   
+		   
+		   
 		   model.addAttribute("product_info", product);
+		   
 		   
 		   return "nav/enterprise_manage/enterprise_product";
 	   }
 	   
 	   // 업체 주문 현황
 	   @RequestMapping(value = "/etporder", method=RequestMethod.GET)
-	   public String etp_order(Model model) {
+	   public String etp_order(Model model, HttpServletRequest request,HttpSession session) {
 		   
+		   String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		   ArrayList<EnterpriseVO> orderlist = new ArrayList<EnterpriseVO>();
+		   
+		   ArrayList<EnterpriseVO> ent_list = new ArrayList<EnterpriseVO>();
+			
+		   ent_list = ManageService.textbox(sess);
+		   
+		   String code = ent_list.get(0).getEtp_cd();
+		   
+
+		   orderlist = ManageService.select_order_list(code);
+		   
+		   model.addAttribute("orderLists", orderlist);
+//		   session.setAttribute("orderLists", orderlist);
+
 		   return "nav/enterprise_manage/enterprise_order";
 	   }
 	   

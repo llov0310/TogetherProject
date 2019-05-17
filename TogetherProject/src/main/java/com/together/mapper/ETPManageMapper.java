@@ -22,6 +22,7 @@ public interface ETPManageMapper {
 				@Param("time2") String time2, 
 				@Param("etp_cd")String etp_cd);
 		
+		public ArrayList<EnterpriseVO> textbox(@Param("sess") String sess);
 		
 		public ArrayList<EnterpriseVO> info_select(String user_id);
 		
@@ -33,4 +34,8 @@ public interface ETPManageMapper {
 				@Param("pd_nm") String pd_nm, 
 				@Param("pd_price") int pd_price, 
 				@Param("pd_content") String pd_content);
+
+		public ArrayList<EnterpriseVO> etpcheck(String sess);
+
+		public ArrayList<EnterpriseVO> select_order_list(String code);
 }

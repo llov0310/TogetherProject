@@ -11,6 +11,17 @@
 		where etp_cd = #{etp_cd}
 		
 	</update>
+	
+	<select id="textbox" resultType="com.together.domain.EnterpriseVO">
+		select * from enterprise a , enterprise_info b 
+		where a.etp_cd = b.etp_cd and a.user_id = #{sess}
+	</select>
+	
+	<select id="etpcheck" resultType="com.together.domain.EnterpriseVO">
+		select * from member a, enterprise b
+		where a.user_id = b.user_id and a.user_id = #{sess}
+	</select>
+	
 	<update id="update2" parameterType="com.together.domain.EnterpriseVO">
 		update enterprise_info set etp_if_info = #{etp_if_info},
 		etp_if_intro = #{etp_if_intro},
@@ -35,4 +46,20 @@
 	<insert id="insert_product" parameterType="com.together.domain.ProductVO">
 		insert into product values (PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},null)
 	</insert> 
+	
+	<select id="select_order_list" resultType="com.together.domain.EnterpriseVO">
+	<![CDATA[
+	select m.user_id,m.ph_no,m.user_nm,e.user_id,e.etp_cd,p.*,o.*,to_char(o.or_dt ,'YYYY-MM-DD') as chardate ,
+	to_char(o.or_dt2 , 'YYYY-MM-DD') as chardate2 , 
+	to_char(o.th_dt, 'YYYY-MM-DD HH24:MI:SS') as charthisdate,
+	to_char(o.or_price, '99,999,999') as price
+	from member m , enterprise e, orders o , product p
+	where e.etp_cd = p.etp_cd 
+	and m.user_id=o.user_id
+	and p.pd_cd = o.pd_cd 
+	and e.etp_cd = #{code}
+	order by to_char(o.th_dt, 'YYYY-MM-DD HH24:MI:SS')
+	]]>
+	</select>
+	
 </mapper>

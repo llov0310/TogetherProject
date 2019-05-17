@@ -11,8 +11,12 @@
 
 <th:block layout:fragment="page_js">
 <!-- 	<script src="assets/js/enterprise_manage/etp_manager.js"></script> -->
+ 
+<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!--    <script src="plugin/jquery.bpopup.min.js"></script>팝업창 스크립트  -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.js"></script><!-- 팝업창 스크립트  -->
 
 <script>
 	
@@ -87,128 +91,174 @@ $('.button-bg').on("click",function(){
 function empty(){
 	$('.opt').val("");
 }
+
+</script>
+
+<script>
+
+//팝업
+$(document).ready(function(){
+	$('.tr_list').on('click',function(){
+		var t_day = $(this).find('td').eq(1).text(); //구매일
+		var product_nm = $(this).find('td').eq(2).text(); //상품명
+		var order_nm = $(this).find('td').eq(3).text(); //구매자명
+		var order_ph = $(this).find('td').eq(4).text(); // 연락처
+		var first_day = $(this).find('label').eq(0).text(); // 연락처
+		var last_day = $(this).find('label').eq(1).text(); // 연락처
+		var book_stat = $(this).find('td').eq(6).find('label').text(); // 예약상태
+		var check = $(this).find('td').eq(7).find('label').text(); // 확인유무
+		var price = $(this).find('td').eq(8).text(); // 가격
+	//	console.log(t_day);
+	//	console.log(product_nm);
+	//	console.log(order_nm);
+	//	console.log(order_ph);
+	//	console.log(first_day);
+	//	console.log(last_day);
+	//	console.log(book_stat);
+	//	console.log(check);
+	//	console.log(price);
+		$('#bP').bPopup();
+	
+	});
+});
 </script>
 
 </th:block>
 
 <th:block layout:fragment="contents" scroll="no">
-<div class="top-nav">
-	<div class="sel sel--black-panther">
-  <select name="select-profession" id="select-profession">
-    <option value="" disabled>날짜기준</option>
-    <option value="buy-day">구매일</option>
-    <option value="book-day">예약 날짜</option>
-  </select>
-</div>
 
-<div class="sel sel--superman">
-	<label>시작일</label>
-	<input type="date" class="clender" id="start" value=""/>
-</div>
-
-<div class="sel sel--superman">
-	<label>종료일</label>
-	<input type="date" class="clender" id="end" value=""/>
-</div>
-
-
-<div class="sel sel--superman">
-  <select name="select-superpower" id="select-superpower">
-    <option value="" disabled>예약상태</option>
-    <option value="wait">확정대기</option>
-    <option value="cancel">취소예정</option>
-    <option value="book-submit">예약확정</option>
-  </select>
-</div>
-
-<div class="sel sel--superman sel-to">
-	<div class="on-off">
-	<span class="off" >미확인</span>
-	</div>
-	
-				
-				<div class="four">
-				  <div class="button-wrap">
-				    <div class="button-bg">
-				      <div class="button-out"></div>
-				      <div class="button-in"></div>
-				      <div class="button-switch"></div>
-				    </div>
-				  </div>
-				</div>
-</div>
-
-<br/>
-<br/>
-<br/>
-
-
-<div class="sel sel--superman sel-to">
-	<label>구매자명</label>
-	<input class="opt" type="text" value="" maxlength="10">
-</div>
-
-
-<div class="sel sel--superman sel-to">
-	<label>연락처</label>
-	<input class="opt1" type="text" value="" maxlength="11" placeholder="   (-)빼고 입력해주세요     ">
-</div>
-
-<div class="sel sel--superman sel-to2" >
-	
-</div>
-
-
-<div class="sel sel--superman sel-to2">
-	
-</div>
-
-
-<div class="sel sel--superman sel-to sel-to2">
-	<button class="btn btn-success searchBtn">검색</button>
-</div>
-
-</div>
-
-
- <div class="bottom_table" style="position : relative; right : 2%;">
- 	<table class="table table-hover" style="width:90%">
- 		<thead>
- 			<tr>
- 				<th><input type="checkbox"></th>
- 				<th>구매일</th>
- 				<th>상품명</th>
- 				<th>구매자명</th>
- 				<th>연락처</th>
- 				<th>예약일</th>
- 				<th>예약 상태</th>
- 				<th>확인</th>
- 				<th>금액</th>
- 			</tr>
- 		</thead>
- 			<tbody>
- 				<tr>
- 					<td><input type="checkbox"></td>
- 					<td>2019-05-08 14:35:05</td>
- 					<td>트윈룸</td>
- 					<td>욘두</td>
- 					<td>01055059374</td>
- 					<td>2019-05-10 <br> ~ 2019-05-12</td>
- 					<td>예약 확정</td>
- 					<td>미확인</td>
- 					<td>110,000원</td>
- 				</tr>
- 			</tbody>
- 	</table>
- 	<hr/>
- 	
- 	<div class="text-center">
+<div class="total_div_ex">
+		<div class="top-nav">
+			<div class="sel sel--black-panther">
+		  <select name="select-profession" id="select-profession">
+		    <option value="" disabled>날짜기준</option>
+		    <option value="buy-day">구매일</option>
+		    <option value="book-day">예약 날짜</option>
+		  </select>
+		</div>
+		
+		<div class="sel sel--superman">
+			<label>시작일</label>
+			<input type="date" class="clender" id="start" value=""/>
+		</div>
+		
+		<div class="sel sel--superman">
+			<label>종료일</label>
+			<input type="date" class="clender" id="end" value=""/>
+		</div>
+		
+		
+		<div class="sel sel--superman">
+		  <select name="select-superpower" id="select-superpower">
+		    <option value="" disabled>예약상태</option>
+		    <option value="wait">확정대기</option>
+		    <option value="cancel">취소예정</option>
+		    <option value="book-submit">예약확정</option>
+		  </select>
+		</div>
+		
+		<div class="sel sel--superman sel-to">
+			<div class="on-off">
+			<span class="off" >미확인</span>
+			</div>
+			
+						
+						<div class="four">
+						  <div class="button-wrap">
+						    <div class="button-bg">
+						      <div class="button-out"></div>
+						      <div class="button-in"></div>
+						      <div class="button-switch"></div>
+						    </div>
+						  </div>
+						</div>
+		</div>
+		
+		<br/>
+		<br/>
+		<br/>
+		
+		
+		<div class="sel sel--superman sel-to">
+			<label>구매자명</label>
+			<input class="opt" type="text" value="" maxlength="10">
+		</div>
+		
+		
+		<div class="sel sel--superman sel-to">
+			<label>연락처</label>
+			<input class="opt1" type="text" value="" maxlength="11" placeholder="   (-)빼고 입력해주세요     ">
+		</div>
+		
+		<div class="sel sel--superman sel-to2" >
+			
+		</div>
+		
+		
+		<div class="sel sel--superman sel-to2">
+			
+		</div>
+		
+		
+		<div class="sel sel--superman sel-to sel-to2">
+			<button class="btn btn-success searchBtn">검색</button>
+		</div>
+		
+		</div>
+		
+		<div class="text-center pagenation">
  		<ul class="pagination">
  			<li><a href="#">1</a></li>
  			<li><a href="#">2</a></li>
  			<li><a href="#">3</a></li>
  		</ul>
- 	</div>
+ 		</div>
+		
+		 <div class="bottom_table">
+		 	<table class="table table-hover st_table">
+		 		<thead>
+		 			<tr>
+		 				<th><input type="checkbox"></th>
+		 				<th>구매일</th>
+		 				<th>상품명</th>
+		 				<th>구매자명</th>
+		 				<th>연락처</th>
+		 				<th>예약일</th>
+		 				<th>예약 상태</th>
+		 				<th>확인</th>
+		 				<th>금액</th>
+		 			</tr>
+		 		</thead>
+		 		
+		 			<tbody class="or_list">
+		 				<tr class="tr_list" th:each="  order : ${orderLists}">
+		 					<td><input type="checkbox"></td>
+		 					<td th:text="${order.charthisdate}"></td>
+		 					<td th:text="${order.pd_nm}"></td>
+		 					<td th:text="${order.user_nm}"></td>
+		 					<td th:text="${order.ph_no}"></td>
+		 					<td><label th:text="${order.chardate}"></label><br> ~ <label th:text="${order.chardate2}"></label></td>
+		 					<td>
+		 					<div th:switch="${order.or_stat}"> 
+							<label th:case="'1'" style="color:black">확정 대기</label>
+							<label th:case="'2'" style="color:red">취소 예정</label>
+							<label th:case="'3'" style="color:blue">예약 확정</label> 
+							</div>
+							</td>
+		 					<td th:switch="${order.or_check}">
+		 					<label th:case="'1'" style="color:red">미확인</label>
+							<label th:case="'2'" style="color:green">확인</label>
+		 					</td>
+		 					<td th:text="${order.price}+'KRW'"></td>
+		 				</tr>
+		 			</tbody>
+		 	</table>
+		 	<hr/>
+		</div>
  </div>
+ 	<div id="bP">
+ 		<label> ok~ </label>
+ 	</div>
+
 </th:block>
 </html>

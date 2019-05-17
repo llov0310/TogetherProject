@@ -37,6 +37,12 @@ public class ETPManageServiceImplement implements ETPManageService {
 			// TODO Auto-generated method stub
 			return mapper.product_select(code);
 		}
+		
+		@Override
+		public ArrayList<EnterpriseVO> textbox(String sess) {
+			// TODO Auto-generated method stub
+			return mapper.textbox(sess);
+		}
 
 
 		@Override
@@ -56,5 +62,19 @@ public class ETPManageServiceImplement implements ETPManageService {
 		public  ArrayList<EnterpriseVO> info_select(String user_id) {
 			// TODO Auto-generated method stub
 			return mapper.info_select(user_id);
+		}
+
+
+		@Override
+		public ArrayList<EnterpriseVO> etpcheck(String sess) {
+			// TODO Auto-generated method stub
+			return mapper.etpcheck(sess);
+		}
+
+		//각 업체 주문 리스트 조회
+		@Override
+		public ArrayList<EnterpriseVO> select_order_list(String code) {
+			// TODO Auto-generated method stub
+			return mapper.select_order_list(code);
 		}
 }

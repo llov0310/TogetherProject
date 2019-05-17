@@ -1,4 +1,6 @@
 package com.together.domain;
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
@@ -30,12 +32,25 @@ public class EnterpriseVO {
 	
 	
 	//업체 상품을볼때 필요한 변수
-	
 	private String pd_cd;
-	
 	private String pd_nm;
 	private int pd_price;
 	private String pd_content;
 	private String pd_img_path;
+	
+	
+	//주문리스트
+	private Timestamp or_dt;
+	private Timestamp or_dt2;
+	private Timestamp th_dt;
+	private String or_stat;
+	private String or_check;
+	private int or_price;
+	private String chardate;
+	private String chardate2;
+	private String charthisdate;
+	private String price;
+	//member
+	private String ph_no;
 	
 }

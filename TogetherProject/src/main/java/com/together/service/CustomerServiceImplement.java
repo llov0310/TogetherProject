@@ -53,16 +53,6 @@ public class CustomerServiceImplement implements CustomerService {
 		return mapper.info(test);
 	}
 
-
-	@Override
-	public ArrayList<EnterpriseVO> textbox(String sess) {
-		// TODO Auto-generated method stub
-		return mapper.textbox(sess);
-	}
-
-	
-
-
 	@Override
 	public int ent_info(String code) {
 		// TODO Auto-generated method stub

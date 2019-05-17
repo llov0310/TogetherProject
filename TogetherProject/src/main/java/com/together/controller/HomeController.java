@@ -123,40 +123,7 @@ public class HomeController {
 	   
 	   return "nav/etpApply";
    }
-  
-   
- ////////////////////////////////////업체 관리 용////////////////////////////////////  
-   //업체 관리 페이지 맵핑
-   @RequestMapping(value = "/etpManage", method=RequestMethod.GET)
-   public String etp_manage(Model model,HttpServletRequest request,HttpSession session) {
-
-	  
-
-	   return "nav/enterprise_manage/enterprise_manage";
-   }
-   
-   
-   @RequestMapping(value = "/etphome", method=RequestMethod.GET)
-   public String etp_home(Model model, HttpSession session, HttpServletRequest request) {
-	   
-	   
-	  String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-	 
-	   ArrayList<EnterpriseVO> ent = new ArrayList<EnterpriseVO>();
-	   
-	   ent = customerservice.textbox(sess);
-	   
-	   model.addAttribute("list", ent);
-	   
-	   
-	   
-	   
-	   return "nav/enterprise_manage/enterprise_home";
-   }
-   
-  
-   
-   
+ 
   
    
 }

@@ -22,8 +22,6 @@ public interface CustomerMapper {
 
 	public ArrayList<EnterpriseVO> info(String test);
 
-	public ArrayList<EnterpriseVO> textbox(@Param("sess") String sess);
-
 	public int ent_info(String code);
 
 	public ArrayList<EnterpriseVO> getList(String code);

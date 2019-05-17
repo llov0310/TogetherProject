@@ -18,8 +18,6 @@ public interface CustomerService {
 
 	public ArrayList<EnterpriseVO> info(String test);
 
-	public ArrayList<EnterpriseVO> textbox(String sess);
-
 	public int ent_info(String code);
 
 	public ArrayList<EnterpriseVO> getList(String code); //상품목록 조회
