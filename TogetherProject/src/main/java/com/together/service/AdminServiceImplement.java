@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
+import com.together.domain.EtpListVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
 import com.together.domain.Search;
@@ -33,6 +34,14 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.etpApplyManage_02(user_id);
 	}
 
+	//업체 삭제
+	@Override
+	public int etpListDelete(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.etpListDelete(user_id);
+	}	
+	
+	
 	// 회원관리 페이지 넘버를 계산하기 위해 사용하는 함수 선언 (페이징)
 	@Override
 	public int memberPageNum() {
@@ -54,6 +63,13 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.etpPageNum();
 	}	
 	
+	// 업체 리스트 페이지 넘버를 계산하기 위해 사용하는 함수 선언 (페이징)
+	@Override
+	public int etpListPageNum() {
+		// TODO Auto-generated method stub
+		return mapper.etpListPageNum();
+	}
+	
 	// 회원 정보를 가져오는 함수 (페이징 처리)
 	@Override
 	public ArrayList<MemberVO> memberList(Paging p) {
@@ -74,7 +90,14 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.enterpriseManage(p);
 	}
-
+	
+	// 업체 리스트를 가져오는 함수 (페이징 처리)
+	@Override
+	public ArrayList<EtpListVO> enterpriseList(Paging p) {
+		// TODO Auto-generated method stub
+		return mapper.enterpriseList(p);
+	}
+	
 	// 관리자 홈페이지 : 회원수를 가져오는 함수 추가
 	@Override
 	public int memberCnt() {
@@ -157,5 +180,19 @@ public class AdminServiceImplement implements AdminService {
 	public ArrayList<EnterpriseVO> etpApplySearchResult(Map<Object, Object> parm) {
 		// TODO Auto-generated method stub
 		return mapper.etpApplySearchResult(parm);
+	}
+	
+	// 업체 리스트 검색을 위한 함수 추가
+	@Override
+	public ArrayList<EtpListVO> etpListSearch(Search s) {
+		// TODO Auto-generated method stub
+		return mapper.etpListSearch(s);
+	}
+
+	// 업체 리스트 검색 결과
+	@Override
+	public ArrayList<EtpListVO> etpListSearchResult(Map<Object, Object> parm) {
+		// TODO Auto-generated method stub
+		return mapper.etpListSearchResult(parm);
 	}
 }

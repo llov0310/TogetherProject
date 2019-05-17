@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.together.domain.DogsVO;
 import com.together.domain.EnterpriseVO;
+import com.together.domain.EtpListVO;
 import com.together.domain.MemberVO;
 import com.together.domain.Paging;
 import com.together.domain.Search;
@@ -21,6 +22,9 @@ public interface AdminService {
 	// 업체 신청 관리 페이지 넘버를 계산하기 위해 사용하는 함수 선언
 	public int etpPageNum();
 	
+	// 업치 리스트 페이지 넘버를 계산하기 위해 사용하는 함수 선언
+	public int etpListPageNum();
+	
 	// 회원정보를 가져오는 memberList 페이징 처리 함수 선언
 	public ArrayList<MemberVO> memberList(Paging p);
 
@@ -29,13 +33,19 @@ public interface AdminService {
 
 	// 업체 리스트를 가져오는 enterpriseManage 페이징 처리 함수 선언
 	public ArrayList<EnterpriseVO> enterpriseManage(Paging p);
-
+	
+	// 업체 리스트를 가져오는 enterpriseList 페이징 처리 함수 선언
+	public ArrayList<EtpListVO> enterpriseList(Paging p);
+	
 	// 업체 신청 수락을 위한 함수 추가
 	public int etpApplyManage_01(String user_id);
 
 	// 업체 신청 거절을 위한 함수 추가
 	public int etpApplyManage_02(String user_id);
-
+	
+	// 업체 삭제를 위한 함수 추가
+	public int etpListDelete(String user_id);
+	
 	// 관리자 홈페이지 : 회원수를 가져오는 함수 추가
 	public int memberCnt();
 
@@ -71,4 +81,11 @@ public interface AdminService {
 	
 	// 업체 신청 검색 결과
 	public ArrayList<EnterpriseVO> etpApplySearchResult(Map<Object, Object> parm);
+	
+	// 업체 리스트 검색을 위한 함수 추가
+	public ArrayList<EtpListVO> etpListSearch(Search s);
+	
+	// 업체 리스트 검색 결과
+	public ArrayList<EtpListVO> etpListSearchResult(Map<Object, Object> parm);
+
 }
