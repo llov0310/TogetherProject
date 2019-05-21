@@ -48,6 +48,8 @@ public interface MypageMapper {
 
 	public ArrayList<PostVO> postlist(@Param("user_id") String user_id);
 
+	public Integer memberdel(@Param("user_id") String user_id, @Param("password")String password);
+
 
 
 

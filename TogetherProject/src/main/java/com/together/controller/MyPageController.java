@@ -2,6 +2,8 @@ package com.together.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
+import com.together.domain.Paging;
 import com.together.domain.PostVO;
 import com.together.service.MypageService;
 
@@ -144,15 +147,72 @@ public class MyPageController {
 		 order_list = mypage.orderlist(user_id);
 		  model.addAttribute("order_list", order_list);
 		  	System.out.println(user_id);
-		  	System.out.println(order_list);
 		return "nav/mypage/myreservation";
 
 	}
 	
 //	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)
 //	public String myreservation(Model model) {
-//		return "nav/mypage/myreservation";
+//		
 //
+//		Paging page = new Paging();
+//		ArrayList<Integer> arr = new ArrayList<Integer>();
+//		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+//		int pageNum = 0;
+//		int mapNum = 0;
+//		int sendPageNum = 0;
+//		int realNum = Integer.parseInt(num);
+//
+//		page.setTotalNum(adminService.memberPageNum());
+//		// OnePageBorad => 한 페이지에 보여줄 멤버(글) 수
+//		if (page.getTotalNum() <= page.getOnePageBoard()) { // totalnum이 10보다 작으면 pageNum을 1로 설정
+//			pageNum = 1;
+//		} else { // totalnum이 더 클 경우
+//			pageNum = page.getTotalNum() / page.getOnePageBoard(); // totalnum / 10
+//																	// ex) 21/ 10 = 2가 pageNum에 들어감
+//			if (page.getTotalNum() % page.getOnePageBoard() > 0) { // 그리고 21 % 10 나머지 1이 0보다 크기때문에 pageNum에 2+1=3이 들어감
+//				pageNum = pageNum + 1;
+//			}
+//		}
+//
+//		// 추가내용
+//		if (pageNum % 5 != 0) {
+//			mapNum = pageNum / 5 + 1;
+//		} else {
+//			mapNum = pageNum / 5;
+//		}
+//
+//		for (int i = 0; i < mapNum; i++) {
+//			arr = new ArrayList<Integer>();
+//			for (int j = 0; j < 5; j++) {
+//
+//				if ((i * 5) + j + 1 > pageNum) {
+//					break;
+//				}
+//
+//				arr.add((i * 5) + j + 1);
+//			}
+//			map.put(i, arr);
+//		}
+//
+//		sendPageNum = (realNum - 1) / 5;
+//
+//		page.setEndNum((realNum * 10) + 1);
+//		page.setStartNum(page.getEndNum() - 10);
+//
+//		// 추가내용
+//		model.addAttribute("pageNum", map.get(sendPageNum));
+//		model.addAttribute("memberList", adminService.memberList(page));
+//
+//		// 추가내용
+//
+//		if (realNum > pageNum) {
+//			System.out.println("pageNum : " + pageNum);
+//			return "redirect:/memberManage/" + pageNum;
+//		}
+//
+//		return "nav/mypage/myreservation";
+//	
 //	}
 	
 	@RequestMapping(value = "/mypost", method = RequestMethod.GET)
@@ -180,10 +240,14 @@ public class MyPageController {
 	}
 	@RequestMapping(value = "/deletid", method = RequestMethod.POST)
 	@ResponseBody
-	public String Deleteid(Model model) {
-		System.out.println("삭제");
+	public String Deleteid(Model model, HttpSession session, HttpServletRequest request,@RequestParam String user_id,@RequestParam String password) {
+			
+		Integer delacc =mypage.memberdel(user_id, password);
+		System.out.println("끝");
+		
+		session.invalidate();
 		return "success";
-
+	
 	}
 	@RequestMapping(value = "/newpwpopup", method = RequestMethod.GET)
 	public String newpwpopup(Model model) {

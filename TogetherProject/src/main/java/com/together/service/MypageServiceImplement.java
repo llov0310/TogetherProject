@@ -86,6 +86,13 @@ public class MypageServiceImplement implements MypageService {
 		return myMapper.postlist(user_id);
 	}
 
+
+	@Override
+	public Integer memberdel(String user_id, String password) {
+		// TODO Auto-generated method stub
+		return myMapper.memberdel(user_id , password);
+	}
+
 	 
 }
 
