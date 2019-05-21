@@ -16,12 +16,6 @@
 	<dependencies>
 		<!-- Spring -->
 <dependency>
-    <groupId>net.sf.json-lib</groupId>
-    <artifactId>json-lib</artifactId>
-    <version>2.4</version>
-    <classifier>jdk15</classifier>
-</dependency>
-<dependency>
 	<groupId>org.mybatis</groupId>
 	<artifactId>mybatis</artifactId>
 	<version>3.4.6</version>
@@ -41,12 +35,14 @@
     <artifactId>spring-tx</artifactId>
     <version>${org.springframework-version}</version>
 </dependency>
+	<!-- 롬복 - . -->
 	<dependency>
 		<groupId>org.projectlombok</groupId>
 		<artifactId>lombok</artifactId>
 		<version>1.18.4</version>
 		<scope>provided</scope>
 	</dependency>
+	<!-- 롬복 - . -->
 	<dependency>
 		<groupId>com.zaxxer</groupId>
 		<artifactId>HikariCP</artifactId>
@@ -208,21 +204,6 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>	
-		
-		
-		<dependency>
-	  	  	<groupId>com.fasterxml.jackson.core</groupId>
-	  	  	<artifactId>jackson-core</artifactId>
-			<version>2.9.8</version>
-		</dependency>
-		
-		
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.8</version>
-		</dependency>		
-
 		<!-- JSON으로 결과 받기를 위한 dependency 추가 ▲▲-->
 
 
@@ -233,6 +214,41 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>4.1.3</version>
 		</dependency>
+		
+		
+		<!-- 파일업로드에 필요한거 ㅇㅇ -->
+		<!-- log4jdbc-log4j2설정 -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+			<version>1.16</version>
+		</dependency>
+		<!-- log4jdbc-log4j2설정 -->
+		
+		<!-- 썸네일 이미지 생성 -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+		<!-- 썸네일 이미지 생성 -->
+		
+			<!-- 1.업로드된 파일의 이름과 원본파일의 이름 2.파일이 저장된 경로 3.업로드된 파일이 이미지인지 아닌지에 대한 정보 -->
+		<!-- 를 처리하는 방법 -->
+		<!-- 1.업로드된 경로가 포함된 파일 이름을 반환하는 방식 2. 별도의 객체를 생성해서 처리하는 방법(2번으로 할거임) -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.9.5</version>
+		</dependency>
+		<!-- 1.업로드된 파일의 이름과 원본파일의 이름 2.파일이 저장된 경로 3.업로드된 파일이 이미지인지 아닌지에 대한 정보 -->
+		<!-- 파일업로드에 필요한거 ㅇㅇ -->
 		
 	</dependencies>
     <build>
