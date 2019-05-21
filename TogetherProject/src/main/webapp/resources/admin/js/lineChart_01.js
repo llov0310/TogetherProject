@@ -11,6 +11,7 @@ $(document).ready(function(){
 	// 월 별 가입자 수를 담을 변수선언, json을 담을 변수 선언
 	var monthMemberCnt = [];
 	var json;
+	var month_02 = [];
 	
 		$.ajax({
 			url : "/lineChart_01",
@@ -19,7 +20,7 @@ $(document).ready(function(){
 			success : function(data) {
 //				alert("하이 ajax");
 //				console.log(data);
-//				console.log(data[0].count);
+//				console.log("카운트 : "+data[0].count);
 //				console.log(data[0].month);
 				
 				for(i=0; i<data.length; i++){
@@ -28,16 +29,28 @@ $(document).ready(function(){
 						count : data[i].count
 					}
 				}
+				
+//				console.log(data[0].month.substr(5,2));
+				
 				//파싱 해줘야함
 				var obj = JSON.stringify(monthMemberCnt);
 				json = JSON.parse(obj);
-
+				
+			    var months = ['1월', '2월', '3월', '4월',
+			    	  '5월', '6월', '7월', '8월', '9월',
+			    	  '10월', '11월', '12월'];
+			    
+			    //차트 그리는 부분
 				new Morris.Line({
 			        element: 'lineChart_01',
 				    data: json,
 			        xkey: 'month',
 			        ykeys: ['count'],
-			        labels: ['value'],
+			        labels: ['가입자 수'],
+			        xLabelFormat : function(x){
+			        	return months[x.getMonth()];
+			        },
+			        gridTextSize:'20px',
 			        resize : true
 				}); // morris차트
 

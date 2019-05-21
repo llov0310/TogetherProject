@@ -42,7 +42,7 @@ $(document).ready(function(){
 				    {value: age_60_over, label: '60대 이상'},
 				  ],
 				  formatter: function (x) { return x + "%"},
-				  colors :['green','red','yellow','blue','pink','black'],
+				  colors :['#58FA58','#01DFD7','#58ACFA','#BCA9F5','#F5A9BC','#F7BE81'],
 				  resize : true
 				}).on('click', function(i, row){
 				  console.log(i, row);
