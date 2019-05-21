@@ -23,7 +23,13 @@
 		$("#delbt").click(function() {
 			var id = $("#did").val();
 			var pw = $("#dpw").val();
-	
+			
+			if ($("#dpw").val() == "") {
+				alert("비밀번호를 입력해주세요");
+				$("#dpw").focus();
+			}else {
+				var pw = $("#dpw").val();
+			}
 			 	$.ajax({
 					url : "/deletid",
 					type : "POST",
@@ -33,9 +39,14 @@
 						password :pw
 					},
 					success : function(data) {
-						alert("탈퇴되었습니다"); 
-						window.location.replace("/");		
-						s
+						if(data== "success"){
+							alert("탈퇴되었습니다"); 
+							window.location.replace("/");	
+							
+						}else {
+							alert("비밀번호가 틀렸습니다");
+							$("#dpw").focus();
+						}
 					}
 					});  
 		});
@@ -45,6 +56,7 @@
 	</script>
 <style>
 .scro_br {
+	font-size:14px;
     border-right: #cbbfab 1px solid;
     padding-right: 7px;
     border-top: #cbbfab 1px solid;
@@ -73,7 +85,7 @@
 <body>
 <div>
 이용약관
-<div class="scro_br" style="width:1000px;height:500px;">
+<div class="scro_br" style="width:1100px;height:500px;">
 <pre>
 제 1 조 (목적)
 본 약관은 서비스(이하 “서비스”)를 제공하는 투게더(이하 “회사”)와 위 서비스를 이용하는 고객 (이하 “고객”)간에 서비스 이용에 관한 권리와 의무 및 책임 기타 제반사항을 규정함을 목적으로 합니다.

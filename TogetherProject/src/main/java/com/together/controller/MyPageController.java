@@ -241,14 +241,24 @@ public class MyPageController {
 	@RequestMapping(value = "/deletid", method = RequestMethod.POST)
 	@ResponseBody
 	public String Deleteid(Model model, HttpSession session, HttpServletRequest request,@RequestParam String user_id,@RequestParam String password) {
-			
+		ArrayList<MemberVO> pass_cheak = new ArrayList<MemberVO>();
+		System.out.println(password +"비밀번호1");
+		System.out.println(user_id + "아이디");
+		pass_cheak = mypage.passCheak(user_id);
+		String a = pass_cheak.get(0).getPassword();
+		
+		if (a.equals(password)) {
 		Integer delacc =mypage.memberdel(user_id, password);
 		System.out.println("끝");
-		
 		session.invalidate();
 		return "success";
-	
+		
+		} else {
+		return "fail";
+		}
 	}
+	
+	
 	@RequestMapping(value = "/newpwpopup", method = RequestMethod.GET)
 	public String newpwpopup(Model model) {
 		return "nav/mypage/newpwpopup";
@@ -268,6 +278,7 @@ public class MyPageController {
 		Integer update = mypage.passNew(user_id, password);
 		System.out.println(update);
 
+		
 		return "success";
 	}
 

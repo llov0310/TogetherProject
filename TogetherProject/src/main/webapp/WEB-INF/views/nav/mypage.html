@@ -22,6 +22,9 @@
 	 function buta() {
 		 $("#content").load("/member_info" );
 	 }
+	 function re() {
+		 location.reload();
+	 }
 	</script>
 	
 	<style>
@@ -159,7 +162,7 @@ dl {
 			<div class="wrap">
 		
 			<div id="snb">
-				<h2>마이 페이지</h2>
+				<h2 onclick="re();">마이 페이지</h2>
 				<div><img src="http://placehold.it/150x150" alt="" id="imgbox"></div>
 		<div th:if="${session.user} != null">
 			<div>
