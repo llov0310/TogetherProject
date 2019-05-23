@@ -58,22 +58,56 @@
   					positionStyle : 'fixed'
   					
   				});
-//   				$("body").bind('touchmove',function(e){e.preventDefault()});
-
   				
   			});
   			
-  			$('#btn_close').on('click',function(){
-  				$ ('#popup').bPopup().close();
+	  			$('#btn_close').on('click',function(){
+	  				$ ('#popup').bPopup().close();
+	  			});
+	  			
+	  			
+	  			
+			//상품 구매가 가능한지 조회하는 버튼 테스트용
+  			$('#join').on('click',function(){
+  				var fir = $('#first_day').text();
+  	  			var las = $('#second_day').text();
+  	  			
+  	  			var code = $('.code').text();
+  	  			var content = $('#pcon').text();
+  	  			var p_nm = $('#pnm').text();
+  	  			var sub_fir = fir.substr(5,5);
+  	  			var sub_las = las.substr(5,5);
+  	  			console.log(sub_las);
+  	  			$.ajax({
+					url : "/join",
+					type: "POST",
+					dataType : 'json',
+					data : {sub_fir,sub_las,content,p_nm,code},
+					success : function(data){
+						if(data.length == 0){
+							alert("예약 가능");
+						}else{
+							for(var i=0; i<data.length; i++){
+								$('.result_').append('<span>' + data[i] + "일의 방이 모두 소진되었습니다." + '</span>');	
+							}
+													
+						}
+
+
+// 					console.log(data);				
+// 					console.log(data.length);
+// 					console.log(data[0]);
+					
+						
+
+						
+					}
+				
+  	  			});
   			});
-  	
-//   			<span>시작일 : <label id="first_day"></label></span><br/>
-//   			<span>종료일 : <label id="second_day"></label></span><br/>
-//   			<span>총 일수 : <label id="total_day"></label></span><br/>
-//   			<span>상품명 : <label id ="pnm"></label></span><br/>
-//   			<span>상품가격 : <label id = "ppri"></label></span><br/>
-//   			<span>상품정보 : <label id = "pcon"></label></span><br/>
-//   			<span>총가격 : <label id = "total_price"></label></span>
+			
+			
+  			//상품 추가 버튼
   		  $('#add_btn').on('click',function(){
   			var a = $('#first_day').text();
   			var b = $('#second_day').text();
@@ -138,8 +172,8 @@
 		        traditional:true,
 				success : function(data){
 					if(data == "success"){
-// 						alert("예약완료");
-// 						window.location.reload();
+						alert("예약완료");
+						window.location.reload();
 					}else{
 						console.log("실패");
 					}
@@ -147,7 +181,6 @@
 				}
 			});
   			  
-//   			  array.push(Obj);
   			  console.log(array);
 
   		  });
@@ -669,6 +702,8 @@
      		<span th:text="${pro.pd_content}"></span>
      		</button>
      	</div>
+     	
+     	
      	<!-- 여기서 부터 팝업창  -->
      	<div id="popup" class="Pstyle">	
 		
@@ -727,12 +762,14 @@
 		<span>상품가격 : <label id = "ppri"></label></span><br/>
 		<span>상품정보 : <label id = "pcon"></label></span><br/>
 		<span>총가격 : <label id = "total_price"></label></span>
+		<div class="result_"></div>
 	</div>
 
 		
 		
 		<input type="button" id="btn_close" value="닫 기">
 		<input type="button" id="add_btn" value = "추가">
+		<input type="button" id="join" value ="조회">
 		</div>
 		
 			

@@ -1,5 +1,6 @@
 package com.together.controller;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
+import com.together.domain.StockVO;
 import com.together.service.CustomerService;
 import com.together.service.ETPManageService;
 
@@ -152,7 +155,7 @@ public class ETPManageController {
 	   //팝업창  상품  추가 버튼
 	   @RequestMapping(value = "/orderPopup_add", method=RequestMethod.GET)
 	   @ResponseBody
-	   public String etp_pop_add(HttpServletRequest request,Model model,@RequestParam String pd_nm,@RequestParam int pd_price,@RequestParam String pd_content) {
+	   public String etp_pop_add(HttpServletRequest request,Model model,@RequestParam String pd_nm,@RequestParam int pd_price,@RequestParam String pd_content,@RequestParam String pd_num ) {
 		  
 		   String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		   
@@ -160,9 +163,47 @@ public class ETPManageController {
 		   
 		   String code = info.get(0).getEtp_cd();
 		   
-		   System.out.println(code + "혹시 왓나");
-		   
 		   int product_insert = ManageService.insert_pro(code,pd_nm,pd_price,pd_content); //이미지 업로드가되면 추가로 넣을예정
+		   
+		   ArrayList<ProductVO> select_product = ManageService.st_insert_pro(code,pd_nm);
+		   
+		   String pro_code = select_product.get(0).getPd_cd();
+		   
+		   
+		   for(int i=5; i<13; i++) {
+			   
+			   for(int f=1; f<=30; f++) {
+				   
+				   if(i < 10 && f<10) {
+					   String total_code = pro_code + "-"+ "0" + i + "-" + "0" + f;
+					   int stock_insert = ManageService.stockint(total_code,pro_code,pd_num);
+				   }else if(f<10){
+						String total_code = pro_code + "-" + i + "-" +"0"+ f;
+						int stock_insert = ManageService.stockint(total_code,pro_code,pd_num);	   
+				   }else if(i<10) {
+					   String total_code = pro_code + "-" +"0"+ i + "-" + f;
+						int stock_insert = ManageService.stockint(total_code,pro_code,pd_num);
+				   }else {
+					   String total_code = pro_code + "-" + i + "-" + f;
+						int stock_insert = ManageService.stockint(total_code,pro_code,pd_num);
+				   }
+				   
+				  if(f==30){ 
+					  if(i==5 || i==7 || i==8) {
+					   String total_code = pro_code + "-" + "0" + i + "-" + "31";
+					   int stock_insert = ManageService.stockint(total_code,pro_code,pd_num);
+					  }else if(i==10 || i == 12) {
+						  String total_code = pro_code + "-"+ i + "-" + "31";
+						  int stock_insert = ManageService.stockint(total_code,pro_code,pd_num);
+					  }
+
+				  }
+				   	
+			   }
+			   if(i == 12) {
+				   return "success";
+			   }
+		   }
 		   
 		   return "success";
 	   }
@@ -179,11 +220,76 @@ public class ETPManageController {
 		   ArrayList<EnterpriseVO> info = ManageService.info_select(id);
 		   
 		   String code = info.get(0).getEtp_cd();
-		   	System.out.println(code + "코드번호");
+		   	
 		   int order_del = ManageService.del(code,nm);
 		   
-		   System.out.println(order_del + "왓습니까?");
+		   
 		   return "success";
 	   }
-	
+	   
+	   
+	   // 업체 확인 업데이트
+	   @RequestMapping(value = "/orderChecklevel", method=RequestMethod.POST)
+	   @ResponseBody
+	   public String orderCheck(Model model,
+			   @RequestParam String day1,
+			   @RequestParam String day2,
+			   @RequestParam String nm,
+			   @RequestParam String check_val,
+			   @RequestParam String day_th
+			   ) {
+		   
+		   ArrayList<OrdersVO> updateCheck = ManageService.newinfo(nm);
+		   
+		   String member_id = updateCheck.get(0).getUser_id();
+
+		   int up = ManageService.updateChecked(day1,day2,check_val,member_id,day_th);
+		   
+		
+		   return "success";
+	   }
+	   
+	   
+	   @RequestMapping(value = "/join", method=RequestMethod.POST)
+	   @ResponseBody
+	   public ArrayList<String> Stock_check(Model model,
+			   @RequestParam  String sub_fir,
+			   @RequestParam  String sub_las,
+			   @RequestParam  String content,
+			   @RequestParam  String p_nm,
+			   @RequestParam  String code) {
+		   
+		   ArrayList<ProductVO> check_pro = ManageService.checkPro(code,content,p_nm); //해당 상품코드조회
+		   
+		   String p_code = check_pro.get(0).getPd_cd();
+
+		   ArrayList<StockVO> check_Stock = ManageService.StockCheckPro(p_code,sub_fir,sub_las); //재고 조회
+		   int i;
+		   
+//		   for(i=0; i<check_Stock.size(); i++) {
+//			  	if(check_Stock.get(i).getSt_this_num() == 0) {			  		
+//			  		return check_Stock.get(i).getSt_cd();
+//			  	}
+//		  }
+//		  return "success";
+		  
+		  //다음부터 해야할 부분입니다
+		  ArrayList<String> re_list = new ArrayList<String>();
+		  
+		  if(check_Stock.size() != 0) {
+			  
+			   for(i=0; i<check_Stock.size(); i++) {
+				  	if(check_Stock.get(i).getSt_this_num() == 0) {
+				  		String list = check_Stock.get(i).getSt_cd();
+				  		re_list.add(list);
+				  	}
+			   }
+			   System.out.println(re_list);
+			   return re_list;
+		  }else {
+			  re_list.add("fail");
+			  return re_list;
+		  }
+		  
+	   }
 }

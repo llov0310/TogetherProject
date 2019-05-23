@@ -10,118 +10,9 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-<!-- 	<script src="assets/js/enterprise_manage/etp_manager.js"></script> -->
- 
-<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--    <script src="plugin/jquery.bpopup.min.js"></script>팝업창 스크립트  -->
+	<script src="assets/js/enterprise_manage/etp_manager.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.js"></script><!-- 팝업창 스크립트  -->
-
-<script>
-	
-	$('.sel').each(function() {
-  $(this).children('select').css('display', 'none');
-  
-  var $current = $(this);
-  
-  $(this).find('option').each(function(i) {
-    if (i == 0) {
-      $current.prepend($('<div>', {
-        class: $current.attr('class').replace(/sel/g, 'sel__box')
-      }));
-      
-      var placeholder = $(this).text();
-      $current.prepend($('<span>', {
-        class: $current.attr('class').replace(/sel/g, 'sel__placeholder'),
-        text: placeholder,
-        'data-placeholder': placeholder
-      }));
-      
-      return;
-    }
-    
-    $current.children('div').append($('<span>', {
-      class: $current.attr('class').replace(/sel/g, 'sel__box__options'),
-      text: $(this).text()
-    }));
-  });
-});
-
-// Toggling the `.active` state on the `.sel`.
-$('.sel').click(function() {
-  $(this).toggleClass('active');
-});
-
-// Toggling the `.selected` state on the options.
-$('.sel__box__options').click(function() {
-  var txt = $(this).text();
-  var index = $(this).index();
-  
-  $(this).siblings('.sel__box__options').removeClass('selected');
-  $(this).addClass('selected');
-  
-  var $currentSel = $(this).closest('.sel');
-  $currentSel.children('.sel__placeholder').text(txt);
-  $currentSel.children('select').prop('selectedIndex', index + 1);
-});
-
-document.getElementById('start').value = new Date().toISOString().substring(0, 10);
-document.getElementById('end').value = new Date().toISOString().substring(0, 10);
-</script>
-<script>
-$('.button-wrap').on("click", function(){
-	  $(this).toggleClass('button-active');
-	});
-	
-	
-	
-$('.button-bg').on("click",function(){
-	
-	var onoff = $('.off').text();
-	
-	if(onoff == "미확인"){
-		$('.off').text('확인');
-	}else if(onoff == "확인"){
-		$('.off').text('미확인');
-	}
-	
-});
-
-function empty(){
-	$('.opt').val("");
-}
-
-</script>
-
-<script>
-
-//팝업
-$(document).ready(function(){
-	$('.tr_list').on('click',function(){
-		var t_day = $(this).find('td').eq(1).text(); //구매일
-		var product_nm = $(this).find('td').eq(2).text(); //상품명
-		var order_nm = $(this).find('td').eq(3).text(); //구매자명
-		var order_ph = $(this).find('td').eq(4).text(); // 연락처
-		var first_day = $(this).find('label').eq(0).text(); // 연락처
-		var last_day = $(this).find('label').eq(1).text(); // 연락처
-		var book_stat = $(this).find('td').eq(6).find('label').text(); // 예약상태
-		var check = $(this).find('td').eq(7).find('label').text(); // 확인유무
-		var price = $(this).find('td').eq(8).text(); // 가격
-	//	console.log(t_day);
-	//	console.log(product_nm);
-	//	console.log(order_nm);
-	//	console.log(order_ph);
-	//	console.log(first_day);
-	//	console.log(last_day);
-	//	console.log(book_stat);
-	//	console.log(check);
-	//	console.log(price);
-		$('#bP').bPopup();
-	
-	});
-});
-</script>
 
 </th:block>
 
@@ -256,9 +147,53 @@ $(document).ready(function(){
 		 	<hr/>
 		</div>
  </div>
- 	<div id="bP">
- 		<label> ok~ </label>
- 	</div>
+
+
+<div id="bP" class="bP">
+  <div id="wrapper">
+    <div class="logo">
+      <h1>상세 예약서</h1>
+      <button class="success">확인</button>
+      <button class="exit">닫기</button>
+    </div>
+    <hr>
+	<div class="a">
+	구매 날짜  : <span class="this_day"></span>
+	</div>
+	
+	<div class="b">
+	상품명  :<span class="pro_nm"></span>
+	</div>
+	
+	<div class="c">
+	구매자명 : <span class="nm"></span>
+	</div>
+	
+	<div class="d">
+	연락처 :<span class="ph"></span>
+	</div>
+	
+	<div class="e">
+	예약일  :<span class="fir"></span> ~ <span class="la"></span>
+	</div>
+	
+	<div class="f">
+	상태  :<span class="stat"></span>
+	</div>
+	
+	<div class="g">
+	확인  :<span class="check"></span>
+	</div>
+
+
+	<div class="h">
+	총가격  :<span class="to_price"></span>
+	</div>	    
+      
+    
+    </div>
+ </div>
+
 
 </th:block>
 </html>

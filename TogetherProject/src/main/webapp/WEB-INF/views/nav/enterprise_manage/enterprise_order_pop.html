@@ -45,6 +45,23 @@ textarea#gdsDes { width:400px; height:180px; }
 	border-color: #2e6da4;
 }
 
+#loading {
+ width: 100%;  
+ height: 100%;  
+ top: 0px;
+ left: 0px;
+ position: fixed;  
+ display: block;  
+ opacity: 0.7;  
+ background-color: #fff;  
+ z-index: 99;  
+ text-align: center; } 
+  
+#loading-image {  
+ position: absolute;  
+ top: 42%;  
+ left: 42%; 
+ z-index: 100; }
 </style>
 </th:block>
 
@@ -54,21 +71,31 @@ textarea#gdsDes { width:400px; height:180px; }
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script>
   $(document).ready(function(){
+	  $(window).load(function() {     
+	       $('#loading').hide();   
+	      }); 
+ 
 	 $("#register_Btn").on('click', function(){
-	  var pd_nm = $("#gdsName").val();
-	  var pd_price = $("#gdsPrice").val();
-	  var pd_content = $("#gdsDes").val();
+	  var pd_nm = $("#gdsName").val(); // 상품 이름
+	  var pd_price = $("#gdsPrice").val(); // 상품 가격
+	  var pd_content = $("#gdsDes").val(); // 상품 설명
+	  var pd_num = $("#gdsNum").val(); // 총갯수 수량
 	  // 추후 업로드 // var pd_img = $("").text();
-	 	
+	  $('#loading').show();   
 	  $.ajax({
 		 type : 'GET',
 		 url : '/orderPopup_add',
 		 dataType : 'text',
-		 data : {pd_nm,pd_price,pd_content},
-		 success : function(){
+		 data : {pd_nm,pd_price,pd_content,pd_num},
+		 success : function(data){
+			 $('#loading').hide();   
+			 if(data == "success"){
 			 alert("상품 추가 완료");
-		opener.location.href = "javascript:refresh();";
+			 opener.location.href = "javascript:refresh();";
 			 window.close();
+		 }else{
+			 alert("넘어오지않았음");
+		 }
 			 
 			 
 		 }
@@ -110,8 +137,15 @@ textarea#gdsDes { width:400px; height:180px; }
 </div>
 
 <div class="inputArea">
+ <label for="gdsNum">일일 수량</label>
+ <input type="text" id="gdsNum"/>
+</div>
+
+<div class="inputArea">
  <button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
 </div>
+
+<div id="loading"><img id="loading-image" src="assets/img/25.gif" alt="Loading..." /></div>
 
 </th:block>
 </html>

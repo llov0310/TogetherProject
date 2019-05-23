@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
+import com.together.domain.StockVO;
 import com.together.mapper.CustomerMapper;
 import com.together.mapper.ETPManageMapper;
 
@@ -75,6 +77,50 @@ public class ETPManageServiceImplement implements ETPManageService {
 		@Override
 		public ArrayList<EnterpriseVO> select_order_list(String code) {
 			// TODO Auto-generated method stub
+			
 			return mapper.select_order_list(code);
+		}
+
+
+		//member 조회
+		@Override
+		public ArrayList<OrdersVO> newinfo(String nm) {
+			// TODO Auto-generated method stub
+			return mapper.newInfo(nm);
+		}
+
+		// 주문 상태 업데이트
+		@Override
+		public int updateChecked(String day1, String day2, String check_val, String member_id, String day_th) {
+			// TODO Auto-generated method stub
+			return mapper.updated(day1,day2,check_val,member_id,day_th);
+		}
+
+		//상품 재고를 위한 코드 조회
+		@Override
+		public ArrayList<ProductVO> st_insert_pro(String code, String pd_nm) {
+			// TODO Auto-generated method stub
+			return mapper.st_insert_pro(code,pd_nm);
+		}
+
+		//상품추가시 날짜 재고 코드생성
+		@Override
+		public int stockint(String total_code, String pro_code, String pd_num) {
+			// TODO Auto-generated method stub
+			return mapper.stockint(total_code,pro_code,pd_num);
+		}
+
+		//해당 상품 코드 조회
+		@Override
+		public ArrayList<ProductVO> checkPro(String code, String content, String p_nm) {
+			// TODO Auto-generated method stub
+			return mapper.checkpro(code,content,p_nm);
+		}
+
+		//일자별 재고 조회
+		@Override
+		public ArrayList<StockVO> StockCheckPro(String p_code, String sub_fir, String sub_las) {
+			// TODO Auto-generated method stub
+			return mapper.StockCheckPro(p_code,sub_fir,sub_las);
 		}
 }

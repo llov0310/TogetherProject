@@ -62,4 +62,44 @@
 	]]>
 	</select>
 	
+	<select id="newInfo" resultType="com.together.domain.OrdersVO">
+		select m.user_nm ,m.user_id,o.user_id 
+		from member m , orders o 
+		where m.user_id = o.user_id and m.user_nm = #{nm}
+	</select>
+	
+	<update id="updated" parameterType="com.together.domain.OrdersVO">
+	update orders set or_check = '2' 
+	where user_id = #{member_id}
+	and or_dt = #{day1} 
+	and or_dt2 = #{day2}
+	and or_check = '1'
+	and th_dt = #{day_th}
+	</update> 
+	
+	<select id="st_insert_pro" resultType="com.together.domain.ProductVO">
+		select * from product where etp_cd = #{code} and pd_nm = #{pd_nm}
+	</select>
+	
+	<insert id="stockint" parameterType="com.together.domain.StockVO">
+		insert into stock values (#{total_code},#{pro_code},#{pd_num},#{pd_num})
+	</insert>
+	
+	<select id="checkpro" resultType="com.together.domain.ProductVO">
+		select * from product 
+		where etp_cd = #{code} 
+		and pd_nm = #{p_nm} 
+		and DBMS_LOB.SUBSTR(pd_content, 1000, 1) = #{content}
+	</select>
+	
+	<select id="StockCheckPro" resultType="com.together.domain.StockVO">
+	<![CDATA[
+	select st_cd, pd_cd ,st_this_num ,st_total_num
+	from stock
+	where to_date(substr(st_cd,-5), 'MM-DD') between to_date(#{sub_fir}, 'MM-DD') and to_date(#{sub_las}, 'MM-DD')
+	and pd_cd = #{p_code}
+	]]>
+	</select>
+	
+	
 </mapper>
