@@ -57,7 +57,8 @@
 	</update> 
 	
 	 <select id="orderlist" resultType="com.together.domain.OrdersVO">
-	select o.*,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2, 'YYYY-MM-DD') as last_day,e.*,p.*  from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
+	select o.*,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2, 'YYYY-MM-DD') as last_day,e.*,p.* ,SUBSTR(e.etp_cd,0,1) as cd
+	from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
         
 	</select>
 	
@@ -69,4 +70,7 @@
 		select * from post where user_id = #{user_id}
 	</select> --> 
 	
+		<delete id="memberdel" parameterType="com.together.domain.MemberVO">
+		delete from member where user_id = #{user_id} and password = #{password}
+	</delete>  
 </mapper>

@@ -68,7 +68,10 @@ table.type11 td {
 </style>
 </head>
 <body>
-<div>검색하기위한</div>
+<div>검색
+<div>업체명검색<input type="text"> <button>검색</button></div>
+<div>기간별검색 <button>오늘</button><button>7일</button><button>15일</button><button>1개월</button><button>3개월</button><button>1년</button></div>
+</div>
 <ul class="tab" id="tab">
     <li>호텔</li>
     <li>병원</li>
@@ -91,70 +94,87 @@ table.type11 td {
     </tr>
     </thead>
     <tbody>
-    
-    <tr th:each="order_list : ${order_list}">
+    <tr th:each="order_list : ${order_list}" th:if="${order_list.cd}==h">
         <td><span th:text="${order_list.or_cd}"></span></th>
         <td><span th:text="${order_list.pd_nm}"></span></th>
         <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
-        <td><span th:text="${order_list.pd_price}"></span></th>
+        <td><span th:text="${order_list.or_price}"></span></th>
         <td><span th:text="${order_list.etp_nm}"></span></th>
         <td><span th:text="${order_list.th_dt}"></span></th>
-         <td><span th:text="${order_list.or_stat}"></span></th>
+         <td><span th:if="${order_list.or_stat}==1">예약대기중</span> 
+         <span th:if="${order_list.or_stat}==2">예약확정</span>
+         <span th:if="${order_list.or_stat}==3">취소대기중</span>
+         <span th:if="${order_list.or_stat}==4">취소확정</span>
+         </th>
         <td><button>삭제</button></th>
     </tr>
     </th:each>
     </tbody>
 </table>
 </div>
-<div>2
+<div>
 <table class="type11">
     <thead>
     <tr>
         <th scope="cols">주문코드</th>
         <th scope="cols">상품</th>
+        <th scope="cols">예약일</th>
         <th scope="cols">가격</th>
         <th scope="cols">업체</th>
         <th scope="cols">주문일시</th>
+        <th scope="cols">상태</th>
         <th scope="cols">삭제</th>
         
     </tr>
     </thead>
     <tbody>
-    
-    <tr th:each="order_list : ${order_list}">
+    <tr th:each="order_list : ${order_list}" th:if="${order_list.cd}==h">
         <td><span th:text="${order_list.or_cd}"></span></th>
         <td><span th:text="${order_list.pd_nm}"></span></th>
-        <td><span th:text="${order_list.pd_price}"></span></th>
+        <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
+        <td><span th:text="${order_list.or_price}"></span></th>
         <td><span th:text="${order_list.etp_nm}"></span></th>
-        <td><span th:text="${order_list.or_dt}"></span></th>
+        <td><span th:text="${order_list.th_dt}"></span></th>
+         <td><span th:if="${order_list.or_stat}==1">예약대기중</span> 
+         <span th:if="${order_list.or_stat}==2">예약확정</span>
+         <span th:if="${order_list.or_stat}==3">취소대기중</span>
+         <span th:if="${order_list.or_stat}==4">취소확정</span>
+         </th>
         <td><button>삭제</button></th>
     </tr>
     </th:each>
     </tbody>
 </table>
 </div>
-<div>3
+<div>
 
 <table class="type11">
     <thead>
     <tr>
         <th scope="cols">주문코드</th>
         <th scope="cols">상품</th>
+        <th scope="cols">예약일</th>
         <th scope="cols">가격</th>
         <th scope="cols">업체</th>
         <th scope="cols">주문일시</th>
+        <th scope="cols">상태</th>
         <th scope="cols">삭제</th>
         
     </tr>
     </thead>
     <tbody>
-    
-    <tr th:each="order_list : ${order_list}">
+    <tr th:each="order_list : ${order_list}" th:if="${order_list.cd}==f">
         <td><span th:text="${order_list.or_cd}"></span></th>
         <td><span th:text="${order_list.pd_nm}"></span></th>
-        <td><span th:text="${order_list.pd_price}"></span></th>
+        <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
+        <td><span th:text="${order_list.or_price}"></span></th>
         <td><span th:text="${order_list.etp_nm}"></span></th>
-        <td><span th:text="${order_list.or_dt}"></span></th>
+        <td><span th:text="${order_list.th_dt}"></span></th>
+         <td><span th:if="${order_list.or_stat}==1">예약대기중</span> 
+         <span th:if="${order_list.or_stat}==2">예약확정</span>
+         <span th:if="${order_list.or_stat}==3">취소대기중</span>
+         <span th:if="${order_list.or_stat}==4">취소확정</span>
+         </th>
         <td><button>삭제</button></th>
     </tr>
     </th:each>
