@@ -14,6 +14,8 @@ public class EnterpriseVO {
 	private String etp_nm;
 	private String etp_content;
 	private String etp_email;
+	private String etp_apply_dt;
+	private String etp_accept_dt;
 	
 	// 업체 정보를 볼때 추가적으로 필요한 변수를 선언 (etpManage 페이지)
 	private String user_nm;

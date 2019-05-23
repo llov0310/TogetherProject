@@ -33,6 +33,14 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.etpApplyManage_02(user_id);
 	}
+	
+	//업체 신청 수락시 수락일시 추가
+	@Override
+	public int etpApplyManage_03(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.etpApplyManage_03(user_id);
+	}
+	
 
 	//업체 삭제
 	@Override
@@ -195,4 +203,6 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.etpListSearchResult(parm);
 	}
+
+
 }

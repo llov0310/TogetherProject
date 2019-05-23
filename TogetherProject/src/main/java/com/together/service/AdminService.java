@@ -43,6 +43,9 @@ public interface AdminService {
 	// 업체 신청 거절을 위한 함수 추가
 	public int etpApplyManage_02(String user_id);
 	
+	// 업체 신청 수락 시 수락일시를 insert하는 함수 추가
+	public int etpApplyManage_03(String user_id);
+	
 	// 업체 삭제를 위한 함수 추가
 	public int etpListDelete(String user_id);
 	

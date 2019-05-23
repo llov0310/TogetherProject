@@ -21,6 +21,9 @@ public interface AdminMapper {
    // 업체 신청 거절을 위한 함수 맵핑
    public int etpApplyManage_02(@Param("user_id") String user_id);
    
+   // 업체 신청 수락 시 수락 일시 추가 함수 맵핑
+   public int etpApplyManage_03(@Param("user_id") String user_id);
+   
    // 업체 삭제를 위한 함수 맵핑
    public int etpListDelete(String user_id);
    

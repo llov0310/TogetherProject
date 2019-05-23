@@ -273,7 +273,13 @@ public class AdminController {
 
 		return "admin/enterpriseManage";
 	}
-
+	
+	// 업체신청 관리 페이지 : 상세정보(새창 띄움)
+	@RequestMapping()
+	public String etpDetail() {
+		return null;
+	}
+	
 	// 업체신청 관리 페이지 : 업체신청 검색
 	@RequestMapping(value = "/enterpriseManage" + "/search" + "/{page}" + "/{searchType}"
 			+ "/{keyword}", method = RequestMethod.GET)
@@ -373,7 +379,9 @@ public class AdminController {
 		String user_id = null;
 		int update = 0;
 		int delete = 0;
-
+		int accept_dt_update = 0;
+		
+		
 		System.out.println(etpApplyMap);
 		System.out.println("수락 및 거절 여부 : " + etpApplyMap.get(0).get("etpCk"));
 		System.out.println(etpApplyMap.get(0).get("user_id"));
@@ -383,6 +391,7 @@ public class AdminController {
 			for (int i = 0; i < etpApplyMap.size(); i++) {
 				user_id = (String) etpApplyMap.get(i).get("user_id");
 				update = adminService.etpApplyManage_01(user_id);
+				accept_dt_update = adminService.etpApplyManage_03(user_id);
 			}
 			if (update != 0) {
 				System.out.println("넘어는 오시는건가요?");
@@ -394,7 +403,7 @@ public class AdminController {
 		} else if (etpApplyMap.get(0).get("etpCk").equals("거절")) {
 			for (int i = 0; i < etpApplyMap.size(); i++) {
 				user_id = (String) etpApplyMap.get(i).get("user_id");
-				delete = adminService.etpApplyManage_01(user_id);
+				delete = adminService.etpApplyManage_02(user_id);
 			}
 			if (delete != 0) {
 				System.out.println("넘어는 오시는건가요?" + "혹시이거니?");

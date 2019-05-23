@@ -15,6 +15,8 @@ public class EtpListVO { //관리자 페이지 업체 리스트 (enterpriseList)
 	private String etp_nm;
 	private String etp_content;
 	private String etp_email;
+	private String etp_apply_dt;
+	private String etp_accept_dt;
 	
 	private String etp_cd_substr; // 오라클 substring을 사용하여서 변수 추가
 	

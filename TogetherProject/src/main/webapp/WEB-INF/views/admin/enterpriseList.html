@@ -39,6 +39,7 @@
 									<th>업체 명</th>
 									<th>업체 소개</th>
 									<th>휴대폰 번호</th>
+									<th>등록 일시</th>
 								</tr>
 							</thead>
 							<tbody th:if="${etpListSearch == null}" th:each="enterpriseList : ${enterpriseList}">
@@ -58,6 +59,7 @@
 									<td th:text="${enterpriseList.etp_nm}"></td>
 									<td th:text="${enterpriseList.etp_content}"></td>
 									<td th:text="${enterpriseList.ph_no}"></td>
+									<td th:text="${enterpriseList.etp_accept_dt}"></td>
 								</tr>
 							</tbody>
 							
@@ -79,6 +81,7 @@
 									<td th:text="${enterpriseList.etp_nm}"></td>
 									<td th:text="${enterpriseList.etp_content}"></td>
 									<td th:text="${enterpriseList.ph_no}"></td>
+									<td th:text="${enterpriseList.etp_accept_dt}"></td>
 								</tr>
 							</tbody>
 						</table>
