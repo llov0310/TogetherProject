@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+<body th:fragment="body">
+	<!-- 네비게이션(uploadnav) -->
+		<th:block th:include="uploadInclude/uploadnav" />
+		
+		<div id="content" style="width: 100%">
+			<!-- contents -->
+			<th:block layout:fragment="contents"></th:block>
+			<!-- contents -->
+		</div>
+		
+		
+		<!-- footer(uploadfooter) -->
+		<th:block th:include="uploadInclude/uploadfooter" />
+	
+	
+	<!-- 특정 페이지 전용 js -->
+	<th:block layout:fragment="page_js"/>
+</body>
+</html>

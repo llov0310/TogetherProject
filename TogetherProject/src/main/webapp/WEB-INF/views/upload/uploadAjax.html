@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{uploadInclude/uploadLayout}">
+
+<th:block layout:fragment="page_head">
+	<title>업로드 홈페이지</title>
+</th:block>
+
+
+<!-- 홈페이지 내용 -->
+<th:block layout:fragment="contents">
+	<h1>Upload with Ajax</h1>
+	<div class='uploadDiv'>
+		<input type='file' name='uploadFile' multiple>
+	</div>
+
+	<!-- ul 태그 내에 업로드된 파일으 이름을 보여줌 -->
+	<div class='uploadResult'>
+		<ul style="color : white;">제발 나와라예 나와라요
+		
+		</ul>
+	</div>
+	<!-- ul 태그 내에 업로드된 파일으 이름을 보여줌 -->
+
+	<button id="uploadBtn">upload</button>
+</th:block>
+
+<!-- css 넣을거-->
+<th:block layout:fragment="page_css">
+<style>
+.uploadResult {
+	width: 100%;
+	background-color: pink;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 100px;
+}
+</style>
+</th:block>
+
+
+<!-- js 넣을거-->
+<th:block layout:fragment="page_js">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+
+	<script>
+		$(document).ready(function() {
+		
+			//확장자 업로드 제한 처리
+			var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+			var maxSize = 524880; //5MB
+
+			function checkExtension(fileName, fileSize) {
+				if (fileSize >= maxSize) {
+					alert("파일 사이즈 초과");
+				}
+				if (regex.test(fileName)) {
+					alert("해당 종류의 파일을 업로드 할 수 없습니다.");
+				}
+				return true;
+			}
+			//확장자 업로드 제한 처리
+			
+			
+			var cloneObj = $(".uploadDiv").clone();
+			
+			
+			$("#uploadBtn").on("click", function(e) {
+				var formData = new FormData();
+				
+				var inputFile = $("input[name='uploadFile']");
+				
+				var files = inputFile[0].files;
+				
+				console.log(files);
+				
+				for(var i=0; i<files.length; i++) {
+					if(!checkExtension(files[i].name, files[i].size) ) {
+						return false;
+					}//end of if
+					
+					formData.append("uploadFile", files[i]);
+				}//end of for
+				
+				//업로드결과를 json으로 받아와서 섬네일 보여주거나 파일 아이콘 보여줌
+				var uploadResult = $(".uploadResult ul");
+				
+				function showUploadedFile(uploadResultArr) {
+					var str="";
+					
+					$(uploadResultArr).each(function(i, obj)  {
+						if(!obj.image) {
+							//str += "<li><img src='/ex05/resources/img/attach.png'>"+obj.fileName+"</li>";
+							
+							var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
+							
+							str += "<li><a href='/ex05/download?fileName="+fileCallPath+"'><img src='/ex05/resources/img/attach.png'>"+obj.fileName+"</a></li>"
+							}else {
+							//str += "<li>" + obj.fileName + "</li>";
+							//var fileCallPath =  encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+							
+							var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+							
+							str += "<li><img src='/ex05/display?fileName="+fileCallPath+"'><li>";
+						}//end of else
+						
+					});//end of uploadResultArr
+					
+					
+					uploadResult.append(str);
+				}
+
+				$.ajax({
+					url:'/uploadAjaxAction',
+					processData:false,
+					contentType:false,
+					data:formData,
+					type:'POST',
+					dataType:'json',
+					success: function(result) {
+						
+						showUploadedFile(result);
+						$(".uploadDiv").html(cloneObj.html());
+					}
+				}); //end of ajax
+			
+			}); //end of uploadBtn method
+
+			//책: 업로드된 이미지 처리 - 521
+
+		}); //end of document.ready
+		</script>
+</th:block>
+
+
+</html>
