@@ -274,11 +274,11 @@ public class AdminController {
 		return "admin/enterpriseManage";
 	}
 	
-	// 업체신청 관리 페이지 : 상세정보(새창 띄움)
-	@RequestMapping()
-	public String etpDetail() {
-		return null;
-	}
+//	// 업체신청 관리 페이지 : 상세정보(새창 띄움)
+//	@RequestMapping()
+//	public String etpDetail() {
+//		return null;
+//	}
 	
 	// 업체신청 관리 페이지 : 업체신청 검색
 	@RequestMapping(value = "/enterpriseManage" + "/search" + "/{page}" + "/{searchType}"
