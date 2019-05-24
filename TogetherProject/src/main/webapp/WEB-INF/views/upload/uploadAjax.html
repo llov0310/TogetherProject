@@ -18,9 +18,7 @@
 
 	<!-- ul 태그 내에 업로드된 파일으 이름을 보여줌 -->
 	<div class='uploadResult'>
-		<ul style="color : white;">제발 나와라예 나와라요
-		
-		</ul>
+		<ul style="color : white;">제발 나와라예 나와라요</ul>
 	</div>
 	<!-- ul 태그 내에 업로드된 파일으 이름을 보여줌 -->
 
@@ -110,15 +108,16 @@
 							//str += "<li><img src='/ex05/resources/img/attach.png'>"+obj.fileName+"</li>";
 							
 							var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
-							
-							str += "<li><a href='/ex05/download?fileName="+fileCallPath+"'><img src='/ex05/resources/img/attach.png'>"+obj.fileName+"</a></li>"
+																						//원래/ex05있었음
+							str += "<li><a href='/download?fileName="+fileCallPath+"'><img src='/resources/img/attach.png'>"+obj.fileName+"</a></li>"
 							}else {
 							//str += "<li>" + obj.fileName + "</li>";
 							//var fileCallPath =  encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
 							
 							var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
 							
-							str += "<li><img src='/ex05/display?fileName="+fileCallPath+"'><li>";
+							// 이거 경로...뭐지
+							str += "<li><img src='/display?fileName="+fileCallPath+"'><li>";
 						}//end of else
 						
 					});//end of uploadResultArr
