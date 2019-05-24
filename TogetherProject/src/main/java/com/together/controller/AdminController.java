@@ -260,6 +260,17 @@ public class AdminController {
 			} else {
 				return "fail2";
 			}
+		} else if(memManageMap.get(0).get("memManage").equals("업체 회원 변경")) {
+			for (int i = 0; i < memManageMap.size(); i++) {
+				user_id = (String) memManageMap.get(i).get("user_id");
+				update = adminService.memManage_04(user_id);
+			}
+			if (update != 0) {
+				System.out.println("넘어는 오시는건가요?" + "혹시이거니?");
+				return "success2";
+			} else {
+				return "fail2";
+			}
 		}
 
 		return "all_fail";

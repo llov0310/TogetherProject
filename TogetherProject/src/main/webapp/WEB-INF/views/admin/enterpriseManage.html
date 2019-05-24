@@ -45,7 +45,7 @@
 							</thead>
 							<tbody>
 								<tr th:if="${etpApplySearch == null}" th:each="etpManage : ${enterpriseManage}" class="etpManage_list">
-									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
+									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id" class="checkBoxBtn"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
 <!-- 									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td> -->
@@ -67,7 +67,7 @@
 							<!-- 검색 할 때 사용하는 테이블 -->
 							<tbody >
 								<tr th:if="${etpApplySearch != null}" th:each="etpManage : ${etpApplySearch}" class="etpManage_list">
-									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
+									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id" class="checkBoxBtn"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
 <!-- 									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td> -->
@@ -133,7 +133,7 @@
 	<!-- 팝업 창 시작 (상세정보) -->
 	<div id="bP" class="bP">
 		<h1>업체 상세 정보</h1>
-		업체 구분 : <span class=""></span>
+		업체 구분 : <span class="etp_cd_substr"></span> </br>
 		아이디 : <span class="user_id"></span> </br>
 		이름 : <span class="user_nm"></span> </br>
 		업체 이메일 : <span class="etp_email"></span> </br>

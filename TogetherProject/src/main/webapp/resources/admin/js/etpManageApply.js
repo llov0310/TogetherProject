@@ -11,7 +11,10 @@ $(document).ready(function(){
 
 		}
 		//해당 회원 선택시 새창 띄움
+
 		$(".etpManage_list").on('click',function(){
+			
+			
 			var user_id = $(this).children().eq(1).text();
 
 			console.log(user_id);
@@ -32,6 +35,13 @@ $(document).ready(function(){
 						positionStyle : 'fixed'
 					});
 					
+					
+					if(data[0].etp_cd_substr == "h"){
+						$('.etp_cd_substr').text("호텔");
+					}else if(data[0].etp_cd_substr == "f"){
+						$('.etp_cd_substr').text("장례");
+					};
+				
 					$('.user_id').text(data[0].user_id);
 					$('.user_nm').text(data[0].user_nm);
 					$('.etp_email').text(data[0].etp_email);

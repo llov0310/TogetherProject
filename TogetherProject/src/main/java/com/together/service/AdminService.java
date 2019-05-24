@@ -103,6 +103,8 @@ public interface AdminService {
 	// 관리자 홈페이지 : 회원 탈퇴 시키기
 	public int memManage_03(String user_id);	
 	
+	// 관리자 홈페이지 : 관리자 회원으로 변경
+	public int memManage_04(String user_id);
 	
 	
 }

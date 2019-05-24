@@ -23,7 +23,8 @@
 					<div>
 						<input type="button" class="memManage" name="memManage" value="탈퇴" />
 						<input type="button" class="memManage" name="memManage" value="정지" />
-						<input type="button" class="memManage" name="memManage" value="정지 해제" />	
+						<input type="button" class="memManage" name="memManage" value="정지 해제" />
+						<input type="button" class="memManage" name="memManage" value="업체 회원 변경" />	
 					</div>
 
 					<table class="table table-bordered" id="dataTable" width="100%"
@@ -33,10 +34,10 @@
 								<th><input type="checkbox" id="allCheck"/>전체 선택</th>
 								<th>아이디</th>
 								<th>이름</th>
-<!-- 								<th>이메일</th> -->
+								<th>이메일</th>
 								<th>휴대폰 번호</th>
 								<th>가입 일시</th>
-<!-- 								<th>주소</th> -->
+								<th>주소</th>
 								<th>회원 분류</th>
 							</tr>
 						</thead>
@@ -45,10 +46,10 @@
 								<td><input type="checkbox" th:value="${memberList.user_id}" name="user_id"></td>
 								<td th:text = "${memberList.user_id}"></td>
 								<td th:text = "${memberList.user_nm}"></td>
-<!-- 								<td th:text = "${memberList.email}"></td> -->
+								<td th:text = "${memberList.email}"></td>
 								<td th:text = "${memberList.ph_no}"></td>
 								<td th:text = "${#strings.substring(memberList.register_dt,0,19)}"></td>
-<!-- 								<td th:text = "|${memberList.addr_ji} ${memberList.addr_dong}|"></td> -->
+								<td th:text = "|${memberList.addr_ji} ${memberList.addr_dong}|"></td>
 								<td th:case = "1">관리자</td>
 								<td th:case = "2">업체 회원</td>
 								<td th:case = "3">회원</td>
@@ -63,10 +64,10 @@
 								<td><input type="checkbox" th:value="${memberList.user_id}" name="user_id"></td>
 								<td th:text="${memberList.user_id}"></td>
 								<td th:text="${memberList.user_nm}"></td>
-<!-- 								<td th:text="${memberList.email}"></td> -->
+								<td th:text="${memberList.email}"></td>
 								<td th:text="${memberList.ph_no}"></td>
 								<td th:text="${#strings.substring(memberList.register_dt,0,19)}"></td>
-<!-- 								<td th:text="|${memberList.addr_ji} ${memberList.addr_dong}|"></td> -->
+								<td th:text="|${memberList.addr_ji} ${memberList.addr_dong}|"></td>
 								<td th:case="1">관리자</td>
 								<td th:case="2">업체 회원</td>
 								<td th:case="3">회원</td>

@@ -231,6 +231,13 @@ public class AdminServiceImplement implements AdminService {
 		// TODO Auto-generated method stub
 		return mapper.memManage_03(user_id);
 	}
+	
+	// 관리자 홈페이지 : 관리자 회원으로 변경
+	@Override
+	public int memManage_04(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.memManage_04(user_id);
+	}
 
 
 }
