@@ -13,7 +13,7 @@
 				if(result) {
 			 		$("#chmember").show(); 
 				} else {
-					alert("고마워"); 
+					alert("취소되었습니다"); 
 						}
 			}else{
 			alert("체크 해주세요");
@@ -28,8 +28,7 @@
 				alert("비밀번호를 입력해주세요");
 				$("#dpw").focus();
 			}else {
-				var pw = $("#dpw").val();
-			}
+				 pw = $("#dpw").val();
 			 	$.ajax({
 					url : "/deletid",
 					type : "POST",
@@ -48,7 +47,8 @@
 							$("#dpw").focus();
 						}
 					}
-					});  
+					}); 
+			}
 		});
 	});
 	

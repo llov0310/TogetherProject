@@ -57,20 +57,24 @@ table.type11 td {
     background: #eee;
 }
 
-.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
-.tab li { float:left; width:33.3%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+.tab { border:1px solid #ddd; background:#fff; overflow:hidden; padding: unset;}
+.tab li { float:left; width:50%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
 .tab li { display:inline-block; padding:20px; cursor:pointer; }
 .tab li.on { background-color:#eee; color:#f00; }
 
 .tab_con div { display:none; background:#fff; line-height:100px; text-align:center; }
 </style>
+<div>검색
+<div>제목<input type="text"> <button>검색</button></div>
+<div>기간별검색 <button>오늘</button><button>7일</button><button>15일</button><button>1개월</button><button>3개월</button><button>1년</button></div>
+<button>삭제하기</button>
+</div>
 <div>
-
 <ul class="tab" id="tab">
     <li>내 작성글</li>
     <li>내가쓴 댓글보기</li>
 </ul>
-<button>삭제하기</button>
+
 <div class="tab_con" id="tab_con">
     <div>
     <table class="type11">
@@ -79,7 +83,7 @@ table.type11 td {
         <th scope="cols"><input type="checkbox"></th>
         <th scope="cols">제목</th>
         <th scope="cols">작성일</th>
-        <th scope="cols">삭제/수정</th>
+        <th scope="cols">삭제</th>
         
     </tr>
     </thead>

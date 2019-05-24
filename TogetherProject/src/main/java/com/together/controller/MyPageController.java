@@ -151,6 +151,7 @@ public class MyPageController {
 
 	}
 	
+	
 //	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)
 //	public String myreservation(Model model) {
 //		
@@ -215,6 +216,17 @@ public class MyPageController {
 //	
 //	}
 	
+	//예약취소	
+	@RequestMapping(value = "/orderdel", method = RequestMethod.POST)
+	@ResponseBody
+	public String orderdel(Model model, HttpSession session, HttpServletRequest request,@RequestParam String or_cd,@RequestParam String or_stat) {
+	System.out.println(or_cd);
+	System.out.println(or_stat);
+	
+	Integer delorder = mypage.delorder(or_cd, or_stat);
+		return "success";
+	}
+		
 	@RequestMapping(value = "/mypost", method = RequestMethod.GET)
 	public String mypost(Model model, HttpSession session, HttpServletRequest request) {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
@@ -227,17 +239,14 @@ public class MyPageController {
 
 	}
 	
-//	@RequestMapping(value = "/mypost", method = RequestMethod.GET)
-//	public String mypost(Model model) {
-//		return "nav/mypage/mypost";
-//
-//	}
+
 
 	@RequestMapping(value = "/deleteaccount", method = RequestMethod.GET)
 	public String DeleteAccount(Model model) {
 		return "nav/mypage/DeleteAccount";
 
 	}
+	//회원탈퇴
 	@RequestMapping(value = "/deletid", method = RequestMethod.POST)
 	@ResponseBody
 	public String Deleteid(Model model, HttpSession session, HttpServletRequest request,@RequestParam String user_id,@RequestParam String password) {

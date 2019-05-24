@@ -70,6 +70,10 @@
 		select * from post where user_id = #{user_id}
 	</select> --> 
 	
+	<update id="delorder" parameterType="com.together.domain.MemberVO">
+		update orders set or_stat = #{or_stat} where or_cd = #{or_cd}
+	</update> 
+	
 		<delete id="memberdel" parameterType="com.together.domain.MemberVO">
 		delete from member where user_id = #{user_id} and password = #{password}
 	</delete>  

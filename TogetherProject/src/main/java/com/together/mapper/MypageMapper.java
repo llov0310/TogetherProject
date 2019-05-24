@@ -50,6 +50,8 @@ public interface MypageMapper {
 
 	public Integer memberdel(@Param("user_id") String user_id, @Param("password")String password);
 
+	public Integer delorder(@Param("or_cd") String or_cd, @Param("or_stat") String or_stat);
+
 
 
 

@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <title>Insert title here</title>
 <script>
 $(function () {	
@@ -33,7 +32,30 @@ function tab(e, num){
         select.addClass('on');
         con.eq(i).show();
     });
+    
 }
+
+$(document).ready(function() {
+	$(".orderdelbt").click(function() {
+		var x = 3;
+		var orcd = $(this).parent().parent().find("#orcd").text();
+		console.log(orcd);
+		
+		$.ajax({
+			url : "/orderdel",
+			type : "POST",
+			dataType : 'text',
+			data : {
+				or_stat : x,
+				or_cd : orcd
+			},
+			success : function(data) {
+				 $("#content").load("/myreservation" );
+			}
+		});
+	});
+});
+
 </script>
 <style type="text/css">
 table.type11 {
@@ -59,7 +81,7 @@ table.type11 td {
     background: #eee;
 }
 
-.tab { border:1px solid #ddd; border-left:none; background:#fff; overflow:hidden; }
+.tab { border:1px solid #ddd; background:#fff; overflow:hidden; padding: unset;}
 .tab li { float:left; width:33.3%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
 .tab li { display:inline-block; padding:20px; cursor:pointer; }
 .tab li.on { background-color:#eee; color:#f00; }
@@ -89,24 +111,24 @@ table.type11 td {
         <th scope="cols">업체</th>
         <th scope="cols">주문일시</th>
         <th scope="cols">상태</th>
-        <th scope="cols">삭제</th>
+        <th scope="cols">취소</th>
         
     </tr>
     </thead>
     <tbody>
     <tr th:each="order_list : ${order_list}" th:if="${order_list.cd}==h">
-        <td><span th:text="${order_list.or_cd}"></span></th>
+        <td><span id="orcd" th:text="${order_list.or_cd}"></span></th>
         <td><span th:text="${order_list.pd_nm}"></span></th>
         <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
         <td><span th:text="${order_list.or_price}"></span></th>
         <td><span th:text="${order_list.etp_nm}"></span></th>
         <td><span th:text="${order_list.th_dt}"></span></th>
-         <td><span th:if="${order_list.or_stat}==1">예약대기중</span> 
-         <span th:if="${order_list.or_stat}==2">예약확정</span>
-         <span th:if="${order_list.or_stat}==3">취소대기중</span>
-         <span th:if="${order_list.or_stat}==4">취소확정</span>
+         <td><span class="orstat" th:if="${order_list.or_stat}==1">예약대기중</span> 
+         <span class="orstat" style="color: blue;" th:if="${order_list.or_stat}==2">예약확정</span>
+         <span class="orstat" style="color: red;" th:if="${order_list.or_stat}==3">취소대기중</span>
+         <span class="orstat" th:if="${order_list.or_stat}==4">취소확정</span>
          </th>
-        <td><button>삭제</button></th>
+        <td><button class="orderdelbt">삭제</button></th>
     </tr>
     </th:each>
     </tbody>

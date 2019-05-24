@@ -93,6 +93,13 @@ public class MypageServiceImplement implements MypageService {
 		return myMapper.memberdel(user_id , password);
 	}
 
+
+	@Override
+	public Integer delorder(String or_cd, String or_stat) {
+		// TODO Auto-generated method stub
+		return myMapper.delorder(or_cd,or_stat);
+	}
+
 	 
 }
 

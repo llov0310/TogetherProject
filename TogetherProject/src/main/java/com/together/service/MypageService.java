@@ -27,8 +27,10 @@ public interface MypageService {
 	public ArrayList<OrdersVO> orderlist(String user_id);
 	//작성글 리스트
 	public ArrayList<PostVO> postlist(String user_id);
-	
+	//회원탈퇴
 	public Integer memberdel(String user_id, String password);
+	//취소요청
+	public Integer delorder(String or_cd, String or_stat);
 
 
 
