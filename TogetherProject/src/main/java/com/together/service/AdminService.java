@@ -91,4 +91,18 @@ public interface AdminService {
 	// 업체 리스트 검색 결과
 	public ArrayList<EtpListVO> etpListSearchResult(Map<Object, Object> parm);
 
+	// 업체 신청 관리 : 클릭 시 상세 정보
+	public ArrayList<EnterpriseVO> etpDetail(String user_id);
+		
+	// 관리자 홈페이지 : 회원 정지 시키기
+	public int memManage_01(String user_id);
+	
+	// 관리자 홈페이지 : 회원 정지 해제 시키기
+	public int memManage_02(String user_id);
+		
+	// 관리자 홈페이지 : 회원 탈퇴 시키기
+	public int memManage_03(String user_id);	
+	
+	
+	
 }

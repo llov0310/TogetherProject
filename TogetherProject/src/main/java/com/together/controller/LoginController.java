@@ -1,9 +1,12 @@
 package com.together.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -27,7 +30,7 @@ public class LoginController {
 	
 	//로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(MemberVO userInfo, HttpSession session, Model model) {	
+	public String login(MemberVO userInfo, HttpSession session, Model model, HttpServletResponse response) throws IOException {	
 		MemberVO user = customerService.login(userInfo.getUser_id(), userInfo.getPassword());
 		
 //		System.out.println(user.getAuthority_no());
@@ -57,14 +60,25 @@ public class LoginController {
 		} else if(user.getAuthority_no() == 3){
 			session.setAttribute("user", user);
 			return "home";
-		} else {
+		} else if(user.getAuthority_no() == 4){
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('관리자에 의해 이용이 정지된 계정입니다. 자세한 사항은 고객센터에 문의해주시기 바랍니다.'); </script>");
+			out.flush();
+			return "home";
+		}else {
 			model.addAttribute("error", "login failed");
 			return "login";
 		}
 	}
 	
 	
-	
+//	@RequestMapping(value = "/banHome", method = RequestMethod.GET)
+//	public String banHome(HttpSession session) {
+//		
+//		
+//		return "banHome";
+//	}
 	
 	
 	//로그아웃

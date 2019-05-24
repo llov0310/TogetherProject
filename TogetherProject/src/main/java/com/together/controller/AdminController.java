@@ -209,7 +209,62 @@ public class AdminController {
 
 		return "admin/memberManage";
 	}
+	
+	// 회원관리 : 탈퇴, 정지, 정지 해제
+	@RequestMapping(value = "/memManage", method = RequestMethod.POST)
+	@ResponseBody
+	public String memManage(Model model, HttpSession session, @RequestBody String param) {
+		List<Map<String, Object>> memManageMap = new ArrayList<Map<String, Object>>();
+		memManageMap = JSONArray.fromObject(param);
+		String user_id = null;
+		int update = 0;
+		int delete = 0;
+		
+		
+		System.out.println(memManageMap);
+		System.out.println("탈퇴, 정지, 정지 해제 확인 : " + memManageMap.get(0).get("memManage"));
+		System.out.println(memManageMap.get(0).get("user_id"));
+		System.out.println(memManageMap.size());
 
+		if (memManageMap.get(0).get("memManage").equals("정지")) {
+			for (int i = 0; i < memManageMap.size(); i++) {
+				user_id = (String) memManageMap.get(i).get("user_id");
+				update = adminService.memManage_01(user_id);
+			}
+			if (update != 0) {
+				System.out.println("넘어는 오시는건가요?");
+				return "success1";
+			} else {
+				return "fail1";
+			}
+
+		} else if (memManageMap.get(0).get("memManage").equals("정지 해제")) {
+			for (int i = 0; i < memManageMap.size(); i++) {
+				user_id = (String) memManageMap.get(i).get("user_id");
+				update = adminService.memManage_02(user_id);
+			}
+			if (update != 0) {
+				System.out.println("넘어는 오시는건가요?" + "혹시이거니?");
+				return "success2";
+			} else {
+				return "fail2";
+			}
+		} else if(memManageMap.get(0).get("memManage").equals("탈퇴")) {
+			for (int i = 0; i < memManageMap.size(); i++) {
+				user_id = (String) memManageMap.get(i).get("user_id");
+				delete = adminService.memManage_03(user_id);
+			}
+			if (delete != 0) {
+				System.out.println("넘어는 오시는건가요?" + "혹시이거니?");
+				return "success2";
+			} else {
+				return "fail2";
+			}
+		}
+
+		return "all_fail";
+	}
+	
 	// 업체 관리 페이지 (페이징)
 	@RequestMapping(value = "/enterpriseManage" + "/{num}", method = RequestMethod.GET)
 	public String enterpriseManage(@PathVariable String num, Model model, HttpSession session) {
@@ -273,12 +328,6 @@ public class AdminController {
 
 		return "admin/enterpriseManage";
 	}
-	
-//	// 업체신청 관리 페이지 : 상세정보(새창 띄움)
-//	@RequestMapping()
-//	public String etpDetail() {
-//		return null;
-//	}
 	
 	// 업체신청 관리 페이지 : 업체신청 검색
 	@RequestMapping(value = "/enterpriseManage" + "/search" + "/{page}" + "/{searchType}"
@@ -771,9 +820,9 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/yearSelectChart", method = RequestMethod.POST)
 	public ArrayList<MemberVO> monthMemberCnt(@RequestParam String year) {
-
 		System.out.println(year);
-
+		
+		
 		return adminService.monthMemberCnt(year);
 	}
 
@@ -783,6 +832,18 @@ public class AdminController {
 	public ArrayList<MemberVO> memberAge() {
 
 		return adminService.memberAge();
+	}
+	
+	// 업체신청 관리 페이지 : 상세정보(팝업 기능 사용)
+	@RequestMapping(value="/etpDetail", method=RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<EnterpriseVO> etpDetail(@RequestParam String user_id, Model model) {
+//		System.out.println(user_id);
+		
+		ArrayList<EnterpriseVO> etpDetail = adminService.etpDetail(user_id);
+
+		System.out.println(etpDetail);
+		return etpDetail;
 	}
 
 }

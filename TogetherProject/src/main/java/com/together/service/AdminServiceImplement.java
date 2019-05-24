@@ -204,5 +204,33 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.etpListSearchResult(parm);
 	}
 
+	// 업체 신청 관리 : 클릭 시 상세 정보
+	@Override
+	public ArrayList<EnterpriseVO> etpDetail(String user_id) {
+		
+		return mapper.etpDetail(user_id);
+	}
+
+	// 관리자 홈페이지 : 회원 정지 시키기
+	@Override
+	public int memManage_01(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.memManage_01(user_id);
+	}
+
+	// 관리자 홈페이지 : 회원 정지 해제 시키기
+	@Override
+	public int memManage_02(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.memManage_02(user_id);
+	}
+	
+	// 관리자 홈페이지 : 회원 탈퇴 시키기
+	@Override
+	public int memManage_03(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.memManage_03(user_id);
+	}
+
 
 }

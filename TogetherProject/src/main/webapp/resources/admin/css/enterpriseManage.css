@@ -10,3 +10,14 @@
 	height : 25%;
 	margin : 0 auto;
 }
+
+#bP {
+	 opacity: 0;
+	 display: none;
+	 position: fixed;
+	 width: 600px;
+	 height: 75%;
+	 border: 5px solid #fff;
+	 padding: 20px;
+	 background-color: #fff;
+}  

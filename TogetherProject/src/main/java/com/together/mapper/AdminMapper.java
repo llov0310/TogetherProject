@@ -93,4 +93,16 @@ public interface AdminMapper {
    // 업체 리스트 검색 결과 맵핑
    public ArrayList<EtpListVO> etpListSearchResult(Map<Object, Object> parm);
    
+   // 업체 신청 관리 : 클릭 시 상세 정보 맵핑
+   public ArrayList<EnterpriseVO> etpDetail(@Param("user_id") String user_id);
+   
+   // 관리자 홈페이지 : 회원 정지 시키기
+   public int memManage_01(@Param("user_id") String user_id);
+   
+   // 관리자 홈페이지 : 회원 정지 해제 시키기
+   public int memManage_02(@Param("user_id") String user_id);
+   
+   // 관리자 홈페이지 : 회원 탈퇴 시키기
+   public int memManage_03(@Param("user_id") String user_id);
+   
 }

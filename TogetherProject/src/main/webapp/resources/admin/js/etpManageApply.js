@@ -1,7 +1,59 @@
 // ready 두번 호출 방지를 위해 변수 선언
 // 설명 : 3. <head> 바깥에 사용할 경우에는 isloaded 변수를 정의해서 ready() 함수가 끝나는 부분에 true로 하고 강제적으로 1번만 호출될 수 있도록 한다.
 var isloaded_etpManageApply = false;
+var isloaded_etpDetail = false;
+
 $(document).ready(function(){
+		// ready 두번 호출 방지를 위해 if문 선언
+		if (isloaded_etpDetail) {
+
+		return;
+
+		}
+		//해당 회원 선택시 새창 띄움
+		$(".etpManage_list").on('click',function(){
+			var user_id = $(this).children().eq(1).text();
+
+			console.log(user_id);
+			
+
+			$.ajax({
+				url : "/etpDetail",
+				type : "GET",
+//				contentType:"application/json;charset=UTF-8",
+				dataType : 'json',
+				data : {user_id},
+//				traditional: true, //배열 때문에 쓰는거
+				success : function(data){
+					
+					$(".bP").bPopup({
+						follow : [false, false],
+						opacity : 0.6,
+						positionStyle : 'fixed'
+					});
+					
+					$('.user_id').text(data[0].user_id);
+					$('.user_nm').text(data[0].user_nm);
+					$('.etp_email').text(data[0].etp_email);
+					$('.etp_ph_no').text(data[0].etp_ph_no);
+					$('.etp_addr').text(data[0].etp_addr);
+					$('.etp_license_no').text(data[0].etp_license_no);
+					$('.etp_nm').text(data[0].etp_nm);
+					$('.ph_no').text(data[0].ph_no);
+//					console.log(data);		
+				},
+				error:function(jqXHR, textStatus, errorThrown){
+					alert('에러 발생 \n' + textStatus + ' : ' + errorThrown);
+				}		
+			}); // ajax END
+		});
+		// ready함수 두번 호출 방지를 위해 true로 변경
+		isloaded_etpDetail = true;
+
+		
+	
+	
+	
 		//체크박스 전체 선택
 		$("#allCheck").click(function(){
 			//클릭 되었으면

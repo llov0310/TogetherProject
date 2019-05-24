@@ -25,62 +25,62 @@
 							<input type="button" id = "reject" class ="etpCk" name="etpApplyCk" value="거절"/>
 						</div>
 					
-						<table class="table table-bordered" id="dataTable" width="100%"
+						<table class="table table-bordered table-hover" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
 								<tr>
 									<th><input type="checkbox" id="allCheck"/>전체 선택</th>
-									<th>업체 구분</th>									
+<!-- 									<th>업체 구분</th>									 -->
 									<th>아이디</th>
 									<th>이름</th>
-									<th>이메일</th>
-									<th>회사 대표 번호</th>
-									<th>주소</th>
-									<th>사업자 번호</th>
-									<th>업체 명</th>
-									<th>업체 소개</th>
+<!-- 									<th>이메일</th> -->
+<!-- 									<th>회사 대표 번호</th> -->
+<!-- 									<th>주소</th> -->
+<!-- 									<th>사업자 번호</th> -->
+<!-- 									<th>업체 명</th> -->
+<!-- 									<th>업체 소개</th> -->
 									<th>휴대폰 번호</th>
 									<th>신청 일시</th>
 								</tr>
 							</thead>
-							<tbody th:if="${etpApplySearch == null}" th:each="etpManage : ${enterpriseManage}">
-								<tr>
+							<tbody>
+								<tr th:if="${etpApplySearch == null}" th:each="etpManage : ${enterpriseManage}" class="etpManage_list">
 									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
-									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td>
-									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td>
+<!-- 									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td> -->
+<!-- 									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td> -->
 									
 									<td th:text="${etpManage.user_id}"></td>					
 									<td th:text="${etpManage.user_nm}"></td>
-									<td th:text="${etpManage.etp_email}"></td>
-									<td th:text="${etpManage.etp_ph_no}"></td>
-									<td th:text="${etpManage.etp_addr}"></td>
-									<td th:text="${etpManage.etp_license_no}"></td>
-									<td th:text="${etpManage.etp_nm}"></td>
-									<td th:text="${etpManage.etp_content}"></td>
+<!-- 									<td th:text="${etpManage.etp_email}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_ph_no}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_addr}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_license_no}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_nm}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_content}"></td> -->
 									<td th:text="${etpManage.ph_no}"></td>
 									<td th:text="${etpManage.etp_apply_dt}"></td>
 								</tr>
 							</tbody>
 							
 							<!-- 검색 할 때 사용하는 테이블 -->
-							<tbody th:if="${etpApplySearch != null}" th:each="etpManage : ${etpApplySearch}">
-								<tr>
+							<tbody >
+								<tr th:if="${etpApplySearch != null}" th:each="etpManage : ${etpApplySearch}" class="etpManage_list">
 									<td><input type="checkbox" th:value="${etpManage.user_id}" name="user_id"></td>
 									
 <!-- 									<td th:text="${etpList.etp_cd_substr}"></td>	 -->
-									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td>
-									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td>
+<!-- 									<td th:if="${etpManage.etp_cd_substr == 'h'}">호텔</td> -->
+<!-- 									<td th:if="${etpManage.etp_cd_substr == 'f'}">장례</td> -->
 									
 									<td th:text="${etpManage.user_id}"></td>					
 									<td th:text="${etpManage.user_nm}"></td>
-									<td th:text="${etpManage.etp_email}"></td>
-									<td th:text="${etpManage.etp_ph_no}"></td>
-									<td th:text="${etpManage.etp_addr}"></td>
-									<td th:text="${etpManage.etp_license_no}"></td>
-									<td th:text="${etpManage.etp_nm}"></td>
-									<td th:text="${etpManage.etp_content}"></td>
+<!-- 									<td th:text="${etpManage.etp_email}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_ph_no}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_addr}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_license_no}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_nm}"></td> -->
+<!-- 									<td th:text="${etpManage.etp_content}"></td> -->
 									<td th:text="${etpManage.ph_no}"></td>
 									<td th:text="${etpManage.etp_apply_dt}"></td>
 								</tr>
@@ -99,6 +99,7 @@
 								
 								<a class="pagination-older">  NEXT</a>
 							</div>
+							
 						</nav>
 					</div>
 					<!-- 페이징 -->
@@ -108,8 +109,7 @@
 						<div class="select">
 							<select id="search-select">
 								<option value="e.user_id">아이디</option>
-								<option value="e.etp_license_no">사업자 번호</option>
-								<option value="e.etp_ph_no">회사 대표 번호</option>
+								<option value="m.user_nm">이름</option>
 								<option value="m.ph_no">휴대폰 번호</option>
 							</select>
 						</div>
@@ -128,24 +128,21 @@
 		</div>
 	</div>
 	<!-- /.container-fluid -->
+	
 
-	<!-- Bootstrap core JavaScript-->
-<!-- 	<script src="admin/vendor/jquery/jquery.min.js"></script> -->
-<!-- 	<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-
-	<!-- Core plugin JavaScript-->
-<!-- 	<script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script> -->
-
-	<!-- Custom scripts for all pages-->
-<!-- 	<script src="admin/js/sb-admin-2.min.js"></script> -->
-
-	<!-- Page level plugins -->
-	<!-- 테이블 관련 js -->
-<!-- 	<script src="admin/vendor/datatables/jquery.dataTables.min.js"></script> -->
-<!-- 	<script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
-
-	<!-- Page level custom scripts -->
-<!-- 	<script src="admin/js/demo/datatables-demo.js"></script> -->
+	<!-- 팝업 창 시작 (상세정보) -->
+	<div id="bP" class="bP">
+		<h1>업체 상세 정보</h1>
+		업체 구분 : <span class=""></span>
+		아이디 : <span class="user_id"></span> </br>
+		이름 : <span class="user_nm"></span> </br>
+		업체 이메일 : <span class="etp_email"></span> </br>
+		업체 연락처 : <span class="etp_ph_no"></span> </br>
+		업체 주소 : <span class="etp_addr"></span> </br>
+		사업자 번호 : <span class="etp_license_no"></span> </br>
+		업체 이름 : <span class="etp_nm"></span> </br>
+		휴대폰 번호 : <span class="ph_no"></span> </br>
+	</div>
 	
 </th:block>
 
@@ -171,6 +168,8 @@
 	<th:block layout:fragment="page_js">
 		<script src="/admin/vendor/jquery/jquery.min.js"></script>
 		<script src="/admin/js/etpManageApply.js"></script>
+		<script src="/admin/plugin/jquery.bpopup.min.js"></script>
+		
 	</th:block>
 
 </html>

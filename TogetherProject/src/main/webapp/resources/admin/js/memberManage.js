@@ -110,4 +110,66 @@ $(document).ready(function(){
 		
 		// ready함수 두번 호출 방지를 위해 true로 변경
 		isloaded_M_Manage = true;
+		
+		//체크박스 전체 선택
+		$("#allCheck").click(function(){
+			//클릭 되었으면
+			if($("#allCheck").prop("checked")){
+				//input태그의 name이 user_id인 태그들을 찾아서 checked옵션을 true로 정의
+				$("input[name=user_id]").prop("checked", true);
+			}else{
+				//input태그의 name이 user_id인 태그들을 찾아서 checked옵션을 false로 정의
+				$("input[name=user_id]").prop("checked", false);
+			}
+		});
+		
+		//보낼때
+		$(".memManage").off().on('click',function(){
+			// name이 같은 체크박스의 값들을 배열에 담는다
+			// off() : 이벤트 제거하기
+			var user_id = []; // 체크 된 아이디를 담을 배열 선언
+			var array = []; // Obj (키,밸류) 형식으로 된 변수를 담을 배열 선언
+			var memManage = $(this).val();
+			
+			$("input[name='user_id']:checked").each(function(i){
+				 user_id.push($(this).val());
+			});
+			
+			console.log(user_id.length);
+			console.log(user_id[0]);
+			
+			for(var i=0; i<user_id.length; i++){
+				var Obj = {}; // 오브젝트 변수 선언과 동시에 초기화
+				Obj.memManage = memManage;
+				Obj.user_id = user_id[i];
+				array.push(Obj);
+			}			
+			
+			console.log(array);
+			console.log(memManage);
+			
+			if(confirm("정말 " + memManage + "하시겠습니까?") == true){
+				$.ajax({
+					url : "/memManage",
+					type : "POST",
+					contentType:"application/json;charset=UTF-8",
+					data : JSON.stringify(array),
+					traditional: true, //배열 때문에 쓰는거
+					success : function(data){
+						alert("완료");
+						console.log(data + "넘 어 오 시 나 요");
+						window.location.href= "/memberManage/"  + (num+1);
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+						alert('에러 발생 \n' + textStatus + ' : ' + errorThrown);
+					}	
+					
+				}); // ajax END
+			}else{
+				return;
+			}
+		});// click END
+		
+		
+		
 }); //document ready

@@ -297,4 +297,34 @@
 	order by x.user_id	
 	]]>
 	</select>
+	
+	<!--업체 신청 관리 : 클릭 시 상세 정보  -->
+	<select id="etpDetail" resultType="com.together.domain.EnterpriseVO">
+	<![CDATA[
+	select m.ph_no, m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content, e.etp_apply_dt
+	from member m, enterprise e
+	where m.user_id = e.user_id and m.authority_no = 3 and e.user_id = #{user_id}
+	order by e.etp_apply_dt
+	]]>
+	</select>
+	
+	<!-- 관리자 홈페이지 : 회원 정지 시키기 -->
+	<update id="memManage_01" parameterType="com.together.domain.MemberVO">
+	update member
+    set authority_no = 4
+    where user_id = #{user_id}
+	</update>
+	
+	<!-- 관리자 홈페이지 : 회원 정지 해제 시키기 -->
+	<update id="memManage_02" parameterType="com.together.domain.MemberVO">
+	update member
+    set authority_no = 3
+    where user_id = #{user_id}
+	</update>
+	
+	<!-- 관리자 홈페이지 : 회원 탈퇴 시키기 -->
+	<delete id="memManage_03" parameterType="com.together.domain.MemberVO">
+	delete from member
+	where user_id = #{user_id}
+	</delete>
 </mapper>
