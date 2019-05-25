@@ -2,26 +2,22 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/layout">
+	layout:decorator="include/serviceLayout">
 
 <th:block layout:fragment="page_head">
 	<title>서비스 메뉴에 오신것을 환영합니다.</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet"
-		href="assets/css/page/hospital/hospital_list.css">
+	<link rel="stylesheet" href="assets/css/page/hospital/hospital_list.css">
 	<link rel="stylesheet" href="assets/css/page/page.css">
-	<script type="text/javascript" src="assets/js/hospitaljs/hospitaljs.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
-  
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05c43d4dfbbb9572affca8b8f5e8381c"></script>
+</th:block>
+
+<th:block layout:fragment="page_js">
+<script src="assets/js/hospitaljs/hospitaljs.js"></script>
 
 </th:block>
-<th:block layout:fragment="page_js">
-</th:block>
+
 <th:block layout:fragment="contents">
 	<div id="main1">
 		<div id="sear">
@@ -170,13 +166,7 @@
 						</div>
 					</div>
 
-					<div id="context1">
-						<div>
-							<div>진료시간</div>
-							<div>오전10시~ 오후 9시까지</div>
-							<div>토 일 공휴일 쉼</div>
-						</div>
-					</div>
+					
 					<div class="fow">
 						위치틀
 						<div>
@@ -195,38 +185,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new daum.maps.LatLng(37.56454, 126.97802), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
-        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
-    }; 
 
-// 지도를 생성한다 
-var map = new daum.maps.Map(mapContainer, mapOption); 
-
-// 지도에 마커를 생성하고 표시한다
-var marker = new daum.maps.Marker({
-    position: new daum.maps.LatLng(37.56643, 126.97901), // 마커의 좌표
-    map: map // 마커를 표시할 지도 객체
-});
-
-// 지도를 표시하는 div 크기를 변경하는 함수입니다
-function resizeMap() {
-    var mapContainer = document.getElementById('map');
-    mapContainer.style.width = '1000px';
-    mapContainer.style.height = '500px'; 
-}
-
-function relayout() {    
-    
-    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-    map.relayout();
-}
-</script>
 </th:block>
 
 </html>

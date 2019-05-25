@@ -222,8 +222,8 @@ public class ETPManageController {
 		   String code = info.get(0).getEtp_cd();
 		   	
 		   int order_del = ManageService.del(code,nm);
-		   
-		   
+		   System.out.println(order_del);
+		   System.out.println("넘어옵니까?");
 		   return "success";
 	   }
 	   

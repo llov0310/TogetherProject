@@ -53,5 +53,15 @@ public class EnterpriseVO {
 	private String chardate2;
 	private String charthisdate;
 	private String price;
-
+	
+	//재고
+	private String st_cd;
+	private int st_total_num;
+	private int st_this_num;
+	
+	
+	//형변환
+	
+	private String if_intro;
+	private String if_info;
 }

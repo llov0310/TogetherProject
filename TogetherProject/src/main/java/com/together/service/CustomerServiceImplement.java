@@ -41,13 +41,6 @@ public class CustomerServiceImplement implements CustomerService {
 
 
 	@Override
-	public ArrayList<EnterpriseVO> ser(String toAddress) {
-		// TODO Auto-generated method stub
-		return mapper.ser(toAddress);
-	}
-
-
-	@Override
 	public ArrayList<EnterpriseVO> info(String test) {
 		// TODO Auto-generated method stub
 		return mapper.info(test);
@@ -78,6 +71,20 @@ public class CustomerServiceImplement implements CustomerService {
 	public int insert_order(String user, String pdcode, String first_day, String last_day, int price) {
 		// TODO Auto-generated method stub
 		return mapper.insert_order(user,pdcode,first_day,last_day,price);
+	}
+
+	//주소와 기간으로 검색
+	@Override
+	public ArrayList<EnterpriseVO> ser(String Address, String in, String out) {
+		// TODO Auto-generated method stub
+		return mapper.address(Address,in,out);
+	}
+
+	//주소와 검색어로 검색
+	@Override
+	public ArrayList<EnterpriseVO> ser2(String serch, String in, String out) {
+		// TODO Auto-generated method stub
+		return mapper.serchlist(serch,in,out);
 	}
 
 

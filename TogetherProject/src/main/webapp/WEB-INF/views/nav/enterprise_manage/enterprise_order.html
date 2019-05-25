@@ -131,9 +131,10 @@
 		 					<td><label th:text="${order.chardate}"></label><br> ~ <label th:text="${order.chardate2}"></label></td>
 		 					<td>
 		 					<div th:switch="${order.or_stat}"> 
-							<label th:case="'1'" style="color:black">확정 대기</label>
-							<label th:case="'2'" style="color:red">취소 예정</label>
-							<label th:case="'3'" style="color:blue">예약 확정</label> 
+							<label th:case="'1'" style="color:black">예약 대기중</label>
+							<label th:case="'2'" style="color:red">예약 확정</label>
+							<label th:case="'3'" style="color:blue">취소 대기중</label>
+							
 							</div>
 							</td>
 		 					<td th:switch="${order.or_check}">

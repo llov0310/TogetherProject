@@ -18,8 +18,6 @@ public interface CustomerMapper {
 
 	public ArrayList<EnterpriseVO> list(String address_total);
 
-	public ArrayList<EnterpriseVO> ser(String toAddress);
-
 	public ArrayList<EnterpriseVO> info(String test);
 
 	public int ent_info(String code);
@@ -33,6 +31,10 @@ public interface CustomerMapper {
 			@Param("first") String first_day, 
 			@Param("last") String last_day, 
 			@Param("price") int price);
+
+	public ArrayList<EnterpriseVO> address(@Param("address") String address, @Param("in") String in, @Param("out") String out);
+
+	public ArrayList<EnterpriseVO> serchlist(@Param("serch") String serch, @Param("in") String in, @Param("out") String out);
 
 	
 	

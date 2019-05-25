@@ -37,7 +37,7 @@
  
   $(".remove").on('click', function () {
 	  var nm = $(this).parent().parent().eq(0).find('label.pd_nm').text();
-	  
+	  console.log(nm);
 	  $.ajax({
 		 type : 'POST',
 		 url : '/order_del',

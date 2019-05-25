@@ -1,15 +1,23 @@
 
-
-
 $(document).ready(function() {
-	 	
+
+	$.ajax({
+		url : '/Hospital',
+		type : "GET",
+		dataType : 'json',
+		success : function(data){
+			alert("성공");
+			console.log(data);
+			}
+		});
+	
+	
 		 $("#searchbar").click(function() {
 			 $("#searchlist").toggle(); //천천히 보이기
 
 		 });
-	 }); 
-	
-	$(document).ready(function() {
+
+
 
 			$(".ok").click(function() {
 			var a =$(this).parent().parent().parent();
@@ -17,11 +25,9 @@ $(document).ready(function() {
 			map.relayout()
 			 
 		 });
-	 }); 
+
 	
-	
-	$(document).ready(function(){ 
-	
+
 		$(function() {
 			var selectTarget = $('.selectbox select');
 
@@ -40,5 +46,9 @@ $(document).ready(function() {
 				$(this).siblings('label').text(select_name);
 				$(this).parent().removeClass('focus');
 			});
-		}); 
-	});
+		});
+	
+		
+		
+}); //end document
+

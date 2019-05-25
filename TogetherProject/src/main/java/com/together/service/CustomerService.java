@@ -13,9 +13,7 @@ public interface CustomerService {
 	public int signup(MemberVO ins);
 
 	public ArrayList<EnterpriseVO> list(String address_total);
-
-	public ArrayList<EnterpriseVO> ser(String toAddress);
-
+	
 	public ArrayList<EnterpriseVO> info(String test);
 
 	public int ent_info(String code);
@@ -25,6 +23,10 @@ public interface CustomerService {
 	public ArrayList<EnterpriseVO> info_list(String code, String name);
 
 	public int insert_order(String user, String pdcode, String first_day, String last_day, int price);
+
+	public ArrayList<EnterpriseVO> ser(String Address,String in,String out);
+
+	public ArrayList<EnterpriseVO> ser2(String serch, String in, String out);
 
 	
 	

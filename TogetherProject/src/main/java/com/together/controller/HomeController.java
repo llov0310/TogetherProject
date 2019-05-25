@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.together.domain.EnterpriseVO;
+
 import com.together.domain.MemberVO;
 import com.together.domain.ProductVO;
 import com.together.service.CustomerService;
@@ -76,24 +77,36 @@ public class HomeController {
    
    //호텔 페이지 관련 이동 맵핑 정보
    @RequestMapping(value = "/hotelserch", method=RequestMethod.GET)
-   public String hotelserch(Model model ,HttpServletRequest request,HttpSession session ,@RequestParam String toAddress, EnterpriseVO ent) {
+   public String hotelserch(Model model ,HttpServletRequest request,HttpSession session ,@RequestParam String toAddress
+		   		,@RequestParam String checkin, @RequestParam String checkout) {
+	   
+	   
 	   ArrayList<EnterpriseVO> result = new ArrayList<EnterpriseVO>();
+	   String in = checkin.substring(5);
+	   String out = checkout.substring(5);
 	   
-//	   int Auto = ((MemberVO) request.getSession().getAttribute("user")).getAuthority_no();
-	   
-	   model.addAttribute("place" , toAddress);
-	   result = customerservice.ser(toAddress);
-//	   session.setAttribute("etp_list" , result);
-	   
+
+		String[] AddressList = {"서울","인천","여수","대구","강릉",
+		"전주","대전","통영","남해","거제","광주","울산","수원"
+		,"평창","춘천","가명","태안","제주도"};
+
+			for(int i=0; i<AddressList.length; i++) {
+	
+			   if(toAddress.equals(AddressList[i])) {
+				   String Address = AddressList[i];
+				   result = customerservice.ser(Address,in,out);   
+			   }
+			   
+			 }
+			
+			if(result.size() == 0) {
+				String Serch = toAddress;
+				result = customerservice.ser2(Serch,in,out);
+			}
+		
 	   model.addAttribute("etp_list", result);
-	  return  "service/hotel/hotelserch";
-   }
-   
-   //병원 페이지 맵핑
-   @RequestMapping(value = "/hospital", method=RequestMethod.GET)
-   public String hospital(Model model) {
 	   
-	   return "service/hospital/hospital_list";
+	  return  "service/hotel/hotelserch";
    }
    
    //펫 장례 페이지 맵핑

@@ -69,7 +69,7 @@
 	</select>
 	
 	<update id="updated" parameterType="com.together.domain.OrdersVO">
-	update orders set or_check = '2' 
+	update orders set or_check = '2' ,or_stat = '2'
 	where user_id = #{member_id}
 	and or_dt = #{day1} 
 	and or_dt2 = #{day2}
