@@ -1,5 +1,6 @@
 package com.together.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -28,6 +29,7 @@ public class OrdersVO {
 	//형변환 변수
 	private String first_day;
 	private String last_day;
+	private Date date_day;
 
 	
 	//member의 id변수

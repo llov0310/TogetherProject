@@ -57,9 +57,14 @@
 	</update> 
 	
 	 <select id="orderlist" resultType="com.together.domain.OrdersVO">
-	select o.*,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2, 'YYYY-MM-DD') as last_day,e.*,p.* ,SUBSTR(e.etp_cd,0,1) as cd
-	from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
-        
+	select o.or_cd,p.pd_nm,o.or_price,o.or_stat,p.pd_nm ,p.etp_cd,e.etp_nm,o.or_dt,o.or_dt2,o.user_id,e.etp_cd,o.th_dt,
+    to_date(to_char(o.th_dt, 'YY/MM/DD')) as date_day ,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2, 'YYYY-MM-DD') as last_day
+	,SUBSTR(e.etp_cd,0,1) as cd
+	from orders o, product p ,enterprise e 
+	where o.pd_cd=p.pd_cd 
+	and p.etp_cd=e.etp_cd 
+	and o.user_id=#{user_id}
+    and to_date(to_char(o.th_dt, 'YY/MM/DD')) = (select to_date(to_char(SYSDATE, 'YY/MM/DD')) from dual)
 	</select>
 	
 	  <select id="postlist" resultType="com.together.domain.PostVO">

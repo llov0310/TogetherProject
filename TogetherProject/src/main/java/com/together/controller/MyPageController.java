@@ -2,6 +2,7 @@ package com.together.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -144,11 +145,22 @@ public class MyPageController {
 	public String myreservation(Model model, HttpSession session, HttpServletRequest request) {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
+	
 		 order_list = mypage.orderlist(user_id);
-		  model.addAttribute("order_list", order_list);
+		 System.out.println(order_list); 
+		 model.addAttribute("order_list", order_list);
+		  
 		  	System.out.println(user_id);
 		return "nav/mypage/myreservation";
 
+	}
+	@RequestMapping(value = "/searchdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String searchdate(Model model, HttpSession session, HttpServletRequest request) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		
+			System.out.println("기간검색");
+		return "success";
 	}
 	
 	
