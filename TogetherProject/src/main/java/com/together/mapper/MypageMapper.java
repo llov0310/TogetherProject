@@ -51,6 +51,16 @@ public interface MypageMapper {
 	public Integer memberdel(@Param("user_id") String user_id, @Param("password")String password);
 
 	public Integer delorder(@Param("or_cd") String or_cd, @Param("or_stat") String or_stat);
+	
+	
+	//public Integer addFile(String da_uuid,String da_path,String da_name,String d_cd);
+	
+	
+	//▲아마 이거 xml이랑 이름 같이해야한다했을걸
+	
+	public Integer addFile(@Param("da_uuid")String da_uuid,@Param("da_path") String da_path,@Param("da_name") String da_name,@Param("d_cd") String d_cd);
+	
+	public ArrayList<DogsVO> getD_cd(@Param("user_id")String user_id,@Param("d_nm") String d_nm,@Param("d_gender") int d_gender,@Param("d_kind") String d_kind,@Param("d_age") String d_age);
 
 
 

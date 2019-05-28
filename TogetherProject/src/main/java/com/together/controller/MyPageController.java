@@ -1,33 +1,212 @@
 package com.together.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.together.domain.AttachFileDTO;
 import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
 import com.together.domain.Paging;
 import com.together.domain.PostVO;
+import com.together.service.BoardService;
 import com.together.service.MypageService;
-
+import lombok.extern.java.Log;
 import lombok.AllArgsConstructor;
+import net.coobird.thumbnailator.Thumbnailator;
 
+
+
+@Log
 @Controller
 @AllArgsConstructor
 public class MyPageController {
+	
+	
+	
+	//파일 업로드 하는 거
+	
+	/*여기다가 변수 만들거야*  필요한거 : (UUID)uuid, (File)uploadPath, uploadFileName*/
+	/* 왜... 먼ㅇ;ㅣ럼ㄴ일
+	UUID uuid=null;  //uuid 전역변수
+	File uploadPath=null; //uploadPath 전역변수*/
+	public static String uploadFileName=null; //uploadFileName 전역변수
+	public static String uid=null; //uuid toString으로 한거 넣을 변수
+	public static String path=null; //uploadPath toString으로 한거 넣을 변수
 
+	
+	//어...
+	@GetMapping("board/register")
+	public void register() {
+		log.info("register 띄움");
+	}
+	//어...
+	//mapper추가
+	private BoardService boardservice;
+	//mapper추가 
+
+	// 년/월/일 폴더 생성
+	private String getFoloder() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		return str.replace("-", File.separator);
+	}
+//	// 년/월/일 폴더 생성
+	
+	// 이미지 파일 판단
+	private boolean checkImageType(File file) {
+		try {
+			String contentType = Files.probeContentType(file.toPath());
+
+			return contentType.startsWith("image");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	//이미지 파일 판단
+	
+
+	// AttachFileDTO의 리스트를 반환하는 구조임
+	@PostMapping(value="/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+		List<AttachFileDTO> list = new ArrayList<>();
+		String uploadFolder = "C:\\upload";
+		String uploadFolderPath = getFoloder();
+		int count = 0;
+		
+		// make folder---
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		} // end of if
+
+		// make yyyy/MM/dd
+		for (MultipartFile multipartFile : uploadFile) {
+			AttachFileDTO attachDTO = new AttachFileDTO();
+			uploadFileName = multipartFile.getOriginalFilename();
+
+			// IE has file path
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			log.info("only file name : " + uploadFileName);
+			attachDTO.setFileName(uploadFileName);
+
+			UUID uuid = UUID.randomUUID();
+
+			uploadFileName = uuid.toString() + "_" + uploadFileName;
+			
+			/*
+			System.out.println(uuid + " ★★★★");
+			System.out.println(uploadPath + " ★★★★");
+			System.out.println(uploadFileName + " ★★★★");  //테스트-> 다 나옴
+			*/
+			
+			
+			try {
+				File saveFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(saveFile);
+
+				attachDTO.setUuid(uuid.toString());
+				attachDTO.setUploadPath(uploadFolderPath);
+				
+				// check image type file
+				if (checkImageType(saveFile)) {
+					attachDTO.setImage(true);
+
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+					thumbnail.close();
+				} // end of if
+
+				uid = uuid.toString();
+				path = uploadPath.toString();
+				
+				System.out.println("전역변수 테스트 : "+uid);
+				System.out.println("전역변수 테스트 : "+path);
+				System.out.println("전역변수 테스트 : "+uploadFileName);  //넘어옴
+				
+				if(count == 0) {
+					//int uploadtest = boardservice.insert(uid, path, uploadFileName);  /*ㅂㄷㅂㄷ...*/
+					count = count+1;
+					System.out.println("count 체크" + count);
+				}
+				
+				// 리스트에 더함
+				list.add(attachDTO);			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} // end of catch
+			
+			
+		} // end of for
+		count = 0;
+		System.out.println("여기는 0 초기화 후에 count" + count);
+		
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
+	
+	
+	// AttachFileDTO의 리스트를 반환하는 구조임
+
+	// 서버에서 섬네일을 get방식으로 가져옴 p526
+	// 특정한 uri뒤에 파일 이름 추가하면 이미지 파일 데이터 가져와서 img태그를 작성하는 과정을 통해 처리
+	@GetMapping("/display")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(String fileName) {
+		log.info("fileName : " + fileName);
+
+		File file = new File("C:\\upload\\" + fileName);
+
+		log.info("file : " + file);
+
+		ResponseEntity<byte[]> result = null;
+		try {
+			HttpHeaders header = new HttpHeaders();
+
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} // end of catch
+
+		return result;
+	}// end of response -getFile	
+	
+	//파일 업로드 하는 거
+	
+	
+	
 	private MypageService mypage;
 
 	@RequestMapping(value = "/member_info", method = RequestMethod.GET)
@@ -96,13 +275,51 @@ public class MyPageController {
 		public String mypet_add_info(Model model, HttpSession session, HttpServletRequest request,
 				@RequestParam String d_nm,@RequestParam int d_gender,@RequestParam String d_kind,@RequestParam String d_content,@RequestParam String d_age) {
 		  String user_id = ((MemberVO)request.getSession().getAttribute("user")).getUser_id();
+		  
+		  //파일 업로드를 위한 변수 선언
+		  String da_uuid = null;
+		  String da_path = null;
+		  String da_name = null;
+		  String d_cd = null;
+		  ArrayList<DogsVO> dcd = new ArrayList<DogsVO>();
+		  //▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		  
 		  System.out.println(user_id+"개주인");
 		  System.out.println(d_nm+"개이름");
 		  System.out.println(d_gender+"개성별");
 		  System.out.println(d_kind+"품종");
 		  System.out.println(d_age+"나이");
 		  System.out.println(d_content+"설명");
-		  Integer adddog = mypage.addDog(user_id, d_nm, d_gender, d_kind, d_content,d_age);
+		  Integer adddog = mypage.addDog(user_id, d_nm, d_gender, d_kind, d_content,d_age); // dogs 테이블에 인서트
+		  
+		  
+		  dcd = mypage.getD_cd(user_id, d_nm, d_gender, d_kind, d_age);
+		  
+		  
+		  
+		  String code = dcd.get(0).getD_cd(); // 해당 user_id에 대한 d_cd를 가져오는 코드
+		  System.out.println("d_cd 확인 : " + code);
+		  
+		  da_uuid = uid;
+		  da_path = path;
+		  da_name = uploadFileName;
+		  d_cd = code;
+		  
+		
+/*
+		  System.out.println("파일 업로드 테스트: "+uploadFileName);
+		  System.out.println("파일 업로드 테스트 : "+uid);
+		  System.out.println("파일 업로드 테스트 : "+path);
+*/
+		  System.out.println("1 : "+da_uuid);
+		  System.out.println("2 : "+da_path);
+		  System.out.println("3 : "+da_name);
+		  System.out.println("4 : "+d_cd);
+		  
+		  
+		  Integer addFile = mypage.addFile(da_uuid, da_path, da_name, d_cd);
+		  
+		  
 		  System.out.println("====================");
 
 			return "success";

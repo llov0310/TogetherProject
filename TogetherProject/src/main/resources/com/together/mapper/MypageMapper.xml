@@ -2,79 +2,120 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.together.mapper.MypageMapper">
-	
+
 	<select id="passCheak" resultType="com.together.domain.MemberVO">
+		select * from member where
+		user_id = #{user_id}
+	</select>
+
+	<select id="memberinfo"
+		resultType="com.together.domain.MemberVO">
 		select * from member where user_id = #{user_id}
 	</select>
-	
-	<select id="memberinfo" resultType="com.together.domain.MemberVO">
-		select * from member where user_id = #{user_id}
-	</select> 
-	
-  	<update id="passNew" parameterType="com.together.domain.MemberVO">
-		update member set password = #{password} where user_id = #{user_id}
-	</update> 
-	
-	  	<update id="infoNew" parameterType="com.together.domain.MemberVO">
-		update member set 
-		email = #{email}, 
+
+	<update id="passNew"
+		parameterType="com.together.domain.MemberVO">
+		update member set password = #{password} where user_id =
+		#{user_id}
+	</update>
+
+	<update id="infoNew"
+		parameterType="com.together.domain.MemberVO">
+		update member set
+		email = #{email},
 		addr_ji = #{addr_ji},
 		addr_dong = #{addr_dong},
-		ph_no = #{phon} 
+		ph_no = #{phon}
 		where user_id = #{user_id}
 	</update>
-	
-	<select id="petlist" resultType="com.together.domain.DogsVO">
-		select * from dogs where user_id = #{user_id}
-	</select> 
-	
 
-	
-<insert id="addDog"  parameterType="com.together.domain.DogsVO">
-	insert into dogs(d_cd, user_id,d_nm,d_dt,d_kind,d_gender,d_content,d_age)
-	values('d'||DOG_SEQ.nextval,
-			#{user_id},
-			#{d_nm},
-			systimestamp,
-			#{d_kind},
-			#{d_gender},
-			#{d_content},
-			#{d_age})
-   
+	<select id="petlist" resultType="com.together.domain.DogsVO">
+		select * from dogs where user_id
+		= #{user_id}
+	</select>
+
+
+
+	<insert id="addDog" parameterType="com.together.domain.DogsVO">
+		insert into dogs(d_cd, user_id,d_nm,d_dt,d_kind,d_gender,d_content,d_age)
+		values('d'||DOG_SEQ.nextval,
+		#{user_id},
+		#{d_nm},
+		systimestamp,
+		#{d_kind},
+		#{d_gender},
+		#{d_content},
+		#{d_age})
+
 	</insert>
-	
-	<delete id="petdelete" parameterType="com.together.domain.DogsVO">
-		delete from dogs where d_nm = #{d_nm} and user_id = #{user_id}
-	</delete>  
-	
-	 	<update id="petup" parameterType="com.together.domain.DogsVO">
-		update dogs set 
+
+
+	<!-- d_cd 가져올거임 -->
+	<select id="getD_cd" resultType="com.together.domain.DogsVO">
+		select d_cd
+		from dogs
+		where user_id = #{user_id}
+		and d_gender = #{d_gender}
+		and d_kind = #{d_kind}
+		and d_nm = #{d_nm}
+		and d_age = #{d_age}
+	</select>
+	<!-- d_cd 가져올거임 -->
+
+	<!-- 파일업ㄹ도ㅡ -->
+
+	<insert id="addFile"
+		parameterType="com.together.domain.DogsAttachVO">
+		<![CDATA[
+		insert into 
+		dogsattach(da_uuid,da_path,da_name,d_cd)
+		values 
+		(#{da_uuid},#{da_path},#{da_name},#{d_cd})
+		]]>
+	</insert>
+	<!-- 파일 업로드 -->
+
+	<delete id="petdelete"
+		parameterType="com.together.domain.DogsVO">
+		delete from dogs where d_nm = #{d_nm} and user_id =
+		#{user_id}
+	</delete>
+
+	<update id="petup" parameterType="com.together.domain.DogsVO">
+		update dogs set
 		d_age = #{d_age},
 		d_gender = #{d_gender},
 		d_kind = #{d_kind},
-		d_content = #{d_content}
+		d_content =
+		#{d_content}
 		where user_id = #{user_id} and d_nm = #{d_nm}
-	</update> 
-	
-	 <select id="orderlist" resultType="com.together.domain.OrdersVO">
-	select o.*,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2, 'YYYY-MM-DD') as last_day,e.*,p.* ,SUBSTR(e.etp_cd,0,1) as cd
-	from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and p.etp_cd=e.etp_cd and o.user_id=#{user_id} 
-        
+	</update>
+
+	<select id="orderlist" resultType="com.together.domain.OrdersVO">
+		select o.*,TO_CHAR(o.or_dt, 'YYYY-MM-DD') as first_day ,TO_CHAR(o.or_dt2,
+		'YYYY-MM-DD') as last_day,e.*,p.* ,SUBSTR(e.etp_cd,0,1) as cd
+		from orders o, product p ,enterprise e where o.pd_cd=p.pd_cd and
+		p.etp_cd=e.etp_cd and o.user_id=#{user_id}
+
 	</select>
-	
-	  <select id="postlist" resultType="com.together.domain.PostVO">
-		select * from post where user_id = #{user_id}
+
+	<select id="postlist" resultType="com.together.domain.PostVO">
+		select * from post where
+		user_id = #{user_id}
 	</select>
-	
-	<!--  <select id="postlist" resultType="com.together.domain.PostVO">
-		select * from post where user_id = #{user_id}
-	</select> --> 
-	
-	<update id="delorder" parameterType="com.together.domain.MemberVO">
-		update orders set or_stat = #{or_stat} where or_cd = #{or_cd}
-	</update> 
-	
-		<delete id="memberdel" parameterType="com.together.domain.MemberVO">
-		delete from member where user_id = #{user_id} and password = #{password}
-	</delete>  
+
+	<!-- <select id="postlist" resultType="com.together.domain.PostVO"> select 
+		* from post where user_id = #{user_id} </select> -->
+
+	<update id="delorder"
+		parameterType="com.together.domain.MemberVO">
+		update orders set or_stat = #{or_stat} where or_cd =
+		#{or_cd}
+	</update>
+
+	<delete id="memberdel"
+		parameterType="com.together.domain.MemberVO">
+		delete from member where user_id = #{user_id} and
+		password = #{password}
+	</delete>
 </mapper>

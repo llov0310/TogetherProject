@@ -5,6 +5,7 @@ import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
 import com.together.domain.PostVO;
+import com.together.domain.DogsAttachVO;
 public interface MypageService {
 	
 	//비밀번호체크
@@ -31,8 +32,11 @@ public interface MypageService {
 	public Integer memberdel(String user_id, String password);
 	//취소요청
 	public Integer delorder(String or_cd, String or_stat);
-
-
-
+	//파일 업로드 ...?
+	//public Integer addFile(String da_uuid, String da_path,da_name,d_cd);
+	public Integer addFile(String da_uuid, String da_path, String da_name, String d_cd);
+	
+	//파일업로드할때 d_cd를 받아오기 위한 서비스 함수
+	public ArrayList<DogsVO> getD_cd(String user_id, String d_nm, int d_gender, String d_kind, String d_age);
 
 }

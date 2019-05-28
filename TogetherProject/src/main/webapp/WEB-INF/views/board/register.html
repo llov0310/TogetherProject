@@ -127,6 +127,8 @@
 		}//end of checkExtension function
 		//파일 확장자,사이즈 제한 
 		
+		
+		
 			$("input[type='file']").change(function(e) {
 				var formData = new FormData();
 				
@@ -139,9 +141,7 @@
 					}//end of if
 					formData.append("uploadFile", files[i]);
 				}//end of for
-				
-				$(".regiBtn").click(function() {
-					alert("ㅇㅇ? ㅇㅋ");
+
 					$.ajax({
 						url:'/uploadAjaxAction',
 						processData:false,
@@ -154,7 +154,6 @@
 						}
 					}); //end of ajax
 
-				});//end of regiBtn
 				function showUploadResult(uploadResultArr) {
 					if(!uploadResultArr || uploadResultArr.length==0) {return;}
 					

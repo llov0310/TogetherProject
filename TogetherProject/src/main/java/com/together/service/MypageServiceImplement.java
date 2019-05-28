@@ -100,6 +100,19 @@ public class MypageServiceImplement implements MypageService {
 		return myMapper.delorder(or_cd,or_stat);
 	}
 
+
+	@Override
+	public Integer addFile(String da_uuid, String da_path, String da_name, String d_cd) {
+		return myMapper.addFile(da_uuid,da_path, da_name, d_cd);
+	}
+
+
+	@Override
+	public ArrayList<DogsVO> getD_cd(String user_id, String d_nm, int d_gender, String d_kind, String d_age) {
+		// TODO Auto-generated method stub
+		return myMapper.getD_cd(user_id, d_nm, d_gender, d_kind, d_age);
+	}
+
 	 
 }
 
