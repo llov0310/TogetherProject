@@ -157,13 +157,13 @@ th:nth-child(9){
 /*SIDEBAR CSS*/
 .sidebar {
     position: absolute;
-    top : 56px;
+    top : 87px;
 /* Change :absolute; to :fixed; to keep the sidebar in place when scolling. */
     background: #c1c1c1;
 /* Sidebar Background */
     width: 200px;
 /* Width of side bar. WARNING: If you change this, change .listItemA:width */
-    height: 94%;
+    height: 90.5%;
     padding-top: 10px;
 /* Padding above the sidebar image. */
     font-family: helvetica;
