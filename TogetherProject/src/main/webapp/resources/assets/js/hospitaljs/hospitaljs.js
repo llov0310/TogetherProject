@@ -21,22 +21,21 @@ $(document).ready(function() {
 					$('#main1-2').
 					append('<div class="listbox1">'
 							+ '<div class="listbox2">'
-							+ '<div id="imgbox1"><div id="img1"><img src="http://placehold.it/200x200" alt="" id="imgbox">'
-							+ '</div></div>'
+								+ '<div id="imgbox1">'
+									+ '<div id="img1"><img src="http://placehold.it/200x200" alt="" id="imgbox"></div>'
+								+ '</div>'
 							+ '<div class="to">'
-							+ '<div class="context"><div><div>'
-							+ '<h2>' + Object.values(test[0][i])[1] + '</h2></div>'
-							+ '<div class="ok">' + Object.values(test[0][i])[2] 
+								+ '<div class="context">'
+									+ '<div><div>'
+										+ '<h2>' + Object.values(test[0][i])[1] + '</h2>'
+										+ '</div>'
+							+ '<div class="ok">' 
+							+ Object.values(test[0][i])[2] 
 							+ '</div>'
 							+ '<div>'+ Object.values(test[0][i])[3] +'</div>'
 							+ '</div></div>'
-							+ '<div id="context1"><div>'
-							+ '<div>진료시간</div><div>오전10시~ 오후 9시까지</div></div></div>'
-							//여기서부터 지도
-							+ '<div class="fow">위치틀<div>'
-							+ '<div>위치 <span class="off">닫기</span></div>'
-							+ '<div id="map" class="map" style="width:1000px;height:500px;"></div>'
-							+ '</div></div></div></div></div>');
+							+ '<div id="context1">'
+							+ '</div>');
 			
 				
 			}
@@ -49,11 +48,18 @@ $(document).ready(function() {
 			 $("#searchlist").toggle(); //천천히 보이기
 
 		 });
+		 
+		 //동적으로 생성된 append 태그의 선택
 
-
-		 $('.listbox1').on('click',function(){
-//			$(this). 
+		 $(document).on("click",".listbox1",function(){
+			 
+			var addr = $(this).children().find('div.ok').html(); // 클릭시 주소값
+			
+			
+			
+			console.log(addr);
 		 });
+
 
 	
 
