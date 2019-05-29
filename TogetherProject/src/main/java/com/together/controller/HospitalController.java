@@ -17,6 +17,7 @@ import org.apache.ibatis.annotations.Param;
 import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,10 +41,11 @@ import net.sf.json.JSONObject;
 public class HospitalController {
 	
 	private HosService Hos;
-	
+
+
 		@RequestMapping(value = "/HospitalLink", method = RequestMethod.GET)
 		public String HosLink(Model model, HttpServletRequest request) {
-			System.out.println("요까이");
+			
 			return "service/hospital/hospital_list";
 		}
 		
@@ -55,6 +57,7 @@ public class HospitalController {
 	   public JSONObject HosData(Model model, HttpServletRequest request) {
 	      
 	      BufferedReader br = null;
+	   
 	      //String sidoName[] = {"서울", "부산", "대구", "인천", "광주", "대전", "울산", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주", "세종"};
 	      String sidoName1[] = {"경기도"};
 	      JSONObject json = new JSONObject();
@@ -68,7 +71,7 @@ public class HospitalController {
 	        	   
 	              String urlstr = " https://openapi.gg.go.kr/Animalhosptl?"
 	                     + "KEY=668375a241224e8da08d4c0493a43d5e"
-	                     + "&Type=json&plndex=1&pSize=50";
+	                     + "&Type=json&plndex=1&pSize=10";
 	              
 	                URL url = new URL(urlstr);
 	                

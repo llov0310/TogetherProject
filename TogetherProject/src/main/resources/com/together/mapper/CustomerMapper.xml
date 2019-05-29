@@ -25,34 +25,38 @@
 	
 	<select id="address" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	select distinct s.pd_cd, s.st_this_num, p.etp_cd, e.etp_nm, e.etp_addr,
-	to_char(i.etp_if_info) as if_info, i.etp_if_time1, i.etp_if_time2, to_char(i.etp_if_intro) as if_intro
-	from stock s, product p, enterprise e, member m, enterprise_info i
-	where p.pd_cd = s.pd_cd 
-    and p.etp_cd = e.etp_cd and i.etp_cd = e.etp_cd
-    and m.user_id = e.user_id 
+	   select DISTINCT s.pd_cd,p.etp_cd,s.st_this_num,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
+    from(select s.pd_cd
+        from stock s
+        where to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
+        Minus
+        select pd_cd
+        from stock
+        where st_this_num = 0
+        and to_date(substr(st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')) a, stock s, product p , enterprise e , enterprise_info i
+    where a.pd_cd = s.pd_cd 
+    and to_date(substr(st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
+    and e.etp_cd = p.etp_cd and s.pd_cd = p.pd_cd and p.etp_cd = i.etp_cd
     and e.etp_addr like '%'||#{address}||'%'
-    and m.authority_no = 2
-    and to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
-    and p.pd_cd not in (
-    (select pd_cd from stock where st_this_num = 0))
 	]]>
 	</select>
 	
 	
 	<select id="serchlist" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	select distinct s.pd_cd, s.st_this_num, p.etp_cd, e.etp_nm, e.etp_addr,
-	to_char(i.etp_if_info) as if_info, i.etp_if_time1, i.etp_if_time2, to_char(i.etp_if_intro) as if_intro
-	from stock s, product p, enterprise e, member m, enterprise_info i
-	where p.pd_cd = s.pd_cd 
-    and p.etp_cd = e.etp_cd and i.etp_cd = e.etp_cd
-    and m.user_id = e.user_id 
+	   select DISTINCT s.pd_cd,p.etp_cd,s.st_this_num,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
+    from(select s.pd_cd
+        from stock s
+        where to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
+        Minus
+        select pd_cd
+        from stock
+        where st_this_num = 0
+        and to_date(substr(st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')) a, stock s, product p , enterprise e , enterprise_info i
+    where a.pd_cd = s.pd_cd 
+    and to_date(substr(st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
+    and e.etp_cd = p.etp_cd and s.pd_cd = p.pd_cd and p.etp_cd = i.etp_cd
     and e.etp_nm like '%'||#{serch}||'%'
-    and m.authority_no = 2
-    and to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
-    and p.pd_cd not in (
-    (select pd_cd from stock where st_this_num = 0))
 	]]>
 	</select>
 	
