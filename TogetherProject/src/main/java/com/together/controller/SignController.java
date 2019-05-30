@@ -19,7 +19,9 @@ public class SignController {
 	// 회원가입
 	@RequestMapping(value = "/sign", method = RequestMethod.POST)
 	public String signup(Model model, MemberVO ins) {
-
+		String user_id = ins.getUser_id();
+		
+		
 		int insert = customerService.signup(ins);
 
 		if (insert != 0) {
