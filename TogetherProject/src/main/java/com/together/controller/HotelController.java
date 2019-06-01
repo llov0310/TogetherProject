@@ -80,6 +80,9 @@ public class HotelController {
 		  
 		  int order_buy = HotelService.insert_order(
 				  user,pdcode,first_day,last_day,price);
+		  
+//		  String first_sub = first_day.subString();
+//		  int order_buy_update = HotelService.update_order(first_day);
 
 		  }
 
