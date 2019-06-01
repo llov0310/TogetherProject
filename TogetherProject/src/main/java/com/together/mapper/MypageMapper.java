@@ -62,6 +62,8 @@ public interface MypageMapper {
 	
 	public ArrayList<DogsVO> getD_cd(@Param("user_id")String user_id,@Param("d_nm") String d_nm,@Param("d_gender") int d_gender,@Param("d_kind") String d_kind,@Param("d_age") String d_age);
 
+	public ArrayList<OrdersVO> searchdate(@Param("user_id")String user_id, @Param("day")int day);
+
 
 
 

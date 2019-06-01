@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -209,6 +210,16 @@ public class MyPageController {
 	
 	private MypageService mypage;
 
+	@RequestMapping(value = "/mainpage", method = RequestMethod.GET)
+	public String mainpage(Model model, HttpSession session, HttpServletRequest request) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+
+	
+		 
+		return "nav/mypage/mainpage";
+
+	}
+	
 	@RequestMapping(value = "/member_info", method = RequestMethod.GET)
 	public String member_info(Model model, HttpSession session, HttpServletRequest request) {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
@@ -361,7 +372,7 @@ public class MyPageController {
 	public String myreservation(Model model, HttpSession session, HttpServletRequest request) {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
-	
+
 		 order_list = mypage.orderlist(user_id);
 		 System.out.println(order_list); 
 		 model.addAttribute("order_list", order_list);
@@ -370,14 +381,68 @@ public class MyPageController {
 		return "nav/mypage/myreservation";
 
 	}
-	@RequestMapping(value = "/searchdate", method = RequestMethod.POST)
-	@ResponseBody
-	public String searchdate(Model model, HttpSession session, HttpServletRequest request) {
+	
+	@RequestMapping(value = "/searchdate"+"/{day}", method = RequestMethod.GET)
+	public String searchdate(Model model, HttpSession session, HttpServletRequest request,@PathVariable int day) {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-		
-			System.out.println("기간검색");
-		return "success";
+		System.out.println(day);
+		ArrayList<OrdersVO> searchdate = new ArrayList<OrdersVO>();
+		searchdate = mypage.searchdate(user_id,day);
+		model.addAttribute("searchdate", searchdate);
+		System.out.println(searchdate);
+		System.out.println("후우");
+			return "nav/mypage/searchdate";
+
 	}
+	
+	
+//	@RequestMapping(value = "/searchdate", method = RequestMethod.GET)
+//	public String searchdate(Model model, HttpSession session, HttpServletRequest request,@RequestParam int day) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<OrdersVO> searchdate = new ArrayList<OrdersVO>();
+//
+//		System.out.println(day);
+//		searchdate = mypage.searchdate(user_id,day);
+//		model.addAttribute("searchdate", searchdate);
+//		System.out.println(searchdate);
+//		return "nav/mypage/searchdate";
+//
+//	}
+//	@RequestMapping(value = "/searchdate"+ "/search" + "/{day}", method = RequestMethod.GET)
+//	public String searchdate(Model model, HttpSession session, HttpServletRequest request , @PathVariable int day) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
+// 
+//		  
+//		  	System.out.println(user_id);
+//		return "nav/mypage/myreservation";
+//
+//	}
+//	@RequestMapping(value = "/searchdate"+ "/search" + "/{day}", method = RequestMethod.GET)
+//	public String searchdate(Model model, HttpSession session, HttpServletRequest request ,@PathVariable int day) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<OrdersVO> searchdate = new ArrayList<OrdersVO>();
+//		searchdate = mypage.searchdate(user_id,day);
+//		model.addAttribute("searchdate", searchdate);
+//		System.out.println(searchdate);
+//		System.out.println("앙앙");
+//			return "nav/mypage/searchdate";
+//
+//	}
+//	@RequestMapping(value = "/searchdate", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String searchdate(Model model, HttpSession session, HttpServletRequest request,@RequestParam int day) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		
+//		ArrayList<OrdersVO> searchdate = new ArrayList<OrdersVO>();
+//		System.out.println("기간검색");
+//		System.out.println(day);
+//		searchdate = mypage.searchdate(user_id,day);
+//		
+//		model.addAttribute("searchdate",searchdate);
+//		System.out.println(searchdate);
+//		return "success";
+//	}
 	
 	
 //	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)

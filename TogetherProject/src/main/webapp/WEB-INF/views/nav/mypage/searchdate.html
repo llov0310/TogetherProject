@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<title>Insert title here</title>
+<script>
+/* $(function () {	
+	tab('#tab',0);	
+});
+
+function tab(e, num){
+    var num = num || 0;
+    var menu = $(e).children();
+    var con = $(e+'_con').children();
+    var select = $(menu).eq(num);
+    var i = num;
+
+    select.addClass('on');
+    con.eq(num).show();
+
+    menu.click(function(){
+        if(select!==null){
+            select.removeClass("on");
+            con.eq(i).hide();
+        }
+
+        select = $(this);	
+        i = $(this).index();
+
+        select.addClass('on');
+        con.eq(i).show();
+    });
+    
+} */
+
+  $(document).ready(function() {
+	$(".orderdelbt").click(function() {
+		var x = 3;
+		var orcd = $(this).parent().parent().find("#orcd").text();
+		console.log(orcd);
+		
+		$.ajax({
+			url : "/orderdel",
+			type : "POST",
+			dataType : 'text',
+			data : {
+				or_stat : x,
+				or_cd : orcd
+			},
+			success : function(data) {
+				 $("#ho").load("/searchdate"+"/"); 
+			}
+		});
+	});
+});  
+
+</script>
+<style type="text/css">
+table.type11 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px 10px;
+}
+table.type11 th {
+    width: 200px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #ce4869 ;
+}
+table.type11 td {
+    width: 200px;
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+}
+
+</style>
+</head>
+<body>
+<table class="type11">
+    <thead>
+    <tr>
+        <th scope="cols">주문코드</th>
+        <th scope="cols">상품</th>
+        <th scope="cols">예약일</th>
+        <th scope="cols">가격</th>
+        <th scope="cols">업체</th>
+        <th scope="cols">주문일시</th>
+        <th scope="cols">상태</th>
+        <th scope="cols">취소</th>
+        
+    </tr>
+    </thead>
+    <tbody class="tbody"th:each="order_list : ${searchdate}">
+    <tr th:if="${order_list.cd}==h">
+        <td><span id="orcd" th:text="${order_list.or_cd}"></span></th>
+        <td><span th:text="${order_list.pd_nm}"></span></th>
+        <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
+        <td><span th:text="${order_list.or_price}"></span></th>
+        <td><span th:text="${order_list.etp_nm}"></span></th>
+        <td><span class="date" th:text="${order_list.th_dt}"></span></th>
+         <td><span class="orstat" th:if="${order_list.or_stat}==1">예약대기중</span> 
+         <span class="orstat" style="color: blue;" th:if="${order_list.or_stat}==2">예약확정</span>
+         <span class="orstat" style="color: red;" th:if="${order_list.or_stat}==3">취소대기중</span>
+         <span class="orstat" th:if="${order_list.or_stat}==4">취소확정</span>
+         </th>
+        <td><button class="orderdelbt">예약취소</button></th>
+    </tr>
+   </tbody>
+   
+  </table>
+  
+</body>
+</html>
