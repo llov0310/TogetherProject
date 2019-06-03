@@ -40,17 +40,15 @@ public class SignController {
 	public String signup(Model model, MemberVO ins, HttpServletRequest request) throws IOException {
 		String user_id = ins.getUser_id();
 		String password = ins.getPassword();
+		String ph_no = ins.getPh_no();
+		String email = ins.getEmail();
 		String user_nm = ins.getUser_nm();
-		
-//		private String ph_no;
-//		private String email;
-//		private String user_nm;
-//		private Timestamp register_dt;
-//		private int authority_no;
-//		private String birth_dt;
-//		private int sign_no;
-//		private String addr_ji;
-//		private String addr_dong;
+		Timestamp register_dt = ins.getRegister_dt();
+		int authority_no = ins.getAuthority_no();
+		String birth_dt = ins.getBirth_dt();
+		int sign_no = ins.getSign_no();
+		String addr_ji = ins.getAddr_ji();
+		String addr_dong = ins.getAddr_dong();
 		
 		String path = request.getSession().getServletContext().getRealPath("/");
 //		System.out.println(path + "resources\\firebase\\blogapp-a9a56-firebase-adminsdk-v8z9o-c7af607772.json");
@@ -115,7 +113,17 @@ public class SignController {
 		Map<String, Object> Map = new HashMap<>(); // 맵 생성하고
 		Map.put("user_id", user_id);
 		Map.put("password", password);
+		Map.put("ph_no", ph_no);
+		Map.put("email", email);
 		Map.put("user_nm", user_nm);
+		Map.put("register_dt", register_dt);
+		Map.put("authority_no", authority_no);
+		Map.put("birth_dt", birth_dt);
+		Map.put("sign_no", sign_no);
+		Map.put("addr_ji", addr_ji);
+		Map.put("addr_dong", addr_dong);
+		
+		
 		
 		useridRef.setValueAsync(Map);
 
