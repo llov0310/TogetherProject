@@ -4,6 +4,14 @@
 <mapper namespace="com.together.mapper.AdminMapper">
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
+	
+	<!-- register_dt를 가져오는 sql문 -->
+	<select id="register_dt" resultType="com.together.domain.MemberVO">
+		select register_dt
+		from member
+		where user_id = #{user_id}
+	</select>
+	
 		
 	<!-- 관리자 홈페이지 : "생년월일 + 숫자"를 가져오는 sql문 -->
 	<select id="memberAge" resultType="com.together.domain.MemberVO">

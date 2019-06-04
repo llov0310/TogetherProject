@@ -10,6 +10,11 @@
 		select * from member where user_id = #{user_id} and password = #{password}
 	</select>
 
+	<select id="loginCheck" resultType="com.together.domain.MemberVO">
+		select * from member where user_id = #{user_id} and password = #{password}
+	</select>
+	
+	
 	<insert id="signup" parameterType="com.together.domain.MemberVO">
 		insert into member values 
 		(#{user_id},#{password},#{ph_no},#{email},#{user_nm},sysdate,'3',#{birth_dt},MEMBER_SEQ.nextval,#{addr_ji},#{addr_dong})

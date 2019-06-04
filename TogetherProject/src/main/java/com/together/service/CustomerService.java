@@ -28,6 +28,8 @@ public interface CustomerService {
 
 	public ArrayList<EnterpriseVO> ser2(String serch, String in, String out);
 
+	public ArrayList<MemberVO> loginCheck(String user_id, String password);
+
 	
 	
 }
