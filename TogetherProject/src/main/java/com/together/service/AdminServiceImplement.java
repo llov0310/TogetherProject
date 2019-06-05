@@ -1,5 +1,6 @@
 package com.together.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -237,6 +238,13 @@ public class AdminServiceImplement implements AdminService {
 	public int memManage_04(String user_id) {
 		// TODO Auto-generated method stub
 		return mapper.memManage_04(user_id);
+	}
+	
+	// 가입 일시를 가져오는 함수 추가
+	@Override
+	public ArrayList<MemberVO> register_dt(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.register_dt(user_id);
 	}
 
 

@@ -1,5 +1,6 @@
 package com.together.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -105,6 +106,9 @@ public interface AdminService {
 	
 	// 관리자 홈페이지 : 관리자 회원으로 변경
 	public int memManage_04(String user_id);
+	
+	// 가입 일시를 가져오는 함수 추가
+	public ArrayList<MemberVO> register_dt(String user_id); 
 	
 	
 }

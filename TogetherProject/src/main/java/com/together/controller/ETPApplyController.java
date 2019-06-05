@@ -1,8 +1,11 @@
 package com.together.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,7 @@ public class ETPApplyController {
 	
 	// 업체 등록 
 	@RequestMapping(value = "/etpApply", method = RequestMethod.POST)
-	public String etpApply(Model model,HttpServletRequest request,EnterpriseVO ins, @RequestParam String cd) {
+	public String etpApply(Model model,HttpServletRequest request,EnterpriseVO ins, @RequestParam String cd, HttpServletResponse response) throws IOException {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<EnterpriseVO> prise = new ArrayList<EnterpriseVO>();
 
@@ -38,9 +41,14 @@ public class ETPApplyController {
 				String code = prise.get(0).getEtp_cd();
 				int ins1 = customerservice.ent_info(code);
 				if (insert != 0) {
-					return "nav/etpApply";
-				} else {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('(호텔)업체 신청이 완료 되었습니다.'); </script>");
+					out.flush();
+					
 					return "home";
+				} else {
+					return "nav/etpApply";
 				}
 		
 		}else if(cd.equals("f")){
@@ -49,15 +57,20 @@ public class ETPApplyController {
 				String code = prise.get(0).getEtp_cd();
 				int ins2 = customerservice.ent_info(code);
 				if (insert != 0) {
-					return "nav/etpApply";
-				} else {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('(장례)업체 신청이 완료 되었습니다.'); </script>");
+					out.flush();
+					
 					return "home";
+				} else {
+					return "nav/etpApply";
 				}
 		}
 		
 		
 		
-		return "nav/etpApply";
+		return "home";
 	
 	
 		// 수정해야 할 부분

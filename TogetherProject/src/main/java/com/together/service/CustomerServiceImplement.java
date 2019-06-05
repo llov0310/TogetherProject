@@ -87,6 +87,20 @@ public class CustomerServiceImplement implements CustomerService {
 		return mapper.serchlist(serch,in,out);
 	}
 
+	//Hotel 예약시 재고 차감
+	@Override
+	public int update_order(String first_day, String last_day, String pdcode) {
+		// TODO Auto-generated method stub
+		return mapper.update_order(first_day, last_day, pdcode);
+	}
+
+
+	@Override
+	public ArrayList<MemberVO> loginCheck(String user_id, String password) {
+		// TODO Auto-generated method stub
+		return mapper.loginCheck(user_id, password);
+	}
+
 
 	
 

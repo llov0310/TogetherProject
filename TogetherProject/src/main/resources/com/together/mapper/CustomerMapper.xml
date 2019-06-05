@@ -10,6 +10,11 @@
 		select * from member where user_id = #{user_id} and password = #{password}
 	</select>
 
+	<select id="loginCheck" resultType="com.together.domain.MemberVO">
+		select * from member where user_id = #{user_id} and password = #{password}
+	</select>
+	
+	
 	<insert id="signup" parameterType="com.together.domain.MemberVO">
 		insert into member values 
 		(#{user_id},#{password},#{ph_no},#{email},#{user_nm},sysdate,'3',#{birth_dt},MEMBER_SEQ.nextval,#{addr_ji},#{addr_dong})
@@ -25,7 +30,7 @@
 	
 	<select id="address" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	   select DISTINCT s.pd_cd,p.etp_cd,s.st_this_num,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
+	   select DISTINCT p.etp_cd,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
     from(select s.pd_cd
         from stock s
         where to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
@@ -44,7 +49,7 @@
 	
 	<select id="serchlist" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	   select DISTINCT s.pd_cd,p.etp_cd,s.st_this_num,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
+	   select DISTINCT p.etp_cd,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
     from(select s.pd_cd
         from stock s
         where to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
@@ -88,5 +93,12 @@
 	insert into orders(or_cd, user_id, pd_cd, or_dt, or_dt2, th_dt, or_stat, or_check, or_price)
  	values(ORDER_SEQ.nextval,#{user},#{pdcode},to_timestamp(#{first}),to_timestamp(#{last}),to_char(sysdate,'YYYY-MM-DD HH24:mi:ss'),'1','1',#{price})
 	</insert>
+	
+	<update id="update_order" parameterType="com.together.domain.StockVO">
+	<![CDATA[
+	update stock set st_this_num = st_this_num-1 where pd_cd=#{pcode} 
+	and (to_date(substr(st_cd, -5),'MM-DD') between to_date(substr(#{in},-4),'MM-DD') and to_date(substr(#{out},-4),'MM-DD'))
+	]]>
+	</update>
 	
 </mapper>

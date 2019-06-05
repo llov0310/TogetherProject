@@ -38,6 +38,7 @@ public class HomeController {
    //홈 페이지 맵핑
    @RequestMapping(value = "/", method=RequestMethod.GET)
    public String home(Model model) {
+	   
 	   return "home";
    }
    

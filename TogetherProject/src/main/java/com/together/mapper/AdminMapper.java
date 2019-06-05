@@ -107,4 +107,8 @@ public interface AdminMapper {
    
    // 관리자 홈페이지 : 관리자 회원으로 변경
    public int memManage_04(@Param("user_id") String user_id);
+   
+   // 
+   public ArrayList<MemberVO> register_dt(String user_id);
+   
 }

@@ -81,13 +81,23 @@ public class HotelController {
 		  int order_buy = HotelService.insert_order(
 				  user,pdcode,first_day,last_day,price);
 		  
-//		  String first_sub = first_day.subString();
-//		  int order_buy_update = HotelService.update_order(first_day);
+//		  System.out.println(first_day + " " + last_day + " " + pdcode);
+		  int order_buy_update = HotelService.update_order(first_day,last_day,pdcode);
 
 		  }
 
 		return "success";
 
 }
+	
+	//리뷰게시판으로 이동
+	@RequestMapping(value = "/hotelReview", method=RequestMethod.GET)
+	public String hotelReview(Model model, HttpSession session) {
+		
+		return "service/hotel/hotelReview";
+
+	}
+	
+	//리뷰 게시판 작성 insert 구문
 	
 }

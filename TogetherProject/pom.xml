@@ -250,12 +250,27 @@
 		<!-- 1.업로드된 파일의 이름과 원본파일의 이름 2.파일이 저장된 경로 3.업로드된 파일이 이미지인지 아닌지에 대한 정보 -->
 		<!-- 파일업로드에 필요한거 ㅇㅇ -->
 		
+
+		<!-- 안드로이드 통신 -->
+	<dependency>
+		<groupId>com.googlecode.json-simple</groupId>
+		<artifactId>json-simple</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.9.13</version>
+	</dependency>		
+
 		<!-- 파이어베이스 -->
 		<dependency>
   			<groupId>com.google.firebase</groupId>
   			<artifactId>firebase-admin</artifactId>
   			<version>6.8.0</version>
 		</dependency>
+
 
 	</dependencies>
     <build>

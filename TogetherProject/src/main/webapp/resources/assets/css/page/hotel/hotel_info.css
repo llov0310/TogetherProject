@@ -347,3 +347,30 @@ button.switch-month:active {
   color: #409EDD;
   line-height: 1.7;
 }
+
+/* 팝업창 안에 인포 윈도우 */
+#de_ch_total{
+	width: 100%;
+	height: 300px;
+}
+
+.def{
+	width: 50%;
+	height : 100%;
+	float : left;
+	
+}
+
+.change {
+	width: 50%;
+	height : 100%;
+	float: left;
+}
+
+.Btndiv{
+	width : 100%;
+}
+
+.Btndiv > input[type=button]  {
+	float: right;
+}

@@ -69,6 +69,12 @@
 		        }
 		    }).open();
 		}
+	 
+	 $(document).reday(function(){
+		 $("#sub").on('click',function(){
+			 alert("신청이 완료되었습니다 홈 화면으로 이동합니다. 신청은 3~7일정도 소요됩니다.");
+		 });
+	 });
 	 </script>
 </th:block>
 
@@ -126,7 +132,7 @@
 			<br/>
 			
 			<label>
-				<input type="submit" value="신청">
+				<input type="submit" value="신청" id="sub">
 			</label>
 		</form>
 
