@@ -79,7 +79,7 @@ function tab(e, num){
 	  
 	$(".searchdate").click(function() {
 		var  day= $(this).val();
-		alert(day);
+		
 		var day1 =decodeURIComponent(day);
 		$.ajax({
 	 		url : "/searchdate"+"/"+day1,
@@ -134,7 +134,6 @@ overflow: auto;}
 </head>
 <body>
 <div>검색
-<div>업체명검색<input type="text" id="search"> <button id="searchbt">검색</button></div>
 <div>기간별검색 
 <button class="searchdate" value=500>전체</button>
 <button class="searchdate" value=0>오늘</button>
