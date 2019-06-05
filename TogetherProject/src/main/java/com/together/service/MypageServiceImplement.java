@@ -113,6 +113,13 @@ public class MypageServiceImplement implements MypageService {
 		return myMapper.getD_cd(user_id, d_nm, d_gender, d_kind, d_age);
 	}
 
+
+	@Override
+	public ArrayList<OrdersVO> searchdate(String user_id, int day) {
+		// TODO Auto-generated method stub
+		return myMapper.searchdate(user_id,day);
+	}
+
 	 
 }
 

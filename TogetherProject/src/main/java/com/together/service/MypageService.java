@@ -38,5 +38,7 @@ public interface MypageService {
 	
 	//파일업로드할때 d_cd를 받아오기 위한 서비스 함수
 	public ArrayList<DogsVO> getD_cd(String user_id, String d_nm, int d_gender, String d_kind, String d_age);
+	
+	public ArrayList<OrdersVO> searchdate(String user_id, int day);
 
 }

@@ -95,6 +95,13 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 
 
+	@Override
+	public ArrayList<MemberVO> loginCheck(String user_id, String password) {
+		// TODO Auto-generated method stub
+		return mapper.loginCheck(user_id, password);
+	}
+
+
 	
 
 

@@ -35,7 +35,7 @@ function tab(e, num){
     
 }
 
-$(document).ready(function() {
+/* $(document).ready(function() {
 	$(".orderdelbt").click(function() {
 		var x = 3;
 		var orcd = $(this).parent().parent().find("#orcd").text();
@@ -54,31 +54,46 @@ $(document).ready(function() {
 			}
 		});
 	});
-});
-$(document).ready(function() {
-	$("#searchbt").click(function() {
-		alert("검색띠");
-	});
-	});
-	
-$(document).ready(function() {
+}); */
+
+
+  $(document).ready(function() {
+		$(".orderdelbt").click(function() {
+			var x = 3;
+			var orcd = $(this).parent().parent().find("#orcd").text();
+			console.log(orcd);
+			
+			$.ajax({
+				url : "/orderdel",
+				type : "POST",
+				dataType : 'text',
+				data : {
+					or_stat : x,
+					or_cd : orcd
+				},
+				success : function(data) {
+					 $("#ho").load("/searchdate"+"/"+day1);
+				}
+			});
+		});
+	  
 	$(".searchdate").click(function() {
-		var a= $(this).val();
-		
-		alert(a);
-		
+		var  day= $(this).val();
+		alert(day);
+		var day1 =decodeURIComponent(day);
 		$.ajax({
-			url : "/searchdate",
-			type : "POST",
+	 		url : "/searchdate"+"/"+day1,
+			type : "GET",
 			dataType : 'text',
 			data : {
-				date : a,
-	
+
 			},
 			success : function(data) {
-				 alert("호우");
-			}
-		});
+				 $("#ho").load("/searchdate"+"/"+day1); 
+			
+		}
+	});
+	
 	});
 	});
 </script>
@@ -121,20 +136,20 @@ overflow: auto;}
 <div>검색
 <div>업체명검색<input type="text" id="search"> <button id="searchbt">검색</button></div>
 <div>기간별검색 
-<button class="searchdate" value="all">전체</button>
-<button class="searchdate">오늘</button>
-<button class="searchdate">7일</button>
-<button class="searchdate">15일</button>
-<button class="searchdate">1개월</button>
-<button class="searchdate">3개월</button>
-<button class="searchdate">1년</button></div>
+<button class="searchdate" value=500>전체</button>
+<button class="searchdate" value=0>오늘</button>
+<button class="searchdate" value=7>7일</button>
+<button class="searchdate" value=15>15일</button>
+<button class="searchdate" value=30>1개월</button>
+<button class="searchdate" value=91>3개월</button>
+<button class="searchdate" value=365>1년</button></div>
 </div>
 <ul class="tab" id="tab">
     <li>호텔</li>
     <li>장례업체</li>	
 </ul>
 <div class="tab_con" id="tab_con">
-<div class="scroll">
+<div class="scroll" id="ho">
 <table class="type11">
     <thead>
     <tr>
@@ -149,14 +164,14 @@ overflow: auto;}
         
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="order_list : ${order_list}" th:if="${order_list.cd}==h">
+    <tbody class="tbody"th:each="order_list : ${order_list}">
+    <tr th:if="${order_list.cd}==h">
         <td><span id="orcd" th:text="${order_list.or_cd}"></span></th>
         <td><span th:text="${order_list.pd_nm}"></span></th>
         <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
         <td><span th:text="${order_list.or_price}"></span></th>
         <td><span th:text="${order_list.etp_nm}"></span></th>
-        <td><span th:text="${order_list.th_dt}"></span></th>
+        <td><span class="date" th:text="${order_list.th_dt}"></span></th>
          <td><span class="orstat" th:if="${order_list.or_stat}==1">예약대기중</span> 
          <span class="orstat" style="color: blue;" th:if="${order_list.or_stat}==2">예약확정</span>
          <span class="orstat" style="color: red;" th:if="${order_list.or_stat}==3">취소대기중</span>
@@ -164,11 +179,12 @@ overflow: auto;}
          </th>
         <td><button class="orderdelbt">예약취소</button></th>
     </tr>
-    </th:each>
-    </tbody>
+   </tbody>
 </table>
 </div>
-<div class="scroll">
+
+
+<div id="ho"class="scroll">
 <table class="type11">
     <thead>
     <tr>
@@ -183,8 +199,10 @@ overflow: auto;}
         
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="order_list : ${order_list}" th:if="${order_list.cd}==f">
+  
+    
+      <tbody th:each="order_list : ${order_list}" th:if="${order_list.cd}==f">
+    <tr>
         <td><span id="orcd" th:text="${order_list.or_cd}"></span></th>
         <td><span th:text="${order_list.pd_nm}"></span></th>
         <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
@@ -198,7 +216,6 @@ overflow: auto;}
          </th>
         <td><button class="orderdelbt">예약취소</button></th>
     </tr>
-    </th:each>
     </tbody>
 </table>
 </div>
