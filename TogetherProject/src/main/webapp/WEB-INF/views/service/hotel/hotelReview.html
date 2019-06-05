@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/serviceLayout">
+
+<th:block layout:fragment="page_head">
+	<title>리뷰 작성중...</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="assets/css/page/hotel/hotelReview.css">
+	 
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="assets/js/hotel_place/hotelReview.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</th:block>
+
+<th:block layout:fragment="contents" scroll="no">
+<div class= "total">
+	<div class="review-container">
+	  <button class="star"><span class="stararea">★</span></button>
+	  <button class="star"><span class="stararea">★</span></button>
+	  <button class="star"><span class="stararea">★</span></button>
+	  <button class="star"><span class="stararea">★</span></button>
+	  <button class="star"><span class="stararea">★</span></button>
+	</div>
+ </div>
+</th:block>
+
+</html>

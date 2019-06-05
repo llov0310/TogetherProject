@@ -36,6 +36,10 @@ public interface CustomerMapper {
 
 	public ArrayList<EnterpriseVO> serchlist(@Param("serch") String serch, @Param("in") String in, @Param("out") String out);
 
+	public int update_order(@Param("in") String first_day, 
+			@Param("out") String last_day, 
+			@Param("pcode") String pdcode);
+
 	
 	
 	

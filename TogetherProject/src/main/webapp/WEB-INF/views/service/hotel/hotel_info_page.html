@@ -16,7 +16,7 @@
 
 <th:block layout:fragment="page_js">
 <!-- 	<script src="assets/js/hotel.js"></script> -->
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.js"></script><!-- 팝업창 스크립트  -->
   
@@ -67,48 +67,56 @@
 	  			
 	  			
 	  			
-			//상품 구매가 가능한지 조회하는 버튼 테스트용
-  			$('#join').on('click',function(){
-  				var fir = $('#first_day').text();
-  	  			var las = $('#second_day').text();
-  	  			
-  	  			var code = $('.code').text();
-  	  			var content = $('#pcon').text();
-  	  			var p_nm = $('#pnm').text();
-  	  			var sub_fir = fir.substr(5,5);
-  	  			var sub_las = las.substr(5,5);
-  	  			console.log(sub_las);
-  	  			$.ajax({
-					url : "/join",
-					type: "POST",
-					dataType : 'json',
-					data : {sub_fir,sub_las,content,p_nm,code},
-					success : function(data){
-						if(data.length == 0){
-							alert("예약 가능");
-						}else{
-							for(var i=0; i<data.length; i++){
-								$('.result_').append('<span>' + data[i] + "일의 방이 모두 소진되었습니다." + '</span>');	
-							}
-													
-						}
+	  			
+	  			
+	  			
+				//상품 구매가 가능한지 조회하는 버튼 테스트용
+	  			$(function(){
+	  			    $('.suc').on('DOMSubtreeModified propertychange', function() {
+	  			    	
+	  			    	$('.check_room').text("");
+	  			    	var fir = $('#first_day').text();
+	  	  	  			var las = $('#second_day').text();
+	  	  	  			
+	  	  	  			var code = $('.code').text();
+	  	  	  			var content = $('#pcon').text();
+	  	  	  			var p_nm = $('#pnm').text();
+	  	  	  			var sub_fir = fir.substr(5,5);
+	  	  	  			var sub_las = las.substr(5,5);
+	  	  	  			console.log(sub_las);
+	  	  	  			$.ajax({
+	  						url : "/join",
+	  						type: "POST",
+	  						dataType : 'json',
+	  						data : {sub_fir,sub_las,content,p_nm,code},
+	  						success : function(data){
+	  							
+	  							console.log(data);
+	  							if(data.length == 0){
+	  								$('.check_room').text("예약가능");
+	  							}else if(data != "fail"){
+	  								for(var i=0; i<data.length; i++){
+	  									$('.check_room').append('<span>' +data[i].substr(3,5) + "일의 방이 모두 소진되었습니다." + '</span><br/>');	
+	  								}
+	  														
+	  							}
+
+	  							
+	  						}
+	  					
+	  	  	  			});
+
+	  			    });
+	  			});
+
+	  		
 
 
-// 					console.log(data);				
-// 					console.log(data.length);
-// 					console.log(data[0]);
-					
-						
-
-						
-					}
-				
-  	  			});
-  			});
-			
 			
   			//상품 추가 버튼
   		  $('#add_btn').on('click',function(){
+  			 
+  			 if($('.check_room').text() == "예약가능"){ 
   			var a = $('#first_day').text();
   			var b = $('#second_day').text();
   			var c = $('#total_day').text();
@@ -132,6 +140,9 @@
   			}
   			$('#top_total_price').text("총가격 : " + sum + "KRW");
   			$ ('#popup').bPopup().close(); 
+  			 }else{
+  				 alert("예약이 불가능한 날이 포함되어 있습니다. 다시선택해 주세요!");
+  			 }
   		  });
   		  
   		  
@@ -172,10 +183,15 @@
 		        traditional:true,
 				success : function(data){
 					if(data == "success"){
-						alert("예약완료");
-						window.location.reload();
+						if (confirm("이용해 주셔서 감사합니다. 지금바로 리뷰를 작성하시겠습니까?")) {
+			                 	location.href = "/hotelReview"
+			             } else {
+			                 // no click
+			            	 window.location.reload();
+			             }
+						
 					}else{
-						console.log("실패");
+						alert("오류가 발생하여 예약이 되지 않았습니다.");
 					}
 					
 				}
@@ -752,25 +768,30 @@
             
 </div> <!-- End Calendar -->
 
-
+<div id="de_ch_total">
 	<!-- 날짜 폼 -->
-	<div>
+	<div class="def">
 		<span>시작일 : <label id="first_day"></label></span><br/>
-		<span>종료일 : <label id="second_day"></label></span><br/>
+		<span>종료일 : <label id="second_day" class="suc" onchange="second_change()"></label></span><br/>
 		<span>총 일수 : <label id="total_day"></label></span><br/>
 		<span>상품명 : <label id ="pnm"></label></span><br/>
 		<span>상품가격 : <label id = "ppri"></label></span><br/>
 		<span>상품정보 : <label id = "pcon"></label></span><br/>
 		<span>총가격 : <label id = "total_price"></label></span>
-		<div class="result_"></div>
+		
 	</div>
+			<!-- 오른쪽 되는지 안되는지 change값 -->
+				<div class="change">
+					<span class="check_room"></span>
+				</div>
 
-		
-		
-		<input type="button" id="btn_close" value="닫 기">
-		<input type="button" id="add_btn" value = "추가">
-		<input type="button" id="join" value ="조회">
-		</div>
+</div>		
+			<div class="Btndiv">
+			<input type="button" id="btn_close" value="닫 기">
+			<input type="button" id="add_btn" value = "추가">
+			</div>
+			
+</div>
 		
 			
 

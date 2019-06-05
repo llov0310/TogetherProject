@@ -28,6 +28,8 @@ public interface CustomerService {
 
 	public ArrayList<EnterpriseVO> ser2(String serch, String in, String out);
 
+	public int update_order(String first_day, String last_day, String pdcode); //예약시 재고 차감
+
 	
 	
 }
