@@ -80,6 +80,7 @@ function tab(e, num){
 	$(".searchdate").click(function() {
 		var  day= $(this).val();
 		
+		
 		var day1 =decodeURIComponent(day);
 		$.ajax({
 	 		url : "/searchdate"+"/"+day1,
@@ -219,6 +220,5 @@ overflow: auto;}
 </table>
 </div>
 </div>
-
 </body>
 </html>
