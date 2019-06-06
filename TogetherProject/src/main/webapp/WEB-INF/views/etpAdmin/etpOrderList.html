@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{etpAdminInclude/etpAdminLayout}">
+
+<th:block layout:fragment="contents">
+	<div id="content-wrapper">
+
+		<div class="container-fluid">
+			<!-- DataTables Example -->
+			<div class="card mb-3">
+				<div class="card-header">
+					<h1>주문 현황</h1>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover" id="dataTable"
+							width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>구매일</th>
+									<th>상품명</th>
+									<th>구매자명</th>
+									<th>연락처</th>
+									<th>예약일</th>
+									<th>예약 상태</th>
+									<th>확인</th>
+									<th>금액</th>
+								</tr>
+							</thead>
+							<tbody class="or_list">
+								<tr class="tr_list" th:each="order : ${orderLists}">
+									<td th:text="${order.charthisdate}"></td>
+									<td th:text="${order.pd_nm}"></td>
+									<td th:text="${order.user_nm}"></td>
+									<td th:text="${order.ph_no}"></td>
+									<td><label th:text="${order.chardate}"></label><br> ~
+										<label th:text="${order.chardate2}"></label></td>
+									<td>
+										<div th:switch="${order.or_stat}">
+											<label th:case="'1'" style="color: black">예약 대기중</label> <label
+												th:case="'2'" style="color: red">예약 확정</label> <label
+												th:case="'3'" style="color: blue">취소 대기중</label>
+										</div>
+									</td>
+									<td th:switch="${order.or_check}"><label th:case="'1'"
+										style="color: red">미확인</label> <label th:case="'2'"
+										style="color: green">확인</label></td>
+									<td th:text="${order.price}+'KRW'"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /.content-wrapper -->
+
+
+
+
+	<!-- 팝업 창 -->
+	<div id="bP" class="bP">
+		<div id="bp_div">
+			<div class="logo">
+				<h1>상세 예약서</h1>
+				<button class="success">확인</button>
+				<button class="exit">닫기</button>
+			</div>
+			<hr>
+			<div class="a">
+				구매 날짜 : <span class="this_day"></span>
+			</div>
+
+			<div class="b">
+				상품명 :<span class="pro_nm"></span>
+			</div>
+
+			<div class="c">
+				구매자명 : <span class="nm"></span>
+			</div>
+
+			<div class="d">
+				연락처 :<span class="ph"></span>
+			</div>
+
+			<div class="e">
+				예약일 :<span class="fir"></span> ~ <span class="la"></span>
+			</div>
+
+			<div class="f">
+				상태 :<span class="stat"></span>
+			</div>
+
+			<div class="g">
+				확인 :<span class="check"></span>
+			</div>
+
+
+			<div class="h">
+				총가격 :<span class="to_price"></span>
+			</div>
+		</div>
+	</div>
+
+</th:block>
+
+
+<th:block layout:fragment="page_js">
+	<script src="/etpAdmin/js/etpOrderList.js"></script>
+	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script>
+	<!-- 팝업창 스크립트  -->
+	<script src="plugin/jquery.bpopup.min.js"></script>
+
+</th:block>
+
+
+<th:block layout:fragment="page_css">
+	<link href="/etpAdmin/css/etpOrderList.css" rel="stylesheet">
+</th:block>
+
+</html>

@@ -9,5 +9,5 @@ public class ProductVO {
 	private String pd_nm;
 	private int pd_price;
 	private String pd_content;
-	private String pd_img_path;
+	private String pd_img_uuid;
 }

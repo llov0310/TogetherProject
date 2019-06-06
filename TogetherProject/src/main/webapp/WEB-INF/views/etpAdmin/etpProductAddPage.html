@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block layout:fragment="page_css">
+	<style>
+.inputArea {
+	margin: 10px 0;
+}
+
+select {
+	width: 100px;
+}
+
+label {
+	display: inline-block;
+	width: 70px;
+	padding: 5px;
+}
+
+label[for='gdsDes'] {
+	display: block;
+}
+
+input {
+	width: 150px;
+}
+
+textarea#gdsDes {
+	width: 400px;
+	height: 180px;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+.filebox input[type="file"] { /* 파일 필드 숨기기 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox.bs3-primary label {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
+}
+
+#loading {
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	display: block;
+	opacity: 0.7;
+	background-color: #fff;
+	z-index: 99;
+	text-align: center;
+}
+
+#loading-image {
+	position: absolute;
+	top: 42%;
+	left: 42%;
+	z-index: 100;
+}
+</style>
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<!-- 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script> -->
+	<script src="/etpAdmin/js/etpProductAddPage.js"></script>
+
+
+</th:block>
+
+<th:block layout:fragment="contents" scroll="no">
+	<head>
+<title>상품 추가</title>
+	</head>
+	<div class="inputArea">
+		<div class="filebox bs3-primary">
+			<img src="http://placehold.it/200x200"><br> <label
+				for="ex_file2">업로드</label> <br> <input type="file"
+				id="ex_file2">
+		</div>
+	</div>
+
+	<div class="inputArea">
+		<label for="gdsName">상품명</label> <input type="text" id="gdsName"
+			name="gdsName" />
+	</div>
+
+	<div class="inputArea">
+		<label for="gdsPrice">상품가격</label> <input type="text" id="gdsPrice"
+			name="gdsPrice" />
+	</div>
+
+	<div class="inputArea">
+		<label for="gdsDes">상품소개</label>
+		<textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+	</div>
+
+	<div class="inputArea">
+		<label for="gdsNum">일일 수량</label> <input type="text" id="gdsNum" />
+	</div>
+
+	<div class="inputArea">
+		<button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
+	</div>
+
+	<div id="loading">
+		<img id="loading-image" src="assets/img/25.gif" alt="Loading..." />
+	</div>
+
+</th:block>
+</html>

@@ -45,6 +45,15 @@
 				</li>				
 				
 				<li class="nav-item " th:if="${session.user}">
+					<span th:if="${session.user.authority_no == 2}">
+						<a class="nav-link js-scroll-trigger" href="etpAdminHome"> 업체 관리자 페이지 </a>
+					</span>
+				</li>		
+				
+				
+				
+				
+				<li class="nav-item " th:if="${session.user}">
 					<span th:if="${session.user.authority_no == 3}">
 						<a class="nav-link js-scroll-trigger" href="etpApply"> 업체 신청 </a>
 					</span>

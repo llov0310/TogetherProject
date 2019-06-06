@@ -1,0 +1,29 @@
+package com.together.mapper;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.together.domain.EnterpriseVO;
+import com.together.domain.ProductVO;
+
+public interface ETPAdminMapper {
+
+	// 업체 관리자 페이지 - 주문현황을 위한 함수 맵핑
+	public ArrayList<EnterpriseVO> select_order_list(String code);
+	public ArrayList<EnterpriseVO> textbox(@Param("sess") String sess);
+
+	// 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 함수 맵핑
+	public ArrayList<EnterpriseVO> info_select(String user_id);
+	public ArrayList<ProductVO> product_select(@Param("code") String code);
+
+	// 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 함수 맵핑
+	public int insert_pro(@Param("code") String code, @Param("pd_nm") String pd_nm, @Param("pd_price") int pd_price,
+			@Param("pd_content") String pd_content);
+	public ArrayList<ProductVO> st_insert_pro(@Param("code") String code, @Param("pd_nm") String pd_nm);
+	public int stockint(@Param("total_code") String total_code,@Param("pro_code") String pro_code,@Param("pd_num")  String pd_num);
+	
+	// 업체 관리자 페이지 - 상품 정보 : 상품삭제 함수 맵핑
+	public int del(@Param("code") String code, @Param("nm") String nm);
+	
+}

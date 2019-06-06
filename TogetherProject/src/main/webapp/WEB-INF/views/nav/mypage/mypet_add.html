@@ -81,7 +81,7 @@ fileButton.addEventListener('change', function(e){
 	// Create a storage ref - 스토리지 참조 생성
 	//firebase.storage().ref('folder_name/file_name');
 	
-	var storageRef = firebase.storage().ref('uploadTest/' + file.name);
+	var storageRef = firebase.storage().ref('uploadTest/' + 'aaa');
 	
 	// Upload file
 	var task = storageRef.put(file);
