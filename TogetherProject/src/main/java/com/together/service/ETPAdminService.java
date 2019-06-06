@@ -16,7 +16,7 @@ public interface ETPAdminService {
 	public ArrayList<ProductVO> product_select(String code);
 	
 	// 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 함수
-	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content);
+	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content, String insert_pro);
 	public ArrayList<ProductVO> st_insert_pro(String code, String pd_nm);
 	public int stockint(String total_code,String pro_code, String pd_num);
 	

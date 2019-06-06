@@ -5,6 +5,57 @@
 	layout:decorator="~{etpAdminInclude/etpAdminLayout}">
 
 <th:block layout:fragment="contents">
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script>
+	 //Your web app's Firebase configuration
+	  var firebaseConfig = {
+	  	apiKey : "AIzaSyDcJDqLBjqwDetOcCt5LcYjr8k8EL7mMnk",
+	  	authDomain : "blogapp-a9a56.firebaseapp.com",
+	  	databaseURL : "https://blogapp-a9a56.firebaseio.com",
+	  	projectId : "blogapp-a9a56",
+	  	storageBucket : "blogapp-a9a56.appspot.com",
+	  	messagingSenderId : "604610409810",
+	  	appId : "1:604610409810:web:76decd7c19ac5f6b"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  
+	  // 파이어베이스 스토리지 생성
+	  var storage = firebase.storage();
+	  var storageRef = storage.ref();
+	  
+	  var starsRef = storageRef.child('uploadTest/e91aa208-5df2-196e-dd12-881386a8cb85')
+
+	  var abc = starsRef.getDownloadURL();
+	  console.log(jQuery.type(abc));
+	  console.log(abc);
+	  console.log(typeof abc);
+
+	 	starsRef.getDownloadURL().then(function(url) {
+		  // `url` is the download URL for 'images/stars.jpg'
+
+		  // This can be downloaded directly:
+		  var xhr = new XMLHttpRequest();
+		  xhr.responseType = 'blob';
+		  xhr.onload = function(event) {
+		    var blob = xhr.response;
+		  };
+		  xhr.open('GET', url);
+		  xhr.send();
+
+		  // Or inserted into an <img> element:
+		  var img = document.getElementById('myimg');
+		  img.src = url;
+
+		}).catch(function(error) {
+		  // Handle any errors
+		});
+	
+	
+	</script>
+
+
+
 	<div id="content-wrapper">
 
 		<div class="container-fluid">
@@ -36,7 +87,7 @@
 									<td><label class="pd_content" th:text="${pro.pd_content}"></label>
 									</td>
 
-									<td><img src="http://placehold.it/100x100"></td>
+									<td><img src="https://firebasestorage.googleapis.com/v0/b/blogapp-a9a56.appspot.com/o/uploadTest%2Fe91aa208-5df2-196e-dd12-881386a8cb85?alt=media&token=dac8e825-88cc-48c2-b3d3-5569e972222a"></td>
 
 									<td>
 										<button class="btn btn-danger remove" type="button">Remove</button>

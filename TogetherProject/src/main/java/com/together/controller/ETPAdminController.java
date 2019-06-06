@@ -79,7 +79,7 @@ public class ETPAdminController {
 	@RequestMapping(value = "/etpProductAddRegister", method = RequestMethod.GET)
 	@ResponseBody
 	public String etpProductAddRegister(HttpServletRequest request, Model model, @RequestParam String pd_nm,
-			@RequestParam int pd_price, @RequestParam String pd_content, @RequestParam String pd_num) {
+			@RequestParam int pd_price, @RequestParam String pd_content, @RequestParam String pd_num, @RequestParam String pd_img_uuid) {
 
 		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 
@@ -87,7 +87,7 @@ public class ETPAdminController {
 
 		String code = info.get(0).getEtp_cd();
 
-		int product_insert = etpAdminService.insert_pro(code, pd_nm, pd_price, pd_content); // 이미지 업로드가되면 추가로 넣을예정
+		int product_insert = etpAdminService.insert_pro(code, pd_nm, pd_price, pd_content, pd_img_uuid); // 이미지 업로드가되면 추가로 넣을예정
 
 		ArrayList<ProductVO> select_product = etpAdminService.st_insert_pro(code, pd_nm);
 

@@ -44,7 +44,7 @@
 	<insert id="insert_pro"
 		parameterType="com.together.domain.ProductVO">
 		insert into product values
-		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},null)
+		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_uuid})
 	</insert>
 
 	<select id="st_insert_pro"

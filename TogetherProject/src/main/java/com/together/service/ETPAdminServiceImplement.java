@@ -43,9 +43,9 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 
 	// 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 함수
 	@Override
-	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content) {
+	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content, String insert_pro) {
 		// TODO Auto-generated method stub
-		return mapper.insert_pro(code, pd_nm, pd_price, pd_content);
+		return mapper.insert_pro(code, pd_nm, pd_price, pd_content, insert_pro);
 	}
 
 	@Override

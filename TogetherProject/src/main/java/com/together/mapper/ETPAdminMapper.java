@@ -19,7 +19,7 @@ public interface ETPAdminMapper {
 
 	// 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 함수 맵핑
 	public int insert_pro(@Param("code") String code, @Param("pd_nm") String pd_nm, @Param("pd_price") int pd_price,
-			@Param("pd_content") String pd_content);
+			@Param("pd_content") String pd_content, @Param("pd_img_uuid") String pd_img_uuid);
 	public ArrayList<ProductVO> st_insert_pro(@Param("code") String code, @Param("pd_nm") String pd_nm);
 	public int stockint(@Param("total_code") String total_code,@Param("pro_code") String pro_code,@Param("pd_num")  String pd_num);
 	
