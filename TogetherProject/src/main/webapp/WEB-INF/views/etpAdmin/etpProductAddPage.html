@@ -5,6 +5,13 @@
 
 <th:block layout:fragment="page_css">
 	<style>
+#uploader {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 50%;
+	margin-bottom: 10px;
+}
+
 .inputArea {
 	margin: 10px 0;
 }
@@ -90,8 +97,6 @@ textarea#gdsDes {
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<!-- 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script> -->
 	<script src="/etpAdmin/js/etpProductAddPage.js"></script>
-
-
 </th:block>
 
 <th:block layout:fragment="contents" scroll="no">
@@ -104,6 +109,11 @@ textarea#gdsDes {
 				for="ex_file2">업로드</label> <br> <input type="file"
 				id="ex_file2">
 		</div>
+	</div>
+
+	<div>
+		<progress value="0" max="100" id="uploader">0%</progress>
+		<input type="file" value="upload" id="fileButton" />
 	</div>
 
 	<div class="inputArea">
@@ -134,4 +144,69 @@ textarea#gdsDes {
 	</div>
 
 </th:block>
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js">
+</script>
+
+<script>
+//Your web app's Firebase configuration
+var firebaseConfig = {
+	apiKey : "AIzaSyDcJDqLBjqwDetOcCt5LcYjr8k8EL7mMnk",
+	authDomain : "blogapp-a9a56.firebaseapp.com",
+	databaseURL : "https://blogapp-a9a56.firebaseio.com",
+	projectId : "blogapp-a9a56",
+	storageBucket : "blogapp-a9a56.appspot.com",
+	messagingSenderId : "604610409810",
+	appId : "1:604610409810:web:76decd7c19ac5f6b"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+//DOM요소 가져오기 - 개별적 변수 선언
+// Get elements
+var uploader = document.getElementById('uploader');
+var fileButton = document.getElementById('fileButton');
+
+// Listen for file selection - 파일이 선택되었을 때 알 수 있도록 해야함
+fileButton.addEventListener('change', function(e){
+	//
+	function guid() {
+  		function s4(){
+    	return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  		}
+  			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+	}
+	
+	//파일이 업로드될때 이 함수 안에서 호출 할 것임
+	
+	// Get file - 파일을 가져오기 위해 타깃 요소에 있는 파일 객체에서 입력할 것
+	var file = e.target.files[0];
+	
+	// Create a storage ref - 스토리지 참조 생성
+	//firebase.storage().ref('folder_name/file_name');
+	
+	var storageRef = firebase.storage().ref('uploadTest/' + guid());
+	
+	// Upload file
+	var task = storageRef.put(file);
+	
+	// Update progress bar
+	task.on('state_changed',
+		function progress(snapshot){
+			var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			uploader.value = percentage;
+		},
+		
+		function error(err){
+			
+		},
+		
+		function complete(){
+			
+		}
+	);
+});		
+</script>
+
+
 </html>
