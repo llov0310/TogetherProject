@@ -1,10 +1,7 @@
-var path = null;
+var path = null; // 파일 업로드를 위한 변수 선언
 
 $(document).ready(function(){
-	  $(window).load(function() {     
-	       $('#loading').hide();   
-	      });  
-	  
+	// 파이어베이스를 이용한 파일 업로드 부분
 	// Your web app's Firebase configuration
 	  var firebaseConfig = {
 	  	apiKey : "AIzaSyDcJDqLBjqwDetOcCt5LcYjr8k8EL7mMnk",
@@ -44,12 +41,12 @@ $(document).ready(function(){
 	  	// Create a storage ref - 스토리지 참조 생성
 	  	// firebase.storage().ref('folder_name/file_name');
 	  	
-	  	var storageRef = firebase.storage().ref('productImgUpload/' + uuid); 	
+	  	var storageRef = firebase.storage().ref('etpRepresentativeImg/' + uuid); 	
 	  	console.log(uuid);
 	  	
 	  	var storage = firebase.storage();
 	  	var downloadRef = storage.ref();
-		var starsRef = downloadRef.child('productImgUpload/' + uuid);
+		var starsRef = downloadRef.child('etpRepresentativeImg/' + uuid);
 	  	
 	  	// Upload file
 	  	var task = storageRef.put(file);
@@ -79,60 +76,45 @@ $(document).ready(function(){
 	  			});
 	  		}
 	  	);
-		
 	  });	
-	  
-	  
-	 $("#register_Btn").on('click', function(){
-	  var pd_nm = $("#gdsName").val(); // 상품 이름
-	  var pd_price = $("#gdsPrice").val(); // 상품 가격
-	  var pd_content = $("#gdsDes").val(); // 상품 설명
-	  var pd_num = $("#gdsNum").val(); // 총갯수 수량
-	  var pd_img_path = path; // 이미지 업로드를 위한 uuid 변수
+	  	// 파일 업로드 끝
 
-	  if(pd_nm == ""){
-		  alert('상품 이름을 입력하세요!');
-		  
-	  }else if(pd_price == ""){
-		  alert('상품 가격을 입력하세요!');
-		 
-	  }else if(pd_num == ""){
-		  alert('총 수량을 입력하세요!');
-		  
-	  }else if(pd_content == ""){
-		  alert('상품 소개를 입력하세요!');
-		  
-	  }else if(pd_img_path == null){
-		  alert('이미지를 등록해주세요!');		  
-	  }else{
-	  $("#loading").show();
-	  $.ajax({
-		 type : 'GET',
-		 url : '/etpProductAddRegister',
-		 dataType : 'text',
-		 data : {pd_nm,pd_price,pd_content,pd_num, pd_img_path},
-		 success : function(data){
-			 $('#loading').hide();   
-			 if(data == "success"){
-				 
-			 alert("상품 추가 완료");
-			 window.opener.location.href = "/etpProduct";	 
-			 window.close();
-		 }else{
-			 alert("넘어오지않았음");
-		 }
-			 
-			 
-		 }
-		 
-		 
-	  }); //ajax END
-	  	
-	  } 
-	 }); 
-  });
-
-
-
-
-
+		$('#update').on('click' , function(){
+			alert("클릭은되나;");
+		var etp_cd = $("#code").text();
+		var etp_nm = $("#etp_nm").val(); // 업체이름
+		var etp_if_info = $("#etp_if_info").val(); // 간단 설명
+		var etp_if_intro = $("#etp_if_intro").val(); // 업체 상세 설명
+		var etp_addr = $("#etp_addr").val(); // 주소
+		var etp_ph_no = $("#etp_ph_no").val(); // 전화번호
+		var etp_license_no = $("#etp_license_no").val(); // 사업자 번호
+		var etp_email = $("#etp_email").val(); // 이메일
+		var time1 = $("#s1 option:selected").val().concat(":").concat($("#m1 option:selected").val());
+		var time2 = $("#s2 option:selected").val().concat(":").concat($("#m2 option:selected").val());
+		var etp_if_img_path = path;// 업체 대표 이미지 업로드 경로를 담는 변수		
+		
+				$.ajax({
+					type : "POST",
+					url : "/etpUpdate",
+					data : {etp_nm,etp_cd,
+							etp_if_info,
+							etp_if_intro,
+							etp_addr,
+							etp_ph_no,
+							etp_license_no,
+							etp_email,
+							time1,
+							time2,
+							etp_if_img_path},
+					dataType : "text",
+					success : function(){
+						alert("수정이 완료 되었습니다.");
+						window.location.href="/etpInfo";
+						
+					}
+					
+				});
+	
+		});
+	
+});

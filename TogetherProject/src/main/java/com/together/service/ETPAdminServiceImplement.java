@@ -43,9 +43,9 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 
 	// 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 함수
 	@Override
-	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content, String insert_pro) {
+	public int insert_pro(String code, String pd_nm, int pd_price, String pd_content, String pd_img_path) {
 		// TODO Auto-generated method stub
-		return mapper.insert_pro(code, pd_nm, pd_price, pd_content, insert_pro);
+		return mapper.insert_pro(code, pd_nm, pd_price, pd_content, pd_img_path);
 	}
 
 	@Override
@@ -65,6 +65,21 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 	public int del(String code, String nm) {
 		// TODO Auto-generated method stub
 		return mapper.del(code, nm);
+	}
+	
+	// 업체 관리자 페이지 - 업체 정보 수정 페이지
+	@Override
+	public Integer update(String etp_nm, String etp_addr, String etp_ph_no, String etp_license_no, String etp_email,
+			String etp_cd) {
+		// TODO Auto-generated method stub
+		return mapper.update(etp_nm, etp_addr, etp_ph_no, etp_email, etp_license_no, etp_cd);
+	}
+
+	@Override
+	public Integer update2(String etp_if_info, String etp_if_intro, String time1, String time2, String etp_cd,
+			String etp_if_img_path) {
+		// TODO Auto-generated method stub
+		return mapper.update2(etp_if_info, etp_if_intro, time1, time2, etp_cd, etp_if_img_path);
 	}
 
 	//

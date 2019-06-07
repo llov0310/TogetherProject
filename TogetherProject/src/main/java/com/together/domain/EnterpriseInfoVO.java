@@ -10,4 +10,5 @@ public class EnterpriseInfoVO {
 	private String etp_if_exter;
 	private String etp_if_time1;
 	private String etp_if_time2;
+	private String etp_if_img_path;
 }

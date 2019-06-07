@@ -11,7 +11,7 @@
   function popupOpen(){
 		var url= "/etpProductAddPage";    // 팝업창 페이지 URL
 		var winWidth = 700;
-	    var winHeight = 600;
+	    var winHeight = 700;
 	    var popupOption= "width="+winWidth+", height="+winHeight;    // 팝업창
 																		// 옵션(optoin)
 		window.open(url,"",popupOption);

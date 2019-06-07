@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <th:block layout:fragment="page_css">
-<!-- 	<link rel="stylesheet" href="assets/css/page/hotel/hotel_info.css"> -->
-	 
+	<!-- 	<link rel="stylesheet" href="assets/css/page/hotel/hotel_info.css"> -->
+
 </th:block>
 
 <th:block layout:fragment="page_js">
-<!-- 	<script src="assets/js/enterprise_manage/etp_manager.js"></script> -->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script>
+	<!-- 	<script src="assets/js/enterprise_manage/etp_manager.js"></script> -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script>
   $(document).ready(function(){
 	
 	
@@ -57,133 +56,136 @@
 </th:block>
 
 <th:block layout:fragment="contents" scroll="no">
-<form action="#">
-		  <header>
-		    <h2>업체 설명 수정 폼</h2>
-	
-		  </header>
- <div th:each=" lists :${list}">
- 		
- 			<div id="code" style="display:none" th:text="${lists.etp_cd}">
- 			</div>
-		  <div>
-		    <label class="desc" id="title1" for="Field1">업체 이름</label>
-		    <div>
-		      <input id="Field1" name="Field1" type="text" class="field text fn" th:value="${lists.etp_nm}" size="8" tabindex="1">
-		    </div>
-		  </div>
-		    
-		    
-		    <div>
-		    <label class="desc" id="title4" for="Field4">업체 간단 설명</label>
-		     <div>
-		      <textarea id="Field2" th:text="${lists.etp_if_info}"name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
-		    </div>
-		  </div>
-		    
-		  <div>
-		    <label class="desc" id="title4" for="Field4">업체 상세 설명</label>
-		     <div>
-		      <textarea id="Field3" th:text="${lists.etp_if_intro}"name="Field4" spellcheck="true" rows="5" cols="30" tabindex="4" style="width:80%;"></textarea>
-		    </div>
-		  </div>
-		  
-		  
-		  
-		   <div>
-		    <label class="desc" id="title4" for="Field4">주소</label>
-		     <div>
-		      <input id="Field4" name="Field1" type="text" class="field text fn" th:value="${lists.etp_addr}" size="8" tabindex="1">
-		    </div>
-		  </div>
-		  
-		  <div>
-		    <label class="desc" id="title1" for="Field1">전화번호</label>
-		    <div>
-		      <input id="Field5" name="Field1" type="text" class="field text fn" th:value="${lists.etp_ph_no}" size="8" tabindex="1">
-		    </div>
-		  </div>
-		  
-		  <div>
-		    <label class="desc" id="title1" for="Field1">사업자 번호</label>
-		    <div>
-		      <input id="Field6" name="Field1" type="text" class="field text fn" th:value="${lists.etp_license_no}" size="8" tabindex="1">
-		    </div>
-		  </div>
-		  
-		  <div>
-		    <label class="desc" id="title1" for="Field1">회사 이메일</label>
-		    <div>
-		      <input id="Field7" name="Field1" type="text" class="field text fn" th:value="${lists.etp_email}" size="8" tabindex="1">
-		    </div>
-		  </div>
-		  
-	 <div>
-		  <label class="desc" id="time1" for="Field1">영업 시간</label>
-		    <div id = "selecter">
-		      <select id ="s1">
-		      	<option value="7">07
-		      	<option value="8">08
-		      	<option value="9">09
-		      	<option value="10">10
-		      	<option value="11">11
-		      	<option value="12">12
-		      	<option value="13">13
-		      	<option value="14">14
-		      	<option value="15">15
-		      </select>
-		      <select id = "m1">
-		      	<option value="00">00
-		      	<option value="10">10
-		      	<option value="20">20
-		      	<option value="30">30
-		      	<option value="40">40
-		      	<option value="50">50
-		      </select>
-		      ~
-		      <select id = "s2">
-		      	<option value="16">16
-		      	<option value="17">17
-		      	<option value="18">18
-		      	<option value="19">19
-		      	<option value="20">20
-		      	<option value="21">21
-		      	<option value="22">22
-		      	<option value="23">21	
-		      </select>
-		      <select id = "m2">
-		      	<option value="00">00
-		      	<option value="10">10
-		      	<option value="20">20
-		      	<option value="30">30
-		      	<option value="40">40
-		      	<option value="50">50     	
-		      </select>
-		    </div>
-		    <input type="checkbox" id="Non" value="24">해당없음 (24시)
-		 </div>
-	</div>	  
-		  
-		   <div>
-		    <label class="desc" id="title106" for="Field106">편의 시설</label>
-		    <div style="padding-left : 20px;">
-		     <input type="checkbox" value="1"/>개인실
-		     <input type="checkbox" value="2"/>간식 제공
-		     <input type="checkbox" value="3"/>놀이 공간
-		     <input type="checkbox" value="4"/>안심 카메라
-		     <input type="checkbox" value="5"/>와이파이
-		     <input type="checkbox" value="6"/>카페
-		    </div>
-		  </div>
-		  
-				 <div>
-						<div>
-				  			<input id="update" name="saveForm" type="button" value="수정">
-				  			
-					    </div>
+	<form action="#">
+		<header>
+			<h2>업체 설명 수정 폼</h2>
+
+		</header>
+		<div th:each=" lists :${list}">
+
+			<div id="code" style="display: none" th:text="${lists.etp_cd}">
+			</div>
+			<div>
+				<label class="desc" id="title1" for="Field1">업체 이름</label>
+				<div>
+					<input id="Field1" name="Field1" type="text" class="field text fn"
+						th:value="${lists.etp_nm}" size="8" tabindex="1">
 				</div>
-		  
-		</form>
+			</div>
+
+
+			<div>
+				<label class="desc" id="title4" for="Field4">업체 간단 설명</label>
+				<div>
+					<textarea id="Field2" th:text="${lists.etp_if_info}" name="Field4"
+						spellcheck="true" rows="5" cols="30" tabindex="4"
+						style="width: 80%;"></textarea>
+				</div>
+			</div>
+
+			<div>
+				<label class="desc" id="title4" for="Field4">업체 상세 설명</label>
+				<div>
+					<textarea id="Field3" th:text="${lists.etp_if_intro}" name="Field4"
+						spellcheck="true" rows="5" cols="30" tabindex="4"
+						style="width: 80%;"></textarea>
+				</div>
+			</div>
+
+
+
+			<div>
+				<label class="desc" id="title4" for="Field4">주소</label>
+				<div>
+					<input id="Field4" name="Field1" type="text" class="field text fn"
+						th:value="${lists.etp_addr}" size="8" tabindex="1">
+				</div>
+			</div>
+
+			<div>
+				<label class="desc" id="title1" for="Field1">전화번호</label>
+				<div>
+					<input id="Field5" name="Field1" type="text" class="field text fn"
+						th:value="${lists.etp_ph_no}" size="8" tabindex="1">
+				</div>
+			</div>
+
+			<div>
+				<label class="desc" id="title1" for="Field1">사업자 번호</label>
+				<div>
+					<input id="Field6" name="Field1" type="text" class="field text fn"
+						th:value="${lists.etp_license_no}" size="8" tabindex="1">
+				</div>
+			</div>
+
+			<div>
+				<label class="desc" id="title1" for="Field1">회사 이메일</label>
+				<div>
+					<input id="Field7" name="Field1" type="text" class="field text fn"
+						th:value="${lists.etp_email}" size="8" tabindex="1">
+				</div>
+			</div>
+
+			<div>
+				<label class="desc" id="time1" for="Field1">영업 시간</label>
+				<div id="selecter">
+					<select id="s1">
+						<option value="7">07
+						<option value="8">08
+						<option value="9">09
+						<option value="10">10
+						<option value="11">11
+						<option value="12">12
+						<option value="13">13
+						<option value="14">14
+						<option value="15">15
+					</select> <select id="m1">
+						<option value="00">00
+						<option value="10">10
+						<option value="20">20
+						<option value="30">30
+						<option value="40">40
+						<option value="50">50
+					</select> ~ <select id="s2">
+						<option value="16">16
+						<option value="17">17
+						<option value="18">18
+						<option value="19">19
+						<option value="20">20
+						<option value="21">21
+						<option value="22">22
+						<option value="23">21
+					</select> <select id="m2">
+						<option value="00">00
+						<option value="10">10
+						<option value="20">20
+						<option value="30">30
+						<option value="40">40
+						<option value="50">50
+					</select>
+				</div>
+				<input type="checkbox" id="Non" value="24">해당없음 (24시)
+			</div>
+		</div>
+
+		<div>
+			<label class="desc" id="title106" for="Field106">편의 시설</label>
+			<div style="padding-left: 20px;">
+				<input type="checkbox" value="1" />개인실 <input type="checkbox"
+					value="2" />간식 제공 <input type="checkbox" value="3" />놀이 공간 <input
+					type="checkbox" value="4" />안심 카메라 <input type="checkbox" value="5" />와이파이
+				<input type="checkbox" value="6" />카페
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<input id="update" name="saveForm" type="button" value="수정">
+
+			</div>
+		</div>
+
+	</form>
 
 </th:block>
 </html>

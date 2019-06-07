@@ -44,7 +44,7 @@
 	<insert id="insert_pro"
 		parameterType="com.together.domain.ProductVO">
 		insert into product values
-		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_uuid})
+		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_path})
 	</insert>
 
 	<select id="st_insert_pro"
@@ -63,4 +63,26 @@
 	<delete id="del" parameterType="com.together.domain.ProductVO">
 		delete from product where etp_cd = #{code} and pd_nm = #{nm}
 	</delete>
+	
+	<!-- 업체 관리자 페이지 - 업체 정보 수정 페이지 sql -->
+	<update id="update" parameterType = "com.together.domain.EnterpriseVO">
+		update enterprise set etp_email = #{etp_email},
+		etp_addr = #{etp_addr},
+		etp_ph_no = #{etp_ph_no},
+		etp_license_no = #{etp_license_no},
+		etp_nm = #{etp_nm}
+		where etp_cd = #{etp_cd}
+		
+	</update>
+
+	<update id="update2" parameterType="com.together.domain.EnterpriseVO">
+		update enterprise_info set etp_if_info = #{etp_if_info},
+		etp_if_intro = #{etp_if_intro},
+		etp_if_time1 = #{time1},
+		etp_if_time2 = #{time2},
+		etp_if_img_path = #{etp_if_img_path}
+		where etp_cd = #{etp_cd}
+	</update>
+	
+	
 </mapper>
