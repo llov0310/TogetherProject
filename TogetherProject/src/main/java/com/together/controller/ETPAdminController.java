@@ -26,8 +26,10 @@ public class ETPAdminController {
 
 	// 업체 관리자 홈 페이지 맵핑
 	@RequestMapping(value = "/etpAdminHome", method = RequestMethod.GET)
-	public String home(Model model) {
-
+	public String home(Model model, HttpServletRequest request, HttpSession session) {
+		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		
+		
 		return "etpAdmin/etpAdminHome";
 	}
 
@@ -158,7 +160,7 @@ public class ETPAdminController {
 		ent = etpAdminService.textbox(sess);
 		
 		model.addAttribute("list", ent);
-		
+
 		return "etpAdmin/etpInfo";
 	}
 	

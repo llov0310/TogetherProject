@@ -12,7 +12,10 @@
 
 				<div id="code" style="display: none" th:text="${lists.etp_cd}">
 				</div>
-
+				
+				<div id="code" style="display: none" th:text="${lists.etp_if_img_path}">
+				</div>
+					
 				<br />
 				<!-- 업체 이름 -->
 				<div class="form-label-group left_input">
@@ -114,8 +117,16 @@
 				<!-- 이미지 업로드 -->
 				<div class="left_input" style="margin-left:15%">
 					<input type="file" value="upload" class="foo" id="fileButton" /> <br />
-					<img id="productImg" src="img/noImage.png" class="alreadyImg"
-						alt="미리보기" style="width:600px; height:250px;"/> <br /> 
+					
+					<!-- DB에 등록된 이미지 경로가 없을 때(null일 떄) -->
+					<img th:if="${lists.etp_if_img_path} == null" th:attr="src='img/noImage.png'"
+					id="productImg_null" style="width:600px; height:250px;"/> 
+					
+					<!-- DB에 등록된 이미지 경로가 있을 때 -->
+					<img th:if="${lists.etp_if_img_path} != null" th:attr="src=${lists.etp_if_img_path}"
+					id="productImg_notNull" style="width:600px; height:250px;"/>
+	
+					<br /> 
 					<progress value="0" max="100" id="uploader"
 						style="display: block; margin: 0px auto;">0%</progress>
 				</div>
@@ -175,10 +186,9 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<!-- 	<script src="assets/js/enterprise_manage/etp_manager.js"></script> -->
-	<script src="/etpAdmin/js/etpInfo.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="/etpAdmin/js/etpInfo.js"></script>
 </th:block>
 
 <th:block layout:fragment="page_css">
