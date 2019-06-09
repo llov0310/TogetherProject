@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head">
+
+<!-- 공통 메타 태그 -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- ▼▼▼▼▼▼부트스트랩에 필요한 링크▼▼▼▼▼▼ -->
+<!-- Custom fonts for this template-->
+<link href="etpAdmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- Page level plugin CSS-->
+<link href="etpAdmin/vendor/datatables/dataTables.bootstrap4.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="etpAdmin/css/sb-admin.css" rel="stylesheet">
+<!-- ▲▲▲▲▲▲부트스트랩에 필요한 링크▲▲▲▲▲▲ -->
+
+<!-- 개별 설정 : 각 .html파일에서 아래의 태그들을 선언하고 태그안에 내용을 적어주면 됨-->
+<th:block layout:fragment="page_head"></th:block>
+<th:block layout:fragment="page_lib"></th:block>
+<th:block layout:fragment="page_css"></th:block>
+<th:block layout:fragment="page_js"></th:block>
+
+</head>
+</html>

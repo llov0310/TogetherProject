@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+	<!-- Navbar -->
+	<!-- 홈페이지 이동 -->
+	<div>
+		<a href="/">홈으로 이동하기</a>
+	</div>
+	
+	<!-- 로그아웃 -->
+	<div th:if="${session.user}" style="float:right; position: relative; left: 75%;">
+		<span style="color:yellow" th:text="|업체 관리자 : ${session.user.user_nm}|"></span>
+		<a href="/logout">로그아웃</a>
+	</div>
+</nav>
+
+
+
+</html>

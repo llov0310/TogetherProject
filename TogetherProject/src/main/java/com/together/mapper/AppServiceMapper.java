@@ -30,7 +30,7 @@ public interface AppServiceMapper {
 	public int reviewadd(@Param("id") String user_id, 
 			@Param("code") String code, 
 			@Param("star") String starcount, 
-			@Param("content") String content);
+			@Param("content") String content); 
 
 	
 

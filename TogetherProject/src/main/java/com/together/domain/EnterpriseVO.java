@@ -31,7 +31,7 @@ public class EnterpriseVO {
 	private String etp_if_exter;
 	private String etp_if_time1;
 	private String etp_if_time2;
-	
+	private String etp_if_img_path;
 	
 	
 	//업체 상품을볼때 필요한 변수

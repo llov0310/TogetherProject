@@ -70,25 +70,38 @@
 		    }).open();
 		}
 	 
-	 $(document).reday(function(){
-		 $("#sub").on('click',function(){
-			 alert("신청이 완료되었습니다 홈 화면으로 이동합니다. 신청은 3~7일정도 소요됩니다.");
-		 });
-	 });
+// 	 $(document).reday(function(){
+// 		 $("#sub").on('click',function(){
+// 			 alert("신청이 완료되었습니다 홈 화면으로 이동합니다. 신청은 3~7일정도 소요됩니다.");
+// 		 });
+// 	 });
 	 </script>
 </th:block>
 
 <th:block layout:fragment="contents">
 
 		<form action="/etpApply" method="post">
-			<label>
+
+		<!-- 업체 선택 -->
+		<div class="form-label-group">
+			<label class="form-control">
 				업체 선택 :
-				<input type="radio" name="cd" value="h" checked="checked">호텔
-				<input type="radio" name="cd" value="f">장례
 			</label>
-			<br/><br/>
+		
+			<label> <input class="form-control" type="radio" name="cd"
+				value="h" checked="checked"/>호텔
+			</label>
 			
-			<label th:if="${session.user != null}" style="display: none;">
+			<label> <input class="form-control" type="radio" name="cd"
+				value="f"/>장례
+			</label>
+			
+			<label> <input class="form-control" type="radio" name="cd"
+				value="d"/>병원
+			</label>
+		</div>
+
+		<label th:if="${session.user != null}" style="display: none;">
 				<input th:value="${session.user.user_id}" name="user_id">
 			</label>
 			

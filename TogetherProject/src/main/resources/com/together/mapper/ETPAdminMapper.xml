@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.mapper.ETPAdminMapper">
+
+	<!-- 업체 관리자 페이지 - 주문현황을 위한 sql문 -->
+	<select id="select_order_list"
+		resultType="com.together.domain.EnterpriseVO">
+	<![CDATA[
+	select m.user_id,m.ph_no,m.user_nm,e.user_id,e.etp_cd,p.*,o.*,to_char(o.or_dt ,'YYYY-MM-DD') as chardate ,
+	to_char(o.or_dt2 , 'YYYY-MM-DD') as chardate2 , 
+	to_char(o.th_dt, 'YYYY-MM-DD HH24:MI:SS') as charthisdate,
+	to_char(o.or_price, '99,999,999') as price
+	from member m , enterprise e, orders o , product p
+	where e.etp_cd = p.etp_cd 
+	and m.user_id=o.user_id
+	and p.pd_cd = o.pd_cd 
+	and e.etp_cd = #{code}
+	order by to_char(o.th_dt, 'YYYY-MM-DD HH24:MI:SS')
+	]]>
+	</select>
+
+	<select id="textbox"
+		resultType="com.together.domain.EnterpriseVO">
+		select * from enterprise a , enterprise_info b
+		where
+		a.etp_cd = b.etp_cd and a.user_id = #{sess}
+	</select>
+
+	<!-- 주문 현황 팝업 창에서 확인 버튼 클릭시 필요한 sql문 -->
+	<select id="newInfo" resultType="com.together.domain.OrdersVO">
+		select m.user_nm
+		,m.user_id,o.user_id
+		from member m , orders o
+		where m.user_id =
+		o.user_id and m.user_nm = #{nm}
+	</select>
+
+	<update id="updateChecked"
+		parameterType="com.together.domain.OrdersVO">
+		update orders set or_check = '2' ,or_stat = '2'
+		where
+		user_id = #{member_id}
+		and or_dt = #{day1}
+		and or_dt2 = #{day2}
+		and
+		or_check = '1'
+		and th_dt = #{day_th}
+	</update>
+
+
+	<!-- 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 sql문 -->
+	<select id="info_select"
+		resultType="com.together.domain.EnterpriseVO">
+		select *from member a, enterprise b
+		where a.user_id =
+		b.user_id and b.user_id = #{user_id}
+	</select>
+
+	<select id="product_select"
+		resultType="com.together.domain.ProductVO">
+		select * from product where etp_cd = #{code}
+	</select>
+
+	<!-- 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 sql문 -->
+	<insert id="insert_pro"
+		parameterType="com.together.domain.ProductVO">
+		insert into product values
+		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_path})
+	</insert>
+
+	<select id="st_insert_pro"
+		resultType="com.together.domain.ProductVO">
+		select * from product where etp_cd = #{code} and pd_nm =
+		#{pd_nm}
+	</select>
+
+	<insert id="stockint"
+		parameterType="com.together.domain.StockVO">
+		insert into stock values
+		(#{total_code},#{pro_code},#{pd_num},#{pd_num})
+	</insert>
+
+	<!-- 업체 관리자 페이지 - 상품 정보 : 상품삭제 sql -->
+	<delete id="del" parameterType="com.together.domain.ProductVO">
+		delete from product where etp_cd
+		= #{code} and pd_nm = #{nm}
+	</delete>
+
+	<!-- 업체 관리자 페이지 - 업체 정보 수정 페이지 sql -->
+	<update id="update"
+		parameterType="com.together.domain.EnterpriseVO">
+		update enterprise set etp_email = #{etp_email},
+		etp_addr
+		= #{etp_addr},
+		etp_ph_no = #{etp_ph_no},
+		etp_license_no =
+		#{etp_license_no},
+		etp_nm = #{etp_nm}
+		where etp_cd = #{etp_cd}
+
+	</update>
+
+	<update id="update2"
+		parameterType="com.together.domain.EnterpriseVO">
+		update enterprise_info set etp_if_info = #{etp_if_info},
+		etp_if_intro = #{etp_if_intro},
+		etp_if_time1 = #{time1},
+		etp_if_time2 =
+		#{time2},
+		etp_if_img_path = #{etp_if_img_path}
+		where etp_cd = #{etp_cd}
+	</update>
+
+
+</mapper>

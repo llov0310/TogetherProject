@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{etpAdminInclude/etpAdminLayout}">
+
+<th:block layout:fragment="contents">
+	<div id="content-wrapper">
+		<div class="container-fluid">
+			<!-- DataTables Example -->
+			<div class="card mb-3">
+				<div class="card-header">
+					<h1>상품 정보</h1>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>상품 이름</th>
+									<th>가격</th>
+									<th>설명</th>
+									<th>상품 이미지</th>
+									<th>삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each=" pro : ${product_info}">
+									<td><label class="pd_nm" th:text="${pro.pd_nm}"></label></td>
+
+									<td><label class="pd_price" th:text="${pro.pd_price}"></label>
+									</td>
+
+									<td><label class="pd_content" th:text="${pro.pd_content}"></label>
+									</td>
+
+									<td><img class="pd_img_path" th:attr="src=${pro.pd_img_path}" style="width: 150px; height:150px;"></td>
+
+									<td>
+										<button class="btn btn-danger remove" type="button">Remove</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<button class="btn btn-large btn-success add" type="button">Add</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<!-- 	<script src="assets/js/enterprise_manage/etp_manager.js"></script> -->
+	<script src="/etpAdmin/js/etpProduct.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</th:block>
+
+</html>
