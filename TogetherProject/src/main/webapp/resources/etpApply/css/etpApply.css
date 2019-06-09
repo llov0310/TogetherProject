@@ -9,3 +9,15 @@ form {
   -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
   box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
 }
+
+/* .selectETP{ */
+/* 	display:inline-block; */
+/* } */
+
+.selectETP_div{
+	display:inline-block;
+}
+
+.selectETP_div > *{
+	display:inline-block;
+}
