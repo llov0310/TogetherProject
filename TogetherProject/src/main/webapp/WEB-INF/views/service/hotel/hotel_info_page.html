@@ -94,9 +94,11 @@
 	  							console.log(data);
 	  							if(data.length == 0){
 	  								$('.check_room').text("예약가능");
+	  								$('.check_room').css('color','blue');
 	  							}else if(data != "fail"){
 	  								for(var i=0; i<data.length; i++){
-	  									$('.check_room').append('<span>' +data[i].substr(3,5) + "일의 방이 모두 소진되었습니다." + '</span><br/>');	
+	  									$('.check_room').append('<span>' +data[i].substr(3,5) + "일의 방이 모두 소진되었습니다." + '</span><br/>');
+	  									$('.check_room').css('color','red');
 	  								}
 	  														
 	  							}
@@ -782,7 +784,7 @@
 	</div>
 			<!-- 오른쪽 되는지 안되는지 change값 -->
 				<div class="change">
-					<span class="check_room"></span>
+					<h1 class="check_room"></h1>
 				</div>
 
 </div>		

@@ -86,6 +86,11 @@ $(document).ready(function(){
 			$('.bP').bPopup().close();
 			
 		});
+		
+		
+		$('.oder_del').on('click',function(){
+			
+		});
 	
 	});
 	

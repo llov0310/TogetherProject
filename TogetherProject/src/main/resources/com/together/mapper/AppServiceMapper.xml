@@ -20,6 +20,50 @@
     and e.etp_addr like '%'||#{address}||'%'
 	]]>
 	</select>
+	
+	<select id="hotelinfoList" resultType="com.together.domain.EnterpriseVO">
+	select e.*,i.etp_if_info,i.etp_if_intro from enterprise e ,enterprise_info i
+	where i.etp_cd = e.etp_cd
+	and e.etp_addr = #{addr}
+	and e.etp_nm = #{name}
+	</select>
 
+		
+	<select id="ProductList" resultType="com.together.domain.EnterpriseVO">
+	select DISTINCT p.pd_cd,p.pd_nm,p.pd_price,to_char(p.pd_content) pd_content,p.pd_img_path
+	from product p, stock s
+	where p.pd_cd = s.pd_cd
+	and p.etp_cd = #{code}
+	and to_date(substr(s.st_cd,-5),'MM-DD') between to_date(#{in},'MM-DD') and to_date(#{out},'MM-DD')
+	</select>
+	
+	<select id="user_info" resultType="com.together.domain.MemberVO">
+	select * from member where user_id = #{user}
+	</select>
+	
+	<select id="product_info" resultType="com.together.domain.EnterpriseVO">
+			select p.etp_cd,p.pd_cd from enterprise e, product p
+			where e.etp_cd = p.etp_cd
+			and e.etp_addr = #{addr}
+			and e.etp_ph_no = #{ph} 
+			and p.pd_nm = #{proname}
+			and p.pd_price = #{price}
+	</select>
+		
+	<select id="total_day" resultType="int">
+		select to_date(#{out},'MM/DD')-to_date(#{in},'MM/DD') from dual
+	</select>
+	
+	<insert id="insertOrder" parameterType="com.together.domain.OrdersVO">
+		insert into orders values
+		(ORDER_SEQ.nextval,#{user},#{code},to_date(#{in},'MM/DD'),sysdate,1,1,to_date(#{out},'MM/DD'),#{price})
+	</insert>
+	
+	<insert id="reviewadd" parameterType="com.together.domain.ReviewBoardVO">
+		insert into reviewboard values(
+		REVIEWBOARD_SEQ.nextval,#{id},#{code},#{content},systimestamp,#{star}
+		)
+		
+	</insert>
 
 </mapper>

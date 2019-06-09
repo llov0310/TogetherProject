@@ -76,17 +76,53 @@ public class HotelController {
 		  
 //		  System.out.println(Integer.parseInt(total_day));
 		  product = HotelService.info_list(code,name);
+		  
 		  String pdcode = product.get(0).getPd_cd();
+		  
 		  
 		  int order_buy = HotelService.insert_order(
 				  user,pdcode,first_day,last_day,price);
 		  
-//		  System.out.println(first_day + " " + last_day + " " + pdcode);
-		  int order_buy_update = HotelService.update_order(first_day,last_day,pdcode);
-
+		  System.out.println(first_day + " " + last_day + " " + pdcode);
+		  System.out.println(first_day.length());
+		  
+		  
+		  String total_first = "";
+		  String total_last = "";
+		  
+		  if(first_day.length() != 9 || last_day.length() != 9) {
+			 
+			 if(first_day.length() != 9) {
+			 String first_day_convert = first_day.substring(5);
+			 String[] aa = first_day_convert.split("-");
+			 total_first = aa[0] + "-" + "0" + aa[1];
+			 System.out.println(total_first);
+			 
+			 if(last_day.length() != 9) {
+				 String last_day_convert = last_day.substring(5);
+			     String[] bb = last_day_convert.split("-");
+				 total_last = bb[0] + "-" + "0" + bb[1];
+				 System.out.println(total_last);	 
+			 }
+			 
+			 if(total_first.length() == 4 && total_last.length() == 4) {
+				 int order_buy_update = HotelService.update_order(total_first,total_last,pdcode);
+			 }else if(total_first.length() == 4){
+				 int order_buy_update = HotelService.update_order(total_first,last_day,pdcode);
+			 }
+			 
+			 return "success";
+			 
+		  }else {
+			 int order_buy_update = HotelService.update_order(first_day,last_day,pdcode);
+			 return "success";
 		  }
-
-		return "success";
+//		  
+		  
+	  }
+	 
+	}  
+		  return "success";
 
 }
 	
