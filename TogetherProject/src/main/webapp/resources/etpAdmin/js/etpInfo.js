@@ -1,10 +1,7 @@
 var path = null; // 파일 업로드를 위한 변수 선언
-var productImg_null = null;
-var productImg_notNull = null;
 
 $(document).ready(function(){
-
-	
+	var img_src = $('#img_div > img').attr('src');
 	// 파이어베이스를 이용한 파일 업로드 부분
 	// Your web app's Firebase configuration
 	  var firebaseConfig = {
@@ -75,17 +72,12 @@ $(document).ready(function(){
 	  				console.log(path);
 	  				
 	  				// 업로드 이미지 미리보기	
-	  				productImg_null = document.getElementById('productImg_null');	
-	  				productImg_notNull = document.getElementById('productImg_notNull');
-
-	  				console.log(typeof productImg_notNull);
-	  				console.log(typeof productImg_null);
-	  				console.log(typeof productImg_null.src);
-	  				
-	  				if(!productImg_null.src){
-	  					productImg_notNull.src = url;
-	  				}else{
-	  					productImg_null.src = url;
+	  				if(img_src == 'img/noImage.png' ){
+	  					var productImg_null = $('#productImg_null');
+	  					productImg_null.attr('src', url);
+	  				}else {
+	  					var productImg_notNull = $('#productImg_notNull');
+	  					productImg_notNull.attr('src', url);
 	  				}
 
 	  			});

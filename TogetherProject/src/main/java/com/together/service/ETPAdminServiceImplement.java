@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
 import com.together.mapper.ETPAdminMapper;
 
@@ -28,6 +29,19 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		return mapper.select_order_list(code);
 	}
 
+	@Override
+	public ArrayList<OrdersVO> newinfo(String nm) {
+		// TODO Auto-generated method stub
+		return mapper.newInfo(nm);
+	}
+
+	@Override
+	public int updateChecked(String day1, String day2, String check_val, String member_id, String day_th) {
+		// TODO Auto-generated method stub
+		return mapper.updateChecked(day1, day2, check_val, member_id, day_th);
+	}
+	
+	
 	// 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 함수
 	@Override
 	public ArrayList<EnterpriseVO> info_select(String user_id) {
@@ -81,7 +95,6 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.update2(etp_if_info, etp_if_intro, time1, time2, etp_cd, etp_if_img_path);
 	}
-
 	//
 	
 	

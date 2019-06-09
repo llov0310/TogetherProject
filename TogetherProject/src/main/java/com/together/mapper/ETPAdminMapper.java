@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
 
 public interface ETPAdminMapper {
@@ -14,6 +15,12 @@ public interface ETPAdminMapper {
 
 	public ArrayList<EnterpriseVO> textbox(@Param("sess") String sess);
 
+	public ArrayList<OrdersVO> newInfo(String nm);
+
+	public int updateChecked(@Param("day1") String day1, @Param("day2") String day2,
+			@Param("check_val") String check_val, @Param("member_id") String member_id, @Param("day_th") String day_th);
+
+	
 	// 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 함수 맵핑
 	public ArrayList<EnterpriseVO> info_select(String user_id);
 
@@ -28,6 +35,8 @@ public interface ETPAdminMapper {
 	public int stockint(@Param("total_code") String total_code, @Param("pro_code") String pro_code,
 			@Param("pd_num") String pd_num);
 
+	
+	
 	// 업체 관리자 페이지 - 상품 정보 : 상품삭제 함수 맵핑
 	public int del(@Param("code") String code, @Param("nm") String nm);
 

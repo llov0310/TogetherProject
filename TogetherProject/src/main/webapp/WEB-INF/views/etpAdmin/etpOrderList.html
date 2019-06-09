@@ -19,6 +19,7 @@
 							width="100%" cellspacing="0">
 							<thead>
 								<tr>
+									<th><input type="checkbox"></th>
 									<th>구매일</th>
 									<th>상품명</th>
 									<th>구매자명</th>
@@ -31,6 +32,7 @@
 							</thead>
 							<tbody class="or_list">
 								<tr class="tr_list" th:each="order : ${orderLists}">
+									<td><input type="checkbox"></td>
 									<td th:text="${order.charthisdate}"></td>
 									<td th:text="${order.pd_nm}"></td>
 									<td th:text="${order.user_nm}"></td>
@@ -112,10 +114,12 @@
 
 
 <th:block layout:fragment="page_js">
-	<script src="/etpAdmin/js/etpOrderList.js"></script>
 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script>
 	<!-- 팝업창 스크립트  -->
 	<script src="plugin/jquery.bpopup.min.js"></script>
+	<script src="/etpAdmin/js/etpOrderList.js"></script>
+
+
 
 </th:block>
 

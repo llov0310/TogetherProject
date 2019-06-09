@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
 import com.together.service.ETPAdminService;
 
@@ -28,8 +29,7 @@ public class ETPAdminController {
 	@RequestMapping(value = "/etpAdminHome", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request, HttpSession session) {
 		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-		
-		
+
 		return "etpAdmin/etpAdminHome";
 	}
 
@@ -51,6 +51,21 @@ public class ETPAdminController {
 		model.addAttribute("orderLists", orderlist);
 
 		return "etpAdmin/etpOrderList";
+	}
+
+	// 업체 관리자 - 주문한 (예약)상품 팝업창에서 확인버튼 클릭 시 업데이트
+	@RequestMapping(value = "/etpOrderListCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String orderCheck(Model model, @RequestParam String day1, @RequestParam String day2, @RequestParam String nm,
+			@RequestParam String check_val, @RequestParam String day_th) {
+
+		ArrayList<OrdersVO> updateCheck = etpAdminService.newinfo(nm);
+
+		String member_id = updateCheck.get(0).getUser_id();
+
+		int up = etpAdminService.updateChecked(day1, day2, check_val, member_id, day_th);
+
+		return "success";
 	}
 
 	// 업체 관리자 - 상품 정보
@@ -81,7 +96,8 @@ public class ETPAdminController {
 	@RequestMapping(value = "/etpProductAddRegister", method = RequestMethod.GET)
 	@ResponseBody
 	public String etpProductAddRegister(HttpServletRequest request, Model model, @RequestParam String pd_nm,
-			@RequestParam int pd_price, @RequestParam String pd_content, @RequestParam String pd_num, @RequestParam String pd_img_path) {
+			@RequestParam int pd_price, @RequestParam String pd_content, @RequestParam String pd_num,
+			@RequestParam String pd_img_path) {
 
 		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 
@@ -89,7 +105,8 @@ public class ETPAdminController {
 
 		String code = info.get(0).getEtp_cd();
 
-		int product_insert = etpAdminService.insert_pro(code, pd_nm, pd_price, pd_content, pd_img_path); // 이미지 업로드가되면 추가로 넣을예정
+		int product_insert = etpAdminService.insert_pro(code, pd_nm, pd_price, pd_content, pd_img_path); // 이미지 업로드가되면
+																											// 추가로 넣을예정
 
 		ArrayList<ProductVO> select_product = etpAdminService.st_insert_pro(code, pd_nm);
 
@@ -152,35 +169,31 @@ public class ETPAdminController {
 	// 업체 관리자 - 업체 정보 수정 페이지 이동
 	@RequestMapping(value = "/etpInfo", method = RequestMethod.GET)
 	public String etpInfo(Model model, HttpSession session, HttpServletRequest request) {
-		
+
 		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-		
+
 		ArrayList<EnterpriseVO> ent = new ArrayList<EnterpriseVO>();
-		
+
 		ent = etpAdminService.textbox(sess);
-		
+
 		model.addAttribute("list", ent);
 
 		return "etpAdmin/etpInfo";
 	}
-	
-	 // 업체 관리자 - 업체 정보 수정 페이지 : 수정버튼 작동
-	   @RequestMapping(value = "/etpUpdate", method=RequestMethod.POST)
-	   @ResponseBody
-	   public String etpUpdate(Model model,@RequestParam String etp_nm,
-			   @RequestParam String etp_if_info,@RequestParam String etp_if_intro
-			   ,@RequestParam String etp_addr,@RequestParam String etp_ph_no
-			   ,@RequestParam String etp_license_no,@RequestParam String etp_email,
-			   @RequestParam String time1,@RequestParam String time2,@RequestParam String etp_cd,
-			   @RequestParam String etp_if_img_path) {
-		   
-		   Integer update = etpAdminService.update(etp_nm,etp_addr,etp_ph_no,etp_license_no,etp_email,etp_cd);
-		   Integer update2 = etpAdminService.update2(etp_if_info,etp_if_intro,time1,time2,etp_cd,etp_if_img_path);
-		   
-		    
-		   
-		   return "tq";		
-		   
-	   }
-	
+
+	// 업체 관리자 - 업체 정보 수정 페이지 : 수정버튼 작동
+	@RequestMapping(value = "/etpUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String etpUpdate(Model model, @RequestParam String etp_nm, @RequestParam String etp_if_info,
+			@RequestParam String etp_if_intro, @RequestParam String etp_addr, @RequestParam String etp_ph_no,
+			@RequestParam String etp_license_no, @RequestParam String etp_email, @RequestParam String time1,
+			@RequestParam String time2, @RequestParam String etp_cd, @RequestParam String etp_if_img_path) {
+
+		Integer update = etpAdminService.update(etp_nm, etp_addr, etp_ph_no, etp_license_no, etp_email, etp_cd);
+		Integer update2 = etpAdminService.update2(etp_if_info, etp_if_intro, time1, time2, etp_cd, etp_if_img_path);
+
+		return "tq";
+
+	}
+
 }

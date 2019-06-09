@@ -115,12 +115,12 @@
 				<br/><br/>
 				
 				<!-- 이미지 업로드 -->
-				<div class="left_input" style="margin-left:15%">
+				<div id="img_div" class="left_input" style="margin-left:15%">
 					<input type="file" value="upload" class="foo" id="fileButton" /> <br />
 					
 					<!-- DB에 등록된 이미지 경로가 없을 때(null일 떄) -->
 					<img th:if="${lists.etp_if_img_path} == null" th:attr="src='img/noImage.png'"
-					id="productImg_null" style="width:600px; height:250px;"/> 
+					id="productImg_null" alt="이미지 없음" style="width:600px; height:250px;"/> 
 					
 					<!-- DB에 등록된 이미지 경로가 있을 때 -->
 					<img th:if="${lists.etp_if_img_path} != null" th:attr="src=${lists.etp_if_img_path}"

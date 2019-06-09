@@ -5,7 +5,7 @@
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
 	
-	<!-- 업체신청시 enterprise테이블에 insert될 쿼리문_01 -->
+	<!-- 호텔 : 업체신청시 enterprise테이블에 insert될 쿼리문_01 -->
 	<insert id="etpApply" parameterType="com.together.domain.EnterpriseVO">
 		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt)
 		values ('h'||ENTERPRISE_SEQ.nextval,
@@ -14,7 +14,7 @@
 		#{etp_content},#{etp_email}, sysdate)
 	</insert>
 	
-	<!-- 업체신청시 enterprise테이블에 insert될 쿼리문_02 -->
+	<!-- 장례 : 업체신청시 enterprise테이블에 insert될 쿼리문_02 -->
 	<insert id="etpApply2" parameterType="com.together.domain.EnterpriseVO">
 		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt)
 		VALUES ('f'||ENTERPRISE_SEQ.nextval,
@@ -22,4 +22,14 @@
 		#{etp_license_no},#{etp_nm},
 		#{etp_content},#{etp_email}, sysdate)
 	</insert>
+	
+	<!-- 병원 : 업체신청시 enterprise테이블에 insert될 쿼리문_03 -->
+	<insert id="etpApply3" parameterType="com.together.domain.EnterpriseVO">
+		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt)
+		VALUES ('d'||ENTERPRISE_SEQ.nextval,
+		#{user_id},#{etp_addr},#{etp_ph_no},
+		#{etp_license_no},#{etp_nm},
+		#{etp_content},#{etp_email}, sysdate)
+	</insert>	
+	
 </mapper>
