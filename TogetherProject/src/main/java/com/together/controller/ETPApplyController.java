@@ -45,36 +45,6 @@ public class ETPApplyController {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<EnterpriseVO> prise = new ArrayList<EnterpriseVO>();
 		
-		String location = "경기도 성남시 분당구 삼평동";
-
-		Geocoder geocoder = new Geocoder();
-		//setAddress : 변환하려는 주소 ex) 경기도 성남시 분당구 등
-		//setLanguage : 인코딩 설정
-		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
-		GeocodeResponse geocoderResponse;
-		
-		try {
-			geocoderResponse = geocoder.geocode(geocoderRequest);
-			if(geocoderResponse.getStatus() == GeocoderStatus.OK & !geocoderResponse.getResults().isEmpty()) {
-				
-				GeocoderResult geocoderResult = geocoderResponse.getResults().iterator().next();
-				LatLng latitudeLongitude = geocoderResult.getGeometry().getLocation();
-				
-				String[] coords = new String[2];
-				coords[0] = latitudeLongitude.getLat().toString();
-				coords[1] = latitudeLongitude.getLng().toString();
-					
-				System.out.println(coords[0]);
-				System.out.println(coords[1]);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-//		String[] coords = CommonUtil.performGeoCoding(location);
-		
-		
 		System.out.println(ins.getEtp_addr());
 				
 		

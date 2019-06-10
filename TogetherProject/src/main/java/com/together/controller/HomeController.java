@@ -47,14 +47,6 @@ public class HomeController {
    @RequestMapping(value = "/", method=RequestMethod.GET)
    public String home(Model model) {
 	   
-	   System.out.println("홈이 실행되었음");
-	   
-	   String location = "경기도 성남시 분당구";
-	   
-	   Float[] coords = geoCoding(location);
-	   
-//	   System.out.println(code[0]+code[1]);
-	   
 	   return "home";
    }
    
@@ -153,66 +145,6 @@ public class HomeController {
 	   
 	   return "nav/etpApply";
    }
- 
-   public static Float[] geoCoding(String location) {
-
-	   
-	   System.out.println("호출이 되긴되었음");
-	   
-	   System.out.println(location);
-	   
-	   if (location == null)  
-	   return null;
-	   
-	   Geocoder geocoder = new Geocoder();
-
-	   System.out.println("null 이 아니어서 여기까지 내려옴");
-	   // setAddress : 변환하려는 주소 (경기도 성남시 분당구 등)
-
-	   // setLanguate : 인코딩 설정
-
-	   GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
-
-	   System.out.println(geocoderRequest);
-	   System.out.println("지오코더리퀘스트 설정을햇음");
-	   
-	   GeocodeResponse geocoderResponse;
-
-	   try {
-		   
-	   geocoderResponse = geocoder.geocode(geocoderRequest);
-	   System.out.println("try안에 들어와 리스폰스 받음");
-	   System.out.println(geocoderResponse);
-	   
-	   if (geocoderResponse.getStatus() == GeocoderStatus.OK & !geocoderResponse.getResults().isEmpty()) {
-
-		   System.out.println("if문 조건에 맞아서 들어옴");
-		   
-	   GeocoderResult geocoderResult=geocoderResponse.getResults().iterator().next();
-
-	   LatLng latitudeLongitude = geocoderResult.getGeometry().getLocation();
-
-	   Float[] coords = new Float[2];
-
-	   coords[0] = latitudeLongitude.getLat().floatValue();
-
-	   coords[1] = latitudeLongitude.getLng().floatValue();
-
-	   return coords;
-
-	   }
-
-	   } catch (IOException ex) {
-
-	   ex.printStackTrace();
-
-	   }
-
-	   return null;
-
-	 }
-   
-  
    
 }
 
