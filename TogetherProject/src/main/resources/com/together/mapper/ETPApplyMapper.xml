@@ -7,29 +7,45 @@
 	
 	<!-- 호텔 : 업체신청시 enterprise테이블에 insert될 쿼리문_01 -->
 	<insert id="etpApply" parameterType="com.together.domain.EnterpriseVO">
-		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt)
+		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt, etp_lat, etp_lnt)
 		values ('h'||ENTERPRISE_SEQ.nextval,
 		#{user_id},#{etp_addr},#{etp_ph_no},
 		#{etp_license_no},#{etp_nm},
-		#{etp_content},#{etp_email}, sysdate)
+		#{etp_content},#{etp_email}, sysdate,
+		#{etp_lat},#{etp_lnt})
 	</insert>
 	
 	<!-- 장례 : 업체신청시 enterprise테이블에 insert될 쿼리문_02 -->
 	<insert id="etpApply2" parameterType="com.together.domain.EnterpriseVO">
-		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt)
+		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt, etp_lat, etp_lnt)
 		VALUES ('f'||ENTERPRISE_SEQ.nextval,
 		#{user_id},#{etp_addr},#{etp_ph_no},
 		#{etp_license_no},#{etp_nm},
-		#{etp_content},#{etp_email}, sysdate)
+		#{etp_content},#{etp_email}, sysdate,
+		#{etp_lat},#{etp_lnt})
 	</insert>
 	
 	<!-- 병원 : 업체신청시 enterprise테이블에 insert될 쿼리문_03 -->
 	<insert id="etpApply3" parameterType="com.together.domain.EnterpriseVO">
-		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt)
+		insert into enterprise (etp_cd, user_id, etp_addr, etp_ph_no, etp_license_no, etp_nm, etp_content, etp_email, etp_apply_dt, etp_lat, etp_lnt)
 		VALUES ('d'||ENTERPRISE_SEQ.nextval,
 		#{user_id},#{etp_addr},#{etp_ph_no},
 		#{etp_license_no},#{etp_nm},
-		#{etp_content},#{etp_email}, sysdate)
+		#{etp_content},#{etp_email}, sysdate,
+		#{etp_lat},#{etp_lnt})
 	</insert>	
+	
+	
+	<insert id="ent_info" parameterType="com.together.domain.EnterpriseInfoVO">
+		insert into enterprise_info(etp_if_cd,etp_cd,etp_if_time1,etp_if_time2) values (ENTINFO_SEQ.nextval,#{code},'07:00','22:00')
+	</insert>
+	
+		<!-- 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 sql문 -->
+	<select id="info_select"
+		resultType="com.together.domain.EnterpriseVO">
+		select *from member a, enterprise b
+		where a.user_id =
+		b.user_id and b.user_id = #{user_id}
+	</select>
 	
 </mapper>

@@ -95,6 +95,13 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.update2(etp_if_info, etp_if_intro, time1, time2, etp_cd, etp_if_img_path);
 	}
+	
+	// 업체 상세 정보 인서트 함수
+	@Override
+	public int ent_info(String code) {
+		// TODO Auto-generated method stub
+		return mapper.ent_info(code);
+	}
 	//
 	
 	

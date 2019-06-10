@@ -76,7 +76,7 @@
 	
 
 	<insert id="ent_info" parameterType="com.together.domain.EnterpriseInfoVO">
-		insert into enterprise_info(etp_if_cd,etp_cd) values (ENTINFO_SEQ.nextval,#{code})		
+		insert into enterprise_info(etp_if_cd,etp_cd,etp_if_time1,etp_if_time2) values (ENTINFO_SEQ.nextval,#{code},'07:00','22:00')
 	</insert>
 	
 	

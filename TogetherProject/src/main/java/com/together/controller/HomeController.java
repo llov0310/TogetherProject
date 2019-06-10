@@ -17,13 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.code.geocoder.Geocoder;
-import com.google.code.geocoder.GeocoderRequestBuilder;
-import com.google.code.geocoder.model.GeocodeResponse;
-import com.google.code.geocoder.model.GeocoderRequest;
-import com.google.code.geocoder.model.GeocoderResult;
-import com.google.code.geocoder.model.GeocoderStatus;
-import com.google.code.geocoder.model.LatLng;
+
 import com.together.domain.EnterpriseVO;
 
 import com.together.domain.MemberVO;
@@ -42,6 +36,7 @@ import lombok.AllArgsConstructor;
 public class HomeController {
 	
 	private CustomerService customerservice;
+	
 	
    //홈 페이지 맵핑
    @RequestMapping(value = "/", method=RequestMethod.GET)

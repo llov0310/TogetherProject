@@ -25,7 +25,6 @@ import com.together.domain.MemberVO;
 import com.together.service.CustomerService;
 import com.together.service.ETPAdminService;
 import com.together.service.ETPApplyService;
-import com.together.service.ETPManageService;
 
 import lombok.AllArgsConstructor;
 
@@ -34,10 +33,8 @@ import lombok.AllArgsConstructor;
 public class ETPApplyController {
 	
 	private ETPApplyService etpApplyService;
-	private CustomerService customerservice;
 	private ETPAdminService etpAdminService;
 	
-	// 주소 값의 위도, 경도 값을 가져오기 위한 메소드 선언
 	
 	// 업체 등록 
 	@RequestMapping(value = "/etpApply", method = RequestMethod.POST)
@@ -45,16 +42,18 @@ public class ETPApplyController {
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		ArrayList<EnterpriseVO> prise = new ArrayList<EnterpriseVO>();
 		
-		System.out.println(ins.getEtp_addr());
-				
-		
+
+//		System.out.println(ins.getEtp_addr());
+		System.out.println(ins.getEtp_lat());
+		System.out.println(ins.getEtp_lnt());
+
 		
 		if(cd.equals("h")) {
 			
 				int insert = etpApplyService.etpApply(ins);
-				prise = etpAdminService.info_select(user_id);
+				prise = etpApplyService.info_select(user_id);
 				String code = prise.get(0).getEtp_cd();
-				int ins1 = customerservice.ent_info(code);
+				int ins1 = etpApplyService.ent_info(code);
 				if (insert != 0) {
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
@@ -68,9 +67,9 @@ public class ETPApplyController {
 		
 		}else if(cd.equals("f")){
 				int insert = etpApplyService.etpApply2(ins);
-				prise = etpAdminService.info_select(user_id);
+				prise = etpApplyService.info_select(user_id);
 				String code = prise.get(0).getEtp_cd();
-				int ins2 = customerservice.ent_info(code);
+				int ins2 = etpApplyService.ent_info(code);
 				if (insert != 0) {
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
@@ -84,9 +83,9 @@ public class ETPApplyController {
 		}
 //		else if(cd.equals("d")){
 //			int insert = etpApplyService.etpApply3(ins);
-//			prise = etpAdminService.info_select(user_id);
+//			prise = etpApplyService.info_select(user_id);
 //			String code = prise.get(0).getEtp_cd();
-//			int ins3 = customerservice.ent_info(code);
+//			int ins3 = etpApplyService.ent_info(code);
 //			if (insert != 0) {
 //				response.setContentType("text/html; charset=UTF-8");
 //				PrintWriter out = response.getWriter();

@@ -1,5 +1,7 @@
 package com.together.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
@@ -26,6 +28,18 @@ public class ETPApplyServiceImplement implements ETPApplyService{
 	public int etpApply2(EnterpriseVO ins) {
 		// TODO Auto-generated method stub
 		return mapper.etpApply2(ins);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> info_select(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.info_select(user_id);
+	}
+
+	@Override
+	public int ent_info(String code) {
+		// TODO Auto-generated method stub
+		return mapper.ent_info(code);
 	}
 	
 }

@@ -48,4 +48,7 @@ public interface ETPAdminMapper {
 	public Integer update2(@Param("etp_if_info") String etp_if_info, @Param("etp_if_intro") String etp_if_intro,
 			@Param("time1") String time1, @Param("time2") String time2, @Param("etp_cd") String etp_cd,
 			@Param("etp_if_img_path") String etp_if_img_path);
+	
+	// 업체 상세 정보 인서트 함수 맵핑
+	public int ent_info(String code);
 }

@@ -30,5 +30,6 @@ public interface ETPAdminService {
 	public Integer update(String etp_nm, String etp_addr, String etp_ph_no, String etp_license_no, String etp_email,String etp_cd);
 	public Integer update2(String etp_if_info, String etp_if_intro, String time1, String time2, String etp_cd, String etp_if_img_path);
 	
-	
+	// 업체 상세 정보 인서트 함수
+	public int ent_info(String code);
 }
