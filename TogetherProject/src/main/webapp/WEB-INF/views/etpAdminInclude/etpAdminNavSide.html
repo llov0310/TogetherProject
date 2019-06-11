@@ -2,10 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <!-- Sidebar -->
-<ul th:if="${session.user}" class="sidebar navbar-nav">
-	<li style="color:yellow" th:text="|업체 관리자 : ${session.user.user_id}|"></li>
-
-
+<!-- 호텔 일때 -->
+<ul th:if="${session.etpKindCheck} == 'h'" class="sidebar navbar-nav">
 	<li class="nav-item active"><a class="nav-link"
 		href="/etpAdminHome"> <i class="fas fa-fw fa-tachometer-alt"></i>
 			<span>업체 관리자 홈 페이지</span>
@@ -22,5 +20,40 @@
 			class="fas fa-fw fa-table"></i> <span>업체 정보 수정</span></a></li>		
 </ul>
 
+<!-- 장례 일 때 -->
+<ul th:if="${session.etpKindCheck} == 'f'" class="sidebar navbar-nav">
+	<li class="nav-item active"><a class="nav-link"
+		href="/etpAdminHome"> <i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>업체 관리자 홈 페이지</span>
+	</a></li>
+
+	<li class="nav-item"><a class="nav-link" href="">
+			<i class="fas fa-fw fa-table"></i> <span>주문 현황</span>
+	</a></li>
+
+	<li class="nav-item"><a class="nav-link" href=""> <i
+			class="fas fa-fw fa-table"></i> <span>상품 정보</span></a></li>
+			
+	<li class="nav-item"><a class="nav-link" href="/etpInfo"> <i
+			class="fas fa-fw fa-table"></i> <span>업체 정보 수정</span></a></li>		
+</ul>
+
+<!-- 병원 일 때 -->
+<ul th:if="${session.etpKindCheck} == 'd'" class="sidebar navbar-nav">
+	<li class="nav-item active"><a class="nav-link"
+		href="/etpAdminHome"> <i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>업체 관리자 홈 페이지</span>
+	</a></li>
+
+	<li class="nav-item"><a class="nav-link" href="">
+			<i class="fas fa-fw fa-table"></i> <span>예약 현황</span>
+	</a></li>
+
+	<li class="nav-item"><a class="nav-link" href=""> <i
+			class="fas fa-fw fa-table"></i> <span>상품 정보</span></a></li>
+			
+	<li class="nav-item"><a class="nav-link" href="/etpInfo"> <i
+			class="fas fa-fw fa-table"></i> <span>업체 정보 수정</span></a></li>		
+</ul>
 
 </html>

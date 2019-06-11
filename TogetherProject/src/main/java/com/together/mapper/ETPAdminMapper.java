@@ -51,4 +51,8 @@ public interface ETPAdminMapper {
 	
 	// 업체 상세 정보 인서트 함수 맵핑
 	public int ent_info(String code);
+	
+	// 호텔, 장레, 병원 구분을 위한 맵핑
+	public String etpKindCheck(@Param("user_id")String user_id);
+	
 }

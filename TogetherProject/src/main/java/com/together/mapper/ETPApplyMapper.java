@@ -6,9 +6,11 @@ import com.together.domain.EnterpriseVO;
 
 public interface ETPApplyMapper {
 	// 업체 신청 함수 맵핑
-	public int etpApply(EnterpriseVO ins);
+	public int etpApply(EnterpriseVO ins); // 호텔
 	
-	public int etpApply2(EnterpriseVO ins);
+	public int etpApply2(EnterpriseVO ins); // 장례
+	
+	public int etpApply3(EnterpriseVO ins); // 병원
 	
 	// 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 함수 맵핑
 	public ArrayList<EnterpriseVO> info_select(String user_id);

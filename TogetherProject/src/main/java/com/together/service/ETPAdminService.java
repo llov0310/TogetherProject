@@ -15,7 +15,7 @@ public interface ETPAdminService {
 	public int updateChecked(String day1, String day2, String check_val, String member_id,String day_th); // 팝업창에서 확인 버튼 클릭 시 쓰이는 함수 
 	
 	// 업체 관리자 페이지 - 상품 정보 : 테이블에 리스트를 보여주는 함수
-	public  ArrayList<EnterpriseVO> info_select(String user_id);
+	public ArrayList<EnterpriseVO> info_select(String user_id);
 	public ArrayList<ProductVO> product_select(String code);
 	
 	// 업체 관리자 페이지 - 상품 정보 -> Add창에서 상품을 추가할때 필요한 함수
@@ -32,4 +32,7 @@ public interface ETPAdminService {
 	
 	// 업체 상세 정보 인서트 함수
 	public int ent_info(String code);
+	
+	// 호텔, 장레, 병원 구분을 위한 메소드
+	public String etpKindCheck(String user_id);
 }

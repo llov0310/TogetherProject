@@ -33,9 +33,7 @@ import lombok.AllArgsConstructor;
 public class ETPApplyController {
 	
 	private ETPApplyService etpApplyService;
-	private ETPAdminService etpAdminService;
-	
-	
+
 	// 업체 등록 
 	@RequestMapping(value = "/etpApply", method = RequestMethod.POST)
 	public String etpApply(Model model,HttpServletRequest request,EnterpriseVO ins, @RequestParam String cd, HttpServletResponse response) throws IOException {
@@ -81,22 +79,22 @@ public class ETPApplyController {
 					return "nav/etpApply";
 				}
 		}
-//		else if(cd.equals("d")){
-//			int insert = etpApplyService.etpApply3(ins);
-//			prise = etpApplyService.info_select(user_id);
-//			String code = prise.get(0).getEtp_cd();
-//			int ins3 = etpApplyService.ent_info(code);
-//			if (insert != 0) {
-//				response.setContentType("text/html; charset=UTF-8");
-//				PrintWriter out = response.getWriter();
-//				out.println("<script>alert('(병원)업체 신청이 완료 되었습니다.'); </script>");
-//				out.flush();
-//				
-//				return "home";
-//			} else {
-//				return "nav/etpApply";
-//			}
-//	}
+		else if(cd.equals("d")){
+			int insert = etpApplyService.etpApply3(ins);
+			prise = etpApplyService.info_select(user_id);
+			String code = prise.get(0).getEtp_cd();
+			int ins3 = etpApplyService.ent_info(code);
+			if (insert != 0) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('(병원)업체 신청이 완료 되었습니다.'); </script>");
+				out.flush();
+				
+				return "home";
+			} else {
+				return "nav/etpApply";
+			}
+	}
 		
 		
 		

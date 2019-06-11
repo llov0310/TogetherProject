@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.protobuf.Empty;
+import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.service.AdminService;
 import com.together.service.CustomerService;
+import com.together.service.ETPAdminService;
 
 import lombok.AllArgsConstructor;
 
@@ -28,13 +30,17 @@ public class LoginController {
 
 	private CustomerService customerService;
 	private AdminService adminService; // 관리자 홈페이지를 위해 선언
-
+	private ETPAdminService etpAdminService;
+	
+	
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO userInfo, HttpSession session, Model model, HttpServletResponse response)
 			throws IOException {
 		MemberVO user = customerService.login(userInfo.getUser_id(), userInfo.getPassword());
-
+		String etpKindCheck = etpAdminService.etpKindCheck(userInfo.getUser_id());
+		
+		
 		ArrayList<MemberVO> u = customerService.loginCheck(userInfo.getUser_id(), userInfo.getPassword());
 			
 		if (u.size() == 0) {
@@ -66,6 +72,7 @@ public class LoginController {
 
 			} else if (user.getAuthority_no() == 2) {
 				session.setAttribute("user", user);
+				session.setAttribute("etpKindCheck", etpKindCheck);
 				return "home";
 			} else if (user.getAuthority_no() == 3) {
 

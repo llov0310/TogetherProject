@@ -66,7 +66,7 @@
 	<insert id="insert_pro"
 		parameterType="com.together.domain.ProductVO">
 		insert into product values
-		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_path})
+		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_path},'0')
 	</insert>
 
 	<select id="st_insert_pro"
@@ -116,5 +116,12 @@
 		insert into enterprise_info(etp_if_cd,etp_cd,etp_if_time1,etp_if_time2) values (ENTINFO_SEQ.nextval,#{code},'07:00','22:00')
 	</insert>
 	
+	<!-- // 호텔, 장레, 병원 구분을 위한 sql -->
+	<select id="etpKindCheck" resultType="String">
+		select substr(etp_cd,0,1) as "etp_cd"
+		from enterprise
+		where user_id=#{user_id}
+	</select>
+
 
 </mapper>

@@ -102,6 +102,13 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.ent_info(code);
 	}
+	
+	// 호텔, 장레, 병원 구분을 위한 메소드
+	@Override
+	public String etpKindCheck(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.etpKindCheck(user_id);
+	}
 	//
 	
 	

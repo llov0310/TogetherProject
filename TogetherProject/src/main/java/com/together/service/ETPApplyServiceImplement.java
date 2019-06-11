@@ -29,7 +29,15 @@ public class ETPApplyServiceImplement implements ETPApplyService{
 		// TODO Auto-generated method stub
 		return mapper.etpApply2(ins);
 	}
-
+	
+	// 업체 신청 (병원)
+	@Override
+	public int etpApply3(EnterpriseVO ins) {
+		// TODO Auto-generated method stub
+		return mapper.etpApply3(ins);
+	}
+	
+	
 	@Override
 	public ArrayList<EnterpriseVO> info_select(String user_id) {
 		// TODO Auto-generated method stub
@@ -41,5 +49,6 @@ public class ETPApplyServiceImplement implements ETPApplyService{
 		// TODO Auto-generated method stub
 		return mapper.ent_info(code);
 	}
+
 	
 }

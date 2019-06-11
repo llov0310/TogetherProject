@@ -29,8 +29,18 @@ public class ETPAdminController {
 	@RequestMapping(value = "/etpAdminHome", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request, HttpSession session) {
 		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-
+		String etpKindCheck = (String) request.getSession().getAttribute("etpKindCheck");
+		
+		if(etpKindCheck.equals("h")) {
+			return "etpAdmin/etpAdminHome";
+		}else if(etpKindCheck.equals("f")){
+			return "etpFuneralAdmin/etpFuneralAdminHome";
+		}else if(etpKindCheck.equals("d")){
+			return "etpHospitalAdmin/etpHospitalAdminHome";
+		}
+		
 		return "etpAdmin/etpAdminHome";
+		
 	}
 
 	// 업체 관리자 - 주문 현황
