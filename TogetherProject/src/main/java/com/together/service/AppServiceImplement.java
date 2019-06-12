@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ReviewBoardVO;
 import com.together.mapper.AppServiceMapper;
 
 import lombok.AllArgsConstructor;
@@ -64,6 +65,13 @@ public class AppServiceImplement implements AppService {
 	public int reviewadd(String user_id, String code, String starcount, String content) {
 		// TODO Auto-generated method stub
 		return mapper.reviewadd(user_id,code,starcount,content);
+	}
+
+	
+	@Override
+	public ArrayList<ReviewBoardVO> reviewList(String etpcode) {
+		// TODO Auto-generated method stub
+		return mapper.reviewList(etpcode);
 	}
 
 }

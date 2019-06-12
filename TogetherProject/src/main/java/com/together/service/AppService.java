@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ReviewBoardVO;
 
 public interface AppService {
 
@@ -33,5 +34,8 @@ public interface AppService {
 	
 	//리뷰작성
 	public int reviewadd(String user_id, String code, String starcount, String content);
+
+	//각업체별 리뷰 리스트 가져오기
+	public ArrayList<ReviewBoardVO> reviewList(String etpcode);
 
 }

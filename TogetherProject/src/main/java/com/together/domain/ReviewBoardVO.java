@@ -14,4 +14,7 @@ public class ReviewBoardVO {
 	private int rb_like;
 	private Timestamp rb_dt;
 	private int rb_avg;
+	
+	//변환용
+	private String rb_dt_char;
 }

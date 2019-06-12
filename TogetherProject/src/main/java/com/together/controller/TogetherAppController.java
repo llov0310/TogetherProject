@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ReviewBoardVO;
 import com.together.service.AppService;
 
 import lombok.AllArgsConstructor;
@@ -104,6 +105,12 @@ public class TogetherAppController {
 		   
 //		   System.out.println(product); 
 		   
+		   //업체 리뷰
+		   ArrayList<ReviewBoardVO> review = new ArrayList<ReviewBoardVO>();
+		   
+		   review = App.reviewList(etpcode);
+		   
+		   
 		   
 		   JSONObject obj = new JSONObject(); // 최종 object
 		   
@@ -132,12 +139,27 @@ public class TogetherAppController {
 			   map2.put("pd_nm",product.get(i).getPd_nm());
 			   map2.put("pd_price", product.get(i).getPd_price());
 			   map2.put("pd_content",product.get(i).getPd_content());
+			   map2.put("pd_img_src",product.get(i).getPd_img_path());
 			   Arrayobj.add(map2);
+			}
+		   
+		   //리뷰 정보를 담는 obj
+		   JSONArray Arrayobj2 = new JSONArray();
+		   
+		   Map<String,Object> map3 = new HashMap<String,Object>();
+		   
+		   for(int i=0; i<review.size(); i++) {
+			   map3.put("user_id",review.get(i).getUser_id());
+			   map3.put("rb_contents",review.get(i).getRb_contents());
+			   map3.put("rb_dt",review.get(i).getRb_dt_char());
+			   map3.put("rb_avg",review.get(i).getRb_avg());
+			   Arrayobj2.add(map3);
 			}
 		   
 		   
 		   map.put("info",listobj);
 		   map.put("product",Arrayobj);
+		   map.put("review",Arrayobj2);
 		   
 		   
 		   obj.put("result",map);

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
+import com.together.domain.ReviewBoardVO;
 
 public interface AppServiceMapper {
 
@@ -30,7 +31,9 @@ public interface AppServiceMapper {
 	public int reviewadd(@Param("id") String user_id, 
 			@Param("code") String code, 
 			@Param("star") String starcount, 
-			@Param("content") String content); 
+			@Param("content") String content);
+
+	public ArrayList<ReviewBoardVO> reviewList(String etpcode); 
 
 	
 

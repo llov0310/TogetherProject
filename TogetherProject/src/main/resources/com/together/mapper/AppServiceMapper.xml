@@ -65,5 +65,10 @@
 		)
 		
 	</insert>
+	
+	<select id="reviewList" resultType="com.together.domain.ReviewBoardVO">
+		select user_id,rb_contents, to_char(rb_dt,'YY/MM/DD HH24:mi:ss') rb_dt_char ,rb_avg 
+		from reviewboard where etp_cd = #{etpcode}
+	</select>
 
 </mapper>
