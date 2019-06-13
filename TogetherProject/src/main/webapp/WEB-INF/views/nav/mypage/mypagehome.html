@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="nav/mypage/mypageInclude/mypagelayout">
+
+<th:block layout:fragment="page_head">
+	<title>관리자 홈 페이지</title>
+</th:block>
+
+<!-- 홈 페이지에 들어갈 내용-->
+<th:block layout:fragment="contents">
+	<div id="content" class="section_home">
+		<div class="column">
+				<div class="sh_group">
+					<div class="sh_header">
+						<h2>회원정보</h2>
+					</div>
+					<div class="sh_content">
+						<dl class="sh_lst">
+						<dt class="blind"></dt>
+						<dd class="pic_desc">
+							<a href="#" onclick="changeImage();clickcr(this,'imn.prfmodify','','',event);">
+								<img src="https://static.nid.naver.com/images/web/user/default.png" width="80" height="80" alt="">
+								<span class="spimg img_frame"></span>
+							</a>
+						</dd>
+							<dt>아이디</dt>
+							<dd><span class="id" th:text="${session.user.user_id}"></span></dd>
+							<dt>이메일</dt>
+							<dd><span class="id" th:text="${session.user.email}"></span></dd>
+							<dt>주소</dt>
+							<dd><span class="id" th:text="${session.user.addr_ji}"></span></dd>
+							<dt>휴대전화</dt>
+							<dd><span class="id" th:text="${session.user.ph_no}"></span></dd>
+				
+						</dl>
+					</div>
+					<button onclick="buta();">수정하기</button>
+				</div>
+
+			
+				<div class="sh_group">
+					<div class="sh_header">
+						<h2>예약현황</h2>
+						<a href="javascript:toggle('region');" onclick="clickcr(this,'imn.reghelp','','',event);" class="link_help"><i id="i_region" class="spico ico_arr3_dn">도움말</i></a>
+						<p id="p_region" class="contxt" style="display:none">
+						     	  네이버 서비스에서 <em>공통으로 사용되는 지역 정보</em>입니다.
+						     <br>
+						설정되어 있는 모든 지역을 보거나 수정하시려면 설정하기를 클릭하세요.</p>
+					</div>
+					<div class="sh_content">
+						 		<p class="contxt">
+						     	 예약대기중
+						     </p>
+					</div>
+					<p class="btn_area_btm"><a href="/user2/help/region.nhn?menu=nid&amp;lang=ko_KR" onclick="clickcr(this,'imn.regmodify','','',event);" class="btn_model"><b class="btn2">설정하기</b></a></p>
+				</div>
+			</div>
+			
+			<div class="column">
+
+				<!-- 프로필 설정 -->
+				<div class="sh_group" style="padding-bottom: 60px;">
+					<div class="sh_header">
+						<h2>반려견정보</h2>
+						
+					</div>
+					<div class="sh_content">
+					<div>dd</div>
+						 		<p class="contxt">
+						     	  	반려견 정보를 입력해주세요 <br>
+						     	  	현재 등록된 강아지수: 
+						     	  	
+						     </p>
+					</div>
+					<p class="btn_area_btm"><a href="/user2/help/region.nhn?menu=nid&amp;lang=ko_KR" onclick="clickcr(this,'imn.regmodify','','',event);" class="btn_model"><b class="btn2">설정하기</b></a></p>
+				</div>
+
+				<!-- 지역 설정 -->
+				<div class="sh_group" style="padding-bottom: 60px;">
+					<div class="sh_header">
+						<h2>내글 보기</h2>
+						
+					</div>
+					<div class="sh_content">
+						 		<p class="contxt">
+						     	  현재 작성된 글 : <br> 작성된 댓글 수: <br>음?
+						     </p>
+					</div>
+					<p class="btn_area_btm"><a href="/user2/help/region.nhn?menu=nid&amp;lang=ko_KR" onclick="clickcr(this,'imn.regmodify','','',event);" class="btn_model"><b class="btn2">설정하기</b></a></p>
+				</div>
+			</div>
+			<p class="desc_sub">투게더를 더 이상 이용하지 않는다면<a href="#" onclick="delac();" class="more">회원탈퇴 바로가기</a></p>
+		
+		
+	
+			</div><!-- div content -->
+</th:block>
+
+
+<!--여기까지  -->
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/page/mypage/mypagehom.css">
+</th:block>
+
+
+
+<th:block layout:fragment="page_js">
+</th:block>
+
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="nav/mypage/mypageInclude/mypagelayout">
+
+<th:block layout:fragment="page_head">
+	<title>내 반려견정보</title>
+</th:block>
+
+<!-- 홈 페이지에 들어갈 내용-->
+<th:block layout:fragment="contents">
+<div class="mypetmain">
+	<div>
+		<h2>강아지 정보</h2> <img src="D:\upload\2019\05\28\83831b4a-aa0b-4413-ad5f-7b60d12cb074_123.png" 
+		alt="" id="imgbox1"/>
+		<button id="adddog">강아지 추가</button>
+		
+	</div>
+	
+	<div class="asd" th:each="pet : ${pet}">
+	<div class="bts">
+	<button class="deldog">삭제</button>
+	<button class="updog">수정</button>
+	</div>
+	<div><img src="https://firebasestorage.googleapis.com/v0/b/blogapp-a9a56.appspot.com/o/uploadTest%2FpetHotel.png?alt=media&token=3f2eef8e-0f6c-4949-9aca-12844053d023" alt="" id="imgbox1"/></div>
+	<br>개정보<br>
+	<div class="dname">이름:<span th:text="${pet.d_nm}" class="dognm"></span></div>
+	<div class="dkind">품종:<span th:text="${pet.d_kind}"> </span></div>
+	<div class="dgender"><span th:if="${pet.d_gender}==1">수컷</span></div>
+	<div class="dgender"><span th:if="${pet.d_gender}==2">암컷</span></div>
+	<div class="dage">나이<span th:text="${pet.d_age}"></span></div>
+	<div>인사말<br><span id="comment"th:text="${pet.d_content}"></span></div>
+	</div>
+</div>
+</th:block>
+
+
+<!--여기까지  -->
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/page/mypage/mypetinfo.css">
+</th:block>
+
+<th:block layout:fragment="page_js">
+<script type="text/javascript" src="assets/js/mypagejs/mypetinfo.js"></script>
+</th:block>
+
+
+</html>
