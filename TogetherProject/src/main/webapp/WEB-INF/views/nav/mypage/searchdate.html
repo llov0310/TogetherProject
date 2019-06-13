@@ -1,63 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<title>Insert title here</title>
-<script>
-/* $(function () {	
-	tab('#tab',0);	
-});
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="nav/mypage/mypageInclude/mypagelayout">
 
-function tab(e, num){
-    var num = num || 0;
-    var menu = $(e).children();
-    var con = $(e+'_con').children();
-    var select = $(menu).eq(num);
-    var i = num;
+<th:block layout:fragment="page_head">
+<style>
+.mymain{
+		border: 1px solid gray;
+	float: left;
+    width: 70%;
+    margin-top: 110px;
+    padding-bottom: 50px;
+}
 
-    select.addClass('on');
-    con.eq(num).show();
-
-    menu.click(function(){
-        if(select!==null){
-            select.removeClass("on");
-            con.eq(i).hide();
-        }
-
-        select = $(this);	
-        i = $(this).index();
-
-        select.addClass('on');
-        con.eq(i).show();
-    });
-    
-} */
-
-  $(document).ready(function() {
-	$(".orderdelbt").click(function() {
-		var x = 3;
-		var orcd = $(this).parent().parent().find("#orcd").text();
-		console.log(orcd);
-		
-		$.ajax({
-			url : "/orderdel",
-			type : "POST",
-			dataType : 'text',
-			data : {
-				or_stat : x,
-				or_cd : orcd
-			},
-			success : function(data) {
-				 $("#ho").load("/searchdate"+"/"); 
-			}
-		});
-	});
-});  
-
-</script>
-<style type="text/css">
 table.type11 {
     border-collapse: separate;
     border-spacing: 1px;
@@ -81,9 +37,39 @@ table.type11 td {
     background: #eee;
 }
 
+.tab {margin-top: 50px; background:#fff; overflow:hidden; padding: unset; border-bottom:2px solid; #fff;}
+.tab li {border: 1px solid #E4E4E4; float:left; width:13%; border-left:1px solid #ddd; text-align:center; box-sizing:border-box; }
+.tab li { display:inline-block; padding:10px; cursor:pointer; }
+.tab li.on { background-color:#eee; color:#f00; }
+.tab_con div { display:none; background:#fff; line-height:100px; text-align:center; }
+
+.scroll{ 
+ height: 530px;
+overflow: auto;}
+
 </style>
-</head>
-<body>
+	<title>예약 현황</title>
+</th:block>
+<!-- 홈 페이지에 들어갈 내용-->
+<th:block layout:fragment="contents">
+<div class="mymain">
+<div>검색
+<div>제목<input type="text"> <button>검색</button></div>
+<div>기간별검색 
+<button class="searchdate" value=500>전체</button>
+<button class="searchdate" value=0>오늘</button>
+<button class="searchdate" value=7>7일</button>
+<button class="searchdate" value=15>15일</button>
+<button class="searchdate" value=30>1개월</button>
+<button class="searchdate" value=91>3개월</button>
+<button class="searchdate" value=365>1년</button></div>
+</div>
+<ul class="tab" id="tab">
+    <li>호텔</li>
+    <li>장례업체</li>	
+</ul>
+<div class="tab_con" id="tab_con">
+<div class="scroll" id="ho">
 <table class="type11">
     <thead>
     <tr>
@@ -116,6 +102,60 @@ table.type11 td {
    </tbody>
    
   </table>
+</div>
+
+
+<div id="ho"class="scroll">
+<table class="type11">
+    <thead>
+    <tr>
+        <th scope="cols">주문코드</th>
+        <th scope="cols">상품</th>
+        <th scope="cols">예약일</th>
+        <th scope="cols">가격</th>
+        <th scope="cols">업체</th>
+        <th scope="cols">주문일시</th>
+        <th scope="cols">상태</th>
+        <th scope="cols">취소</th>
+        
+    </tr>
+    </thead>
   
-</body>
+    
+      <tbody th:each="order_list : ${order_list}" th:if="${order_list.cd}==f">
+    <tr>
+        <td><span id="orcd" th:text="${order_list.or_cd}"></span></th>
+        <td><span th:text="${order_list.pd_nm}"></span></th>
+        <td><span th:text="${order_list.first_day}"></span>~<span th:text="${order_list.last_day}"></span></th>
+        <td><span th:text="${order_list.or_price}"></span></th>
+        <td><span th:text="${order_list.etp_nm}"></span></th>
+        <td><span th:text="${order_list.th_dt}"></span></th>
+         <td><span class="orstat" th:if="${order_list.or_stat}==1">예약대기중</span> 
+         <span class="orstat" style="color: blue;" th:if="${order_list.or_stat}==2">예약확정</span>
+         <span class="orstat" style="color: red;" th:if="${order_list.or_stat}==3">취소대기중</span>
+         <span class="orstat" th:if="${order_list.or_stat}==4">취소확정</span>
+         </th>
+        <td><button class="orderdelbt">예약취소</button></th>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+</th:block>
+
+
+<!--여기까지  -->
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/page/mypage/myreservation.css">
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="assets/js/mypagejs/myreservation.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>	
+</th:block>
+
+
 </html>

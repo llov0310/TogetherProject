@@ -375,12 +375,45 @@ public class MyPageController {
 
 		 order_list = mypage.orderlist(user_id);
 		 System.out.println(order_list); 
-		 model.addAttribute("order_list", order_list);
-		  
-		  	System.out.println(user_id);
+	 model.addAttribute("order_list", order_list);
+
+
 		return "nav/mypage/myreservation";
 
 	}
+//	@RequestMapping(value = "/myreservation", method = RequestMethod.GET)
+//	public String myreservation(Model model, HttpSession session, HttpServletRequest request) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
+//
+//		 order_list = mypage.orderlist(user_id);
+//		 System.out.println(order_list); 
+//		 model.addAttribute("order_list", order_list);
+//		 ArrayList<OrdersVO> searchdate = new ArrayList<OrdersVO>(); 
+//		 searchdate = mypage.searchdate(user_id,day); model.addAttribute("searchdate", searchdate);
+//		 System.out.println(searchdate);
+//		  
+//		  	System.out.println(user_id);
+//		return "nav/mypage/myreservation";
+//
+//	}
+	
+	/*
+	 * @RequestMapping(value = "/myreservation"+"/search"+"/{day}", method =
+	 * RequestMethod.GET) public String myreservationsearch(Model model, HttpSession
+	 * session, HttpServletRequest request,@PathVariable int day) { String user_id =
+	 * ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+	 * ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
+	 * System.out.println(day); System.out.println("오니"); ArrayList<OrdersVO>
+	 * searchdate = new ArrayList<OrdersVO>(); searchdate =
+	 * mypage.searchdate(user_id,day); model.addAttribute("searchdate", searchdate);
+	 * System.out.println(searchdate);
+	 * 
+	 * System.out.println("후우"); System.out.println(user_id);
+	 * 
+	 * return "nav/mypage/myreservation"; // return
+	 * "redirect:/myreservation/search/"+day; }
+	 */
 	
 	@RequestMapping(value = "/searchdate"+"/{day}", method = RequestMethod.GET)
 	public String searchdate(Model model, HttpSession session, HttpServletRequest request,@PathVariable int day) {
@@ -604,4 +637,54 @@ public class MyPageController {
 		return "success";
 	}
 
+	//시험용
+	@RequestMapping(value = "/mypagev2", method = RequestMethod.GET)
+	public String mypagev2(Model model) {
+		return "nav/mypage/mypagehome";
+
+	}
+	@RequestMapping(value = "/memberinfo2", method = RequestMethod.GET)
+	public String memberinfo2(Model model, HttpSession session, HttpServletRequest request) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		ArrayList<MemberVO> member_info = new ArrayList<MemberVO>();
+		 member_info =  mypage.memberinfo(user_id);
+		/* System.out.println("회원정보" + member_info); */
+		 
+		 model.addAttribute("memberinfo", member_info);
+		return "nav/mypage/mypage2/memberinfo";
+
+	}
+	  @RequestMapping(value = "/mypet_info2", method=RequestMethod.GET) 
+	  public String mypet_info2(Model model,HttpSession session,HttpServletRequest request){ 
+	  String user_id = ((MemberVO)request.getSession().getAttribute("user")).getUser_id();
+	  System.out.println(user_id+"개리스트"); 
+	  ArrayList<DogsVO> pet_list = new ArrayList<DogsVO>();
+	  pet_list =  mypage.petlist(user_id);
+	 
+	 
+	  model.addAttribute("pet", pet_list);
+	 
+	 	  return "nav/mypage/mypet_info2"; 
+	 }
+		@RequestMapping(value = "/myreservation2", method = RequestMethod.GET)
+		public String myreservation2(Model model, HttpSession session, HttpServletRequest request) {
+			String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+			ArrayList<OrdersVO> order_list = new ArrayList<OrdersVO>();
+
+			 order_list = mypage.orderlist(user_id);
+			 System.out.println(order_list); 
+			 model.addAttribute("order_list", order_list);
+			  
+			  	System.out.println(user_id);
+			return "nav/mypage/myreservation2";
+
+		}
+		@RequestMapping(value = "/deleteaccount2", method = RequestMethod.GET)
+		public String DeleteAccount2(Model model) {
+			return "nav/mypage/DeleteAccount2";
+
+		}
 }
+
+
+

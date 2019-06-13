@@ -1,152 +1,16 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="assets/js/mypagejs/memberinfojs.js"></script>
-<!-- 일단 붙여넣음 자바스크립트 -->
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="nav/mypage/mypageInclude/mypagelayout">
 
-
-<th:block layout:fragment="page_js">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-<!-- 첨부파일 관련 기본동작 막는거 -->
-<script>
-	$(document).ready(function(e) {
-		
-		//이게 뭘까
-		var formObj = $("form[role='form']");
-		//이게 뭘까
-		/*
-		$("button[type='submit']").on("click", function(e) {
-			alert("제발 나와라예 나와라요");
-			e.preventDefault();
-			console.log("submit clicked");
-			
-			var str="";
-			$(".uploadResult ul li").each(function(i, obj) {
-				var jobj = $(obj);
-				
-				console.dir(jboj);
-				
-				str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
-			      str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
-			      str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
-			      str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
-			});  //end of $uploadResult ul li").each
-			
-			formObj.append(str).submit();
-		}); //end of button click
-		*/
-		//파일 확장자,사이즈 제한 
-		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-		var maxSize = 5242880; //5MB
-		
-		function checkExtension(fileName, fileSize) {
-			if(fileSize>=maxSize) {
-				alert("파일 사이즈 초과");
-				return false;
-			}
-			
-			if(regex.test(fileName)) {
-				alert("해당 종류의 파일은 업로드할 수 없습니다.");
-				return false;
-			}
-			return true;
-		}//end of checkExtension function
-		//파일 확장자,사이즈 제한 
-		
-		
-		
-			$("input[type='file']").change(function(e) {
-				var formData = new FormData();
-				
-				var inputFile = $("input[name='uploadFile']");
-				var files = inputFile[0].files;
-				
-				for(var i=0; i<files.length; i++) {
-					if(!checkExtension(files[i].name, files[i].size)) {
-						return false;
-					}//end of if
-					formData.append("uploadFile", files[i]);
-				}//end of for
-				
-				$(".regiBtn").click(function() {
-					alert("ㅇㅇ? ㅇㅋ");
-					$.ajax({
-						url:'/uploadAjaxAction',
-						processData:false,
-						contentType:false,
-						data:formData,
-						type:'POST',
-						dataType:'json',
-						success: function(result) {
-							showUploadResult(result); //업로드 결과 처리 함수
-						}
-					}); //end of ajax
-
-				});//end of regiBtn
-				function showUploadResult(uploadResultArr) {
-					if(!uploadResultArr || uploadResultArr.length==0) {return;}
-					
-					var uploadUL = $(".uploadResult ul");
-					
-					var str="";
-					
-					$(uploadResultArr).each(function(e, obj) {
-						//image type
-						 
-						if(obj.image){
-							//이미지면 이거
-							var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-							str += "<li data-path='"+obj.uploadPath+"'";
-							str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
-							str +" ><div>";
-							str += "<span> "+ obj.fileName+"</span>";
-							str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-							str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-							//str += "<img src='/ex05/display?fileName="+fileCallPath+"'>"; <- 원본
-							str += "<img src='/display?fileName="+fileCallPath+"'>";
-							str += "</div>";
-							str +"</li>";
-							
-						}else{
-							//이미지 아니면 이거
-							var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);			      
-						    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-						      
-							str += "<li "
-							str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
-							str += "<span> "+ obj.fileName+"</span>";
-							str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
-							str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-											//'/ex05/resources/img/attach.png'></a>"; <-원본
-							str += "<img src='/resources/img/attach.png'></a>";
-							str += "</div>";
-							str +"</li>";
-						}
-							
-						
-					}); //end of uploadResultArr.each
-					
-					uploadUL.append(str);
-				}//end of showUploadResult function
-				
-				
-				
-				
-			});// end of change
-
-	});//end of document.ready
-</script>
+<th:block layout:fragment="page_head">
+	<title>회원 정보</title>
 </th:block>
 
-
-
-
-<!-- 자바스크립트 -->
-<div id="ppap">
+<!-- 홈 페이지에 들어갈 내용-->
+<th:block layout:fragment="contents">
+<div class="ppap">
 	<div id="dddd">
 		<h2>회원정보 수정</h2>
 	</div>
@@ -210,9 +74,6 @@
 					변경 주소 <input type="text" id="addr" placeholder="우편번호 검색을 해주세요"
 						onclick="address_code()"><br> <input type="text"
 						id="addr2" placeholder="상세주소"><br>
-
-
-
 				</div>
 				<div>
 					<button id="upbtn">수정하기</button>
@@ -224,8 +85,17 @@
 	</div>
 </div>
 
+</th:block>
 
 
+<!--여기까지  -->
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/page/mypage/memberinfo.css">
+</th:block>
+
+<th:block layout:fragment="page_js">
+<script type="text/javascript" src="assets/js/mypagejs/memberinfojs.js"></script>
+</th:block>
 
 
-
+</html>

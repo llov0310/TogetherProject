@@ -4,10 +4,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-	
-
 
 <title>애견 추가</title>
 
@@ -135,16 +131,11 @@ $(document).ready(function() {
 			},
 			success : function(data) {
 				alert("등록완료");
-				opener.parent.repet();
-				if(opener.repet){
-				 }else{
-					alert("실패");
+				opener.location.reload();
+				window.close();
 				}
 
-				window.close();		
-				}
-			});   
-		
+	 	});	
 	});
 });
 </script>
