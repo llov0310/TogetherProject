@@ -55,4 +55,8 @@ public interface ETPAdminMapper {
 	// 호텔, 장레, 병원 구분을 위한 맵핑
 	public String etpKindCheck(@Param("user_id")String user_id);
 	
+	// 업체 관리자 페이지 (장례) - 상품추가
+	public int funeralProInsert(@Param("code") String code, @Param("pd_nm") String pd_nm, @Param("pd_price") int pd_price,
+			@Param("pd_content") String pd_content, @Param("pd_img_path") String pd_img_path, @Param("ca_cd") String ca_cd);
+	
 }

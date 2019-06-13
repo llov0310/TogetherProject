@@ -109,6 +109,14 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.etpKindCheck(user_id);
 	}
+
+	// 업체 관리자 페이지(장례) : 상품 추가
+	@Override
+	public int funeralProInsert(String code, String pd_nm, int pd_price, String pd_content, String pd_img_path,
+			String ca_cd) {
+		// TODO Auto-generated method stub
+		return mapper.funeralProInsert(code, pd_nm, pd_price, pd_content, pd_img_path, ca_cd);
+	}
 	//
 	
 	

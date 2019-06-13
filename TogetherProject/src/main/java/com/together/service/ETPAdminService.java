@@ -35,4 +35,7 @@ public interface ETPAdminService {
 	
 	// 호텔, 장레, 병원 구분을 위한 메소드
 	public String etpKindCheck(String user_id);
+	
+	// 업체 관리자 페이지(장례) : 상품 추가
+	public int funeralProInsert(String code, String pd_nm, int pd_price, String pd_content, String pd_img_path, String ca_cd);
 }

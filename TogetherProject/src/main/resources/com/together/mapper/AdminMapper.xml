@@ -157,8 +157,9 @@
 		select x.rnum, x.*
 		from (select rownum as rnum, A.*
     	from (	select *
-    			from member
-    			order by REGISTER_DT DESC) A
+				from member
+				where user_id not in ('admin')
+				order by REGISTER_DT DESC) A
     	where rownum < ${endNum}
 		) x
 		where x.rnum >= ${startNum}	

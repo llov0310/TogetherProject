@@ -21,10 +21,10 @@
 				<div class="table-responsive">
 
 					<div>
-						<input type="button" class="memManage" name="memManage" value="탈퇴" />
-						<input type="button" class="memManage" name="memManage" value="정지" />
-						<input type="button" class="memManage" name="memManage" value="정지 해제" />
-						<input type="button" class="memManage" name="memManage" value="업체 회원 변경" />	
+						<input type="button" class="btn btn-primary memManage" name="memManage" value="탈퇴" />
+						<input type="button" class="btn btn-primary memManage" name="memManage" value="정지" />
+						<input type="button" class="btn btn-primary memManage" name="memManage" value="정지 해제" />
+						<input type="button" class="btn btn-primary memManage" name="memManage" value="업체 회원 변경" />	
 					</div>
 
 					<table class="table table-bordered" id="dataTable" width="100%"
@@ -99,6 +99,7 @@
 					
 					<!-- 검색 -->
 					<div class="search">
+					
 						<div class="select">
 							<select id="search-select">
 								<option value="user_id">아이디</option>
@@ -106,12 +107,15 @@
 								<option value="ph_no">휴대폰 번호</option>
 							</select>
 						</div>
+						
 						<section class="search-box">
+						
 							<div class="search-content">
-								<input type="text" id="keyword" />
+								<input type="text" id="keyword"/>
 							</div>
+							
 							<div class="search-button">
-								<button id="search">검색</button>
+								<button id="search" class="btn btn-primary">검색</button>
 							</div>
 						</section>
 					</div>

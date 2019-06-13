@@ -123,5 +123,10 @@
 		where user_id=#{user_id}
 	</select>
 
-
+	<!-- 업체 관리자 페이지 (장례) : 상품등록할 때 쓰이는 sql문 -->
+	<insert id="funeralProInsert"
+		parameterType="com.together.domain.ProductVO">
+		insert into product values
+		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_path},#{ca_cd})
+	</insert>
 </mapper>

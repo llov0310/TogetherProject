@@ -31,19 +31,30 @@ public class ETPAdminController {
 		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 		String etpKindCheck = (String) request.getSession().getAttribute("etpKindCheck");
 		
-		if(etpKindCheck.equals("h")) {
-			return "etpAdmin/etpAdminHome";
-		}else if(etpKindCheck.equals("f")){
-			return "etpFuneralAdmin/etpFuneralAdminHome";
-		}else if(etpKindCheck.equals("d")){
-			return "etpHospitalAdmin/etpHospitalAdminHome";
-		}
+		//관리자 홈페이지가 미구현이라 나중에 개발할예정
+//		if(etpKindCheck.equals("h")) {
+//			return "etpAdmin/etpAdminHome";
+//		}else if(etpKindCheck.equals("f")){
+//			return "etpFuneralAdmin/etpFuneralAdminHome";
+//		}else if(etpKindCheck.equals("d")){
+//			return "etpHospitalAdmin/etpHospitalAdminHome";
+//		}
 		
-		return "etpAdmin/etpAdminHome";
+//		if(etpKindCheck.equals("h")) {
+//			return "etpAdmin/etpInfo";
+//		}else if(etpKindCheck.equals("f")){
+//			return "etpAdmin/etpInfo";
+//		}else if(etpKindCheck.equals("d")){
+//			return "etpAdmin/etpInfo";
+//		}
+		
+		
+		
+		return "redirect: etpInfo";
 		
 	}
 
-	// 업체 관리자 - 주문 현황
+	// 업체 관리자 - 주문 현황 : 호텔
 	@RequestMapping(value = "/etpOrderList", method = RequestMethod.GET)
 	public String etpOrderList(Model model, HttpServletRequest request, HttpSession session) {
 
@@ -63,7 +74,7 @@ public class ETPAdminController {
 		return "etpAdmin/etpOrderList";
 	}
 
-	// 업체 관리자 - 주문한 (예약)상품 팝업창에서 확인버튼 클릭 시 업데이트
+	// 업체 관리자 - 주문한 (예약)상품 팝업창에서 확인버튼 클릭 시 업데이트  : 호텔
 	@RequestMapping(value = "/etpOrderListCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String orderCheck(Model model, @RequestParam String day1, @RequestParam String day2, @RequestParam String nm,
@@ -78,7 +89,7 @@ public class ETPAdminController {
 		return "success";
 	}
 
-	// 업체 관리자 - 상품 정보
+	// 업체 관리자 - 상품 정보  : 호텔
 	@RequestMapping(value = "/etpProduct", method = RequestMethod.GET)
 	public String etpProduct(Model model, HttpServletRequest request) {
 		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
@@ -95,14 +106,14 @@ public class ETPAdminController {
 		return "etpAdmin/etpProduct";
 	}
 
-	// 업체 관리자 - 상품 정보 : 상품 추가 팝업창(Add버튼 클릭시 새창 띄움)
+	// 업체 관리자 - 상품 정보 : 상품 추가 팝업창(Add버튼 클릭시 새창 띄움)  : 호텔
 	@RequestMapping(value = "/etpProductAddPage", method = RequestMethod.GET)
 	public String etpProductAddPage(Model model) {
 
 		return "etpAdmin/etpProductAddPage";
 	}
 
-	// 업체 관리자 - 상품 정보 : 팝업창 상품 추가 버튼
+	// 업체 관리자 - 상품 정보 : 팝업창 상품 추가 버튼  : 호텔
 	@RequestMapping(value = "/etpProductAddRegister", method = RequestMethod.GET)
 	@ResponseBody
 	public String etpProductAddRegister(HttpServletRequest request, Model model, @RequestParam String pd_nm,
@@ -160,7 +171,7 @@ public class ETPAdminController {
 		return "success";
 	}
 
-	// 업체 관리자 - 상품 정보 : 상품 제거
+	// 업체 관리자 - 상품 정보 : 상품 제거  : 호텔
 	@RequestMapping(value = "/etpProductDel", method = RequestMethod.POST)
 	@ResponseBody
 	public String etpProductDel(Model model, HttpServletRequest request, @RequestParam String nm) {
@@ -176,7 +187,7 @@ public class ETPAdminController {
 		return "success";
 	}
 
-	// 업체 관리자 - 업체 정보 수정 페이지 이동
+	// 업체 관리자 - 업체 정보 수정 페이지 이동  : 호텔
 	@RequestMapping(value = "/etpInfo", method = RequestMethod.GET)
 	public String etpInfo(Model model, HttpSession session, HttpServletRequest request) {
 
@@ -191,7 +202,7 @@ public class ETPAdminController {
 		return "etpAdmin/etpInfo";
 	}
 
-	// 업체 관리자 - 업체 정보 수정 페이지 : 수정버튼 작동
+	// 업체 관리자 - 업체 정보 수정 페이지 : 수정버튼 작동  : 호텔
 	@RequestMapping(value = "/etpUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public String etpUpdate(Model model, @RequestParam String etp_nm, @RequestParam String etp_if_info,
@@ -205,5 +216,47 @@ public class ETPAdminController {
 		return "tq";
 
 	}
+	
+	
+	// 장례 업체 관리자 - 상품 정보
+	@RequestMapping(value = "/etpFuneralPro", method = RequestMethod.GET)
+	public String etpFuneralPro(Model model, HttpServletRequest request) {
+		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 
+		ArrayList<EnterpriseVO> info = etpAdminService.info_select(id);
+		ArrayList<ProductVO> product = new ArrayList<ProductVO>();
+
+		String code = info.get(0).getEtp_cd();
+
+		product = etpAdminService.product_select(code);
+
+		model.addAttribute("product_info", product);
+
+		return "etpFuneralAdmin/etpFuneralPro";
+	}
+	
+	// 장례 업체 관리자 - 상품 정보 : 상품 추가 팝업창(Add버튼 클릭시 새창 띄움)
+	@RequestMapping(value = "/etpFuneralProAddPage", method = RequestMethod.GET)
+	public String etpFuneralProAddPage(Model model) {
+
+		return "etpFuneralAdmin/etpFuneralProAddPage";
+	}
+	
+	// 업체 관리자 - 상품 정보 : 팝업창 상품 추가 버튼  : 호텔
+	@RequestMapping(value = "/etpFuneralProAddRegister", method = RequestMethod.GET)
+	@ResponseBody
+	public String etpFuneralProAddRegister(HttpServletRequest request, Model model, @RequestParam String pd_nm,
+			@RequestParam int pd_price, @RequestParam String pd_content, @RequestParam String pd_img_path, @RequestParam String ca_cd) {
+		//1. 세션에서 아이디를 가져옴
+		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		//2. 그 아이디에 대한 업체 코드를 가져옴
+		ArrayList<EnterpriseVO> info = etpAdminService.info_select(id);
+		//3. 업체 코드를 code 변수에 저장
+		String code = info.get(0).getEtp_cd();
+		//4. insert할 때 code에 저장 한 업체 코드와 함께 sql문 실행
+		int funeralProInsert = etpAdminService.funeralProInsert(code, pd_nm, pd_price, pd_content, pd_img_path, ca_cd); 
+		
+		return "success";
+	}
+	
 }

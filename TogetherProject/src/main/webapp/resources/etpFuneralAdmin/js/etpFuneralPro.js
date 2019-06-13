@@ -1,11 +1,15 @@
-/* Functions */ 
+/* Functions */
+  
+  function refresh(){
+	  $(".total").load("/etpproduct");
+  }
 
   function removeRow(button) {
     button.closest("tr").remove();
   }
   
   function popupOpen(){
-		var url= "/etpProductAddPage";    // 팝업창 페이지 URL
+		var url= "/etpFuneralProAddPage";    // 팝업창 페이지 URL
 		var winWidth = 700;
 	    var winHeight = 700;
 	    var popupOption= "width="+winWidth+", height="+winHeight;    // 팝업창
@@ -25,7 +29,7 @@
 		 success : function(){
 			 alert("왓음");
 			 removeRow($(this));
-			 $(".total").load("/etpProductAddPage");
+			 $(".total").load("/etpFuneralPro");
 			 window.location.reload();
 		 }
 		 
