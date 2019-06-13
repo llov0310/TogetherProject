@@ -6,7 +6,7 @@ import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
 import com.together.domain.PostVO;
 import com.together.domain.DogsAttachVO;
-public interface MypageService {
+public interface OldMypageService {
 	
 	//비밀번호체크
 	public ArrayList<MemberVO> passCheak(String user_id);

@@ -8,15 +8,15 @@ import com.together.domain.DogsVO;
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
 import com.together.domain.PostVO;
-import com.together.mapper.MypageMapper;
+import com.together.mapper.OldMypageMapper;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class MypageServiceImplement implements MypageService {
+public class OldMypageServiceImplement implements OldMypageService {
 	
-	private MypageMapper myMapper;
+	private OldMypageMapper myMapper;
 
 	@Override
 	public ArrayList<MemberVO> passCheak(String user_id) {

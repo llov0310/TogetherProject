@@ -127,11 +127,18 @@ public class HomeController {
 	   return "service/memorial/memorialGallery";
    }
    
-   //마이 페이지 맵핑
+   //마이 페이지 맵핑 (예전거)
    @RequestMapping(value = "/mypage", method=RequestMethod.GET)
    public String mypage(Model model) {
 	   
 	   return "nav/mypage";
+   }
+   
+   // 마이 페이지 맵핑
+   @RequestMapping(value = "/myPageHome", method=RequestMethod.GET)
+   public String myPageHome(Model model) {
+	   
+	   return "myPage/myPageHome";
    }
    
    //업체 신청 페이지 맵핑

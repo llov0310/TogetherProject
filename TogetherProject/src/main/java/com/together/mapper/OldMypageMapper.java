@@ -9,7 +9,7 @@ import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
 import com.together.domain.PostVO;
 
-public interface MypageMapper {
+public interface OldMypageMapper {
 
 	public ArrayList<MemberVO> passCheak(@Param("user_id") String user_id);
 	

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{myPageInclude/myPageLayout}">
+
+<!-- 홈 페이지에 들어갈 내용-->
+<th:block layout:fragment="contents">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>회원 정보 수정</h1>
+		</div>
+	</div>
+	<hr />
+
+	<!-- page-inner 안 왼쪽 div -->
+	<div id="left">
+		<h2 style="text-align: center;">회원 프로필</h2>
+		<hr style="width: 60%" />
+
+
+
+		<hr style="width: 60%" />
+	</div>
+	<!-- left div END -->
+
+
+	<!-- page-inner 안 오른쪽 div -->
+	<div id="right">
+		<h2 style="text-align: center;">비밀번호 변경</h2>
+		<hr style="width: 60%" />
+		<br />
+		<br />
+		<br />
+		<br />
+		
+		<div class="form-inline form-group">
+      		<label>변경할 비밀번호 : </label>
+			<input type="password" class="form-control" id="password_01" name="password_01">
+      		<br/>
+      		
+      		
+      		<label>변경할 비밀번호 확인 : </label>
+       		<input type="password" class="form-control" id="password_02" name="password_02">
+      		<br/>
+      		
+      		<input type="button" id="passWordBtn" value="변경" class="btn btn-info"/>
+     	</div>
+
+		<br />
+		<br />
+		<br />
+		<br />
+
+		<hr style="width: 60%" />
+	</div>
+	<!-- right div END -->
+
+</th:block>
+
+
+<!-- CSS -->
+<th:block layout:fragment="page_css">
+	<link href="myPage/css/myPageInfoEdit.css" rel="stylesheet"
+		type="text/css">
+</th:block>
+
+<!-- JS -->
+<th:block layout:fragment="page_js">
+	<script type="text/javascript" src="myPage/js/myPageInfoEdit.js"></script>
+
+</th:block>
+
+
+</html>

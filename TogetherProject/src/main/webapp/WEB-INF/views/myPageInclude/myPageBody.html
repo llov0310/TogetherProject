@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body th:fragment="body" id="page-top">
+	
+	<div id="wrapper">
+		<!-- 좌측 네비게이션 바 -->
+		<th:block th:include="myPageInclude/myPageNavSide" />
+		
+		<!-- 상단 네비게이션 바 -->
+		<th:block th:include="myPageInclude/myPageNavHeader" />
+		
+		<!-- page-wrapper : 내용 -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<!-- 페이지 별 내용 들어갈 부분 -->
+				<th:block layout:fragment="contents"></th:block>
+			</div>
+		</div>	
+	</div>
+	
+	<!-- 특정 페이지 전용 js들 -->
+	<th:block layout:fragment="page_js" />
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="adjust-nav">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".sidebar-collapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<!-- Brand -->
+			<a class="navbar-brand js-scroll-trigger" href="/"> 
+			<img src="/assets/img/Together.png">
+			</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right" th:if="${session.user}">
+				<!-- 아이디 비밀번호 체크를 하기 위해  아이디를 숨겨서 가져옴 -->
+				<li style="display:none;" th:text="${session.user.user_id}" id="user_id">
+				<li style="font-size:1.5em; margin-top:10px"
+				th:text="|${session.user.user_id} 님|" id="session_id"></li>
+				<li style="font-size:1.5em;"><a href="/logout">로그아웃</a></li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+<!-- /. NAV TOP  -->
+</html>

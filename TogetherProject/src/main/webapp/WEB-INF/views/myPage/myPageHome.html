@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{myPageInclude/myPageLayout}">
+
+<!-- 홈 페이지에 들어갈 내용-->
+<th:block layout:fragment="contents">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>회원 정보 수정</h1>
+			</div>
+		</div>
+		<!-- /. ROW  -->
+		<hr />
+		
+		<br/><br/><br/><br/>
+		<div class="row"
+			style="margin-left: 33%; display: inline-block; text-align: center;">
+			<br /> <br /> <br /> <br /> <label><h3>회원 정보 수정을 위해
+					비밀번호를 입력 해 주세요.</h3></label>
+
+			<hr />
+
+			<div class="form-inline form-group" style="font-size: 1.5em;">
+					<label>비밀 번호 </label>
+					<input type="password" class="form-control" id="password" autofocus/>
+					<input type="submit" class="btn btn-info" id="passCkBtn" value="확인" />
+			</div>
+			<hr />
+
+		</div>
+</th:block>
+
+<!-- CSS -->
+<th:block layout:fragment="page_css">
+</th:block>
+
+<!-- JS -->
+<th:block layout:fragment="page_js">
+	<script type="text/javascript" src="myPage/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" th:inline="javascript" src="myPage/js/myPageHome.js"></script>
+</th:block>
+
+
+</html>
