@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" href="/assets/css/page/mypage/sidemenu.css">
+<div th:fragment="sidebar">
+		<div id="snb">
+		<h1>마이페이지</h1>
+				<div><img src="http://placehold.it/150x150" alt="" id="imgbox"></div>
+		<div th:if="${session.user} != null">
+			<div>
+				 <span class="id" th:text="${session.user.user_id}"></span>님 안녕하세요
+			</div>
+			</div>
+				<ul>
+					<li id="aa"><span style="cursor:pointer"><a class="trigger" href="/member_info">회원정보</a></span></li>
+					<li id="aa"><span style="cursor:pointer"><a class="trigger" href="/mypet_info2">반려견정보</a></span></li>
+					<li id="aa"><span style="cursor:pointer"><a class="trigger" href="/myreservation">예약현황</a></span></li>
+					<li id="aa"><span style="cursor:pointer"><a class="tigger" href="/myreservation2">내글보기</a></span></li>
+					<li id="aa"><span style="cursor:pointer"><a class="trigger" href="/deleteaccount2">탈퇴하기</a></span></li>
+				</ul>
+			</div><!--div snb  -->
+			</div>
+	
+</html>
