@@ -2,202 +2,16 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/serviceLayout">
+	layout:decorator="nav/mypage/mypageInclude/mypagelayout">
 
 <th:block layout:fragment="page_head">
-	<title>마이 페이지</title>
-</th:block>
-
-<th:block layout:fragment="page_css">
-	<link rel="stylesheet" href="assets/css/page/page.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="assets/js/mypagejs/mypagejs.js"></script>
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<title>관리자 홈 페이지</title>
 	<script type="text/javascript" src="assets/js/mypagejs/memberinfojs.js"></script>
-	<script>
-	 function repet() {
-		 $("#content").load("/mypet_info" );
-	}
-	 function buta() {
-		 $("#content").load("/member_info" );
-	 }
-	 function delac() {
-		 $("#content").load("/deleteaccount" );
-	 }
-	 function re() {
-		 location.reload();
-	 }
-	</script>
-	
-	<style>
-
-#container {
-	margin-top: 50px;
-	width: 100%;
-    height: 100%;
-    padding: 0 0 35px;
-    background: #fbfbfb;
-    
-    
-}
-
-#snb {
-	border: 1px solid gray;
-    float: left;
-    width: 204px;
-    margin: 38px 20px 0 10%;
-    padding-right: 20px;
-}
-
-#content {
-	border: 1px solid gray;
-	float: left;
-    width: 70%;
-    margin-top: 38px;
-    padding-bottom: 50px;
-}
-.wrap {
-    width: 1700px;
-    min-width: 1500px;
-    margin: 0 auto;
-}
-
-.section_home .column {
-    float: left;
-    width: 50%;
-}
-.sh_group {
-    min-height: 185px;
-}
-.sh_group, .sh_group2, .sh_group3, .sh_group4 {
-    margin: 16px 8px 0;
-    padding: 32px 29px 32px;
-    text-align: left;
-    border: 1px solid #dadada;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    background: #fff;
-   
-}
-/*안에 스타일  */
-.sh_header {
-    position: relative;
-}
-.sh_group .sh_content {
-    min-height: 119px;
-    padding-top: 9px;
-}
-.sh_lst {
-    position: relative;
-    min-height: 80px;
-    margin-top: -1px;
-    padding-bottom: 8px;
-}
-.blind, legend {
-    position: absolute;
-    clip: rect(0 0 0 0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-}
-.sh_lst .pic_desc {
-    position: absolute;
-    top: 3px;
-    left: 0;
-    width: 80px;
-}
-.blind, legend {
-    position: absolute;
-    clip: rect(0 0 0 0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-}
-.sh_lst .intro_desc {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 21px;
-    padding: 15px 0 0 40%;
-    color: #666;
-}
-.sh_lst .nic_tit {
-    margin: 12px 8px 0 40%;
-}
-.sh_lst .nic_desc {
-    font-size: 14px;
-    line-height: 21px;
-    margin-top: 8px;
-    letter-spacing: -1px;
-    color: #666;
-}
-#content {
-    position: relative;
-    padding: 32px 51px 95px;
-}
-dl {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-.sh_lst dt {
-    font-size: 12px;
-    font-weight: 700;
-    float: left;
-    color: #333;
-    margin: 5px 5px 5px 200px; 
-}
-.desc_sub {
-    font-size: 18px;
-    line-height: 14px;
-    clear: left;
-    padding-top: 15px;
-    letter-spacing: -1px;
-    color: #899197;
-}
-.desc_sub .more {
-    font-weight: 700;
-    margin-left: 7px;
-    padding-right: 5px;
-    text-decoration: underline;
-    color: #390;
-    background: url(https://static.nid.naver.com/images/web/user/bu_rarr_green2.gif) no-repeat 100% 3px;
-    background-image: url(https://static.nid.naver.com/images/user/images/help/bu_rarr_green.gif)\9;
-    -webkit-background-size: 3px 5px;
-    background-size: 3px 5px;
-}
-</style>
 </th:block>
-<th:block layout:fragment="page_js">
-</th:block>
+
+<!-- 홈 페이지에 들어갈 내용-->
 <th:block layout:fragment="contents">
-
-	<div id="container">
-			<div class="wrap">
-		
-			<div id="snb">
-				<h2 onclick="re();">마이 페이지</h2>
-				<div><img src="http://placehold.it/150x150" alt="" id="imgbox"></div>
-		<div th:if="${session.user} != null">
-			<div>
-				 <span class="id" th:text="${session.user.user_id}"></span>님 안녕하세요
-			</div>
-			</div>
-				<ul>
-					<li id="aa"><span style="cursor:pointer">회원정보</span></li>
-					<li id="bb"><span style="cursor:pointer">반려견정보</span></li>
-					<li id="cc"><span style="cursor:pointer">예약현황</span></li>
-					<li id="dd"><span style="cursor:pointer">내글 보기</span></li>
-					<li id="ff"><span style="cursor:pointer">회원탈퇴</span></li>
-				</ul>
-			</div><!--div snb  -->
-			
-			
-			<div id="content" class="section_home">
+	<div id="content" class="section_home">
 		<div class="column">
 				<div class="sh_group">
 					<div class="sh_header">
@@ -223,7 +37,7 @@ dl {
 				
 						</dl>
 					</div>
-					<button onclick="buta();">수정하기</button>
+						<p class="btn_area_btm"><a href="#" onclick="clickcr(this,'imn.regmodify','','',event);" class="btn_model"><b class="btn2">설정하기</b></a></p>
 				</div>
 
 			
@@ -283,12 +97,18 @@ dl {
 		
 	
 			</div><!-- div content -->
-
-		</div><!--div wrap  -->
-
-	</div><!--div container  -->
-
-
-
 </th:block>
+
+
+<!--여기까지  -->
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="assets/css/page/mypage/mypagehom.css">
+</th:block>
+
+
+
+<th:block layout:fragment="page_js">
+</th:block>
+
+
 </html>

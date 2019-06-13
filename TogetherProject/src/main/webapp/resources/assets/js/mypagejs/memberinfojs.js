@@ -72,7 +72,8 @@
 					success : function(data) {
 						if(data== "success"){
 							alert("변경완료");
-							$("#content").load("/member_info" );
+							location.replace("/mypage");
+
 							
 						}else {
 							alert("실패");
