@@ -143,11 +143,13 @@ public class HomeController {
    
    //업체 신청 페이지 맵핑
    @RequestMapping(value = "/etpApply", method=RequestMethod.GET)
-   public String etpApply(Model model) {
-	   
+   public String etpApply(Model model, HttpSession session, HttpServletRequest request) {
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		System.out.println(user_id);
+	 
 	   return "nav/etpApply";
-   }
    
+   }
 }
 
 
