@@ -18,6 +18,7 @@ public class MemberVO {
 	private int sign_no;
 	private String addr_ji;
 	private String addr_dong;
+	private String userImg_path; //프로필 이미지 경로 : 파이어 베이스
 	
 	// 관리자 페이지 : json을 사용하여 라인 차트를 그릴 때 필요한 변수 선언 - 해당 연도 월별 가입자 수 확인
 	private String count;

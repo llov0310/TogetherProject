@@ -126,7 +126,7 @@ $(document).ready(function(){
 		 }
 		 
 		 
-	  }); //ajax END
+	  }); // ajax END
 	  	
 	  } 
 	 }); 

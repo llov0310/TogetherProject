@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.together.domain.EnterpriseVO;
 import com.together.domain.MemberVO;
 import com.together.service.MyPageService;
 
@@ -55,6 +56,19 @@ public class MyPageController {
 	public String myPageInfoEdit(Model model) {
 		
 		return "myPage/myPageInfoEdit";
+	}
+	
+	@RequestMapping(value = "/editBtn", method = RequestMethod.GET)
+	@ResponseBody
+	public String etpProductAddRegister(HttpServletRequest request, Model model, @RequestParam String userImg_path) {
+		
+		//세션에서 user_id를 가져옴
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		
+		// 업데이트 구문 : 해당 아이디의 이메일, 휴대폰번호, 주소, 프로필 이미지 경로를 수정 함
+		int memberUpdate = myPageService.memberUpdate(user_id, userImg_path);
+		
+		return "success";
 	}
 
 }

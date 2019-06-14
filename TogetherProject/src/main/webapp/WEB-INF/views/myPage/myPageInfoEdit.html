@@ -3,7 +3,25 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="~{myPageInclude/myPageLayout}">
+	
+	
+<!-- CSS -->
+<th:block layout:fragment="page_css">
+	<link href="myPage/css/myPageInfoEdit.css" rel="stylesheet"
+		type="text/css">
+</th:block>
 
+<!-- JS -->
+<th:block layout:fragment="page_js">
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="/myPage/js/jquery-3.4.1.min.js"></script>
+<script src="/myPage/js/myPageInfoEdit.js"></script>
+
+<!-- 파이어베이스 이용을 위해 스크립트 선언 -->
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+</th:block>	
+	
 <!-- 홈 페이지에 들어갈 내용-->
 <th:block layout:fragment="contents">
 	<div class="row">
@@ -18,8 +36,49 @@
 		<h2 style="text-align: center;">회원 프로필</h2>
 		<hr style="width: 60%" />
 
+		<!-- 사진 등록 DIV -->
+		<span id="imgsrccode" style="display: none"></span> <!-- 사진 등록에 필요한 태그 -->
+		
+		<div>
+			<div>
+				<img id="productImg" src="img/noImage.png" class="alreadyImg"
+					alt="미리보기" /> <br />
+				<input type="file" value="upload" class="foo" id="fileButton" /> <br />	
+					
+				<progress value="0" max="100" id="uploader"
+					style="display: block; margin: 0px auto;">0%</progress>
+			</div>
 
 
+		</div>
+
+
+		<!-- 고정값 DIV -->
+		<div>
+			<span>아이디 : </span><br/>
+			<span>이름 : </span><br/>
+			<span>생년월일 : </span>
+		
+		</div>
+
+		<!-- 프로필이 수정 될 DIV -->
+		<div class="form-inline form-group">
+			<label>이메일 : </label>
+			<input type="text" class="form-control"/> <br/>
+		
+			<label>휴대폰 번호 : </label>
+			<input type="text" class="form-control"/> <br/>
+			
+			<label>주소 : </label>
+			<input type="text" class="form-control"/> <br/>
+			
+			
+		
+		</div>
+		
+		<!-- 수정 완료 버튼 -->
+		<input type="button" id="editBtn" value="수정" class="btn btn-info" />
+	
 		<hr style="width: 60%" />
 	</div>
 	<!-- left div END -->
@@ -29,47 +88,24 @@
 	<div id="right">
 		<h2 style="text-align: center;">비밀번호 변경</h2>
 		<hr style="width: 60%" />
-		<br />
-		<br />
-		<br />
-		<br />
-		
-		<div class="form-inline form-group">
-      		<label>변경할 비밀번호 : </label>
-			<input type="password" class="form-control" id="password_01" name="password_01">
-      		<br/>
-      		
-      		
-      		<label>변경할 비밀번호 확인 : </label>
-       		<input type="password" class="form-control" id="password_02" name="password_02">
-      		<br/>
-      		
-      		<input type="button" id="passWordBtn" value="변경" class="btn btn-info"/>
-     	</div>
+		<br /> <br /> <br /> <br />
 
-		<br />
-		<br />
-		<br />
-		<br />
+		<div class="form-inline form-group">
+			<label>변경할 비밀번호 : </label> <input type="password"
+				class="form-control" id="password_01" name="password_01"> <br />
+
+
+			<label>변경할 비밀번호 확인 : </label> <input type="password"
+				class="form-control" id="password_02" name="password_02"> <br />
+
+			<input type="button" id="passWordBtn" value="변경" class="btn btn-info" />
+		</div>
+
+		<br /> <br /> <br /> <br />
 
 		<hr style="width: 60%" />
 	</div>
 	<!-- right div END -->
-
 </th:block>
-
-
-<!-- CSS -->
-<th:block layout:fragment="page_css">
-	<link href="myPage/css/myPageInfoEdit.css" rel="stylesheet"
-		type="text/css">
-</th:block>
-
-<!-- JS -->
-<th:block layout:fragment="page_js">
-	<script type="text/javascript" src="myPage/js/myPageInfoEdit.js"></script>
-
-</th:block>
-
 
 </html>

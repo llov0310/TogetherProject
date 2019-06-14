@@ -126,8 +126,7 @@ public class ETPAdminController {
 
 		String code = info.get(0).getEtp_cd();
 
-		int product_insert = etpAdminService.insert_pro(code, pd_nm, pd_price, pd_content, pd_img_path); // 이미지 업로드가되면
-																											// 추가로 넣을예정
+		int product_insert = etpAdminService.insert_pro(code, pd_nm, pd_price, pd_content, pd_img_path);
 
 		ArrayList<ProductVO> select_product = etpAdminService.st_insert_pro(code, pd_nm);
 
@@ -259,4 +258,11 @@ public class ETPAdminController {
 		return "success";
 	}
 	
+	// 업체 관리자 - 주문 목록 : 장례 업체
+	@RequestMapping(value = "/etpFuneralOrderList", method=RequestMethod.GET)
+	public String etpFuneralOrderList(Model model, HttpServletRequest request, HttpSession session) {
+		
+		
+		return "etpFuneralAdmin/etpFuneralOrderList";
+	}
 }

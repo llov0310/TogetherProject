@@ -5,27 +5,24 @@
 	layout:decorator="include/layout">
 
 <th:block layout:fragment="page_head">
-	    <!-- 스크롤시 상단바 색깔 변경되는 js -->
-	    <script src="assets/js/home.js"></script>
-	    <script>
-	    
-	    </script>
-		<style>
-		#fow1{
-   			 position: absolute;
-   			 bottom:-23px;
-   			 max-width: 360px;
-   			 left: 690px;
-    			width: 55%;
-    			
-		}
-	#etpup{
-    opacity: 1.4;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
-}
-		
 
-		</style>
+	<style>
+#fow1 {
+	position: absolute;
+	bottom: -23px;
+	max-width: 360px;
+	left: 690px;
+	width: 55%;
+}
+
+#etpup {
+	opacity: 1.4;
+	filter: alpha(opacity = 50); /* For IE8 and earlier */
+}
+</style>
+<!-- 스크롤시 상단바 색깔 변경되는 js -->
+<script src="assets/js/home.js"></script>
+
 	<title>홈 페이지</title>
 </th:block>
 
@@ -55,32 +52,32 @@
 						<h1 class="text-white text-center mb-4 display-4 font-weight-bold">
 							반려견 종합 서비스 <br> Together에 오신것을 <br> 환영합니다.
 						</h1>
-						
-						
+
+
 
 						<!-- Subheading -->
 						<p class="lead text-white text-center mb-5">
-							반려견에 대한 통합서비스가 주인 투개더에서는 사용자의 편의성과 함께 <br>
-							<br>새로운 서비스를 제공하고 있습니다 분양/짝찾기/병원/장례 등 <br>
-							<br>정보를 확인할수 있으며 커뮤니티를 통해 <br>
-							<br>쉽게 알고자하는 정보를 획득할수 있습니다. <br>
-							<br>반려견과 처음부터 끝까지 책임지는 서비스 플랫폼 입니다.
+							반려견에 대한 통합서비스가 주인 투개더에서는 사용자의 편의성과 함께 <br> <br>새로운 서비스를
+							제공하고 있습니다 분양/짝찾기/병원/장례 등 <br> <br>정보를 확인할수 있으며 커뮤니티를 통해
+							<br> <br>쉽게 알고자하는 정보를 획득할수 있습니다. <br> <br>반려견과
+							처음부터 끝까지 책임지는 서비스 플랫폼 입니다.
 						</p>
-		
-							<a id="fow1" href="/etpApply"><img id="etpup"alt="" src="assets/img/배경13.png"></a> 
-	
-					
-						
-							<!-- Button -->
-<!-- 						<div class="text-center mb-0"> -->
-<!-- 							<a -->
-<!-- 								href="https://play.google.com/store/apps?utm_source=apac_med&utm_medium=hasem&utm_content=Jan0219&utm_campaign=Evergreen&pcampaignid=MKT-DR-apac-kr-1003227-med-hasem-ap-Evergreen-Jan0219-Text_Search_BKWS-BKWS%7cONSEM_kwid_43700009359644034_creativeid_96242360585_device_c&gclid=EAIaIQobChMIos6S79qA4QIVhKmWCh3c8wTKEAAYASAAEgJzU_D_BwE&gclsrc=aw.ds" -->
-<!-- 								target="_blank" class="btn btn-dark"> Google play -->
-<!-- 								Download </a> <a -->
-<!-- 								href="https://itunes.apple.com/kr/app/apple-store/id375380948?mt=8" -->
-<!-- 								target="_blank" class="btn btn-dark" style="width: 247px;"> -->
-<!-- 								ios Download </a> -->
-<!-- 						</div> -->
+
+						<!-- 							<a id="etpApplyBtn" href="/etpApply"><img id="etpup"alt="" src="assets/img/배경13.png"></a>  -->
+<!-- 						<input type="button" id="etpApplyBtn" class="btn btn-primary" -->
+<!-- 							value="업체 신청" /> -->
+
+
+						<!-- Button -->
+						<!-- 						<div class="text-center mb-0"> -->
+						<!-- 							<a -->
+						<!-- 								href="https://play.google.com/store/apps?utm_source=apac_med&utm_medium=hasem&utm_content=Jan0219&utm_campaign=Evergreen&pcampaignid=MKT-DR-apac-kr-1003227-med-hasem-ap-Evergreen-Jan0219-Text_Search_BKWS-BKWS%7cONSEM_kwid_43700009359644034_creativeid_96242360585_device_c&gclid=EAIaIQobChMIos6S79qA4QIVhKmWCh3c8wTKEAAYASAAEgJzU_D_BwE&gclsrc=aw.ds" -->
+						<!-- 								target="_blank" class="btn btn-dark"> Google play -->
+						<!-- 								Download </a> <a -->
+						<!-- 								href="https://itunes.apple.com/kr/app/apple-store/id375380948?mt=8" -->
+						<!-- 								target="_blank" class="btn btn-dark" style="width: 247px;"> -->
+						<!-- 								ios Download </a> -->
+						<!-- 						</div> -->
 					</div>
 				</div>
 			</div>
@@ -88,8 +85,8 @@
 		</div>
 		<!-- / .container -->
 	</section>
-	
-	
+
+
 	<!-- SECTIONS
     ================================================== -->
 	<!-- PAGES
@@ -113,7 +110,8 @@
 			<!-- / .row -->
 
 			<div class="row justy-content-center">
-				<div class="col-lg-3 col-md-6" id="Hotel" onclick ="window.location.href='/hotel'" style="cursor:pointer;">
+				<div class="col-lg-3 col-md-6" id="Hotel"
+					onclick="window.location.href='/hotel'" style="cursor: pointer;">
 					<div class="text-center feature-block">
 						<div class="img petching">
 							<img src="assets/img/petHotel.png">
@@ -122,19 +120,23 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 col-md-6" id="Hospital" onclick="window.location.href='/HospitalLink'" style="cursor:pointer;">
-				
+				<div class="col-lg-3 col-md-6" id="Hospital"
+					onclick="window.location.href='/HospitalLink'"
+					style="cursor: pointer;">
+
 					<div class="text-center feature-block">
 						<div class="img pet hospital">
 							<img src="assets/img/petHospital.png">
 						</div>
 						<h4 class="mb-3" style="padding-top: 10px;">애견병원</h4>
 					</div>
-					
+
 				</div>
 
 				<div class="col-lg-3 col-md-6">
-					<div class="text-center feature-block" id="goodbye1" onclick="window.location.href='/goodbye1'" style="cursor:pointer;">
+					<div class="text-center feature-block" id="goodbye1"
+						onclick="window.location.href='/goodbye1'"
+						style="cursor: pointer;">
 						<div class="img pet community">
 							<img src="assets/img/goodByePet.png">
 						</div>
@@ -143,7 +145,9 @@
 				</div>
 
 				<div class="col-lg-3 col-md-6">
-					<div class="text-center feature-block" id="memorialGallery" onclick="window.location.href='/memorialGallery'" style="cursor:pointer;">
+					<div class="text-center feature-block" id="memorialGallery"
+						onclick="window.location.href='/memorialGallery'"
+						style="cursor: pointer;">
 						<div class="img pet goodbye">
 							<img src="assets/img/rainbow.png">
 						</div>
@@ -406,4 +410,5 @@
 	</section>
 
 </th:block>
+
 </html>

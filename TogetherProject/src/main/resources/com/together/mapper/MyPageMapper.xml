@@ -8,4 +8,10 @@
 		where user_id = #{user_id}
 		and password = #{password}
 	</select>
+	
+	<update id="memberUpdate" parameterType="com.together.domain.MemberVO">
+		update member
+		set userImg_path = #{userImg_path}
+		where user_id = #{user_id}
+	</update>
 </mapper>
