@@ -129,4 +129,17 @@
 		insert into product values
 		(PRODUCT_SEQ.nextval,#{code},#{pd_nm},#{pd_price},#{pd_content},#{pd_img_path},#{ca_cd})
 	</insert>
+	
+	<!-- 업체 관리자 페이지(장례) : 주문 현황 -->
+	<select id="etpFuneralOrderList" resultType="com.together.domain.EnterpriseVO" >
+		<![CDATA[
+			select DISTINCT o.user_id,o.or_dt,o.or_dt2,o.or_stat,o.or_check,p.etp_cd,sum(or_price) as or_price,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD') as funeral_th_dt
+			from orders o, product p , member m
+			where o.pd_cd = p.pd_cd
+			and o.user_id = m.user_id
+			and p.etp_cd = #{code}
+			group by o.user_id,o.or_dt,o.or_dt2,o.or_stat,o.or_check,p.etp_cd,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD')
+		]]>
+	</select>
+	
 </mapper>

@@ -38,4 +38,8 @@ public interface ETPAdminService {
 	
 	// 업체 관리자 페이지(장례) : 상품 추가
 	public int funeralProInsert(String code, String pd_nm, int pd_price, String pd_content, String pd_img_path, String ca_cd);
+
+	// 업체 관리자 페이지(장례) : 주문 현황
+	public ArrayList<EnterpriseVO> etpFuneralOrderList(String code);
+	
 }

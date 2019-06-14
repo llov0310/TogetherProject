@@ -19,26 +19,27 @@
 							width="100%" cellspacing="0">
 							<thead>
 								<tr>
-									<th><input type="checkbox"></th>
-									<th>구매일</th>
-									<th>상품명</th>
-									<th>구매자명</th>
+									<th>구매 날짜</th>
+									<th>구매자 아이디</th>
+									<th>구매자 이름</th>
 									<th>연락처</th>
-									<th>예약일</th>
+									<th>이용 시간</th>
 									<th>예약 상태</th>
-									<th>확인</th>
-									<th>금액</th>
+									<th>확인 상태</th>
+									<th>총 금액</th>
+									<th style="display:none;">업체 코드</th>
 								</tr>
 							</thead>
 							<tbody class="or_list">
 								<tr class="tr_list" th:each="order : ${orderLists}">
-									<td><input type="checkbox"></td>
-									<td th:text="${order.charthisdate}"></td>
-									<td th:text="${order.pd_nm}"></td>
+									<td th:text="${order.funeral_th_dt}"></td>
+									<td th:text="${order.user_id}"></td>
 									<td th:text="${order.user_nm}"></td>
 									<td th:text="${order.ph_no}"></td>
-									<td><label th:text="${order.chardate}"></label><br> ~
-										<label th:text="${order.chardate2}"></label></td>
+									
+									
+									<td><label th:text="${order.or_dt}" id="or_dt"></label><br> ~
+										<label th:text="${order.or_dt2}" id="or_dt2"></label></td>
 									<td>
 										<div th:switch="${order.or_stat}">
 											<label th:case="'1'" style="color: black">예약 대기중</label> <label
@@ -49,7 +50,9 @@
 									<td th:switch="${order.or_check}"><label th:case="'1'"
 										style="color: red">미확인</label> <label th:case="'2'"
 										style="color: green">확인</label></td>
-									<td th:text="${order.price}+'KRW'"></td>
+									<td th:text="|${order.or_price} 원|"></td>
+									
+									<td th:text="${order.etp_cd}" id="etp_cd" style="display:none;" ></td>
 								</tr>
 							</tbody>
 						</table>
@@ -70,43 +73,84 @@
 	<div id="bP" class="bP">
 		<div id="bp_div">
 			<div class="logo">
-				<h1>상세 예약서</h1>
-				<button class="success">확인</button>
-				<button class="exit">닫기</button>
+				<h1>상세 예약서 <button class="btn btn-dark exit" style="float:right; ">닫기</button></h1>
+				
 			</div>
-			<hr>
+			<hr/>
+			
 			<div class="a">
-				구매 날짜 : <span class="this_day"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">구매 일시</span>
+					<span class="this_day"></span>
+				</h3>
 			</div>
-
+			<br/>
+			
 			<div class="b">
-				상품명 :<span class="pro_nm"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">상품 이름</span>
+					<span class="pro_nm"></span>
+				</h3>
 			</div>
+			<br/>
 
 			<div class="c">
-				구매자명 : <span class="nm"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">구매자 이름</span>
+					<span class="nm"></span>
+				</h3>
 			</div>
-
+			<br/>
+			
+			
 			<div class="d">
-				연락처 :<span class="ph"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">연락처</span>
+					<span class="ph"></span>
+				</h3>
 			</div>
+			<br/>
 
 			<div class="e">
-				예약일 :<span class="fir"></span> ~ <span class="la"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">예약 일</span>
+					<span class="fir"></span> ~ <span class="la"></span>
+				</h3>
 			</div>
+			<br/>
+			
 
 			<div class="f">
-				상태 :<span class="stat"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">예약 상태</span>
+					<span class="stat"></span>
+				</h3>
 			</div>
+			<br/>
+			
 
 			<div class="g">
-				확인 :<span class="check"></span>
+				<h3>
+					<span class="badge badge-dark bp_span_label">확인 상태</span>
+					<span class="check"></span>
+				</h3>
 			</div>
-
-
+			<hr/>
+			
 			<div class="h">
-				총가격 :<span class="to_price"></span>
+				<h3>
+					<span class="badge badge-danger bp_span_label" style="font-size:1em;">총 가격</span>
+					<span class="to_price"></span>
+				</h3>
 			</div>
+			<hr/>
+			
+			<div style="text-align: center;">
+				
+					<button class="btn btn-danger success" style="width:30%; font-size:1.8em;">확인</button>
+				
+			</div>
+		
 		</div>
 	</div>
 
@@ -117,7 +161,7 @@
 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script>
 	<!-- 팝업창 스크립트  -->
 	<script src="plugin/jquery.bpopup.min.js"></script>
-	<script src="/etpAdmin/js/etpOrderList.js"></script>
+	<script src="/etpFuneralAdmin/js/etpFuneralOrderList.js"></script>
 
 
 
@@ -125,7 +169,7 @@
 
 
 <th:block layout:fragment="page_css">
-	<link href="/etpAdmin/css/etpOrderList.css" rel="stylesheet">
+	<link href="/etpFuneralAdmin/css/etpFuneralOrderList.css" rel="stylesheet">
 </th:block>
 
 </html>

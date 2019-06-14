@@ -59,4 +59,7 @@ public interface ETPAdminMapper {
 	public int funeralProInsert(@Param("code") String code, @Param("pd_nm") String pd_nm, @Param("pd_price") int pd_price,
 			@Param("pd_content") String pd_content, @Param("pd_img_path") String pd_img_path, @Param("ca_cd") String ca_cd);
 	
+	// 업체 관리자 페이지(장례) : 주문 현황
+	public ArrayList<EnterpriseVO> etpFuneralOrderList(String code);
+
 }

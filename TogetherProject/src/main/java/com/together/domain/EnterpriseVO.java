@@ -56,6 +56,8 @@ public class EnterpriseVO {
 	private String charthisdate;
 	private String price;
 	
+	private String funeral_th_dt; // 장례 업체 주문 목록 : 주문 날짜
+	
 	//재고
 	private String st_cd;
 	private int st_total_num;

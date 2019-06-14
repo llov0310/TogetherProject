@@ -241,6 +241,29 @@ public class ETPAdminController {
 		return "etpFuneralAdmin/etpFuneralProAddPage";
 	}
 	
+	// 장례 업체 관리자 - 주문 현황 : 장례
+	@RequestMapping(value = "/etpFuneralOrderList", method = RequestMethod.GET)
+	public String etpFuneralOrderList(Model model, HttpServletRequest request, HttpSession session) {
+
+		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+		ArrayList<EnterpriseVO> orderlist = new ArrayList<EnterpriseVO>();
+
+		ArrayList<EnterpriseVO> ent_list = new ArrayList<EnterpriseVO>();
+
+		ent_list = etpAdminService.textbox(sess);
+
+		String code = ent_list.get(0).getEtp_cd();
+
+		orderlist = etpAdminService.etpFuneralOrderList(code);
+		System.out.println("주문 리스트 확인 : "+orderlist);
+		
+		model.addAttribute("orderLists", orderlist);
+		
+		return "etpFuneralAdmin/etpFuneralOrderList";
+	}
+	
+	
+	
 	// 업체 관리자 - 상품 정보 : 팝업창 상품 추가 버튼  : 호텔
 	@RequestMapping(value = "/etpFuneralProAddRegister", method = RequestMethod.GET)
 	@ResponseBody
@@ -258,11 +281,4 @@ public class ETPAdminController {
 		return "success";
 	}
 	
-	// 업체 관리자 - 주문 목록 : 장례 업체
-	@RequestMapping(value = "/etpFuneralOrderList", method=RequestMethod.GET)
-	public String etpFuneralOrderList(Model model, HttpServletRequest request, HttpSession session) {
-		
-		
-		return "etpFuneralAdmin/etpFuneralOrderList";
-	}
 }
