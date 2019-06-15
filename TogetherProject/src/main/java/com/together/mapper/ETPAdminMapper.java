@@ -61,5 +61,7 @@ public interface ETPAdminMapper {
 	
 	// 업체 관리자 페이지(장례) : 주문 현황
 	public ArrayList<EnterpriseVO> etpFuneralOrderList(String code);
-
+	
+	// 업체 관리자 페이지(장례) : bp 팝업 -> 주문 상세 내역
+	public ArrayList<OrdersVO> selectDetail(@Param("or_dt") String or_dt, @Param("or_dt2") String or_dt2, @Param("etp_cd") String etp_cd);
 }

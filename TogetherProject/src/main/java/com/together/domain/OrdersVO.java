@@ -17,24 +17,24 @@ public class OrdersVO {
 	private String or_check;
 	private int or_price;
 
-	
 	//주문리스트 보기위한변수
 	private String pd_nm;
 	private String etp_cd;
 	private String etp_nm;
 	private String pd_price;
-	
-	
-	
+
 	//형변환 변수
 	private String first_day;
 	private String last_day;
 	private Date date_day;
 
-	
 	//member의 id변수
 	private String user_nm;
 	private String ph_no;
 	private String cd;
-
+	
+	//변환 함수
+	private String s_or_dt1;
+	private String s_or_dt2;
+	
 }

@@ -142,4 +142,15 @@
 		]]>
 	</select>
 	
+	<!-- 업체 관리자 페이지(장례) : bP 팝업 -> 상세 주문 내역  -->
+	<select id="selectDetail" resultType="com.together.domain.OrdersVO">
+		<![CDATA[
+			select p.pd_nm, p.etp_cd, p.pd_price,to_char(o.or_dt,'YY-MM-DD HH24:MI:SS') as s_or_dt1 ,to_char(o.or_dt2,'YY-MM-DD HH24:MI:SS') as s_or_dt2 
+			from orders o,product p 
+			where or_dt = #{or_dt}
+			and or_dt2 = #{or_dt2}
+			and p.etp_cd = #{etp_cd}
+			and p.pd_cd = o.pd_cd
+		]]>
+	</select>
 </mapper>

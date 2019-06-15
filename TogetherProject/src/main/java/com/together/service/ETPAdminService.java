@@ -42,4 +42,7 @@ public interface ETPAdminService {
 	// 업체 관리자 페이지(장례) : 주문 현황
 	public ArrayList<EnterpriseVO> etpFuneralOrderList(String code);
 	
+	// 업체 관리자 페이지(장례) : bp팝업 창 -> 주문 상세 내역
+	public ArrayList<OrdersVO> selectDetail(String or_dt, String or_dt2, String etp_cd);
+	
 }

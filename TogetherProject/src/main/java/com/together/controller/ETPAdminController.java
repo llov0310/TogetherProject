@@ -1,12 +1,16 @@
 package com.together.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +23,8 @@ import com.together.domain.ProductVO;
 import com.together.service.ETPAdminService;
 
 import lombok.AllArgsConstructor;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
 @AllArgsConstructor
@@ -72,6 +78,42 @@ public class ETPAdminController {
 		model.addAttribute("orderLists", orderlist);
 
 		return "etpAdmin/etpOrderList";
+	}
+	
+	// 업체 관리자 - 주문 현황 : 호텔 : SMS 서비스
+	@RequestMapping(value = "/SMS_Service" ,method = RequestMethod.POST)
+	   @ResponseBody
+	   public String SMS_Service(@RequestBody Map<String,Object> map, HttpSession session) {
+		
+		System.out.println(map);
+		
+		String alarm_content = (String)map.get("alarm_content");
+		String order_ph = (String)map.get("order_ph");
+		
+		String api_key = "NCSQ2XC4Y8XZNWUI";
+        String api_secret = "NUUYXN9PFYKWBZTQ8BON4ZMEFH4ULTTI";
+        Message coolsms = new Message(api_key, api_secret);
+        
+        // 4 params(to, from, type, text) are mandatory. must be filled
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("to", order_ph);
+        params.put("from", "01041524134");
+        if(alarm_content.length() <= 45)
+        params.put("type", "SMS");
+        else
+        params.put("type", "LMS");   
+        params.put("text", alarm_content);
+        params.put("app_version", "test app 1.2"); // application name and version
+
+        try {
+          JSONObject obj = (JSONObject) coolsms.send(params);
+          System.out.println(obj.toString());
+        } catch (CoolsmsException e) {
+          System.out.println(e.getMessage());
+          System.out.println(e.getCode());
+        }
+		
+		return "success";
 	}
 
 	// 업체 관리자 - 주문한 (예약)상품 팝업창에서 확인버튼 클릭 시 업데이트  : 호텔
@@ -279,6 +321,22 @@ public class ETPAdminController {
 		int funeralProInsert = etpAdminService.funeralProInsert(code, pd_nm, pd_price, pd_content, pd_img_path, ca_cd); 
 		
 		return "success";
+	}
+	
+	// 장례 업체 BP 팝업 : 주문 상세 내역
+	@RequestMapping(value = "/etpFuneralOrderListDetail", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<OrdersVO> etpFuneralOrderListDetail(Model model, @RequestParam String or_dt,
+			@RequestParam String or_dt2, @RequestParam String etp_cd) {		
+		ArrayList<OrdersVO> selectDetail = new ArrayList<OrdersVO>();
+		//주문 상세 내역 select문
+		selectDetail = etpAdminService.selectDetail(or_dt, or_dt2, etp_cd);
+		 
+		
+//		model.addAttribute("selectDetail", selectDetail);
+		System.out.println(selectDetail);
+		
+		return selectDetail;
 	}
 	
 }

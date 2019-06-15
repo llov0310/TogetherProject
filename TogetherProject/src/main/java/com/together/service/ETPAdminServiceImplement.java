@@ -124,6 +124,14 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.etpFuneralOrderList(code);
 	}
+	
+	
+	
+	@Override
+	public ArrayList<OrdersVO> selectDetail(String or_dt, String or_dt2, String etp_cd) {
+		// TODO Auto-generated method stub
+		return mapper.selectDetail(or_dt, or_dt2, etp_cd);
+	}
 	//
 	
 	
