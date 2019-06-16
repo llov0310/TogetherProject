@@ -71,106 +71,45 @@
 
 	<!-- 팝업 창 -->
 	<div id="bP" class="bP">
+	<h1>상세 예약서 <button class="btn btn-dark exit" style="float:right; ">닫기</button></h1>
+	<hr/>
 						<table class="table table-bordered table-hover" id="dataTable"
-							width="100%" cellspacing="0">
+							width="100%" cellspacing="0" style="font-size:1.5em;">
 							<thead>
 								<tr>
-									<th>or_dt</th>
-									<th>or_dt2</th>
+									<th>상품 이름</th>
+									<th>이용 시간</th>
+									<th>주문 시간</th>
+									<th>금액</th>
 								</tr>
 							</thead>
 							<tbody class="selectDetail">
 
 							</tbody>
 						</table>
-<!-- 		<div id="bp_div"> -->
-<!-- 			<div class="logo"> -->
-<!-- 				<h1>상세 예약서 <button class="btn btn-dark exit" style="float:right; ">닫기</button></h1> -->
+						
+			<div class="h" style="text-align: left;">
+				<h3>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">총 금액</span>
+					<span class="total_price"></span>
+				</h3>
+			</div>	
+			<hr/>
+	
+			<div style="text-align: center;">
 				
-<!-- 			</div> -->
-<!-- 			<hr/> -->
-			
-<!-- 			<div class="a"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">구매 일시</span> -->
-<!-- 					<span class="this_day"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-			
-<!-- 			<div class="b"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">상품 이름</span> -->
-<!-- 					<span class="pro_nm"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-
-<!-- 			<div class="c"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">구매자 이름</span> -->
-<!-- 					<span class="nm"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-			
-			
-<!-- 			<div class="d"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">연락처</span> -->
-<!-- 					<span class="ph"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-
-<!-- 			<div class="e"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">예약 일</span> -->
-<!-- 					<span class="fir"></span> ~ <span class="la"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-			
-
-<!-- 			<div class="f"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">예약 상태</span> -->
-<!-- 					<span class="stat"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-			
-
-<!-- 			<div class="g"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-dark bp_span_label">확인 상태</span> -->
-<!-- 					<span class="check"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<hr/> -->
-			
-<!-- 			<div class="h"> -->
-<!-- 				<h3> -->
-<!-- 					<span class="badge badge-danger bp_span_label" style="font-size:1em;">총 가격</span> -->
-<!-- 					<span class="to_price"></span> -->
-<!-- 				</h3> -->
-<!-- 			</div> -->
-<!-- 			<hr/> -->
-			
-<!-- 			<div style="text-align: center;"> -->
+					<button class="btn btn-danger success" style="width:30%; font-size:1.8em;">확인</button>
 				
-<!-- 					<button class="btn btn-danger success" style="width:30%; font-size:1.8em;">확인</button> -->
-				
-<!-- 			</div> -->
-		
-<!-- 		</div> -->
+			</div>
 	</div>
 
 </th:block>
 
 
 <th:block layout:fragment="page_js">
-	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  
+<!-- 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script> -->
 	<!-- 팝업창 스크립트  -->
 	<script src="plugin/jquery.bpopup.min.js"></script>
 	<script src="/etpFuneralAdmin/js/etpFuneralOrderList.js"></script>

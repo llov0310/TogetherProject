@@ -36,5 +36,6 @@ public class OrdersVO {
 	//변환 함수
 	private String s_or_dt1;
 	private String s_or_dt2;
+	private String s_th_dt;	
 	
 }

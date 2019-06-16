@@ -45,4 +45,7 @@ public interface ETPAdminService {
 	// 업체 관리자 페이지(장례) : bp팝업 창 -> 주문 상세 내역
 	public ArrayList<OrdersVO> selectDetail(String or_dt, String or_dt2, String etp_cd);
 	
+	// 업체 관리자 페이지(장례) : 확인 update
+	public int or_checkUpdate(String user_id, String or_dt, String or_dt2, String th_dt);
+	
 }

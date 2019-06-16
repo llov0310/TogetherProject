@@ -35,6 +35,10 @@
 			var check = $(this).parent().parent().find('.check').text(); //체크유무
 			var check_val = '1';
 			
+			console.log(day1);
+			console.log(day2);
+			console.log(day_th);
+			
 			if(check == "미확인"){
 					$.ajax({
 						url : "/etpOrderListCheck",
@@ -100,9 +104,17 @@
 				
 				
 			}else if(check == "확인"){
+				$('.this_day').text('');
+				$('.pro_nm').text('');
+				$('.nm').text('');
+				$('.ph').text('');
+				$('.fir').text('');
+				$('.la').text('');
+				$('.stat').text('');
+				$('.check').text('');
+				$('.to_price').text('');
+				
 				$('.bP').bPopup().close();
-				
-				
 			}
 			
 			

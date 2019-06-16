@@ -2,12 +2,18 @@ package com.together.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+//import net.sf.json.JSONArray;
+//import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -130,7 +136,9 @@ public class ETPAdminController {
 
 		return "success";
 	}
-
+	
+	
+	
 	// 업체 관리자 - 상품 정보  : 호텔
 	@RequestMapping(value = "/etpProduct", method = RequestMethod.GET)
 	public String etpProduct(Model model, HttpServletRequest request) {
@@ -304,8 +312,7 @@ public class ETPAdminController {
 		return "etpFuneralAdmin/etpFuneralOrderList";
 	}
 	
-	
-	
+
 	// 업체 관리자 - 상품 정보 : 팝업창 상품 추가 버튼  : 호텔
 	@RequestMapping(value = "/etpFuneralProAddRegister", method = RequestMethod.GET)
 	@ResponseBody

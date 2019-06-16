@@ -132,6 +132,14 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectDetail(or_dt, or_dt2, etp_cd);
 	}
+
+	
+	//업체관리자 페이지 ㅇㅁㄴㅇㄹㄴㅁㄹㄴㅁㄹ
+	@Override
+	public int or_checkUpdate(String user_id, String or_dt, String or_dt2, String th_dt) {
+		// TODO Auto-generated method stub
+		return mapper.updateChecked2(user_id,or_dt,or_dt2,th_dt);
+	}
 	//
 	
 	
