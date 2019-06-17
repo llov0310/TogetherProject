@@ -821,10 +821,12 @@ public class AdminController {
 		String subStrYear = date.format(today); // yyyy 포맷으로 저장된 today를 year 변수에 담는다
 		subStrYear = subStrYear.substring(2);
 		String year = subStrYear;
-//			System.out.println("현재 연도 : " + year);
+			System.out.println("현재 연도 : " + year);
 
-//			System.out.println("로그인 Json 컨트롤러");
-		return adminService.monthMemberCnt(year);
+			System.out.println("로그인 Json 컨트롤러");
+			ArrayList<MemberVO> memlist = adminService.monthMemberCnt(year);
+			System.out.println("테스트 : "+adminService.monthMemberCnt(year));
+		return memlist;
 	}
 
 	// 라인 차트 : 원하는 연도의 가입자 수를 보기 위해 선언
