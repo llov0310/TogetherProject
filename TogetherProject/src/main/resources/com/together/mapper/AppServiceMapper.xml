@@ -5,7 +5,7 @@
 
 	<select id="hotelList" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[	
-	 select DISTINCT p.etp_cd,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm
+	 select DISTINCT p.etp_cd,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm,i.etp_if_img_path,to_char(e.etp_content) etp_content,e.etp_lat,e.etp_lnt
     from(select s.pd_cd
         from stock s
         where to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
@@ -18,12 +18,14 @@
     and to_date(substr(st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
     and e.etp_cd = p.etp_cd and s.pd_cd = p.pd_cd and p.etp_cd = i.etp_cd
     and e.etp_addr like '%'||#{address}||'%'
+    and e.etp_cd like 'h'||'%'
 	]]>
 	</select>
 	
 	<select id="hotelinfoList" resultType="com.together.domain.EnterpriseVO">
-	select e.*,i.etp_if_info,i.etp_if_intro from enterprise e ,enterprise_info i
+	select e.*,i.etp_if_info,i.etp_if_intro,m.user_nm from enterprise e ,enterprise_info i,member m
 	where i.etp_cd = e.etp_cd
+	and m.user_id = e.user_id
 	and e.etp_addr = #{addr}
 	and e.etp_nm = #{name}
 	</select>
@@ -35,6 +37,7 @@
 	where p.pd_cd = s.pd_cd
 	and p.etp_cd = #{code}
 	and to_date(substr(s.st_cd,-5),'MM-DD') between to_date(#{in},'MM-DD') and to_date(#{out},'MM-DD')
+	order by p.pd_price
 	</select>
 	
 	<select id="user_info" resultType="com.together.domain.MemberVO">
@@ -67,8 +70,92 @@
 	</insert>
 	
 	<select id="reviewList" resultType="com.together.domain.ReviewBoardVO">
-		select user_id,rb_contents, to_char(rb_dt,'YY/MM/DD HH24:mi:ss') rb_dt_char ,rb_avg 
-		from reviewboard where etp_cd = #{etpcode}
+		select a.user_id,a.rb_contents, to_char(a.rb_dt,'YY/MM/DD HH24:mi:ss') rb_dt_char ,a.rb_avg,b.user_nm
+		from
+		(select * from reviewboard where etp_cd = #{etpcode}) a , member b
+		where a.user_id = b.user_id
+		
 	</select>
-
+	
+	<select id="reviewcount" resultType="com.together.domain.ReviewBoardVO">
+	select NVL(to_number(to_char(avg(rb_avg),'FM9.9')),0) rb_avg from reviewboard where etp_cd = #{etp_cd}
+	</select>
+	
+	<select id="firstproduct" resultType="com.together.domain.EnterpriseVO">
+	select p.pd_nm,p.pd_price from enterprise e,product p 
+    where e.etp_cd = p.etp_cd 
+    and e.etp_cd = #{etp_cd}
+    order by p.pd_price
+    </select>
+    
+    <select id="funeralList" resultType="com.together.domain.EnterpriseVO">
+    <![CDATA[
+    select DISTINCT e.etp_nm,e.etp_addr,e.etp_ph_no,e.etp_lat,e.etp_lnt,to_char(e.etp_content) etp_content,i.etp_if_img_path,i.etp_if_time1,i.etp_if_time2,e.etp_cd
+ 	from enterprise e , product po , orders o ,enterprise_info i
+ 	where po.etp_cd = e.etp_cd 
+    and e.etp_cd = i.etp_cd
+ 	and e.etp_addr like '%'||#{location}||'%'
+ 	and e.etp_cd like '%'||'f'||'%'
+ 	MINUS
+ 	select DISTINCT e.etp_nm,e.etp_addr,e.etp_ph_no,e.etp_lat,e.etp_lnt,to_char(e.etp_content) etp_content,i.etp_if_img_path,i.etp_if_time1,i.etp_if_time2,e.etp_cd
+ 	from (select o.*,p.etp_cd,p.pd_nm from product p , orders o where p.pd_cd = o.pd_cd) po , enterprise e , enterprise_info i
+ 	where po.etp_cd = e.etp_cd 
+    and e.etp_cd = i.etp_cd
+ 	and e.etp_addr like '%'||#{location}||'%'
+ 	and e.etp_cd like '%'||'f'||'%'
+ 	and (or_dt in(to_timestamp(#{day},'YY/MM/DD HH24:MI'))  
+	and or_dt2 in(to_timestamp(to_char(to_timestamp(#{day},'YY/MM/DD HH24:MI')+1/24,'YY/MM/DD HH24:Mi'),'YY/MM/DD HH24:MI')))
+	]]>
+    </select>
+    
+    <select id="firstfuneralproduct" resultType="com.together.domain.EnterpriseVO">
+    select p.pd_nm,p.pd_price from enterprise e,product p 
+    where e.etp_cd = p.etp_cd 
+    and e.etp_cd = #{etp_cd}
+    and p.ca_cd = (select ca_cd from procategory where ca_cd = '4')
+    order by p.pd_price
+	</select>
+	
+	<select id="funeral_review" resultType="com.together.domain.ReviewBoardVO">
+	select r.user_id,m.user_nm,r.rb_contents,to_char(r.rb_dt,'YY/MM/DD HH24:mi:ss') rb_dt_char,r.rb_avg 
+	from reviewboard r,member m 
+	where m.user_id = r.user_id  and etp_cd = #{decodeResult}
+	</select>
+	
+	<select id="funeralgetList" resultType="com.together.domain.EnterpriseVO">
+	select t.*,m.user_nm
+	from (select e.user_id,e.etp_addr,e.etp_ph_no,e.etp_license_no,e.etp_nm,e.etp_email,e.etp_lat,e.etp_lnt,i.*
+	from enterprise e, enterprise_info i
+	where e.etp_cd = i.etp_cd
+	and e.etp_cd = #{decodeResult}) t,member m
+	where t.user_id = m.user_id
+	</select>
+	
+	
+	<!-- 야매 장례 상품조회  -->
+	<select id="funeral1" resultType="com.together.domain.EnterpriseVO">
+	select * from product
+	where etp_cd = #{decodeResult}
+	and ca_cd = (select ca_cd from procategory where ca_name='수의')
+	</select>
+	
+	<select id="funeral2" resultType="com.together.domain.EnterpriseVO">
+	select * from product
+	where etp_cd = #{decodeResult}
+	and ca_cd = (select ca_cd from procategory where ca_name='함')
+	</select>
+	
+	<select id="funeral3" resultType="com.together.domain.EnterpriseVO">
+	select * from product
+	where etp_cd = #{decodeResult}
+	and ca_cd = (select ca_cd from procategory where ca_name='관')
+	</select>
+	
+	<select id="funeral4" resultType="com.together.domain.EnterpriseVO">
+	select * from product
+	where etp_cd = #{decodeResult}
+	and ca_cd = (select ca_cd from procategory where ca_name='기타')
+	</select>
+	
+	
 </mapper>

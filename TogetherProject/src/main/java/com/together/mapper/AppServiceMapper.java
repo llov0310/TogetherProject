@@ -33,7 +33,26 @@ public interface AppServiceMapper {
 			@Param("star") String starcount, 
 			@Param("content") String content);
 
-	public ArrayList<ReviewBoardVO> reviewList(String etpcode); 
+	public ArrayList<ReviewBoardVO> reviewList(String etpcode);
+
+	public ArrayList<ReviewBoardVO> reviewcount(String etp_cd);
+
+	public ArrayList<EnterpriseVO> firstproduct(String etp_cd);
+
+	public ArrayList<EnterpriseVO> funeralList(@Param("day") String formetData, @Param("location") String location);
+
+	public ArrayList<EnterpriseVO> firstfuneralproduct(String etp_cd);
+
+	public ArrayList<ReviewBoardVO> funeral_review(String decodeResult);
+
+	public ArrayList<EnterpriseVO> funeralgetList(String decodeResult);
+
+	
+	//격리공간 (장례상품조회)
+	public ArrayList<EnterpriseVO> funeral1(String decodeResult);
+	public ArrayList<EnterpriseVO> funeral2(String decodeResult); 
+	public ArrayList<EnterpriseVO> funeral3(String decodeResult); 
+	public ArrayList<EnterpriseVO> funeral4(String decodeResult); 
 
 	
 

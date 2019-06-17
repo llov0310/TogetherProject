@@ -74,4 +74,66 @@ public class AppServiceImplement implements AppService {
 		return mapper.reviewList(etpcode);
 	}
 
+	@Override
+	public ArrayList<ReviewBoardVO> reviewcount(String etp_cd) {
+		// TODO Auto-generated method stub
+		return mapper.reviewcount(etp_cd);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> firstproduct(String etp_cd) {
+		// TODO Auto-generated method stub
+		return mapper.firstproduct(etp_cd);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> funeralLIst(String formetData,String location) {
+		// TODO Auto-generated method stub
+		return mapper.funeralList(formetData,location);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> firstfuneralproduct(String etp_cd) {
+		// TODO Auto-generated method stub
+		return mapper.firstfuneralproduct(etp_cd);
+	}
+
+	@Override
+	public ArrayList<ReviewBoardVO> funeral_review(String decodeResult) {
+		// TODO Auto-generated method stub
+		return mapper.funeral_review(decodeResult);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> funeralGetList(String decodeResult) {
+		// TODO Auto-generated method stub
+		return mapper.funeralgetList(decodeResult);
+	}
+
+	
+	//격리 공간 (장례상품조회)
+	@Override
+	public ArrayList<EnterpriseVO> funeral1(String decodeResult) {
+		// TODO Auto-generated method stub
+		return mapper.funeral1(decodeResult);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> funeral2(String decodeResult) {
+		// TODO Auto-generated method stub
+		return mapper.funeral2(decodeResult);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> funeral3(String decodeResult) {
+		// TODO Auto-generated method stub
+		return mapper.funeral3(decodeResult);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> funeral4(String decodeResult) {
+		// TODO Auto-generated method stub
+		return mapper.funeral4(decodeResult);
+	}
+
 }
