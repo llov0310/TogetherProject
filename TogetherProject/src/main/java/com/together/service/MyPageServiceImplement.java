@@ -16,7 +16,7 @@ public class MyPageServiceImplement implements MyPageService {
 	
 	// 회원정보 변경 전 비밀번호체크
 	@Override
-	public ArrayList<MemberVO> passWordCk(String user_id, String password) {
+	public ArrayList<MemberVO> passWordCk(String user_id, String password) { 
 		// TODO Auto-generated method stub
 		return mapper.passWordCk(user_id, password);
 	}

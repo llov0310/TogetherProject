@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class MyPageController {
-	private MyPageService myPageService;
+	private MyPageService myPageService; 
 
 	// 패스워드 값을 비교하고 회원 정보를 수정하는 페이지로 가는 구문
 	@RequestMapping(value = "/myPagePassCk", method = RequestMethod.POST)
