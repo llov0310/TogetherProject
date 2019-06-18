@@ -52,6 +52,8 @@ public class ETPApplyController {
 				prise = etpApplyService.info_select(user_id);
 				String code = prise.get(0).getEtp_cd();
 				int ins1 = etpApplyService.ent_info(code);
+				System.out.println(code);
+				System.out.println(ins1);
 				if (insert != 0) {
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();

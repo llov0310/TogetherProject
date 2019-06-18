@@ -124,7 +124,8 @@
 	</update>
 
 	<insert id="ent_info" parameterType="com.together.domain.EnterpriseInfoVO">
-		insert into enterprise_info(etp_if_cd,etp_cd,etp_if_time1,etp_if_time2) values (ENTINFO_SEQ.nextval,#{code},'07:00','22:00')
+		insert into enterprise_info(etp_if_cd,etp_cd,etp_if_time1,etp_if_time2) values 
+		(ENTINFO_SEQ.nextval,#{code},'07:00','22:00')
 	</insert>
 	
 	<!-- // 호텔, 장레, 병원 구분을 위한 sql -->
@@ -144,12 +145,12 @@
 	<!-- 업체 관리자 페이지(장례) : 주문 현황 -->
 	<select id="etpFuneralOrderList" resultType="com.together.domain.EnterpriseVO" >
 		<![CDATA[
-			select DISTINCT o.user_id,o.or_dt,o.or_dt2,o.or_stat,o.or_check,p.etp_cd,sum(or_price) as or_price,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD') as funeral_th_dt
+			select DISTINCT o.user_id,to_char(o.or_dt,'YYYY-MM-DD HH24:MI:SS') as s_or_dt1 ,to_char(o.or_dt2,'YYYY-MM-DD HH24:MI:SS') as s_or_dt2 ,o.or_stat,o.or_check,p.etp_cd,sum(or_price) as or_price,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD') as funeral_th_dt
 			from orders o, product p , member m
 			where o.pd_cd = p.pd_cd
 			and o.user_id = m.user_id
 			and p.etp_cd = #{code}
-			group by o.user_id,o.or_dt,o.or_dt2,o.or_stat,o.or_check,p.etp_cd,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD')
+			group by o.user_id,to_char(o.or_dt,'YYYY-MM-DD HH24:MI:SS'),to_char(o.or_dt2,'YYYY-MM-DD HH24:MI:SS'),o.or_stat,o.or_check,p.etp_cd,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD')
 		]]>
 	</select>
 	
@@ -157,9 +158,9 @@
 	<select id="selectDetail" resultType="com.together.domain.OrdersVO">
 		<![CDATA[
 			select o.user_id, o.or_stat, o.or_check, to_char(o.th_dt,'YY-MM-DD HH24:MI:SS') as s_th_dt, p.pd_nm, p.etp_cd, p.pd_price,to_char(o.or_dt,'YY-MM-DD HH24:MI:SS') as s_or_dt1 ,to_char(o.or_dt2,'YY-MM-DD HH24:MI:SS') as s_or_dt2 
-			from orders o,product p 
-			where or_dt = #{or_dt}
-			and or_dt2 = #{or_dt2}
+			from orders o,product p
+			where or_dt = to_timestamp(#{day},'YYYY/MM/DD HH24:MI:SS')
+			and or_dt2 = to_timestamp(#{day2},'YYYY/MM/DD HH24:MI:SS')
 			and p.etp_cd = #{etp_cd}
 			and p.pd_cd = o.pd_cd
 		]]>

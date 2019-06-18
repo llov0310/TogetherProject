@@ -68,4 +68,9 @@ public class EnterpriseVO {
 	
 	private String if_intro;
 	private String if_info;
+	
+	
+	// 형변환 2
+	private String s_or_dt1;
+	private String s_or_dt2;
 }

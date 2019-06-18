@@ -337,6 +337,11 @@ public class ETPAdminController {
 			@RequestParam String or_dt2, @RequestParam String etp_cd) {		
 		ArrayList<OrdersVO> selectDetail = new ArrayList<OrdersVO>();
 		//주문 상세 내역 select문
+		
+//		String s_or_dt = or_dt.substring(0,18);
+//		System.out.println(s_or_dt);
+		System.out.println(or_dt2);
+		
 		selectDetail = etpAdminService.selectDetail(or_dt, or_dt2, etp_cd);
 		 
 		
