@@ -10,15 +10,11 @@ public class MemberVO {
 	private String user_id;
 	private String password;
 	private String ph_no;
-	private String email;
 	private String user_nm;
 	private Timestamp register_dt;
 	private int authority_no;
 	private String birth_dt;
-	private int sign_no;
-	private String addr_ji;
-	private String addr_dong;
-	private String userImg_path; //프로필 이미지 경로 : 파이어 베이스
+	private String f_uid; //파이어베이스 아이디가 만들어질 때 생성되는 uid
 	
 	// 관리자 페이지 : json을 사용하여 라인 차트를 그릴 때 필요한 변수 선언 - 해당 연도 월별 가입자 수 확인
 	private String count;
