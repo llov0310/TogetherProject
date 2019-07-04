@@ -213,10 +213,14 @@ public class SignController {
 		System.out.println("파베 테스트 : " + Map);
 		// 파이어베이스 DB에 인서트하는 부분 끝
 		
-		
-//		int insert = customerService.signup(ins);
+		int insert = customerService.signup(ins);
 
-		return "success";
+		if(insert != 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
 	}
 
 }
