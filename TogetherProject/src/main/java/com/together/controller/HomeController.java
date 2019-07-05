@@ -98,7 +98,7 @@ public class HomeController {
 		UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail("t@gmail.com");
 		// See the UserRecord reference doc for the contents of userRecord.
 		System.out.println("Successfully fetched user data: " + userRecord.getUid());
-	   
+		System.out.println("가져와지나? : " + userRecord.getUid());
 	   
 	   return "home";
    }

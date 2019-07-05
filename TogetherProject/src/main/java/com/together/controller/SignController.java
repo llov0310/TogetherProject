@@ -44,87 +44,87 @@ public class SignController {
 	private AdminService adminService;
 
 	// 회원가입
-	@RequestMapping(value = "/sign", method = RequestMethod.POST)
-	public String signup(Model model, MemberVO ins, HttpServletRequest request) throws IOException {
-		int insert = customerService.signup(ins);
-
-		if (insert != 0) {
-			String user_id = ins.getUser_id();
-			String password = ins.getPassword();
-			String ph_no = ins.getPh_no();
-
-			String user_nm = ins.getUser_nm();
-			int authority_no = ins.getAuthority_no();
-			String birth_dt = ins.getBirth_dt();
-
-			ArrayList<MemberVO> arr = adminService.register_dt(user_id);
-			String register_dt = arr.get(0).getRegister_dt().toString();
-
-			// ins.getRegister_dt();
-
-			String path = request.getSession().getServletContext().getRealPath("/");
-
-			// 서버 올릴 때 경로
-			String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
-					+ "blogapp-a9a56-firebase-adminsdk-v8z9o-c7af607772.json";
-
-			// ▼▼▼파이어베이스▼▼▼
-			FileInputStream serviceAccount = new FileInputStream(firebasePath);
-			// 수정 코드
-			FirebaseApp firebaseApp = null;
-			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
-			if (firebaseApps != null && !firebaseApps.isEmpty()) {
-				for (FirebaseApp app : firebaseApps) {
-					if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
-						firebaseApp = app;
-					}
-				}
-			} else {
-				FirebaseOptions options = new FirebaseOptions.Builder()
-						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-						.setDatabaseUrl("https://blogapp-a9a56.firebaseio.com").build();
-
-				FirebaseApp.initializeApp(options);
-			}
-
-			// As an admin, the app has access to read and write all data, regardless of
-			// Security Rules
-			DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Member");
-			ref.addListenerForSingleValueEvent(new ValueEventListener() {
-				@Override
-				public void onDataChange(DataSnapshot dataSnapshot) {
-					Object document = dataSnapshot.getValue();
-					System.out.println("오브젝트 도큐먼트 확인 : " + document);
-				}
-
-				@Override
-				public void onCancelled(DatabaseError error) {
-				}
-			});
-			// ▲▲▲파이어베이스▲▲▲/
-			DatabaseReference useridRef = null;
-			useridRef = ref.child(user_id);
-
-			Map<String, Object> Map = new HashMap<>(); // 맵 생성하고
-			Map.put("user_id", user_id);
-			Map.put("password", password);
-			Map.put("ph_no", ph_no);
-
-			Map.put("user_nm", user_nm);
-			Map.put("register_dt", register_dt);
-			Map.put("authority_no", authority_no);
-			Map.put("birth_dt", birth_dt);
-
-			useridRef.setValueAsync(Map);
-
-			System.out.println("파베 테스트 : " + Map);
-
-			return "nav/login";
-		} else {
-			return "home";
-		}
-
-	}
+//	@RequestMapping(value = "/sign", method = RequestMethod.POST)
+//	public String signup(Model model, MemberVO ins, HttpServletRequest request) throws IOException {
+//		int insert = customerService.signup(ins);
+//
+//		if (insert != 0) {
+//			String user_id = ins.getUser_id();
+//			String password = ins.getPassword();
+//			String ph_no = ins.getPh_no();
+//
+//			String user_nm = ins.getUser_nm();
+//			int authority_no = ins.getAuthority_no();
+//			String birth_dt = ins.getBirth_dt();
+//
+//			ArrayList<MemberVO> arr = adminService.register_dt(user_id);
+//			String register_dt = arr.get(0).getRegister_dt().toString();
+//
+//			// ins.getRegister_dt();
+//
+//			String path = request.getSession().getServletContext().getRealPath("/");
+//
+//			// 서버 올릴 때 경로
+//			String firebasePath = path + "resources" + File.separator + "firebase" + File.separator
+//					+ "blogapp-a9a56-firebase-adminsdk-v8z9o-c7af607772.json";
+//
+//			// ▼▼▼파이어베이스▼▼▼
+//			FileInputStream serviceAccount = new FileInputStream(firebasePath);
+//			// 수정 코드
+//			FirebaseApp firebaseApp = null;
+//			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+//			if (firebaseApps != null && !firebaseApps.isEmpty()) {
+//				for (FirebaseApp app : firebaseApps) {
+//					if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+//						firebaseApp = app;
+//					}
+//				}
+//			} else {
+//				FirebaseOptions options = new FirebaseOptions.Builder()
+//						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//						.setDatabaseUrl("https://blogapp-a9a56.firebaseio.com").build();
+//
+//				FirebaseApp.initializeApp(options);
+//			}
+//
+//			// As an admin, the app has access to read and write all data, regardless of
+//			// Security Rules
+//			DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Member");
+//			ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//				@Override
+//				public void onDataChange(DataSnapshot dataSnapshot) {
+//					Object document = dataSnapshot.getValue();
+//					System.out.println("오브젝트 도큐먼트 확인 : " + document);
+//				}
+//
+//				@Override
+//				public void onCancelled(DatabaseError error) {
+//				}
+//			});
+//			// ▲▲▲파이어베이스▲▲▲/
+//			DatabaseReference useridRef = null;
+//			useridRef = ref.child(user_id);
+//
+//			Map<String, Object> Map = new HashMap<>(); // 맵 생성하고
+//			Map.put("user_id", user_id);
+//			Map.put("password", password);
+//			Map.put("ph_no", ph_no);
+//
+//			Map.put("user_nm", user_nm);
+//			Map.put("register_dt", register_dt);
+//			Map.put("authority_no", authority_no);
+//			Map.put("birth_dt", birth_dt);
+//
+//			useridRef.setValueAsync(Map);
+//
+//			System.out.println("파베 테스트 : " + Map);
+//
+//			return "nav/login";
+//		} else {
+//			return "home";
+//		}
+//
+//	}
 
 	@RequestMapping(value = "/signTest", method = RequestMethod.POST)
 	@ResponseBody
