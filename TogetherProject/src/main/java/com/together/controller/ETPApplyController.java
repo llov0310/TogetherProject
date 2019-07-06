@@ -102,8 +102,17 @@ public class ETPApplyController {
 	
 	
 		// 수정해야 할 부분
-		
 
 	}
 	
+	@RequestMapping(value = "/etpselect", method = RequestMethod.GET)
+	public String etpSelect(Model model) {
+		return "nav/etpSelect";
+
+	}
+	@RequestMapping(value = "/etpApplyhospital", method = RequestMethod.GET)
+	public String etpApplyhospital(Model model) {
+		return "nav/etpApplyHospital";
+
+	}
 }

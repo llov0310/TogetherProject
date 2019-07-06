@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
+
+<th:block layout:fragment="page_head">
+	<title>업체 선택</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+<style>
+
+#hellow{
+	padding-top:100px;
+	padding: 8% 10% 2% 10%; 
+}
+.main_div{
+margin-bottom: 15%; 
+padding: 0 10%;
+}
+h1 {
+    border-bottom: #56526b 1px solid;
+    width: 100%;
+    font-size: 2.462em;
+    font-weight: 600;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+.goBtn_box_bang ul li {
+    float: left;
+    width: 33%;
+}
+.info_banner_all ul li {
+    border: #cfdde5 3px solid;
+    background: #ffffff;
+    width: 33.3%;
+    height: 300px;
+    border-radius: 20px;
+    position: relative;
+    padding-top: 20px;
+    margin-left: 10%;
+  
+}
+.info_banner_all {
+ /*  background: #cfdde5; */
+    border-radius: 8px;
+}
+.goBtn_box_bang {
+    margin-top: 30px;
+    padding: 15px;
+   
+}
+.goBtn_box_bang:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+dl, ul, ol, menu, li {
+    list-style: none;
+}
+.goBtn_box_bang div {
+    float: left;
+}
+.info_banner_all .tt {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-top: 18px;
+}
+.info_banner_all a.user_go {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -20px;
+    font-size: 0.8em;
+    width: 40px;
+    height: 40px;
+    border: #63aecb 1px solid;
+    border-radius: 20px;
+    background: #63aecb;
+    color: #fff !important;
+    line-height: 330%;
+    text-align: center;
+}
+.info{
+text-align: center;
+}
+
+</style>
+	
+		<!-- Custom fonts for this template-->
+
+
+	<!-- Custom styles for this template-->
+
+</th:block>
+
+<th:block layout:fragment="page_js">
+	 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	 <script>
+	 $( document ).ready( function() {
+		 $('#select1').click(function(){
+			 
+		 $(location).attr("href", "/etpApply");
+		 });
+		 
+		 $('#select2').click(function(){
+			 
+			 $(location).attr("href", "/etpApplyhospital");
+			 });
+	});
+
+		</script>
+</th:block>
+
+<th:block layout:fragment="contents">
+
+<div id="hellow"><h1>업체 유형 선택</h1></div>
+<p class="info">본인이 신청하고자 업체를 선택하여 주세요</p>
+<div class="main_div">
+<div class="goBtn_box_bang info_banner_all">
+				<ul sizetype="px" defaultsize="13" currentsize="13">
+					<li sizetype="px" defaultsize="13" currentsize="13">
+						<div><img src="//static.kosaf.go.kr/www/images/n_skin/info/info_ct_icon01.gif" alt="" sizetype="px" defaultsize="13" currentsize="13"></div>
+						<div>
+							<p class="tt" sizetype="px" defaultsize="18" currentsize="18">호텔/장례</p>
+							<button id="select1">호텔/장례</button>
+						</div>
+						<div><a href="javascript:;" onclick="setBizField();" class="blue_st user_go" title="신청하기" sizetype="px" defaultsize="10" currentsize="10">GO &gt;</a></div>
+					</li>
+				
+					<li sizetype="px" defaultsize="13" currentsize="13">
+						<div><img src="//static.kosaf.go.kr/www/images/n_skin/info/info_ct_icon03.gif" alt="" sizetype="px" defaultsize="13" currentsize="13"></div>
+						<div>
+							<p class="tt" sizetype="px" defaultsize="18" currentsize="18">병원</p>
+								 <button id="select2">병원</button>
+						</div>
+						<div><a href="javascript:;" onclick="fn_goCertify('02', '');return false;" class="blue_st user_go" title="GO" sizetype="px" defaultsize="10" currentsize="10">GO &gt;</a></div>
+					</li>
+				</ul>
+			  </div>
+
+
+</div>
+</th:block>
+</html>
