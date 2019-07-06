@@ -4,11 +4,18 @@ $('.tr_list').on('click',function(){
 		var etp_cd = $(this).find('td').eq(8).text(); // 업체 코드
 		var check = $(this).find('td').eq(6).find('label').text(); // 확인유무
 		
+		var user_nm =  $(this).find('td').eq(2).text(); //유저 이름 
+		var ph_no =  $(this).find('td').eq(3).text(); //연락처
+		
+		console.log(user_nm);
+		console.log(ph_no);
+		
 		// 팝업창
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
 					positionStyle : 'fixed'});
 
+		
 		
 		var testList = new Array();
 		var jsonData = null;
@@ -42,7 +49,10 @@ $('.tr_list').on('click',function(){
 						
 						total_price = parseInt(total_price) + parseInt(data[i].pd_price);
 					}
-
+					
+					$(".user_nm").text(' : ' + user_nm);
+					$(".ph_no").text(' : '+ ph_no);
+					
 					$(".total_price").text(' : ' + total_price + '원');
 					
 				
@@ -58,6 +68,16 @@ $('.tr_list').on('click',function(){
 								+ data[i].s_th_dt + '</td><td>'
 								+ data[i].pd_price + '</td></tr>');
 						
+						var test = new Object();
+						
+						test.user_id = data[i].user_id;
+						test.s_or_dt1 = data[i].s_or_dt1;
+						test.s_or_dt2 = data[i].s_or_dt2;
+						test.s_th_dt = data[i].s_th_dt;
+						
+						testList.push(test);
+						
+						
 					}
 					
 					
@@ -67,6 +87,9 @@ $('.tr_list').on('click',function(){
 						total_price = parseInt(total_price) + parseInt(data[i].pd_price);
 					}
 
+					$(".user_nm").text(' : ' + user_nm);
+					$(".ph_no").text(' : '+ ph_no);
+					
 					$(".total_price").text(' : ' + total_price + '원');
 					
 					

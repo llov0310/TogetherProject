@@ -1,7 +1,11 @@
 package com.together.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +21,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.together.domain.EnterpriseVO;
 
 import com.together.domain.MemberVO;
@@ -40,7 +54,51 @@ public class HomeController {
 	
    //홈 페이지 맵핑
    @RequestMapping(value = "/", method=RequestMethod.GET)
-   public String home(Model model) {
+   public String home(Model model, HttpServletRequest request) throws IOException, FirebaseAuthException {
+		//ins.getRegister_dt();
+
+		String path = request.getSession().getServletContext().getRealPath("/");
+
+		// 서버 올릴 때 경로
+		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "blogapp-a9a56-firebase-adminsdk-v8z9o-c7af607772.json";
+		
+		//▼▼▼파이어베이스▼▼▼
+		FileInputStream serviceAccount = new FileInputStream(firebasePath);
+		// 수정 코드
+		FirebaseApp firebaseApp = null;
+		List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+		if (firebaseApps != null && !firebaseApps.isEmpty()) {
+			for (FirebaseApp app : firebaseApps) {
+				if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+					firebaseApp = app;
+				}
+			}
+		} else {
+			FirebaseOptions options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.setDatabaseUrl("https://blogapp-a9a56.firebaseio.com").build();
+
+			FirebaseApp.initializeApp(options);
+		}
+
+		// As an admin, the app has access to read and write all data, regardless of Security Rules
+		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Member");
+		ref.addListenerForSingleValueEvent(new ValueEventListener() {
+		  @Override
+		  public void onDataChange(DataSnapshot dataSnapshot) {
+		    Object document = dataSnapshot.getValue();
+		    System.out.println("오브젝트 도큐먼트 확인 : " + document);
+		  }
+
+		  @Override
+		  public void onCancelled(DatabaseError error) {
+		  }
+		});
+		//▲▲▲파이어베이스▲▲▲/
+		UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail("t@gmail.com");
+		// See the UserRecord reference doc for the contents of userRecord.
+		System.out.println("Successfully fetched user data: " + userRecord.getUid());
+		System.out.println("가져와지나? : " + userRecord.getUid());
 	   
 	   return "home";
    }

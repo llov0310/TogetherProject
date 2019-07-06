@@ -17,7 +17,7 @@
 	
 	<insert id="signup" parameterType="com.together.domain.MemberVO">
 		insert into member values 
-		(#{user_id},#{password},#{ph_no},#{email},#{user_nm},sysdate,'3',#{birth_dt},MEMBER_SEQ.nextval,#{addr_ji},#{addr_dong})
+		(#{user_id},#{password},#{ph_no},#{user_nm},sysdate,3,#{birth_dt},#{f_uid})
 	</insert>
 	
 	<select id="list" resultType="com.together.domain.EnterpriseVO">
