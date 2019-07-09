@@ -10,199 +10,234 @@
 
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" href="etpApply/css/etpApply.css">
-	
-		<!-- Custom fonts for this template-->
+
+	<!-- Custom fonts for this template-->
 	<link href="etpAdmin/vendor/fontawesome-free/css/all.min.css"
 		rel="stylesheet" type="text/css">
 
 	<!-- Custom styles for this template-->
 	<link href="etpAdmin/css/sb-admin.css" rel="stylesheet">
+
+	<style>
+.checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+
+.checks input[type="checkbox"]+label {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.checks input[type="checkbox"]+label:before { /* 가짜 체크박스 */
+	content: ' ';
+	display: inline-block;
+	width: 21px; /* 체크박스의 너비를 지정 */
+	height: 21px; /* 체크박스의 높이를 지정 */
+	line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+	margin: -2px 8px 0 0;
+	text-align: center;
+	vertical-align: middle;
+	background: #fafafa;
+	border: 1px solid #cacece;
+	border-radius: 3px;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
+		rgba(0, 0, 0, 0.05);
+}
+
+.checks input[type="checkbox"]+label:active:before, .checks input[type="checkbox"]:checked+label:active:before
+	{
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px
+		rgba(0, 0, 0, 0.1);
+}
+
+.checks input[type="checkbox"]:checked+label:before { /* 체크박스를 체크했을때 */
+	content: '\2714'; /* 체크표시 유니코드 사용 */
+	color: #99a1a7;
+	text-shadow: 1px 1px #fff;
+	background: #e9ecee;
+	border-color: #adb8c0;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
+		rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+}
+</style>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=590c0507631ccb4fcce21f0b5d9bb6a7&libraries=services,clusterer,drawing"></script>
-	 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	 <script>
-	 
-	 
-	 function address_code() {
-		    new daum.Postcode({
-		        oncomplete: function(data) {
-		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=590c0507631ccb4fcce21f0b5d9bb6a7&libraries=services,clusterer,drawing"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		function address_code() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-		            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-		            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		            var roadAddr = data.roadAddress; // 도로명 주소 변수
-		            var extraRoadAddr = ''; // 참고 항목 변수
+							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var roadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 참고 항목 변수
 
-		            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-		            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-		            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                extraRoadAddr += data.bname;
-		            }
-		            // 건물명이 있고, 공동주택일 경우 추가한다.
-		            if(data.buildingName !== '' && data.apartment === 'Y'){
-		               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		            }
-		            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-		            if(extraRoadAddr !== ''){
-		                extraRoadAddr = ' (' + extraRoadAddr + ')';
-		            }
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
 
-		            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		            document.getElementById("etp_addr").value = roadAddr;
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById("etp_addr").value = roadAddr;
 
-		            var geocoder = new daum.maps.services.Geocoder();
+							var geocoder = new daum.maps.services.Geocoder();
 
-					var address_start = document.getElementById("etp_addr").value;
-					
-					// 주소로 좌표를 검색합니다
-					geocoder.addressSearch(address_start, function(result,
-							status) {
+							var address_start = document
+									.getElementById("etp_addr").value;
 
-						// 정상적으로 검색이 완료됐으면
-						if (status === daum.maps.services.Status.OK) {
+							// 주소로 좌표를 검색합니다
+							geocoder.addressSearch(address_start, function(
+									result, status) {
 
-							var coords = new daum.maps.LatLng(result[0].y,
-									result[0].x);
+								// 정상적으로 검색이 완료됐으면
+								if (status === daum.maps.services.Status.OK) {
 
-// 							console.log("1.다음지도=====" + result[0].y); /// 위도
-// 							console.log("2.다음지도=====" + result[0].x); /// 경도
-							
-							var Lat;
-	 						var Lnt;	
-							
-							Lat = result[0].y; //위도
-							Lnt = result[0].x; //경도
-							
-							document.getElementById('Lat').value = Lat;
-							document.getElementById('Lnt').value = Lnt;
-							
-							
-							 
-// 							$('form > #Lat').val(Lat);
-// 							$('form > #Lnt').val(Lnt);
-// 							$('.ll').val("4");
+									var coords = new daum.maps.LatLng(
+											result[0].y, result[0].x);
+
+									// 							console.log("1.다음지도=====" + result[0].y); /// 위도
+									// 							console.log("2.다음지도=====" + result[0].x); /// 경도
+
+									var Lat;
+									var Lnt;
+
+									Lat = result[0].y; //위도
+									Lnt = result[0].x; //경도
+
+									document.getElementById('Lat').value = Lat;
+									document.getElementById('Lnt').value = Lnt;
+
+									// 							$('form > #Lat').val(Lat);
+									// 							$('form > #Lnt').val(Lnt);
+									// 							$('.ll').val("4");
+								}
+
+							});
+
 						}
 
-					});
-					
-		        }
-		    
-		    }).open();
-		   
-	 	}
-	 
-	 
-		 
+					}).open();
 
-		</script>
+		}
+	</script>
 </th:block>
 
 <th:block layout:fragment="contents">
-		
-		
-		<div class="main_div">
+
+
+	<div class="main_div">
 		<form action="/etpApply" method="post">
-		<input type="text" id="Lat" style="display:none;" name="etp_lat" value="1"></input>
-		<input type="text" id="Lnt" style="display:none;" name="etp_lnt" value="2"></input>
-		<div class="left_div">
-		<!-- 업체 선택 -->
-		<label class="title_label">병원 업체 신청</label>
-		<br/>
-		
-		
-		<br/><br/>
-		<label th:if="${session.user != null}" style="display: none;">
-				<input th:value="${session.user.user_id}" name="user_id">
-			</label>
-		
-		<label class="title_label">업체 이름</label><br/>
-		<!-- 업체 이름 -->	
-		<div class="form-label-group a_text_g">	
-			<input class="form-control" type="text" id="etp_nm" name="etp_nm"/>
-<!-- 			<label class="label_name">업체 이름</label> -->
-		</div>
-		<br/><br/>
-		
-		<label class="title_label" >사업자 번호</label><br/>
-		<!-- 사업자 번호 -->
-		<div class="form-label-group a_text_g">
-			<input class="form-control" type="text" id="etp_license_no" name="etp_license_no" maxlength="10">
-<!-- 			<label class="label_name">사업자 번호</label> -->
-		</div>
-		<br/><br/>
-		
-		
-		<label class="title_label">업체 대표 번호</label><br/>
-		<!-- 업체 대표 번호 -->
-		<div class="form-label-group a_text_g">
-			<input class="form-control" type="text" id="etp_ph_no" name="etp_ph_no" maxlength="12">
-<!-- 			<label class="label_name">10자리</label> -->
-		</div>
-		<br/><br/>
-		
-		<label class="title_label">업체 이메일</label><br/>
-		<!-- 업체 이메일 -->
-		<div class="form-label-group a_text_g">
-			<input class="form-control" type="text" id="etp_email" name="etp_email">
-<!-- 			<label class="label_name" >업체 이메일</label> -->
-		</div>
-		<br/><br/>
-		
-		<label class="title_label">업체 주소</label><br/>
-		<!-- 업체 주소 -->
-		<div class="form-label-group a_text_g">
-			<input class="form-control" type="text" id="etp_addr"
-			name="etp_addr" onclick="address_code()" onchange="changeaddr()">
-			<label class="labe_name">우편번호 검색을 해주세요</label>
-		</div>
-		<!-- 상세 주소 -->
-		<div class="form-label-group a_text_g">
-			<input class="form-control" type="text" id="etp_addr2"><br>	
-			<label>상세 주소</label>
-		</div>
-		<br/><br/>
-		
-		<label class="title_label">자격증사진</label><br/>
-		<!-- 업체 대표 번호 -->
-		<input type="file" value="upload" class="foo" id="fileButton" />
-					
-		<br/><br/>
-		</div> <!-- left_div END -->			
-		
-		<div class="right_div">
-		
-		<br/><br/>
-		<label class="title_label">진료과목</label><br/>
-		<!-- 업체 대표 번호 -->
-		<div class="form-label-group a_text_g">
-			<input type="checkbox">외과
-			<input type="checkbox">내과
-			<input type="checkbox">안과
-			<input type="checkbox">치과
-			<input type="checkbox">피부과
-			<input type="checkbox">생식과
-			<input type="checkbox">종합
-		
+			<input type="text" id="Lat" style="display: none;" name="etp_lat"
+				value="1"></input> <input type="text" id="Lnt"
+				style="display: none;" name="etp_lnt" value="2"></input>
+			<div class="left_div">
+				<!-- 업체 선택 -->
+				<label class="title_label">병원 업체 신청</label> <br /> <br /> <br />
+				<label th:if="${session.user != null}" style="display: none;">
+					<input th:value="${session.user.user_id}" name="user_id">
+				</label> <label class="title_label">업체 이름</label><br />
+				<!-- 업체 이름 -->
+				<div class="form-label-group a_text_g">
+					<input class="form-control" type="text" id="etp_nm" name="etp_nm" />
+					<!-- 			<label class="label_name">업체 이름</label> -->
+				</div>
+				<br /> <br /> <label class="title_label">사업자 번호</label><br />
+				<!-- 사업자 번호 -->
+				<div class="form-label-group a_text_g">
+					<input class="form-control" type="text" id="etp_license_no"
+						name="etp_license_no" maxlength="10">
+					<!-- 			<label class="label_name">사업자 번호</label> -->
+				</div>
+				<br /> <br /> <label class="title_label">업체 대표 번호</label><br />
+				<!-- 업체 대표 번호 -->
+				<div class="form-label-group a_text_g">
+					<input class="form-control" type="text" id="etp_ph_no"
+						name="etp_ph_no" maxlength="12">
+					<!-- 			<label class="label_name">10자리</label> -->
+				</div>
+				<br /> <br /> <label class="title_label">업체 이메일</label><br />
+				<!-- 업체 이메일 -->
+				<div class="form-label-group a_text_g">
+					<input class="form-control" type="text" id="etp_email"
+						name="etp_email">
+					<!-- 			<label class="label_name" >업체 이메일</label> -->
+				</div>
+				<br /> <br /> <label class="title_label">업체 주소</label><br />
+				<!-- 업체 주소 -->
+				<div class="form-label-group a_text_g">
+					<input class="form-control" type="text" id="etp_addr"
+						name="etp_addr" onclick="address_code()" onchange="changeaddr()">
+					<label class="labe_name">우편번호 검색을 해주세요</label>
+				</div>
+				<!-- 상세 주소 -->
+				<div class="form-label-group a_text_g">
+					<input class="form-control" type="text" id="etp_addr2"><br>
+					<label>상세 주소</label>
+				</div>
+				<br /> <br /> <label class="title_label">자격증사진</label><br />
+				<!-- 업체 대표 번호 -->
+				<input type="file" value="upload" class="foo" id="fileButton" /> <br />
+				<br />
+			</div>
+			<!-- left_div END -->
+
+			<div class="right_div">
+
+				<br /> <br /> <label class="title_label">진료과목</label><br />
+
+			
+				<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
+		<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
+				<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
+						<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
+								<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
+										<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
+												<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
 
 
-
-		</div>
-		<br/><br/>
-		
-		<label class="title_label">업체 소개</label>
-		<!-- 업체 소개 -->
-		<div class="form-label-group">
-			<textarea style="font-size:2em;"class="form-control" id="etp_content"
-			name="etp_content" rows="10" cols="50" placeholder="업체 소개"></textarea>	
-		</div>
-		<br/>
-		
-		<input class="btn btn-primary" type="submit" value="신청" id="sub">
-		</div> <!-- right_div END -->
+				<br /> <br /> <label class="title_label">업체 소개</label>
+				<!-- 업체 소개 -->
+				<div class="form-label-group">
+					<textarea style="font-size: 2em;" class="form-control"
+						id="etp_content" name="etp_content" rows="10" cols="50"
+						placeholder="업체 소개"></textarea>
+				</div>
+				<br /> <input class="btn btn-primary" type="submit" value="신청"
+					id="sub">
+			</div>
+			<!-- right_div END -->
 		</form>
-		</div> <!-- main_div END -->
+	</div>
+	<!-- main_div END -->
 </th:block>
 </html>

@@ -10,10 +10,14 @@
 
 <th:block layout:fragment="page_css">
 <style>
-
+.navbar {
+    position: relative;
+    padding: 1.25rem 1rem;
+    background: #4e73df !important;
+}
 #hellow{
 	padding-top:100px;
-	padding: 8% 10% 2% 10%; 
+	padding: 5% 15% 2% 15%; 
 }
 .main_div{
 margin-bottom: 15%; 
@@ -48,7 +52,7 @@ h1 {
     border-radius: 8px;
 }
 .goBtn_box_bang {
-    margin-top: 30px;
+    margin-top: 5%;
     padding: 15px;
    
 }
@@ -74,17 +78,30 @@ dl, ul, ol, menu, li {
     top: 50%;
     margin-top: -20px;
     font-size: 0.8em;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: #63aecb 1px solid;
-    border-radius: 20px;
+    border-radius: 30px;
     background: #63aecb;
     color: #fff !important;
-    line-height: 330%;
+    line-height: 360%;
     text-align: center;
 }
 .info{
 text-align: center;
+}
+.info_ct_title01 {
+	margin-left:15%;
+    width: 70%;
+    height: 170px;
+    background: #f8f8f8;
+    padding: 35px 50px 50px 50px;
+    background: url(http://static.kosaf.go.kr/www/images/n_skin/info/info_ct_img01.jpg) 100% 50% no-repeat #f8f8f8;
+    
+}
+.f_18 {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 </style>
@@ -117,7 +134,11 @@ text-align: center;
 <th:block layout:fragment="contents">
 
 <div id="hellow"><h1>업체 유형 선택</h1></div>
-<p class="info">본인이 신청하고자 업체를 선택하여 주세요</p>
+<div class="info_ct_title01">
+				<h4 class="f_18" sizetype="px" defaultsize="18" currentsize="18"><p sizetype="px" defaultsize="18" currentsize="18">서비스이용자는 반드시 본인명의로 가입하셔야 합니다.</p>
+				<p sizetype="px" defaultsize="18" currentsize="18">한국장학재단 각종 서비스를 이용하기 위해서는 <span sizetype="px" defaultsize="18" currentsize="18">서비스 이용자 등록 후 이용이 가능</span>합니다.</p>
+				<p sizetype="px" defaultsize="18" currentsize="18">사업자(개인·법인사업자) 및 임의 단체는 모두 기업으로 등록하셔야 합니다.</p></h4>
+			  </div>
 <div class="main_div">
 <div class="goBtn_box_bang info_banner_all">
 				<ul sizetype="px" defaultsize="13" currentsize="13">
@@ -127,7 +148,7 @@ text-align: center;
 							<p class="tt" sizetype="px" defaultsize="18" currentsize="18">호텔/장례</p>
 							<button id="select1">호텔/장례</button>
 						</div>
-						<div><a href="javascript:;" onclick="setBizField();" class="blue_st user_go" title="신청하기" sizetype="px" defaultsize="10" currentsize="10">GO &gt;</a></div>
+						<div><a href="/etpApply"  class="blue_st user_go" title="신청하기" sizetype="px" defaultsize="10" currentsize="10">GO &gt;</a></div>
 					</li>
 				
 					<li sizetype="px" defaultsize="13" currentsize="13">
@@ -136,7 +157,7 @@ text-align: center;
 							<p class="tt" sizetype="px" defaultsize="18" currentsize="18">병원</p>
 								 <button id="select2">병원</button>
 						</div>
-						<div><a href="javascript:;" onclick="fn_goCertify('02', '');return false;" class="blue_st user_go" title="GO" sizetype="px" defaultsize="10" currentsize="10">GO &gt;</a></div>
+						<div><a href="/etpApplyhospital" class="blue_st user_go" title="GO" sizetype="px" defaultsize="10" currentsize="10">GO &gt;</a></div>
 					</li>
 				</ul>
 			  </div>

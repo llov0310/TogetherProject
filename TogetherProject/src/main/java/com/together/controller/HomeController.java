@@ -2,7 +2,6 @@ package com.together.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +9,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
-import org.apache.ibatis.annotations.Param;
-import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -33,9 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.together.domain.EnterpriseVO;
-
 import com.together.domain.MemberVO;
-import com.together.domain.ProductVO;
 import com.together.service.CustomerService;
 
 import lombok.AllArgsConstructor;
@@ -63,7 +55,7 @@ public class HomeController {
 		String firebasePath = path + "resources"+ File.separator +"firebase" + File.separator + "blogapp-a9a56-firebase-adminsdk-v8z9o-c7af607772.json";
 		
 		//▼▼▼파이어베이스▼▼▼
-		FileInputStream serviceAccount = new FileInputStream(firebasePath);
+		 FileInputStream serviceAccount = new FileInputStream(firebasePath); 
 		// 수정 코드
 		FirebaseApp firebaseApp = null;
 		List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
@@ -96,7 +88,7 @@ public class HomeController {
 		});
 		//▲▲▲파이어베이스▲▲▲/
 		UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail("t@gmail.com");
-		// See the UserRecord reference doc for the contents of userRecord.
+
 		System.out.println("Successfully fetched user data: " + userRecord.getUid());
 		System.out.println("가져와지나? : " + userRecord.getUid());
 	   
