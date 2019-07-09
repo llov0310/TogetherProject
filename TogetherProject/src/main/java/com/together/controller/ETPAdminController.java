@@ -87,40 +87,40 @@ public class ETPAdminController {
 	}
 	
 	// 업체 관리자 - 주문 현황 : 호텔 : SMS 서비스
-	@RequestMapping(value = "/SMS_Service" ,method = RequestMethod.POST)
-	   @ResponseBody
-	   public String SMS_Service(@RequestBody Map<String,Object> map, HttpSession session) {
-		
-		System.out.println(map);
-		
-		String alarm_content = (String)map.get("alarm_content");
-		String order_ph = (String)map.get("order_ph");
-		
-		String api_key = "NCSQ2XC4Y8XZNWUI";
-        String api_secret = "NUUYXN9PFYKWBZTQ8BON4ZMEFH4ULTTI";
-        Message coolsms = new Message(api_key, api_secret);
-        
-        // 4 params(to, from, type, text) are mandatory. must be filled
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("to", order_ph);
-        params.put("from", "01041524134");
-        if(alarm_content.length() <= 45)
-        params.put("type", "SMS");
-        else
-        params.put("type", "LMS");   
-        params.put("text", alarm_content);
-        params.put("app_version", "test app 1.2"); // application name and version
-
-        try {
-          JSONObject obj = (JSONObject) coolsms.send(params);
-          System.out.println(obj.toString());
-        } catch (CoolsmsException e) {
-          System.out.println(e.getMessage());
-          System.out.println(e.getCode());
-        }
-		
-		return "success";
-	}
+//	@RequestMapping(value = "/SMS_Service" ,method = RequestMethod.POST)
+//	   @ResponseBody
+//	   public String SMS_Service(@RequestBody Map<String,Object> map, HttpSession session) {
+//		
+//		System.out.println(map);
+//		
+//		String alarm_content = (String)map.get("alarm_content");
+//		String order_ph = (String)map.get("order_ph");
+//		
+//		String api_key = "NCSQ2XC4Y8XZNWUI";
+//        String api_secret = "NUUYXN9PFYKWBZTQ8BON4ZMEFH4ULTTI";
+//        Message coolsms = new Message(api_key, api_secret);
+//        
+//        // 4 params(to, from, type, text) are mandatory. must be filled
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        params.put("to", order_ph);
+//        params.put("from", "01041524134");
+//        if(alarm_content.length() <= 45)
+//        params.put("type", "SMS");
+//        else
+//        params.put("type", "LMS");   
+//        params.put("text", alarm_content);
+//        params.put("app_version", "test app 1.2"); // application name and version
+//
+//        try {
+//          JSONObject obj = (JSONObject) coolsms.send(params);
+//          System.out.println(obj.toString());
+//        } catch (CoolsmsException e) {
+//          System.out.println(e.getMessage());
+//          System.out.println(e.getCode());
+//        }
+//		
+//		return "success";
+//	}
 
 	// 업체 관리자 - 주문한 (예약)상품 팝업창에서 확인버튼 클릭 시 업데이트  : 호텔
 	@RequestMapping(value = "/etpOrderListCheck", method = RequestMethod.POST)

@@ -56,47 +56,50 @@
 								$('.stat').text('');
 								$('.check').text('');
 								$('.to_price').text('');
-							
-								// 닫기 전에 컨펌 실행
-								if(confirm("주문자에게 주문 확인 SMS를 보내시겠습니까?")){
-									
-									var alarm_content = 'Together' + '\n'
-									+ order_nm + '님의 예약이 완료 되었습니다.' + '\n'
-									+ '주문 일시 : ' + t_day + '\n'
-									+ '상품 명 : ' + product_nm + '\n'
-									+ '예약 날짜 : ' + first_day + ' ~ ' + last_day
-									
-									console.log(alarm_content);
-									console.log(order_ph);
-									
-									var query = {
-										alarm_content : alarm_content,
-										order_ph : order_ph
-									}
-									
-									var data = JSON.stringify(query);
-									
-									$.ajax({
-										type: "POST",
-										url : "SMS_Service",
-										data : data,
-										contentType: 'application/json; charset=utf-8',
-										success : function(data){
-											if(data == "success"){
-												alert("완료 되었습니다.");
-										        window.location.href="/etpOrderList";
-											}else{
-												alert("SMS 서비스 오류");
-											}
-										}
-										
-									}); // ajax END  
-							    }
-								else{
-									$('.bP').bPopup().close();
-									window.location.href="/etpOrderList";
-									//취소를 누르면 바로 window.location.href="/etpOrderList" 로 보내 면 될듯
-								}
+								
+								
+								alert("완료 되었습니다.");
+						        window.location.href="/etpOrderList";
+//								// 닫기 전에 컨펌 실행
+//								if(confirm("주문자에게 주문 확인 SMS를 보내시겠습니까?")){
+//									
+//									var alarm_content = 'Together' + '\n'
+//									+ order_nm + '님의 예약이 완료 되었습니다.' + '\n'
+//									+ '주문 일시 : ' + t_day + '\n'
+//									+ '상품 명 : ' + product_nm + '\n'
+//									+ '예약 날짜 : ' + first_day + ' ~ ' + last_day
+//									
+//									console.log(alarm_content);
+//									console.log(order_ph);
+//									
+//									var query = {
+//										alarm_content : alarm_content,
+//										order_ph : order_ph
+//									}
+//									
+//									var data = JSON.stringify(query);
+//									
+//									$.ajax({
+//										type: "POST",
+//										url : "SMS_Service",
+//										data : data,
+//										contentType: 'application/json; charset=utf-8',
+//										success : function(data){
+//											if(data == "success"){
+//												alert("완료 되었습니다.");
+//										        window.location.href="/etpOrderList";
+//											}else{
+//												alert("SMS 서비스 오류");
+//											}
+//										}
+//										
+//									}); // ajax END  
+//							    }
+//								else{
+//									$('.bP').bPopup().close();
+//									window.location.href="/etpOrderList";
+//									//취소를 누르면 바로 window.location.href="/etpOrderList" 로 보내 면 될듯
+//								}
 							return false;						
 							}
 						}
