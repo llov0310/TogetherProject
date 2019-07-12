@@ -171,7 +171,7 @@
 	<![CDATA[
 		select x.rnum, x.*
 		from (select rownum as rnum, A.*
-    	from (select e.*, substr(e.etp_cd, 1,1) as etp_cd_substr,  m.password, m.ph_no, m.email, m.user_nm, m.register_dt, m.authority_no, m.birth_dt, m.sign_no, m.addr_ji, m.addr_dong
+    	from (select e.*, substr(e.etp_cd, 1,1) as etp_cd_substr,  m.password, m.ph_no, m.user_nm, m.register_dt, m.authority_no, m.birth_dt
 				from enterprise e, member m
 				where e.user_id = m.user_id and m.authority_no = 2
 				order by e.etp_accept_dt) A
