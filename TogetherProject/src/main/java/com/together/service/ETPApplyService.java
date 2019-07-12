@@ -3,6 +3,7 @@ package com.together.service;
 import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalcategoryVO;
 
 public interface ETPApplyService {
 	// 업체 신청을 위한 메소드 추가
@@ -17,4 +18,6 @@ public interface ETPApplyService {
 	
 	// 업체 상세 정보 인서트 함수
 	public int ent_info(String code);
+
+	public int ent_category(HospitalcategoryVO hospitalcategoryVO);
 }

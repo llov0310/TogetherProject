@@ -1,5 +1,6 @@
 package com.together.domain;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class EnterpriseVO {
 	private String etp_accept_dt;
 	private String etp_lat;
 	private String etp_lnt;
+	
 	
 	// 업체 정보를 볼때 추가적으로 필요한 변수를 선언 (etpManage 페이지)
 	private String user_nm;
@@ -73,4 +75,6 @@ public class EnterpriseVO {
 	// 형변환 2
 	private String s_or_dt1;
 	private String s_or_dt2;
+	
+	
 }

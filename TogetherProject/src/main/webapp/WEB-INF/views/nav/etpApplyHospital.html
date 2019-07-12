@@ -19,57 +19,6 @@
 	<link href="etpAdmin/css/sb-admin.css" rel="stylesheet">
 
 	<style>
-.checks input[type="checkbox"] { /* 실제 체크박스는 화면에서 숨김 */
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0
-}
-
-.checks input[type="checkbox"]+label {
-	display: inline-block;
-	position: relative;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-}
-
-.checks input[type="checkbox"]+label:before { /* 가짜 체크박스 */
-	content: ' ';
-	display: inline-block;
-	width: 21px; /* 체크박스의 너비를 지정 */
-	height: 21px; /* 체크박스의 높이를 지정 */
-	line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
-	margin: -2px 8px 0 0;
-	text-align: center;
-	vertical-align: middle;
-	background: #fafafa;
-	border: 1px solid #cacece;
-	border-radius: 3px;
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
-		rgba(0, 0, 0, 0.05);
-}
-
-.checks input[type="checkbox"]+label:active:before, .checks input[type="checkbox"]:checked+label:active:before
-	{
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px
-		rgba(0, 0, 0, 0.1);
-}
-
-.checks input[type="checkbox"]:checked+label:before { /* 체크박스를 체크했을때 */
-	content: '\2714'; /* 체크표시 유니코드 사용 */
-	color: #99a1a7;
-	text-shadow: 1px 1px #fff;
-	background: #e9ecee;
-	border-color: #adb8c0;
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
-		rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-}
 </style>
 </th:block>
 
@@ -150,93 +99,182 @@
 
 		}
 	</script>
+	<script>
+		$(document).ready(function() {
+			$('#sub').click(function() {
+				/* 		var etp_nm=$("#etp_nm").val();
+						var etp_license_no=$("#etp_license_no").val();
+						var etp_ph_no=$("#etp_ph_no").val();
+						var etp_email=$("#etp_email").val();
+						var etp_addr=$("#etp_addr").val();
+						var etp_addr2=$("#etp_addr2").val();
+						var fileButton=$("fileButton").val();
+						var etp_content=$("#etp_content").val();	
+				 */
+				var Lat = $("#Lat").val();
+				var Lnt = $("#Lnt").val();
+				var items = [];
+				$('input[name="title"]:checkbox:checked').each(function() {
+					items.push($(this).val());
+				});
+
+				
+				var a = new Object();
+				var b = new Array();
+				
+				a.etp_nm = $("#etp_nm").val();
+				a.etp_license_no = $("#etp_license_no").val();
+				a.etp_ph_no = $("#etp_ph_no").val();
+				a.etp_email = $("#etp_email").val();
+				a.etp_addr = $("#etp_addr").val();
+				a.etp_addr2 = $("#etp_addr2").val();
+				a.fileButton = $("#fileButton").val();
+				a.etp_content = $("#etp_content").val();
+				a.etp_content = $("#etp_content").val();
+				a.etp_lnt = $("#Lnt").val();
+				a.etp_lat = $("#Lat").val();
+				a.category = items;
+				
+				b.push(a);
+				
+
+				alert("뜨냐");
+				$.ajax({
+					url : "/etphospital",
+					type : "POST",
+					dataType : "json",
+					contentType: 'application/json; charset=utf-8',
+					data : JSON.stringify(b),
+					success : function(data) {
+						alert("호ㅓ우");
+					}
+
+				}); // ajax END 
+			});
+		});
+	</script>
 </th:block>
 
 <th:block layout:fragment="contents">
 
 
 	<div class="main_div">
-		<form action="/etpApply" method="post">
-			<input type="text" id="Lat" style="display: none;" name="etp_lat"
-				value="1"></input> <input type="text" id="Lnt"
-				style="display: none;" name="etp_lnt" value="2"></input>
-			<div class="left_div">
-				<!-- 업체 선택 -->
-				<label class="title_label">병원 업체 신청</label> <br /> <br /> <br />
-				<label th:if="${session.user != null}" style="display: none;">
-					<input th:value="${session.user.user_id}" name="user_id">
-				</label> <label class="title_label">업체 이름</label><br />
-				<!-- 업체 이름 -->
-				<div class="form-label-group a_text_g">
-					<input class="form-control" type="text" id="etp_nm" name="etp_nm" />
-					<!-- 			<label class="label_name">업체 이름</label> -->
-				</div>
-				<br /> <br /> <label class="title_label">사업자 번호</label><br />
-				<!-- 사업자 번호 -->
-				<div class="form-label-group a_text_g">
-					<input class="form-control" type="text" id="etp_license_no"
-						name="etp_license_no" maxlength="10">
-					<!-- 			<label class="label_name">사업자 번호</label> -->
-				</div>
-				<br /> <br /> <label class="title_label">업체 대표 번호</label><br />
-				<!-- 업체 대표 번호 -->
-				<div class="form-label-group a_text_g">
-					<input class="form-control" type="text" id="etp_ph_no"
-						name="etp_ph_no" maxlength="12">
-					<!-- 			<label class="label_name">10자리</label> -->
-				</div>
-				<br /> <br /> <label class="title_label">업체 이메일</label><br />
-				<!-- 업체 이메일 -->
-				<div class="form-label-group a_text_g">
-					<input class="form-control" type="text" id="etp_email"
-						name="etp_email">
-					<!-- 			<label class="label_name" >업체 이메일</label> -->
-				</div>
-				<br /> <br /> <label class="title_label">업체 주소</label><br />
-				<!-- 업체 주소 -->
-				<div class="form-label-group a_text_g">
-					<input class="form-control" type="text" id="etp_addr"
-						name="etp_addr" onclick="address_code()" onchange="changeaddr()">
-					<label class="labe_name">우편번호 검색을 해주세요</label>
-				</div>
-				<!-- 상세 주소 -->
-				<div class="form-label-group a_text_g">
-					<input class="form-control" type="text" id="etp_addr2"><br>
-					<label>상세 주소</label>
-				</div>
-				<br /> <br /> <label class="title_label">자격증사진</label><br />
-				<!-- 업체 대표 번호 -->
-				<input type="file" value="upload" class="foo" id="fileButton" /> <br />
-				<br />
+		<input type="text" id="Lat" style="display: none;" name="etp_lat"
+			value="1"></input> <input type="text" id="Lnt" style="display: none;"
+			name="etp_lnt" value="2"></input>
+
+		<div class="left_div">
+			<!-- 업체 선택 -->
+			<label class="title_label">병원 업체 신청</label> <br /> <br /> <br /> <label
+				th:if="${session.user != null}" style="display: none;"> <input
+				th:value="${session.user.user_id}" name="user_id">
+			</label> <label class="title_label">업체 이름</label><br />
+			<!-- 업체 이름 -->
+			<div class="form-label-group a_text_g">
+				<input class="form-control" type="text" id="etp_nm" name="etp_nm" />
+				<!-- 			<label class="label_name">업체 이름</label> -->
 			</div>
-			<!-- left_div END -->
-
-			<div class="right_div">
-
-				<br /> <br /> <label class="title_label">진료과목</label><br />
-
-			
-				<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-		<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-				<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-						<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-								<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-										<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-												<div class="checks"> <input type="checkbox" id="ex_chk"> <label for="ex_chk">체크박스</label> </div>
-
-
-				<br /> <br /> <label class="title_label">업체 소개</label>
-				<!-- 업체 소개 -->
-				<div class="form-label-group">
-					<textarea style="font-size: 2em;" class="form-control"
-						id="etp_content" name="etp_content" rows="10" cols="50"
-						placeholder="업체 소개"></textarea>
-				</div>
-				<br /> <input class="btn btn-primary" type="submit" value="신청"
-					id="sub">
+			<br /> <br /> <label class="title_label">사업자 번호</label><br />
+			<!-- 사업자 번호 -->
+			<div class="form-label-group a_text_g">
+				<input class="form-control" type="text" id="etp_license_no"
+					name="etp_license_no" maxlength="10">
+				<!-- 			<label class="label_name">사업자 번호</label> -->
 			</div>
-			<!-- right_div END -->
-		</form>
+			<br /> <br /> <label class="title_label">업체 대표 번호</label><br />
+			<!-- 업체 대표 번호 -->
+			<div class="form-label-group a_text_g">
+				<input class="form-control" type="text" id="etp_ph_no"
+					name="etp_ph_no" maxlength="12">
+				<!-- 			<label class="label_name">10자리</label> -->
+			</div>
+			<br /> <br /> <label class="title_label">업체 이메일</label><br />
+			<!-- 업체 이메일 -->
+			<div class="form-label-group a_text_g">
+				<input class="form-control" type="text" id="etp_email"
+					name="etp_email">
+				<!-- 			<label class="label_name" >업체 이메일</label> -->
+			</div>
+			<br /> <br /> <label class="title_label">업체 주소</label><br />
+			<!-- 업체 주소 -->
+			<div class="form-label-group a_text_g">
+				<input class="form-control" type="text" id="etp_addr"
+					name="etp_addr" onclick="address_code()" onchange="changeaddr()">
+				<label class="labe_name">우편번호 검색을 해주세요</label>
+			</div>
+			<!-- 상세 주소 -->
+			<div class="form-label-group a_text_g">
+				<input class="form-control" type="text" id="etp_addr2"><br>
+				<label>상세 주소</label>
+			</div>
+			<br /> <br /> <label class="title_label">자격증사진</label><br />
+			<!-- 업체 대표 번호 -->
+			<input type="file" value="upload" class="foo" id="fileButton" /> <br />
+			<br />
+		</div>
+		<!-- left_div END -->
+
+		<div class="right_div">
+
+			<br /> <br /> <label class="title_label">진료과목</label><br />
+
+			<!-- Default inline 1-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline1" name="title" value="종합"> <label
+					class="custom-control-label" for="defaultInline1">종합</label>
+			</div>
+
+			<!-- Default inline 2-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline2" name="title" value="내과"> <label
+					class="custom-control-label" for="defaultInline2">내과</label>
+			</div>
+
+			<!-- Default inline 3-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline3" name="title" value="외과"> <label
+					class="custom-control-label" for="defaultInline3">외과</label>
+			</div>
+			<!-- Default inline 3-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline4" name="title" value="안과"> <label
+					class="custom-control-label" for="defaultInline4">안과</label>
+			</div>
+			<!-- Default inline 3-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline5" name="title" value="피부과"> <label
+					class="custom-control-label" for="defaultInline5">피부과</label>
+			</div>
+			<!-- Default inline 3-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline6" name="title" value="치과"> <label
+					class="custom-control-label" for="defaultInline6">치과</label>
+			</div>
+			<!-- Default inline 3-->
+			<div class="custom-control custom-checkbox custom-control-inline">
+				<input type="checkbox" class="custom-control-input"
+					id="defaultInline7" name="title" value="산과"> <label
+					class="custom-control-label" for="defaultInline7">산과</label>
+			</div>
+
+			<br /> <br /> <label class="title_label">업체 소개</label>
+			<!-- 업체 소개 -->
+			<div class="form-label-group">
+				<textarea style="font-size: 2em;" class="form-control"
+					id="etp_content" name="etp_content" rows="10" cols="50"
+					placeholder="업체 소개"></textarea>
+			</div>
+			<br />
+			<button class="btn btn-primary" id="sub">신청</button>
+		</div>
+		<!-- right_div END -->
+
 	</div>
 	<!-- main_div END -->
 </th:block>

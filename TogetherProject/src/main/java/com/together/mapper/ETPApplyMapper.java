@@ -3,6 +3,7 @@ package com.together.mapper;
 import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalcategoryVO;
 
 public interface ETPApplyMapper {
 	// 업체 신청 함수 맵핑
@@ -17,4 +18,6 @@ public interface ETPApplyMapper {
 	
 	// 업체 상세 정보 인서트 함수 맵핑
 	public int ent_info(String code);
+
+	public int ent_category(HospitalcategoryVO hospitalcategoryVO);
 }

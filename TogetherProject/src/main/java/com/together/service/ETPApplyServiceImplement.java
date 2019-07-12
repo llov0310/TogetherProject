@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalcategoryVO;
 import com.together.mapper.ETPApplyMapper;
 
 import lombok.AllArgsConstructor;
@@ -48,6 +49,12 @@ public class ETPApplyServiceImplement implements ETPApplyService{
 	public int ent_info(String code) {
 		// TODO Auto-generated method stub
 		return mapper.ent_info(code);
+	}
+
+	@Override
+	public int ent_category(HospitalcategoryVO hospitalcategoryVO) {
+		// TODO Auto-generated method stub
+		return mapper.ent_category(hospitalcategoryVO);
 	}
 
 	
