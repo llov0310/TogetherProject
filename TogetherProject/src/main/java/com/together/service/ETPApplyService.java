@@ -3,6 +3,7 @@ package com.together.service;
 import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.EnterpriseattachVO;
 import com.together.domain.HospitalcategoryVO;
 
 public interface ETPApplyService {
@@ -20,4 +21,6 @@ public interface ETPApplyService {
 	public int ent_info(String code);
 
 	public int ent_category(HospitalcategoryVO hospitalcategoryVO);
+
+	public int ent_attach(EnterpriseattachVO enterpriseattachVO);
 }

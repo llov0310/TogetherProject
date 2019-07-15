@@ -28,6 +28,7 @@ import com.google.code.geocoder.model.GeocoderResult;
 import com.google.code.geocoder.model.GeocoderStatus;
 import com.google.code.geocoder.model.LatLng;
 import com.together.domain.EnterpriseVO;
+import com.together.domain.EnterpriseattachVO;
 import com.together.domain.HospitalcategoryVO;
 import com.together.domain.MemberVO;
 import com.together.service.CustomerService;
@@ -130,7 +131,7 @@ public class ETPApplyController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/etphospital", method = RequestMethod.POST)
-	public JSONObject etphospital(EnterpriseVO EnterpriseVO, HospitalcategoryVO HospitalcategoryVO, HttpServletRequest request, HttpServletResponse response
+	public JSONObject etphospital(EnterpriseVO EnterpriseVO, HospitalcategoryVO HospitalcategoryVO,EnterpriseattachVO EnterpriseattachVO, HttpServletRequest request, HttpServletResponse response
 			,@RequestBody String param) {
 		
 		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id(); 	//세선의 아이디를 작성자로 사용하기 위해서
@@ -179,8 +180,13 @@ public class ETPApplyController {
 			System.out.println(HospitalcategoryVO);
 		
 		}
+		EnterpriseattachVO.setEtp_cd(code);
+		EnterpriseattachVO.setEtp_ex_path((String)paymentMap.get(0).get("fileButton"));
+		System.out.println(EnterpriseattachVO);
+		int upimg = etpApplyService.ent_attach(EnterpriseattachVO);
 		
 		JSONObject json = JSONObject.fromObject(map);
+		map.put("result", ins3);
 		System.out.println(json);
 		
 		return json;
