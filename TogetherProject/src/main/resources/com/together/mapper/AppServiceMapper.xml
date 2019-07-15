@@ -157,5 +157,88 @@
 	and ca_cd = (select ca_cd from procategory where ca_name='기타')
 	</select>
 	
+	<insert id="f_orders" parameterType="com.together.domain.OrdersVO">
+		insert into orders 
+		(or_cd,user_id,pd_cd,or_dt,or_dt2,th_dt,or_price,or_stat,or_check)
+		values
+		(
+		ORDER_SEQ.nextval,
+		#{user},
+		(select pd_cd from product where pd_nm=#{pro} and etp_cd=#{code}),
+		to_timestamp(#{day},'YYYY/MM/DD HH24:MI'),
+		to_timestamp(to_char(to_timestamp(#{day},'YYYY/MM/DD HH24:MI')+1/24,'YYYY/MM/DD HH24:MI'),'YYYY/MM/DD HH24:MI'),
+		systimestamp,
+		#{price},
+		1,
+		1)
+	</insert>
+	
+	<select id="resultOrder" resultType="com.together.domain.EnterpriseVO">
+	select e.etp_nm,to_char(o.or_dt,'YYYY/MM/DD HH24:MI') chardate,to_char(o.or_dt2,'YYYY/MM/DD HH24:MI') chardate2,
+	to_char(o.th_dt,'YYYY/MM/DD HH24:MI') charthisdate,o.or_price,o.or_stat,o.or_cd,p.pd_nm from orders o , enterprise e,product p 
+	where e.etp_cd=#{code} 
+	and o.user_id=#{user} 
+	and o.or_dt= to_timestamp(#{day},'YYYY/MM/DD HH24:MI')
+	and p.pd_cd = o.pd_cd
+	order by o.or_cd
+	</select>
+	
+	<select id="getHospitalList" resultType="com.together.domain.EnterpriseVO">
+	select DISTINCT e.etp_cd, e.etp_addr,e.etp_nm,
+	e.etp_lat,e.etp_lnt,i.etp_if_img_path,i.etp_if_time1,
+	i.etp_if_time2,to_char(e.etp_content) etp_content
+	from enterprise e, hospitalcategory h, enterprise_info i
+	where i.etp_cd = e.etp_cd
+	and h.etp_cd = e.etp_cd
+	and (
+	h.etp_ct = #{item1} or h.etp_ct = #{item2} or
+	h.etp_ct = #{item3} or h.etp_ct = #{item4} or
+	h.etp_ct = #{item5} or h.etp_ct = #{item6} or
+	h.etp_ct = #{item7}
+	)
+	order by e.etp_cd
+	</select>
+	
+	<select id="detail_getHosList" resultType="com.together.domain.EnterpriseVO">
+	select e.etp_cd,i.etp_if_time1,i.etp_if_time2,i.etp_if_hos_time
+	from enterprise e, enterprise_info i
+	where 
+	e.etp_cd = i.etp_cd
+	and
+	e.etp_cd = (select etp_cd from enterprise where etp_nm= #{etp_nm})
+	</select>
+	
+	<select id="hospital_orders" resultType="com.together.domain.HospitalOrdersVO">
+	select to_char(hor_dt_f,'YYYY-MM-DD HH24:MI') hor_dt_cf , to_char(hor_dt_l,'YYYY-MM-DD HH24:MI') hor_dt_cl 
+	from hospitalorders
+	where etp_cd = #{code}
+	and hor_dt_f between to_timestamp(#{day1},'YYYY-MM-DD HH24:MI') and to_timestamp(#{day2},'YYYY-MM-DD HH24:MI')
+	</select>
+	
+	<insert id="HosOrders" parameterType="com.together.domain.HospitalOrdersVO">
+	insert into hospitalorders values
+	('HO'||to_char(sysdate,'YYYYMMDD')||HOS_ORDER_SEQ.nextval,
+	(select etp_cd from enterprise where etp_nm = #{etp_cd}),
+	#{user_id},
+	to_timestamp(#{hor_dt_cf},'YYYY-MM-DD HH24:MI'),
+	to_timestamp(#{hor_dt_cl},'YYYY-MM-DD HH24:MI'),
+	1,
+	1,
+	#{hor_pet_cd},
+	#{hor_detail})
+	</insert>
+	
+	<select id="getHor_cd" resultType="com.together.domain.HospitalOrdersVO">
+	select hor_cd from hospitalorders
+	where etp_cd = (select etp_cd from enterprise where etp_nm=#{etp_cd})
+	and hor_dt_f = to_timestamp(#{hor_dt_cf},'YYYY/MM/DD HH24:MI')
+	</select>
+	
+	<insert id="HosDetail" parameterType="com.together.domain.HospitalOrdersVO">
+	insert into hospitalordersdetail values
+	('DE'||HOS_DETAIL_SEQ.nextval,#{hor_cd},#{canser})
+	</insert>
+	
+	
 	
 </mapper>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
 import com.together.domain.MemberVO;
 import com.together.domain.ReviewBoardVO;
 import com.together.mapper.AppServiceMapper;
@@ -134,6 +135,57 @@ public class AppServiceImplement implements AppService {
 	public ArrayList<EnterpriseVO> funeral4(String decodeResult) {
 		// TODO Auto-generated method stub
 		return mapper.funeral4(decodeResult);
+	}
+
+	@Override
+	public int f_orders(String user_id, String pro_name, String price, String order_day,String code) {
+		// TODO Auto-generated method stub
+		return mapper.f_orders(user_id,pro_name,price,order_day,code);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> resultOrders(String order_day, String code, String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.resultOrder(order_day,code,user_id);
+	}
+
+	
+	@Override
+	public ArrayList<EnterpriseVO> getHospitalList(String day, String item1, String item2, String item3, String item4,
+			String item5, String item6, String item7) {
+		// TODO Auto-generated method stub
+		return mapper.getHospitalList(day,item1,item2,item3, item4,
+				item5,item6, item7);
+	}
+
+	@Override
+	public ArrayList<EnterpriseVO> detail_getHosList(String etp_nm) {
+		// TODO Auto-generated method stub
+		return mapper.detail_getHosList(etp_nm);
+	}
+
+	@Override
+	public ArrayList<HospitalOrdersVO> hospital_orders(String etp_cd, String s_time1, String s_time2) {
+		// TODO Auto-generated method stub
+		return mapper.hospital_orders(etp_cd,s_time1,s_time2);
+	}
+
+	@Override
+	public int HosOrders(HospitalOrdersVO insVO) {
+		// TODO Auto-generated method stub
+		return mapper.HosOrders(insVO);
+	}
+
+	@Override
+	public ArrayList<HospitalOrdersVO> getHor_cd(HospitalOrdersVO insVO) {
+		// TODO Auto-generated method stub
+		return mapper.getHor_cd(insVO);
+	}
+
+	@Override
+	public int HosDetail(String hor_cd, String canser) {
+		// TODO Auto-generated method stub
+		return mapper.HosDetail(hor_cd,canser);
 	}
 
 }

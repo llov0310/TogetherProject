@@ -6,7 +6,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.protobuf.Empty;
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
 import com.together.domain.MemberVO;
 import com.together.domain.ReviewBoardVO;
 import com.together.service.AppService;
@@ -56,6 +60,8 @@ public class TogetherAppController {
 		   
 		   ArrayList<EnterpriseVO> pro_first_list = new ArrayList<EnterpriseVO>();
 		   
+		   
+		   //나중에 저 address가 서울/대구/지역명이면 배열에서 비교받아 아래구문 실행 아니면 다른 sql문 실행
 		   list = App.hotelList(in,out,Address);
 		   
 		   
@@ -116,7 +122,7 @@ public class TogetherAppController {
 		   	String etpfirst = result[2];
 		   	String etplast = result[3];
 		   	
-//		   	System.out.println(decodeResult);
+		   	
 		   	
 		   	
 		   ArrayList<EnterpriseVO> list = new ArrayList<EnterpriseVO>();
@@ -128,8 +134,14 @@ public class TogetherAppController {
 		   
 		   ArrayList<EnterpriseVO> product = new ArrayList<EnterpriseVO>();
 		   
+		   
+//		   System.out.println(etpcode+","+etpfirst+","+etplast);
+		   
+		   
 		   product = App.StockList(etpcode,etpfirst,etplast); //상품 리스트
 		   
+		  
+		   System.out.println(product);
 //		   System.out.println(product); 
 		   
 		   //업체 리뷰
@@ -527,6 +539,477 @@ public class TogetherAppController {
 		}
 		
 		
-	
-	
+		@ResponseBody
+		   @RequestMapping(value = "/funeral_order", method=RequestMethod.POST)
+		   public JSONObject funeral_orders(@RequestBody String a) {
+		
+			
+			System.out.println("주문요청왓음");
+			String decodeResult = URLDecoder.decode(a);
+			System.out.println(decodeResult);
+			JSONObject FuneralMap = new JSONObject();
+			FuneralMap = JSONObject.fromObject(decodeResult);
+
+			
+			JSONArray jarry = JSONArray.fromObject(FuneralMap.get("result"));
+			
+			for(int i=0; i<jarry.size(); i++) {
+			JSONObject jsonObject = jarry.getJSONObject(i);
+			
+			String user_id = jsonObject.optString("user");
+			String pro_name = jsonObject.optString("name");
+			String price = jsonObject.optString("price");
+			String order_day = jsonObject.optString("day")+" "+jsonObject.optString("time");
+			String code = jsonObject.optString("code");
+			
+			
+			int f_orders = App.f_orders(user_id,pro_name,price,order_day,code);
+			
+			}
+			
+			//변수값을 0번째꺼만 받아와도 되기때문에 코드값 선언
+			JSONObject jsonObject2 = jarry.getJSONObject(0);
+			String user_id = jsonObject2.optString("user");
+			String code = jsonObject2.optString("code");
+			String order_day = jsonObject2.optString("day")+" "+jsonObject2.optString("time");
+			
+			//현재 값을 받아오는 작업은 끝내놓음 
+			JSONObject jobj = new JSONObject(); //최종적인 반환형태
+			JSONArray Arrayobj = new JSONArray(); //최종 어레이
+			
+			
+			ArrayList<EnterpriseVO> list = App.resultOrders(order_day,code,user_id);
+			for(int f=0; f<list.size(); f++) {
+			Map<String,Object> map = new HashMap<String,Object>(); // map
+			map.put("etp_nm", list.get(0).getEtp_nm());
+			map.put("order_cd",list.get(0).getOr_cd());
+			map.put("or_dt",list.get(0).getChardate());
+			map.put("or_dt2",list.get(0).getChardate2());
+			map.put("stat",list.get(0).getOr_stat());
+			map.put("pro_nm",list.get(f).getPd_nm());
+			map.put("th_dt",list.get(0).getCharthisdate());
+			map.put("price",list.get(f).getOr_price());
+			Arrayobj.add(map);
+			}
+			jobj.put("result",Arrayobj);
+			
+			System.out.println(jobj);
+			return jobj;
+			
+		
+		}
+		
+		
+		@ResponseBody
+		   @RequestMapping(value = "/Hospital_list", method=RequestMethod.POST)
+		   public JSONObject Hospital_list(@RequestBody String a) {
+		
+			
+			System.out.println("주문요청왓음");
+			String decodeResult = URLDecoder.decode(a);
+			System.out.println(decodeResult);
+			JSONObject HospitalMap = new JSONObject();
+			HospitalMap = JSONObject.fromObject(decodeResult);
+
+			
+			JSONArray jarry = JSONArray.fromObject(HospitalMap.get("result"));
+			
+			ArrayList<EnterpriseVO> list = new ArrayList<EnterpriseVO>();
+			
+			String item1 = "";
+			String item2 = "";
+			String item3 = "";
+			String item4 = "";
+			String item5 = "";
+			String item6 = "";
+			String item7 = "";
+			
+			
+			if(jarry.size() == 1) {
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				item1 = jsonObject.optString("category");
+				
+			
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+					System.out.println(list);
+			
+			}else if(jarry.size() == 2) {
+				
+				ArrayList<String> count = new ArrayList<String>();
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				
+				for(int i=0; i<jarry.size(); i++) {
+					JSONObject Jcount = jarry.getJSONObject(i);
+					
+					count.add(Jcount.optString("category"));
+					
+				}
+				
+				item1 = count.get(0);
+				item2 = count.get(1);
+				
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+				System.out.println(list);
+				
+			}else if(jarry.size() == 3) {
+				
+				ArrayList<String> count = new ArrayList<String>();
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				
+				for(int i=0; i<jarry.size(); i++) {
+					JSONObject Jcount = jarry.getJSONObject(i);
+					
+					count.add(Jcount.optString("category"));
+					
+				}
+				
+				item1 = count.get(0);
+				item2 = count.get(1);
+				item3 = count.get(2);
+				
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+				System.out.println(list);
+			}else if(jarry.size() == 4) {
+				
+				ArrayList<String> count = new ArrayList<String>();
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				
+				for(int i=0; i<jarry.size(); i++) {
+					JSONObject Jcount = jarry.getJSONObject(i);
+					
+					count.add(Jcount.optString("category"));
+					
+				}
+				
+				item1 = count.get(0);
+				item2 = count.get(1);
+				item3 = count.get(2);
+				item4 = count.get(3);
+				
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+				System.out.println(list);
+				
+			}else if(jarry.size() == 5) {
+				
+				ArrayList<String> count = new ArrayList<String>();
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				
+				for(int i=0; i<jarry.size(); i++) {
+					JSONObject Jcount = jarry.getJSONObject(i);
+					
+					count.add(Jcount.optString("category"));
+					
+				}
+				
+				item1 = count.get(0);
+				item2 = count.get(1);
+				item3 = count.get(2);
+				item4 = count.get(3);
+				item5 = count.get(4);
+				
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+				System.out.println(list);
+				
+			}else if(jarry.size() == 6) {
+				
+				ArrayList<String> count = new ArrayList<String>();
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				
+				for(int i=0; i<jarry.size(); i++) {
+					JSONObject Jcount = jarry.getJSONObject(i);
+					
+					count.add(Jcount.optString("category"));
+					
+				}
+				
+				item1 = count.get(0);
+				item2 = count.get(1);
+				item3 = count.get(2);
+				item4 = count.get(3);
+				item5 = count.get(4);
+				item6 = count.get(5);
+				
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+				System.out.println(list);
+				
+			}else if(jarry.size() == 7) {
+				
+				ArrayList<String> count = new ArrayList<String>();
+				
+				JSONObject jsonObject = jarry.getJSONObject(0);
+				String Day = jsonObject.optString("Day");
+				
+				for(int i=0; i<jarry.size(); i++) {
+					JSONObject Jcount = jarry.getJSONObject(i);
+					
+					count.add(Jcount.optString("category"));
+					
+				}
+				
+				item1 = count.get(0);
+				item2 = count.get(1);
+				item3 = count.get(2);
+				item4 = count.get(3);
+				item5 = count.get(4);
+				item6 = count.get(5);
+				
+				list = App.getHospitalList(Day,item1,item2,item3,item4,item5,item6,item7);
+				
+				System.out.println(list);
+				
+			}
+
+			JSONObject jobj = new JSONObject(); //최종적인 반환형태
+			JSONArray Arrayobj = new JSONArray(); //최종 어레이
+			
+			ArrayList<ReviewBoardVO> r_list = new ArrayList<ReviewBoardVO>();
+		
+			for(int f=0; f<list.size(); f++) {
+			Map<String,Object> map = new HashMap<String,Object>(); // map
+			map.put("etp_cd", list.get(f).getEtp_cd());
+			map.put("etp_addr",list.get(f).getEtp_addr());
+			map.put("etp_nm",list.get(f).getEtp_nm());
+			map.put("etp_lat",list.get(f).getEtp_lat());//위도
+			map.put("etp_lnt",list.get(f).getEtp_lnt()); //경도
+			map.put("if_time1",list.get(f).getEtp_if_time1());
+			map.put("if_time2",list.get(f).getEtp_if_time2());
+			map.put("etp_img_path",list.get(f).getEtp_if_img_path());
+			map.put("etp_content",list.get(f).getEtp_content());
+			
+			
+			r_list = App.reviewcount(list.get(f).getEtp_cd());
+			
+			
+			
+			   	for(int r=0; r<r_list.size(); r++) {
+			   		if(r_list.get(0).getRb_avg() == 0) {
+			   			map.put("avg","0.0");
+			   		}else {
+			   		map.put("avg",r_list.get(f).getRb_avg());
+			   		}
+			   	}
+			   	
+			
+			
+			Arrayobj.add(map);
+			}
+			jobj.put("result",Arrayobj);
+			
+			System.out.println(jobj);
+			return jobj;
+			
+		
+		}
+		
+		@ResponseBody
+		   @RequestMapping(value = "/Hospital_detail", method=RequestMethod.POST)
+		   public JSONObject Hospital_detail(@RequestBody String a) {
+		
+			String decodeResult = URLDecoder.decode(a);
+			System.out.println(decodeResult);
+			
+					
+			//현재 값을 받아오는 작업은 끝내놓음 
+			JSONObject jobj = new JSONObject(); //최종적인 반환형태
+			JSONArray Arrayobj = new JSONArray(); //최종 어레이
+			Map<String,Object> map2 = new HashMap<String,Object>(); // map
+			
+			
+			JSONArray Arrayobj1 = new JSONArray(); //최종 어레이
+			JSONArray Arrayobj2 = new JSONArray(); //최종 어레이
+			
+			
+			ArrayList<EnterpriseVO> list = App.funeralGetList(decodeResult); //병원업체 정보 불러오기
+			ArrayList<ReviewBoardVO> r_list = App.funeral_review(decodeResult); //병원업체 리뷰
+			
+			System.out.println(list);
+			System.out.println(r_list);
+			
+			for(int i=0; i<list.size(); i++) {
+			Map<String,Object> map = new HashMap<String,Object>(); // map
+			
+			   map.put("etp_nm",list.get(0).getEtp_nm());
+			   map.put("etp_addr",list.get(0).getEtp_addr());
+			   map.put("etp_ph_no",list.get(0).getEtp_ph_no());
+			   map.put("etp_email",list.get(0).getEtp_email());
+			   map.put("etp_lat",list.get(0).getEtp_lat());
+			   map.put("etp_lnt",list.get(0).getEtp_lnt());
+			   map.put("etp_info",list.get(0).getEtp_if_info());
+			   map.put("etp_intro",list.get(0).getEtp_if_intro());
+			   map.put("etp_time",list.get(0).getEtp_if_time1() + "~" + list.get(0).getEtp_if_time2());
+			   map.put("etp_user",list.get(0).getUser_nm());
+			   map.put("etp_img",list.get(0).getEtp_if_img_path());
+			   map.put("etp_license",list.get(0).getEtp_license_no());
+			   
+			Arrayobj1.add(map);
+			}
+			
+			map2.put("info",Arrayobj1);
+			
+			
+			
+			if(r_list.size() == 0) {
+				Map<String,Object> map1 = new HashMap<String,Object>(); // map
+				   map1.put("user_id","사용자가 없습니다");
+				   map1.put("rb_contents","없음");
+				   map1.put("user_nm","없음");
+				   map1.put("rb_dt","없음");
+				   map1.put("rb_avg","없음");
+				  
+				   Arrayobj2.add(map1);
+			}else {
+			
+				for(int i=0; i<r_list.size(); i++) {
+					Map<String,Object> map1 = new HashMap<String,Object>(); // map
+					   map1.put("user_id",r_list.get(i).getUser_id());
+					   map1.put("rb_contents",r_list.get(i).getRb_contents());
+					   map1.put("user_nm",r_list.get(i).getUser_nm());
+					   map1.put("rb_dt",r_list.get(i).getRb_dt_char());
+					   map1.put("rb_avg",r_list.get(i).getRb_avg());
+					  
+				Arrayobj2.add(map1);
+				}
+				
+			}
+			map2.put("review",Arrayobj2);
+			
+			
+			
+			jobj.put("result", map2);
+			
+			System.out.println(jobj);
+			return jobj;
+			
+		
+		}
+		@ResponseBody
+		   @RequestMapping(value = "/Hospital_timeCheck", method=RequestMethod.POST)
+		   public JSONObject Hospital_timeCheck(@RequestBody String a) {
+		
+			String decodeResult = URLDecoder.decode(a);
+			System.out.println(decodeResult);
+			
+			String result[] = decodeResult.split("=");
+			
+			String etp_nm = result[0];
+			String date = result[1];
+			
+			ArrayList<EnterpriseVO> list = App.detail_getHosList(etp_nm);
+			
+			String etp_cd = list.get(0).getEtp_cd();
+			String etp_time1 = list.get(0).getEtp_if_time1();
+			String etp_time2 = list.get(0).getEtp_if_time2();
+			String time = list.get(0).getEtp_if_hos_time();
+			
+			String s_time1 = date+" "+etp_time1;
+			String s_time2 = date+" "+etp_time2;
+					
+			ArrayList<HospitalOrdersVO> orders = App.hospital_orders(etp_cd,s_time1,s_time2);
+			
+			
+			
+			//현재 값을 받아오는 작업은 끝내놓음 
+			JSONObject jobj = new JSONObject(); //최종적인 반환형태
+			JSONArray Arrayobj = new JSONArray(); //최종 어레이
+			
+			System.out.println(orders);
+			
+			if(orders.isEmpty()) {
+				
+				
+				Map<String,Object> map = new HashMap<String,Object>(); // map
+				map.put("TimeSet",time);
+				map.put("etp_time",etp_time1+"~"+etp_time2);
+				Arrayobj.add(map);
+			
+			}else {
+				
+				for(int i=0; i<orders.size(); i++) {
+					Map<String,Object> map = new HashMap<String,Object>(); // map
+					map.put("CheckTime1",orders.get(i).getHor_dt_cf());
+					map.put("CheckTime2",orders.get(i).getHor_dt_cl());
+					map.put("TimeSet",time);
+					map.put("etp_time",etp_time1+"~"+etp_time2);
+					Arrayobj.add(map);
+				}
+			}
+			
+			jobj.put("result", Arrayobj);
+			
+			
+			System.out.println(jobj);
+			return jobj;
+			
+		
+		}
+		
+		
+		@ResponseBody
+		   @RequestMapping(value = "/Hospital_ordersSet", method=RequestMethod.POST)
+		   public JSONObject Hospital_ordersSet(@RequestBody String a) {
+		
+			String decodeResult = URLDecoder.decode(a);
+			
+			
+			JSONObject HospitalMap = new JSONObject();
+			HospitalMap = JSONObject.fromObject(decodeResult);
+			System.out.println(HospitalMap);
+			
+			String user_id = HospitalMap.optString("user_id");
+			String TimeSet[] = HospitalMap.optString("Time").split("~");
+			String Time = HospitalMap.optString("date")+" "+TimeSet[0];
+			String Time2 = HospitalMap.optString("date")+" "+TimeSet[1];
+			String petcode = HospitalMap.optString("petcode");
+			String etp_nm = HospitalMap.optString("etp_nm");
+			String editText = HospitalMap.optString("edit");
+			JSONArray CanserArray = HospitalMap.optJSONArray("Canser");
+			
+			HospitalOrdersVO InsVO = new HospitalOrdersVO();
+			InsVO.setUser_id(user_id);
+			InsVO.setEtp_cd(etp_nm); //서브쿼리를 통해 업체코드를 가져올것임
+			InsVO.setHor_pet_cd(petcode);
+			InsVO.setHor_detail(editText);
+			InsVO.setHor_dt_cf(Time);
+			InsVO.setHor_dt_cl(Time2);
+			
+			System.out.println(InsVO);
+			
+			int HospitalOrders = App.HosOrders(InsVO);
+			
+			ArrayList<HospitalOrdersVO> getHor_cd = App.getHor_cd(InsVO);
+			String Hor_cd = getHor_cd.get(0).getHor_cd();
+			//병적 사항 넣는곳
+			for(int i=0; i<CanserArray.size(); i++) {
+				JSONObject castJobj = CanserArray.getJSONObject(i);
+				String Canser = castJobj.optString("list");
+				int HospitalOrder_detail = App.HosDetail(Hor_cd,Canser);
+			}
+
+			//현재 값을 받아오는 작업은 끝내놓음 
+			JSONObject jobj = new JSONObject(); //최종적인 반환형태
+			jobj.put("result","success");
+			
+			return jobj;
+			
+		
+		}
+		
 }

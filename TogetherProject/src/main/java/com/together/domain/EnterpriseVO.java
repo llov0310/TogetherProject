@@ -34,6 +34,7 @@ public class EnterpriseVO {
 	private String etp_if_time1;
 	private String etp_if_time2;
 	private String etp_if_img_path;
+	private String etp_if_hos_time;
 	
 	
 	//업체 상품을볼때 필요한 변수
@@ -45,6 +46,7 @@ public class EnterpriseVO {
 	
 	
 	//주문리스트
+	private String or_cd;
 	private Timestamp or_dt;
 	private Timestamp or_dt2;
 	private Timestamp th_dt;
@@ -64,8 +66,17 @@ public class EnterpriseVO {
 	private int st_this_num;
 	
 	
-	//형변환
-	
+	//형변환	
 	private String if_intro;
 	private String if_info;
+	
+	
+	//병원 카테고리
+	private String etp_ct;
+	private int etp_no;
+	
+	
+	//병원 첨부파일
+	private String etp_ex_cd;
+	private String etp_ex_path;
 }

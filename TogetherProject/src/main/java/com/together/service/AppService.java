@@ -3,6 +3,7 @@ package com.together.service;
 import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
 import com.together.domain.MemberVO;
 import com.together.domain.ReviewBoardVO;
 
@@ -66,5 +67,30 @@ public interface AppService {
 	public ArrayList<EnterpriseVO> funeral2(String decodeResult);
 	public ArrayList<EnterpriseVO> funeral3(String decodeResult);
 	public ArrayList<EnterpriseVO> funeral4(String decodeResult);
+
+	
+	//장례상품 주문
+	public int f_orders(String user_id, String pro_name, String price, String order_day, String code);
+
+	//주문완료시 값을 보내주기위해 코드 셀렉트
+	public ArrayList<EnterpriseVO> resultOrders(String order_day, String code, String user_id);
+
+	
+	//병원 카테고리 검색별로 나타나는 리스트
+	public ArrayList<EnterpriseVO> getHospitalList(String day, String item1, String item2, String item3, String item4,
+			String item5, String item6, String item7);
+
+	//병원업체 최초로 정보 몇가지 가져오기
+	public ArrayList<EnterpriseVO> detail_getHosList(String etp_nm);
+
+	
+	//각병원의 예약가능시간을 조회하기
+	public ArrayList<HospitalOrdersVO> hospital_orders(String etp_cd, String s_time1, String s_time2);
+
+	public int HosOrders(HospitalOrdersVO insVO);
+
+	public ArrayList<HospitalOrdersVO> getHor_cd(HospitalOrdersVO insVO);
+
+	public int HosDetail(String hor_cd, String canser);
 
 }
