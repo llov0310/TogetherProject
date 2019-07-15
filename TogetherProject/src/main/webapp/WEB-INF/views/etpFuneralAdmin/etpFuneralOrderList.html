@@ -38,8 +38,8 @@
 									<td th:text="${order.ph_no}"></td>
 									
 									
-									<td><label th:text="${order.or_dt}" id="or_dt"></label><br> ~
-										<label th:text="${order.or_dt2}" id="or_dt2"></label></td>
+									<td><label th:text="${order.s_or_dt1}" id="or_dt"></label><br> ~
+										<label th:text="${order.s_or_dt2}" id="or_dt2"></label></td>
 									<td>
 										<div th:switch="${order.or_stat}">
 											<label th:case="'1'" style="color: black">예약 대기중</label> <label
@@ -90,9 +90,21 @@
 						
 			<div class="h" style="text-align: left;">
 				<h3>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">구매자 이름</span>
+					<span class="user_nm"></span>
+				</h3>
+				
+				<h3>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">연락처</span>
+					<span class="ph_no"></span>
+				</h3>
+				
+				<h3>
 					<span class="badge badge-dark bp_span_label" style="font-size:1em;">총 금액</span>
 					<span class="total_price"></span>
 				</h3>
+				
+				
 			</div>	
 			<hr/>
 	

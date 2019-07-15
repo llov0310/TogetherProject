@@ -21,71 +21,56 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script src="assets/js/sign.js"></script>
-	<script
-		src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	 <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </th:block>
 
 <th:block layout:fragment="contents">
-
-	<form action="/sign" method="post">
+	
+	<div id="signUp_div">
 		<h1>회원가입</h1>
 		<br/><br/>
 		
-		<!-- 아이디 -->
+		<!-- 아이디(이메일 형식) -->
 		<div class="form-inline form-group">
 			<label class="control-label" >아이디 : </label>
-			<input type="text" class="form-control input" id="id" name="user_id" />
+			<input type="text" class="form-control input" id="id_01" name="id_01" />@
+			<input type="text" class="form-control input" id="id_02" name="id_02" />
 		</div>
 		<br/>
 		
 		<!-- 이름 -->
 		<div class="form-inline form-group">
 			<label class="control-label" >이름 : </label>
-			<input type="text" class="form-control input" id="name" name="user_nm" />
+			<input type="text" class="form-control input" id="user_nm" name="user_nm" />
 		</div>
 		<br/>
 				
 		<!-- 비밀번호 -->
 		<div class="form-inline form-group">
 			<label class="control-label">비밀번호 : </label>
-			<input type="password" class="form-control input" id="password" name="password"/>
+			<input type="password" class="form-control input" id="password" name="password" placeholder="6자리 이상 입력"/>
 		</div>
 		<br/>
-		
-		<!-- 이메일 -->
-		<div class="form-inline form-group">
-			<label class="control-label">이메일 : </label>
-			<input type="text" class="form-control input" id="email" placeholder="ex)xxxx@naver.com" name="email"/>
-		</div>
-		<br/>
+
 
 		<!-- 휴대폰 번호 -->
 		<div class="form-inline form-group">
 			<label class="control-label">휴대폰 번호 : </label>
-			<input type="text" class="form-control input" id="ph" placeholder="01066667777" name="ph_no"/>
+			<input type="text" class="form-control input" id="ph_no" placeholder="01066667777" name="ph_no"/>
 		</div>
 		<br/>
 		
 		<!-- 생녀월일 기입-->
 		<div class="form-inline form-group">
 			<label class="control-label">생년월일 : </label>
-			<input type="text" class="form-control input" id="bir" placeholder="주민등록번호 앞자리  + 뒷자리 한자리" maxlength="7" name="birth_dt"/>
+			<input type="text" class="form-control input" id="birth_dt" placeholder="주민등록번호 앞자리  + 뒷자리 한자리" maxlength="7" name="birth_dt"/>
 		</div>
 		<br/>
 
-		<!-- 주소 -->
-		<div class="form-inline form-group">
-			<label class="control-label">주소 : </label>
-			<input type="text" class="form-control input input" id="sample4_roadAddress" placeholder="주소" name="addr_ji"/>
-			<input type="text" class="form-control input input" id="sample4_extraAddress" placeholder="동" name="addr_dong"/>
-			<input type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"/>
-		</div>
-		<br/><br/>
-		
-		<input type="submit" class="btn btn-primary submit_01" value="완료" />
-	</form>
+		<input type="button" class="btn btn-primary submit_01" id="signup" value="완료" />
+	</div>
 	<br>
 
 </th:block>

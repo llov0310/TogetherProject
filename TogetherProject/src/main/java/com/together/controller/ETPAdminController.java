@@ -87,40 +87,40 @@ public class ETPAdminController {
 	}
 	
 	// 업체 관리자 - 주문 현황 : 호텔 : SMS 서비스
-	@RequestMapping(value = "/SMS_Service" ,method = RequestMethod.POST)
-	   @ResponseBody
-	   public String SMS_Service(@RequestBody Map<String,Object> map, HttpSession session) {
-		
-		System.out.println(map);
-		
-		String alarm_content = (String)map.get("alarm_content");
-		String order_ph = (String)map.get("order_ph");
-		
-		String api_key = "NCSQ2XC4Y8XZNWUI";
-        String api_secret = "NUUYXN9PFYKWBZTQ8BON4ZMEFH4ULTTI";
-        Message coolsms = new Message(api_key, api_secret);
-        
-        // 4 params(to, from, type, text) are mandatory. must be filled
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("to", order_ph);
-        params.put("from", "01041524134");
-        if(alarm_content.length() <= 45)
-        params.put("type", "SMS");
-        else
-        params.put("type", "LMS");   
-        params.put("text", alarm_content);
-        params.put("app_version", "test app 1.2"); // application name and version
-
-        try {
-          JSONObject obj = (JSONObject) coolsms.send(params);
-          System.out.println(obj.toString());
-        } catch (CoolsmsException e) {
-          System.out.println(e.getMessage());
-          System.out.println(e.getCode());
-        }
-		
-		return "success";
-	}
+//	@RequestMapping(value = "/SMS_Service" ,method = RequestMethod.POST)
+//	   @ResponseBody
+//	   public String SMS_Service(@RequestBody Map<String,Object> map, HttpSession session) {
+//		
+//		System.out.println(map);
+//		
+//		String alarm_content = (String)map.get("alarm_content");
+//		String order_ph = (String)map.get("order_ph");
+//		
+//		String api_key = "NCSQ2XC4Y8XZNWUI";
+//        String api_secret = "NUUYXN9PFYKWBZTQ8BON4ZMEFH4ULTTI";
+//        Message coolsms = new Message(api_key, api_secret);
+//        
+//        // 4 params(to, from, type, text) are mandatory. must be filled
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        params.put("to", order_ph);
+//        params.put("from", "01041524134");
+//        if(alarm_content.length() <= 45)
+//        params.put("type", "SMS");
+//        else
+//        params.put("type", "LMS");   
+//        params.put("text", alarm_content);
+//        params.put("app_version", "test app 1.2"); // application name and version
+//
+//        try {
+//          JSONObject obj = (JSONObject) coolsms.send(params);
+//          System.out.println(obj.toString());
+//        } catch (CoolsmsException e) {
+//          System.out.println(e.getMessage());
+//          System.out.println(e.getCode());
+//        }
+//		
+//		return "success";
+//	}
 
 	// 업체 관리자 - 주문한 (예약)상품 팝업창에서 확인버튼 클릭 시 업데이트  : 호텔
 	@RequestMapping(value = "/etpOrderListCheck", method = RequestMethod.POST)
@@ -337,6 +337,11 @@ public class ETPAdminController {
 			@RequestParam String or_dt2, @RequestParam String etp_cd) {		
 		ArrayList<OrdersVO> selectDetail = new ArrayList<OrdersVO>();
 		//주문 상세 내역 select문
+		
+//		String s_or_dt = or_dt.substring(0,18);
+//		System.out.println(s_or_dt);
+		System.out.println(or_dt2);
+		
 		selectDetail = etpAdminService.selectDetail(or_dt, or_dt2, etp_cd);
 		 
 		
@@ -344,6 +349,27 @@ public class ETPAdminController {
 		System.out.println(selectDetail);
 		
 		return selectDetail;
+	}
+	
+	// 병원 예약 리스트
+	@RequestMapping(value="/etpHospitalBooksList", method=RequestMethod.GET)
+	public String etpHospitalBooksList(Model model, HttpServletRequest request, HttpSession session) {
+//		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<EnterpriseVO> orderlist = new ArrayList<EnterpriseVO>();
+//
+//		ArrayList<EnterpriseVO> ent_list = new ArrayList<EnterpriseVO>();
+//
+//		ent_list = etpAdminService.textbox(sess);
+//
+//		String code = ent_list.get(0).getEtp_cd();
+//
+//		orderlist = etpAdminService.etpFuneralOrderList(code);
+//		System.out.println("주문 리스트 확인 : "+orderlist);
+//		
+//		model.addAttribute("orderLists", orderlist);
+		
+		return "etpHospitalAdmin/etpHospitalBooks";
+	
 	}
 	
 }

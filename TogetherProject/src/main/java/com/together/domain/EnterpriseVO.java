@@ -1,5 +1,6 @@
 package com.together.domain;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class EnterpriseVO {
 	private String etp_accept_dt;
 	private String etp_lat;
 	private String etp_lnt;
+	
 	
 	// 업체 정보를 볼때 추가적으로 필요한 변수를 선언 (etpManage 페이지)
 	private String user_nm;
@@ -71,6 +73,7 @@ public class EnterpriseVO {
 	private String if_info;
 	
 	
+
 	//병원 카테고리
 	private String etp_ct;
 	private int etp_no;
@@ -79,4 +82,11 @@ public class EnterpriseVO {
 	//병원 첨부파일
 	private String etp_ex_cd;
 	private String etp_ex_path;
+
+	// 형변환 2
+	private String s_or_dt1;
+	private String s_or_dt2;
+	
+	
+
 }
