@@ -351,4 +351,25 @@ public class ETPAdminController {
 		return selectDetail;
 	}
 	
+	// 병원 예약 리스트
+	@RequestMapping(value="/etpHospitalBooksList", method=RequestMethod.GET)
+	public String etpHospitalBooksList(Model model, HttpServletRequest request, HttpSession session) {
+//		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<EnterpriseVO> orderlist = new ArrayList<EnterpriseVO>();
+//
+//		ArrayList<EnterpriseVO> ent_list = new ArrayList<EnterpriseVO>();
+//
+//		ent_list = etpAdminService.textbox(sess);
+//
+//		String code = ent_list.get(0).getEtp_cd();
+//
+//		orderlist = etpAdminService.etpFuneralOrderList(code);
+//		System.out.println("주문 리스트 확인 : "+orderlist);
+//		
+//		model.addAttribute("orderLists", orderlist);
+		
+		return "etpHospitalAdmin/etpHospitalBooks";
+	
+	}
+	
 }

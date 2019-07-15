@@ -1,10 +1,138 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{etpAdminInclude/etpAdminLayout}">
 
-</body>
+<th:block layout:fragment="contents">
+	<div id="content-wrapper">
+
+		<div class="container-fluid">
+			<!-- DataTables Example -->
+			<div class="card mb-3">
+				<div class="card-header">
+					<h1>예약 현황</h1>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover" id="dataTable"
+							width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>구매 날짜</th>
+									<th>구매자 아이디</th>
+									<th>구매자 이름</th>
+									<th>연락처</th>
+									<th>이용 시간</th>
+									<th>예약 상태</th>
+									<th>확인 상태</th>
+									<th>총 금액</th>
+									<th style="display:none;">업체 코드</th>
+								</tr>
+							</thead>
+							<tbody class="or_list">
+								<tr class="tr_list" th:each="order : ${orderLists}">
+									<td th:text="${order.funeral_th_dt}"></td>
+									<td th:text="${order.user_id}"></td>
+									<td th:text="${order.user_nm}"></td>
+									<td th:text="${order.ph_no}"></td>
+									
+									
+									<td><label th:text="${order.s_or_dt1}" id="or_dt"></label><br> ~
+										<label th:text="${order.s_or_dt2}" id="or_dt2"></label></td>
+									<td>
+										<div th:switch="${order.or_stat}">
+											<label th:case="'1'" style="color: black">예약 대기중</label> <label
+												th:case="'2'" style="color: red">예약 확정</label> <label
+												th:case="'3'" style="color: blue">취소 대기중</label>
+										</div>
+									</td>
+									<td th:switch="${order.or_check}"><label th:case="'1'"
+										style="color: red">미확인</label> <label th:case="'2'"
+										style="color: green">확인</label></td>
+									<td th:text="|${order.or_price} 원|"></td>
+									
+									<td th:text="${order.etp_cd}" id="etp_cd" style="display:none;" ></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /.content-wrapper -->
+
+
+
+
+	<!-- 팝업 창 -->
+	<div id="bP" class="bP">
+	<h1>상세 예약서 <button class="btn btn-dark exit" style="float:right; ">닫기</button></h1>
+	<hr/>
+						<table class="table table-bordered table-hover" id="dataTable"
+							width="100%" cellspacing="0" style="font-size:1.5em;">
+							<thead>
+								<tr>
+									<th>상품 이름</th>
+									<th>이용 시간</th>
+									<th>주문 시간</th>
+									<th>금액</th>
+								</tr>
+							</thead>
+							<tbody class="selectDetail">
+
+							</tbody>
+						</table>
+						
+			<div class="h" style="text-align: left;">
+				<h3>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">구매자 이름</span>
+					<span class="user_nm"></span>
+				</h3>
+				
+				<h3>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">연락처</span>
+					<span class="ph_no"></span>
+				</h3>
+				
+				<h3>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">총 금액</span>
+					<span class="total_price"></span>
+				</h3>
+				
+				
+			</div>	
+			<hr/>
+	
+			<div style="text-align: center;">
+				
+					<button class="btn btn-danger success" style="width:30%; font-size:1.8em;">확인</button>
+				
+			</div>
+	</div>
+
+</th:block>
+
+
+<th:block layout:fragment="page_js">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  
+<!-- 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script> -->
+	<!-- 팝업창 스크립트  -->
+	<script src="plugin/jquery.bpopup.min.js"></script>
+	<script src="/etpFuneralAdmin/js/etpFuneralOrderList.js"></script>
+
+
+
+</th:block>
+
+
+<th:block layout:fragment="page_css">
+	<link href="/etpFuneralAdmin/css/etpFuneralOrderList.css" rel="stylesheet">
+</th:block>
+
 </html>
