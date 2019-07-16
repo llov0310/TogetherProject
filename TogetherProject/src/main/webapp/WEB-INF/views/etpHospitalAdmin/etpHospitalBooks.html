@@ -19,40 +19,42 @@
 							width="100%" cellspacing="0">
 							<thead>
 								<tr>
-									<th>구매 날짜</th>
+									<th>주문코드</th>
 									<th>구매자 아이디</th>
 									<th>구매자 이름</th>
 									<th>연락처</th>
 									<th>이용 시간</th>
 									<th>예약 상태</th>
 									<th>확인 상태</th>
-									<th>총 금액</th>
+									<th>상세증상</th>
 									<th style="display:none;">업체 코드</th>
+									<th style="display:none;">펫코드</th>
 								</tr>
 							</thead>
 							<tbody class="or_list">
-								<tr class="tr_list" th:each="order : ${orderLists}">
-									<td th:text="${order.funeral_th_dt}"></td>
+								<tr class="tr_list" th:each="order : ${hos_oredr_list}">
+									<td th:text="${order.hor_cd}"></td>
 									<td th:text="${order.user_id}"></td>
-									<td th:text="${order.user_nm}"></td>
-									<td th:text="${order.ph_no}"></td>
+										<td th:text="${order.user_nm}"></td>
+									<td th:text="${order.ph_no}"></td> 
 									
 									
-									<td><label th:text="${order.s_or_dt1}" id="or_dt"></label><br> ~
-										<label th:text="${order.s_or_dt2}" id="or_dt2"></label></td>
+									<td><label th:text="${order.hor_dt_cf}" id="or_dt"></label><br> ~
+										<label th:text="${order.hor_dt_cl}" id="or_dt2"></label></td>
 									<td>
-										<div th:switch="${order.or_stat}">
+										<div th:switch="${order.hor_stat}">
 											<label th:case="'1'" style="color: black">예약 대기중</label> <label
 												th:case="'2'" style="color: red">예약 확정</label> <label
 												th:case="'3'" style="color: blue">취소 대기중</label>
 										</div>
 									</td>
-									<td th:switch="${order.or_check}"><label th:case="'1'"
+									<td th:switch="${order.hor_check}"><label th:case="'1'"
 										style="color: red">미확인</label> <label th:case="'2'"
 										style="color: green">확인</label></td>
-									<td th:text="|${order.or_price} 원|"></td>
+									<td th:text="${order.hor_detail}"></td>
 									
 									<td th:text="${order.etp_cd}" id="etp_cd" style="display:none;" ></td>
+									<td th:text="${order.hor_pet_cd}" id="etp_cd" style="display:none;" ></td>
 								</tr>
 							</tbody>
 						</table>
@@ -77,10 +79,11 @@
 							width="100%" cellspacing="0" style="font-size:1.5em;">
 							<thead>
 								<tr>
-									<th>상품 이름</th>
-									<th>이용 시간</th>
-									<th>주문 시간</th>
-									<th>금액</th>
+									<th>사진</th>
+									<th>이름</th>
+									<th>나이</th>
+									<th>품종</th>
+									<th>증상</th>
 								</tr>
 							</thead>
 							<tbody class="selectDetail">
@@ -100,7 +103,7 @@
 				</h3>
 				
 				<h3>
-					<span class="badge badge-dark bp_span_label" style="font-size:1em;">총 금액</span>
+					<span class="badge badge-dark bp_span_label" style="font-size:1em;">예약일시</span>
 					<span class="total_price"></span>
 				</h3>
 				

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
+
 import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
 import com.together.mapper.ETPAdminMapper;
@@ -139,6 +141,13 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 	public int or_checkUpdate(String user_id, String or_dt, String or_dt2, String th_dt) {
 		// TODO Auto-generated method stub
 		return mapper.updateChecked2(user_id,or_dt,or_dt2,th_dt);
+	}
+
+
+	@Override
+	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.hospital_order_list(user_id);
 	}
 	//
 	

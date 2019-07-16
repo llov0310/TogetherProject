@@ -3,6 +3,8 @@ package com.together.service;
 import java.util.ArrayList;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
+
 import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
 
@@ -47,5 +49,8 @@ public interface ETPAdminService {
 	
 	// 업체 관리자 페이지(장례) : 확인 update
 	public int or_checkUpdate(String user_id, String or_dt, String or_dt2, String th_dt);
+	
+	//병원주문목록
+	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id);
 	
 }

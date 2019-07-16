@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
+
 import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
 
@@ -67,4 +69,6 @@ public interface ETPAdminMapper {
 
 	public int updateChecked2(
 			@Param("user_id") String user_id, @Param("day") String or_dt, @Param("day2") String or_dt2, @Param("t_day") String th_dt);
+
+	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id);
 }

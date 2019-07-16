@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.together.domain.EnterpriseVO;
+import com.together.domain.HospitalOrdersVO;
+
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
 import com.together.domain.ProductVO;
@@ -354,13 +356,14 @@ public class ETPAdminController {
 	// 병원 예약 리스트
 	@RequestMapping(value="/etpHospitalBooksList", method=RequestMethod.GET)
 	public String etpHospitalBooksList(Model model, HttpServletRequest request, HttpSession session) {
-//		String sess = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-//		ArrayList<EnterpriseVO> orderlist = new ArrayList<EnterpriseVO>();
-//
-//		ArrayList<EnterpriseVO> ent_list = new ArrayList<EnterpriseVO>();
-//
-//		ent_list = etpAdminService.textbox(sess);
-//
+		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+
+		ArrayList<HospitalOrdersVO> hos_oredr_list = new ArrayList<HospitalOrdersVO>();
+		hos_oredr_list = etpAdminService.hospital_order_list(user_id);
+		
+		System.out.println(hos_oredr_list);
+		
+		model.addAttribute("hos_oredr_list", hos_oredr_list);
 //		String code = ent_list.get(0).getEtp_cd();
 //
 //		orderlist = etpAdminService.etpFuneralOrderList(code);
