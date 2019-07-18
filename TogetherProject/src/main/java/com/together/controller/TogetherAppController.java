@@ -292,6 +292,38 @@ public class TogetherAppController {
 		
 		
 		@ResponseBody
+		   @RequestMapping(value = "/Recommend_list", method=RequestMethod.POST)
+		   public JSONObject Recommend_list(@RequestBody String a) {
+			
+			JSONObject jobj = new JSONObject();
+			JSONArray jarry = new JSONArray();
+			
+			ArrayList<EnterpriseVO> list = new ArrayList<EnterpriseVO>();
+			list = App.Recommend_list();
+			
+			for(int i=0; i<list.size(); i++) {
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("etp_cd",list.get(i).getEtp_cd());
+				map.put("etp_addr",list.get(i).getEtp_addr());
+				map.put("etp_nm",list.get(i).getEtp_nm());
+				map.put("etp_time1",list.get(i).getEtp_if_time1());
+				map.put("etp_time2",list.get(i).getEtp_if_time2());
+				map.put("etp_image",list.get(i).getEtp_if_img_path());
+				map.put("reviewcount",list.get(i).getReviewcount());
+				map.put("reviewavg",list.get(i).getReviewavg());
+				jarry.add(map);
+			}
+			
+			jobj.put("result",jarry);
+			
+			System.out.println(jobj);
+			
+			return jobj;
+			
+		}
+		
+		
+		@ResponseBody
 		   @RequestMapping(value = "/funeral_list", method=RequestMethod.POST)
 		   public JSONObject funeral(@RequestBody String a) {
 			
@@ -304,8 +336,7 @@ public class TogetherAppController {
 			   String day = result[0]; // 날짜
 			   String[] timeconvert = result[1].split(":"); //시간
 			   String time = timeconvert[0]+":"+"00";
-			   String[] locationconvert = result[2].split(":"); //지역
-			   String location = locationconvert[1].trim();
+			   String location = result[2];// 지역
 			   
 		
 			   
@@ -369,6 +400,8 @@ public class TogetherAppController {
 		@ResponseBody
 		   @RequestMapping(value = "/Funeral_review", method=RequestMethod.POST)
 		   public JSONObject funeral_review(@RequestBody String a) {
+			
+			System.out.println("장례 리뷰 들어왔습니다.");
 			
 			String decodeResult = URLDecoder.decode(a);
 			System.out.println(decodeResult);
@@ -968,6 +1001,7 @@ public class TogetherAppController {
 		
 			String decodeResult = URLDecoder.decode(a);
 			
+			System.out.println("병원주문왔음");
 			
 			JSONObject HospitalMap = new JSONObject();
 			HospitalMap = JSONObject.fromObject(decodeResult);
@@ -991,16 +1025,21 @@ public class TogetherAppController {
 			InsVO.setHor_dt_cl(Time2);
 			
 			System.out.println(InsVO);
+			System.out.println(CanserArray);
 			
 			int HospitalOrders = App.HosOrders(InsVO);
 			
 			ArrayList<HospitalOrdersVO> getHor_cd = App.getHor_cd(InsVO);
 			String Hor_cd = getHor_cd.get(0).getHor_cd();
-			//병적 사항 넣는곳
-			for(int i=0; i<CanserArray.size(); i++) {
-				JSONObject castJobj = CanserArray.getJSONObject(i);
-				String Canser = castJobj.optString("list");
-				int HospitalOrder_detail = App.HosDetail(Hor_cd,Canser);
+		
+			if(CanserArray.size() != 0) {
+				
+				for(int i=0; i<CanserArray.size(); i++) {
+					JSONObject castJobj = CanserArray.getJSONObject(i);
+					String Canser = castJobj.optString("list");
+					int HospitalOrder_detail = App.HosDetail(Hor_cd,Canser);
+				}
+				
 			}
 
 			//현재 값을 받아오는 작업은 끝내놓음 

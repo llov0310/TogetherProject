@@ -93,4 +93,7 @@ public interface AppService {
 
 	public int HosDetail(String hor_cd, String canser);
 
+	//추천 장례업체 정보
+	public ArrayList<EnterpriseVO> Recommend_list();
+
 }

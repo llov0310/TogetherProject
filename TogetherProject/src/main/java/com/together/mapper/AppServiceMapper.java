@@ -81,7 +81,9 @@ public interface AppServiceMapper {
 	public ArrayList<HospitalOrdersVO> getHor_cd(HospitalOrdersVO insVO);
 
 	public int HosDetail(@Param("hor_cd") String hor_cd, 
-			@Param("canser") String canser); 
+			@Param("canser") String canser);
+
+	public ArrayList<EnterpriseVO> Recommend_list(); 
 
 	
 

@@ -88,6 +88,21 @@
     order by p.pd_price
     </select>
     
+    <select id="Recommend_list" resultType="com.together.domain.EnterpriseVO">
+   <![CDATA[
+    select * from
+	(select e.etp_cd,e.etp_nm,e.etp_addr,i.etp_if_img_path,i.etp_if_time1,i.etp_if_time2,
+	to_char(count(r.etp_cd)) reviewcount,to_char(avg(r.rb_avg),'9.9') reviewavg 
+	from enterprise e,reviewboard r,enterprise_info i
+	where e.etp_cd like 'f'||'%' 
+	and e.etp_cd = r.etp_cd
+    and e.etp_cd = i.etp_cd
+	group by e.etp_cd,e.etp_nm,e.etp_addr,i.etp_if_img_path,i.etp_if_time1,i.etp_if_time2
+	order by count(r.etp_cd) desc, avg(r.rb_avg) desc) a
+    where rownum <= 5
+    ]]>
+    </select>
+    
     <select id="funeralList" resultType="com.together.domain.EnterpriseVO">
     <![CDATA[
     select DISTINCT e.etp_nm,e.etp_addr,e.etp_ph_no,e.etp_lat,e.etp_lnt,to_char(e.etp_content) etp_content,i.etp_if_img_path,i.etp_if_time1,i.etp_if_time2,e.etp_cd

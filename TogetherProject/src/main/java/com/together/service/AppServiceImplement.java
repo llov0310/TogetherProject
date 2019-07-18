@@ -188,4 +188,10 @@ public class AppServiceImplement implements AppService {
 		return mapper.HosDetail(hor_cd,canser);
 	}
 
+	@Override
+	public ArrayList<EnterpriseVO> Recommend_list() {
+		// TODO Auto-generated method stub
+		return mapper.Recommend_list();
+	}
+
 }

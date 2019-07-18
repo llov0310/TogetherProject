@@ -87,6 +87,9 @@ public class EnterpriseVO {
 	private String s_or_dt1;
 	private String s_or_dt2;
 	
+	//count 변수
+	private String reviewcount;
+	private String reviewavg;
 	
 
 }
