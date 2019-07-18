@@ -1,6 +1,7 @@
 package com.together.mapper;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -71,4 +72,8 @@ public interface ETPAdminMapper {
 			@Param("user_id") String user_id, @Param("day") String or_dt, @Param("day2") String or_dt2, @Param("t_day") String th_dt);
 
 	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id);
+//병원상세
+	public ArrayList<HospitalOrdersVO> hospital_order_detail(@Param("hor_cd") String hor_cd);
+
+
 }

@@ -92,6 +92,9 @@ public class HomeController {
 		System.out.println("Successfully fetched user data: " + userRecord.getUid());
 		System.out.println("가져와지나? : " + userRecord.getUid());
 	   
+		//petcode를 통해 uid값을 가져옴
+       
+		
 	   return "home";
    }
    

@@ -22,6 +22,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 
@@ -364,15 +372,80 @@ public class ETPAdminController {
 		System.out.println(hos_oredr_list);
 		
 		model.addAttribute("hos_oredr_list", hos_oredr_list);
-//		String code = ent_list.get(0).getEtp_cd();
-//
-//		orderlist = etpAdminService.etpFuneralOrderList(code);
-//		System.out.println("주문 리스트 확인 : "+orderlist);
-//		
-//		model.addAttribute("orderLists", orderlist);
+
 		
 		return "etpHospitalAdmin/etpHospitalBooks";
 	
 	}
+	//병원상세페이지
+	@RequestMapping(value = "/etphospitalOrderListDetail", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<HospitalOrdersVO> etphospitalOrderListDetail(Model model, HttpServletRequest request, HttpSession session,
+			@RequestParam String hor_pet_cd, @RequestParam String hor_cd, @RequestParam String user_id) throws FirebaseAuthException {
+	
+		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+
+		ArrayList<HospitalOrdersVO> hosDetail = new ArrayList<HospitalOrdersVO>();
+		ArrayList<String> dogs = new ArrayList<String>();
+		
+		hosDetail = etpAdminService.hospital_order_detail(hor_cd);
+		
+		System.out.println(hosDetail);
+		
+//			
+//			UserRecord Uid = FirebaseAuth.getInstance().getUserByEmail(user_id);
+//		
+//			DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pets").child(Uid.getUid()).child(hor_pet_cd);
+//			
+//			final JSONObject obj = new JSONObject();
+//			
+//	        reference.addValueEventListener(new ValueEventListener() {
+//	        	
+//	        	final JSONObject bb = new JSONObject();
+//	        	
+//	        	String birthday;
+//	        	String gender;
+//	        	String petbreed;
+//	        	String petimageurl;
+//	        	String petname;
+//	        	String petweight;
+//	        	
+//	        	private String setpetname;
+//	        	
+//				@SuppressWarnings("unchecked")
+//				
+//				@Override
+//	            public void onDataChange(DataSnapshot snapshot) {
+//	            	
+//	            	Map<String,String> list = (Map<String, String>) snapshot.getValue();
+//	            	
+//	            	birthday = list.get("birthday");
+//	            	gender = list.get("gender");
+//	            	petbreed = list.get("petbreed");
+//	            	petimageurl = list.get("petimageurl");
+//	            	petname = list.get("petname");
+//	            	petweight = list.get("petweight");
+//	            	
+//	            		System.out.println(birthday + " " + gender + " " + petbreed);
+//	            	bb.put("aa",birthday);
+//	            	System.out.println("첫번째");
+//	            	System.out.println(bb);
+//	            	
+//	            
+//	            	
+//	            
+//	            }
+//
+//	            @Override
+//	            public void onCancelled(DatabaseError databaseError) {
+//
+//	            }
+//	        });
+	        System.out.println("아아아");
+	        System.out.println("ㅎ해해");
+	  
+	        return hosDetail;
+	}
+
 	
 }

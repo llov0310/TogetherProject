@@ -40,6 +40,9 @@ $(document).ready(function(){
 						$('.etp_cd_substr').text("호텔");
 					}else if(data[0].etp_cd_substr == "f"){
 						$('.etp_cd_substr').text("장례");
+					}else if(data[0].etp_cd_substr == "d"){
+						$('.etp_cd_substr').text("병원");
+				
 					};
 				
 					$('.user_id').text(data[0].user_id);
@@ -50,7 +53,10 @@ $(document).ready(function(){
 					$('.etp_license_no').text(data[0].etp_license_no);
 					$('.etp_nm').text(data[0].etp_nm);
 					$('.ph_no').text(data[0].ph_no);
-//					console.log(data);		
+					
+			
+//					console.log(data);	
+					
 				},
 				error:function(jqXHR, textStatus, errorThrown){
 					alert('에러 발생 \n' + textStatus + ' : ' + errorThrown);

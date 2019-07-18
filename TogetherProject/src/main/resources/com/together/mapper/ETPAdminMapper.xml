@@ -4,6 +4,12 @@
 <mapper namespace="com.together.mapper.ETPAdminMapper">
 
 	<!-- 업체 관리자 페이지 - 주문현황을 위한 sql문 -->
+	<select id="hospital_order_detail" resultType="com.together.domain.HospitalOrdersVO">
+	select h.hor_cd, m.f_uid ,d.hod_canser , h.hor_pet_cd
+	from hospitalorders h , member m , hospitalordersdetail d
+	where  h.user_id=m.user_id and h.hor_cd = d.hor_cd and h.hor_cd=#{hor_cd}
+	</select>
+	
 	<select id="hospital_order_list" resultType="com.together.domain.HospitalOrdersVO">
 	select h.*,to_char(h.hor_dt_f,'YY-MM-DD HH24:MI:SS') hor_dt_cf,
 	to_char(h.hor_dt_l,'YY-MM-DD HH24:MI:SS') hor_dt_cl,

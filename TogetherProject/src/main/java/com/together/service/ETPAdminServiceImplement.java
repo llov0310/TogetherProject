@@ -1,6 +1,7 @@
 package com.together.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -149,7 +150,14 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		// TODO Auto-generated method stub
 		return mapper.hospital_order_list(user_id);
 	}
-	//
+
+	@Override
+	public ArrayList<HospitalOrdersVO> hospital_order_detail(String hor_cd) {
+		// TODO Auto-generated method stub
+		return mapper.hospital_order_detail(hor_cd);
+	}
+
+
 	
 	
 }

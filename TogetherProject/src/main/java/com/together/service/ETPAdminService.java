@@ -1,6 +1,7 @@
 package com.together.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
@@ -52,5 +53,8 @@ public interface ETPAdminService {
 	
 	//병원주문목록
 	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id);
+	//병원상세
+	public ArrayList<HospitalOrdersVO> hospital_order_detail(String hor_cd);
+	
 	
 }

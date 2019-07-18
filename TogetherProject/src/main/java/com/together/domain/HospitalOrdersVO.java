@@ -30,4 +30,5 @@ public class HospitalOrdersVO {
 	//Member테이블
 	private String ph_no;
 	private String user_nm;
+	private String f_uid;
 }
