@@ -74,6 +74,8 @@ public interface ETPAdminMapper {
 	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id);
 //병원상세
 	public ArrayList<HospitalOrdersVO> hospital_order_detail(@Param("hor_cd") String hor_cd);
+//병원 체크
+	public Integer hoscheck(@Param("hor_cd") String hor_cd);
 
 
 }

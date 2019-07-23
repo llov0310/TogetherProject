@@ -29,6 +29,8 @@
 									<th>상세증상</th>
 									<th style="display:none;">업체 코드</th>
 									<th style="display:none;">펫코드</th>
+									<th style="display:none;">uid</th>
+									<th style="display:none;">업체명</th>
 								</tr>
 							</thead>
 							<tbody class="or_list">
@@ -55,6 +57,8 @@
 									
 									<td th:text="${order.etp_cd}" id="etp_cd" style="display:none;" ></td>
 									<td th:text="${order.hor_pet_cd}" id="pet_cd" style="display:none;" ></td>
+									<td th:text="${order.f_uid}" id="pet_cd" style="display:none;" ></td>
+									<td th:text="${order.etp_nm}" id="pet_cd" style="display:none;" ></td>
 								</tr>
 							</tbody>
 						</table>
@@ -75,19 +79,15 @@
 	<div id="bP" class="bP">
 	<h1>상세 예약서 <button class="btn btn-dark exit" style="float:right; ">닫기</button></h1>
 	<hr/>
-						<table class="table table-bordered table-hover" id="dataTable"
+						<table class="table table-bordered table-hover" id="dataTable1"
 							width="100%" cellspacing="0" style="font-size:1.5em;">
-							<thead>
-								<tr>
-									<th>사진</th>
-									<th>이름</th>
-									<th>나이</th>
-									<th>품종</th>
-									<th>증상</th>
-								</tr>
-							</thead>
+							<tr>
+									<th style="text-align: center; width: 40%">사진</th>
+									<th>강이지 정보</th>
+									<th style="text-align: center; width: 25%">증상</th>
+							</tr>
 							<tbody class="selectDetail">
-
+								
 							</tbody>
 						</table>
 						
@@ -137,6 +137,18 @@
 
 <th:block layout:fragment="page_css">
 	<link href="/etpFuneralAdmin/css/etpFuneralOrderList.css" rel="stylesheet">
+	<style>
+	#dataTable1{
+
+	
+	}
+	.dogimg{
+	   width: 200px;
+	    height: auto;
+	}
+	.selectDetail{text-align: center;}
+	.doginfo{text-align: left; margin-left: 5%}
+	</style>
 </th:block>
 
 </html>

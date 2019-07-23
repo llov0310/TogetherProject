@@ -157,6 +157,12 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		return mapper.hospital_order_detail(hor_cd);
 	}
 
+	@Override
+	public Integer hoscheck(String hor_cd) {
+		// TODO Auto-generated method stub
+		return mapper.hoscheck(hor_cd);
+	}
+
 
 	
 	
