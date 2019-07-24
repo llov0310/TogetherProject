@@ -10,6 +10,8 @@ var firebaseConfig = {
 					  // Initialize Firebase
 					  firebase.initializeApp(firebaseConfig);
 					  var database = firebase.database();
+					  
+					 
 
 $('.tr_list').on('click',function(){
 		var or_dt = $(this).find('label').eq(0).text(); // 이용 시간 : 시작  
@@ -131,7 +133,12 @@ $('.tr_list').on('click',function(){
 				  		context += "■ 접수내역 : ["+pr+"]\n"
 				  		context += "■ 가격: ["+total_price + "원]\n"
 				  		context += "\n "
-				  
+				  			
+				  			
+				  			 const messaging = firebase.messaging();
+						  messaging.requestPermission().then(function(){
+							  console.log("?");
+						  });
 				  	
 				  			console.log(context);
 				  			

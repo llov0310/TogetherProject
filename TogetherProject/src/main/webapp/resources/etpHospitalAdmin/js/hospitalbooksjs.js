@@ -125,15 +125,28 @@ $('.tr_list').on('click',function(){
 						$('.tr_pro').text('');
 								$('.bP').bPopup().close();
 							
-								  var newChats = firebase.database().ref().child('Chats').push();
-								  console.log(newChats.key);
-								  newChats.set({
-									  isseen: false,
-									  message: context,
-									  receiver: f_uid,
-									  sender: "OxI0I1sYuhQkVJnAey7HmJfSjNL2"
-								  });
+//								  var newChats = firebase.database().ref().child('Chats').push();
+//								  console.log(newChats.key);
+//								  newChats.set({
+//									  isseen: false,
+//									  message: context,
+//									  receiver: f_uid,
+//									  sender: "OxI0I1sYuhQkVJnAey7HmJfSjNL2"
+//								  });
 									alert("메세지 전송");
+									
+									$.ajax({	
+										type : "POST",
+										url : "/fcm",
+										dataType : 'json',
+										data : {text:"마 띠끼야"},
+									success : function(data){
+										console.log(data);
+										alert("머고");
+									}
+									});
+							
+									
 									
 									alert("완료 되었습니다.");
 								location.reload();
