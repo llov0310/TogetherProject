@@ -1,4 +1,17 @@
-	$('.tr_list').on('click',function(){
+var firebaseConfig = {
+					  	apiKey : "AIzaSyDcJDqLBjqwDetOcCt5LcYjr8k8EL7mMnk",
+					  	authDomain : "blogapp-a9a56.firebaseapp.com",
+					  	databaseURL : "https://blogapp-a9a56.firebaseio.com",
+					  	projectId : "blogapp-a9a56",
+					  	storageBucket : "blogapp-a9a56.appspot.com",
+					  	messagingSenderId : "604610409810",
+					  	appId : "1:604610409810:web:76decd7c19ac5f6b"
+					  };
+					  // Initialize Firebase
+					  firebase.initializeApp(firebaseConfig);
+					  var database = firebase.database();	
+
+$('.tr_list').on('click',function(){
 		
 		var t_day = $(this).find('td').eq(1).text(); //구매일
 		var product_nm = $(this).find('td').eq(2).text(); //상품명
@@ -8,8 +21,14 @@
 		var last_day = $(this).find('label').eq(1).text(); // 예약마지막날
 		var book_stat = $(this).find('td').eq(6).find('label').text(); // 예약상태
 		var check = $(this).find('td').eq(7).find('label').text(); // 확인유무
-		var price = $(this).find('td').eq(8).text(); // 가격
-
+		var price = $(this).find('td').eq(8).text().trim(); // 가격
+		var etp_nm = $(this).find('td').eq(9).text(); // 가격
+		var f_uid = $(this).find('td').eq(10).text(); // 가격
+		
+		console.log(etp_nm);
+		console.log(f_uid);
+		
+		
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
 					positionStyle : 'fixed'});
@@ -35,11 +54,23 @@
 			var check = $(this).parent().parent().find('.check').text(); //체크유무
 			var check_val = '1';
 			
+			var context = "[Together]\n"
+		  		context += "예약 해주셔서 감사합니다.\n"
+		  		context += "[" + order_nm + "] 고객님께서 예약이 접수처리가 완료되었습니다.\n"
+		  		context += "■ 예약일시 : ["+first_day +"~"+last_day+"]\n"
+		  		context += "■ 매장명 : ["+etp_nm+"]\n"
+		  		context += "■ 주문상품 : ["+product_nm+"]\n"
+		  		context += "■ 가격:["+price+"]\n"
+		  		context += "\n "
+		  		console.log(context);	
+			
 			console.log(day1);
 			console.log(day2);
 			console.log(day_th);
 			
+			
 			if(check == "미확인"){
+				
 					$.ajax({
 						url : "/etpOrderListCheck",
 						type : "POST",
@@ -57,9 +88,20 @@
 								$('.check').text('');
 								$('.to_price').text('');
 								
+								var newChats = firebase.database().ref().child('Chats').push();
+								  console.log(newChats.key);
+								  newChats.set({
+									  isseen: false,
+									  message: context,
+									  receiver: f_uid,
+									  sender: "3PTCMHLT3wO0Z0BmVUAHDQt0KGs2"
+								  });
+									alert("메세지 전송");
 								
 								alert("완료 되었습니다.");
 						        window.location.href="/etpOrderList";
+						    
+						        
 //								// 닫기 전에 컨펌 실행
 //								if(confirm("주문자에게 주문 확인 SMS를 보내시겠습니까?")){
 //									

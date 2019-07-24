@@ -19,6 +19,7 @@ public class HospitalOrdersVO {
 	private Timestamp hor_dt_f;
 	private Timestamp hor_dt_l;
 	
+	private String etp_nm;
 	//timestamp 형변환 전용
 	private String hor_dt_cf;
 	private String hor_dt_cl;

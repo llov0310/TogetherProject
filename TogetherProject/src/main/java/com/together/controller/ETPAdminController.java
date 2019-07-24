@@ -86,11 +86,11 @@ public class ETPAdminController {
 		ArrayList<EnterpriseVO> ent_list = new ArrayList<EnterpriseVO>();
 
 		ent_list = etpAdminService.textbox(sess);
-
+		System.out.println(ent_list +"머가뜨노");
 		String code = ent_list.get(0).getEtp_cd();
 
 		orderlist = etpAdminService.select_order_list(code);
-
+		System.out.println(orderlist +"이건뜨노");
 		model.addAttribute("orderLists", orderlist);
 
 		return "etpAdmin/etpOrderList";
@@ -386,66 +386,29 @@ public class ETPAdminController {
 		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 
 		ArrayList<HospitalOrdersVO> hosDetail = new ArrayList<HospitalOrdersVO>();
-		ArrayList<String> dogs = new ArrayList<String>();
 		
 		hosDetail = etpAdminService.hospital_order_detail(hor_cd);
+	
+		System.out.println(hosDetail+"뜨냐");
 		
-		System.out.println(hosDetail);
-		
-//			
-//			UserRecord Uid = FirebaseAuth.getInstance().getUserByEmail(user_id);
-//		
-//			DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pets").child(Uid.getUid()).child(hor_pet_cd);
-//			
-//			final JSONObject obj = new JSONObject();
-//			
-//	        reference.addValueEventListener(new ValueEventListener() {
-//	        	
-//	        	final JSONObject bb = new JSONObject();
-//	        	
-//	        	String birthday;
-//	        	String gender;
-//	        	String petbreed;
-//	        	String petimageurl;
-//	        	String petname;
-//	        	String petweight;
-//	        	
-//	        	private String setpetname;
-//	        	
-//				@SuppressWarnings("unchecked")
-//				
-//				@Override
-//	            public void onDataChange(DataSnapshot snapshot) {
-//	            	
-//	            	Map<String,String> list = (Map<String, String>) snapshot.getValue();
-//	            	
-//	            	birthday = list.get("birthday");
-//	            	gender = list.get("gender");
-//	            	petbreed = list.get("petbreed");
-//	            	petimageurl = list.get("petimageurl");
-//	            	petname = list.get("petname");
-//	            	petweight = list.get("petweight");
-//	            	
-//	            		System.out.println(birthday + " " + gender + " " + petbreed);
-//	            	bb.put("aa",birthday);
-//	            	System.out.println("첫번째");
-//	            	System.out.println(bb);
-//	            	
-//	            
-//	            	
-//	            
-//	            }
-//
-//	            @Override
-//	            public void onCancelled(DatabaseError databaseError) {
-//
-//	            }
-//	        });
+
 	        System.out.println("아아아");
 	        System.out.println("ㅎ해해");
 	  
 	        return hosDetail;
 	}
+	
+	//병원 상세페이지 확인클릭시
+	@RequestMapping(value = "/etphospitalOrdercheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String etphospitalOrdercheck(Model model, HttpServletRequest request, HttpSession session ,@RequestParam String hor_cd) {
+	
+		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
 
+		System.out.println("여기오니");
+		System.out.println(hor_cd);
+		Integer check = etpAdminService.hoscheck(hor_cd);
+	        return "good";
+	}
 	
 }

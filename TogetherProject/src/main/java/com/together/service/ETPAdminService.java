@@ -55,6 +55,8 @@ public interface ETPAdminService {
 	public ArrayList<HospitalOrdersVO> hospital_order_list(String user_id);
 	//병원상세
 	public ArrayList<HospitalOrdersVO> hospital_order_detail(String hor_cd);
+	//병원 체크
+	public Integer hoscheck(String hor_cd);
 	
 	
 }

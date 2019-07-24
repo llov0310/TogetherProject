@@ -9,178 +9,163 @@ var firebaseConfig = {
 					  };
 					  // Initialize Firebase
 					  firebase.initializeApp(firebaseConfig);
-
+					  var user_nm;
+					  var or_dt1;
+					  var etp_nm;
+		
+					  var check;
 $('.tr_list').on('click',function(){
-		var or_dt1 = $(this).find('label').eq(0).text(); // 이용 시간 : 시작
+		or_dt1 = $(this).find('label').eq(0).text(); // 이용 시간 : 시작
 		var or_dt2 = $(this).find('label').eq(1).text();  // 이용 시간 : 끝
 		var etp_cd = $(this).find('td').eq(8).text(); // 업체 코드
-		var check = $(this).find('td').eq(6).find('label').text(); // 확인유무
+		check = $(this).find('td').eq(6).find('label').text(); // 확인유무
 		var hor_cd =  $(this).find('td').eq(0).text(); // 주문코드
 		var user_id =  $(this).find('td').eq(1).text(); // 유저 이름
 		var ph_no =  $(this).find('td').eq(3).text(); // 연락처
 		var hor_pet_cd = $(this).find('td').eq(9).text();
+		var f_uid = $(this).find('td').eq(10).text();
+		user_nm = $(this).find('td').eq(2).text();
+		etp_nm = $(this).find('td').eq(11).text();
 		console.log(user_id);
 		console.log(hor_cd);
 		console.log(hor_pet_cd);
+		console.log(f_uid);
 		// 팝업창
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
 					positionStyle : 'fixed'});
 
 		
-		
-		var testList = new Array();
-		var jsonData = null;
-		
+				
 		$.ajax({
 			url : "/etphospitalOrderListDetail",
 			type : "POST",
 			dataType : "json",
 			data : {hor_pet_cd, hor_cd,user_id},
 			success : function(data){
-
+				console.log(data);
 				
-				
-
-		
-					  
-					  
 					  var database = firebase.database();
 				
-//					  var userId = firebase.auth().onAuthStateChanged();
-					  var dbRef = firebase.database().ref().child('Pets').child("6YZdQrf5RycKO1kwvze0vCXL8V83").child(hor_pet_cd);
+					  			
+// var userId = firebase.auth().onAuthStateChanged();
+					  var dbRef = firebase.database().ref().child('Pets').child(f_uid).child(hor_pet_cd);
+					
+			
 					  dbRef.on("value", function(snapshot) {
 						  var dog = "";
+						  var dog_disease = "";
 						  dog = snapshot.val();
 						  console.log(snapshot.val());
 						  console.log(dog.gender);
-							console.log(data);
+					
 						
-							 
+						  for(var i=0; i<data.length; i++){
+								if(i == data.length-1){
+							  dog_disease = dog_disease + data[i].hod_canser+ '<br>';
+								}else{
+									dog_disease = dog_disease + data[i].hod_canser+","+ '<br>';
+								}
+						  }
+							
+							  if($(".selectDetail").find('tr').attr('class') != 'tr_pro'){
+								  $(".selectDetail").append('<tr class="tr_pro">'+ 
+										  '<td>' + '<img class="dogimg" src="'+dog.petimageurl+'"/>'+ '</td><td class="doginfo">'
+										 + "이름: "+'<span class="dogname">'+dog.petname+ '</span>'+'<br>'
+										 + "출생일: "+ dog.birthday +	'<br>'
+										 + "품종: " +dog.petbreed + '<br>'
+										 + "성별: "+ dog.gender +	'<br>'
+										 + "몸무게: "+dog.petweight +'<br>'
+										 + '</td><td>'+'<span class="dogdi">'+ dog_disease +'</span>'+ '</td>'
+										 + '</tr>'
+										 );
+							  }
 						  
-						  
-					  });
-				
-					////시이작
-					  if($(".selectDetail").find('tr').attr('class') != 'tr_pro'){
-						  $(".selectDetail").append('<tr class="tr_pro">'
-								 + '<td>' + '<img src="'+dog.petimageurl+'"/>'+ '</td><td>'
-								 + dog.petname+ '</td><td>'
-								 + dog.birthday + '</td><td>'
-								 + dog.petbreed+ '</td></tr>'
-								
-								 );
-					  }
-			}
-	});
-			  
-		
-// if($(".selectDetail").find('tr').attr('class') != 'tr_pro'){
-// for(var i = 0; i< data.length; i++ ){
-// $(".selectDetail").append('<tr class="tr_pro">'
-// + '<td>' + data[i].pd_nm + '</td><td>'
-// + data[i].s_or_dt1 + ' ~ '+data[i].s_or_dt2 + '</td><td>'
-// + data[i].s_th_dt + '</td><td>'
-// + data[i].pd_price + '</td></tr>');
-//
-// var test = new Object();
-//						
-// test.user_id = data[i].user_id;
-// test.s_or_dt1 = data[i].s_or_dt1;
-// test.s_or_dt2 = data[i].s_or_dt2;
-// test.s_th_dt = data[i].s_th_dt;
-//						
-// testList.push(test);
-// }
-//
-// var total_price = 0;
-// for(var i = 0; i< data.length; i++ ){
-//						
-// total_price = parseInt(total_price) + parseInt(data[i].pd_price);
-// }
-//					
-// $(".user_nm").text(' : ' + user_nm);
-// $(".ph_no").text(' : '+ ph_no);
-//					
-// $(".total_price").text(' : ' + total_price + '원');
-//					
-//				
-// }else{
-//					
-// $(".selectDetail").empty();
-//
-// for(var i = 0; i< data.length; i++ ){
-//				
-// $(".selectDetail").append('<tr class="tr_pro">'
-// + '<td>' + data[i].pd_nm + '</td><td>'
-// + data[i].s_or_dt1 + ' ~ '+data[i].s_or_dt2 + '</td><td>'
-// + data[i].s_th_dt + '</td><td>'
-// + data[i].pd_price + '</td></tr>');
-//						
-// var test = new Object();
-//						
-// test.user_id = data[i].user_id;
-// test.s_or_dt1 = data[i].s_or_dt1;
-// test.s_or_dt2 = data[i].s_or_dt2;
-// test.s_th_dt = data[i].s_th_dt;
-//						
-// testList.push(test);
-//						
-//						
-// }
-//					
-//					
-// var total_price = 0;
-// for(var i = 0; i< data.length; i++ ){
-//						
-// total_price = parseInt(total_price) + parseInt(data[i].pd_price);
-// }
-//
-// $(".user_nm").text(' : ' + user_nm);
-// $(".ph_no").text(' : '+ ph_no);
-//					
-// $(".total_price").text(' : ' + total_price + '원');
-//					
-					
-// }
 	
-// //출력해야될부분
-// jsonData = JSON.stringify(testList);
-// console.log(jsonData);
-//
-// $('.success').click(function(){
-//					
-// if(check == "미확인"){
-// $.ajax({
-// type : "POST",
-// url : "/etpFuneralOrderListCheck",
-// data : JSON.stringify(testList),
-// contentType: 'application/json; charset=utf-8',
-// success : function(data){
-// if(data == "success"){
-//										
-//										
-// $('.tr_pro').text('');
-// $('.bP').bPopup().close();
-// location.reload();
-// return false;
-// }
-// }
-// });
-//						
-//						
-// }else if(check == "확인"){
-// $('.bP').bPopup().close();
-// }
+					  });
+						 $(".user_nm").text(' : ' + user_nm);
+						 $(".ph_no").text(' : '+ ph_no);					
+						 $(".total_price").text(' : ' +  or_dt1 + '~'+or_dt2);	
 					
-					
-// });
-				
-				
-				
-			 // success END
-//		});// ajax END
+			}
+			
+			
+	});
+		$(".selectDetail").empty();
 
+		
+		
+		$('.success').click(function(){
+			var dname = $(".dogname").text();
+			var dogdi = $(".dogdi").text(",");
+			var context = "[Together]\n"
+		  		context += "예약 해주셔서 감사합니다.\n"
+		  		context += "[" + user_nm + "] 고객님께서 예약이 접수처리가 완료되었습니다.\n"
+		  		context += "■ 예약일시 : ["+or_dt1+"]\n"
+		  		context += "■ 매장명 : ["+etp_nm+"]\n"
+		  		context += "■ 예약견 : ["+dname+"]\n"
+		  		context += "■ 접수내역 : ["+dogdi+"]\n"
+		  		context += "\n "
+		  		context += "방문시에 창구에서 확인후 대기해 주시면 감사하겠습니다\n"
+		  		context += "진료시간은 표기된 시간보다 오차가 있을수 있는점 양해바랍니다.\n"
+		  
+					console.log(dname);
+		  			console.log(user_nm);
+		  			console.log(dogdi);	
+		  			
+				if(check == "미확인"){
+					$.ajax({	
+						type : "POST",
+						url : "/etphospitalOrdercheck",
+						dataType : 'text',
+						data : {hor_cd},
+					success : function(data){
+						alert("예약 확인");
+						console.log(context);
+						$('.tr_pro').text('');
+								$('.bP').bPopup().close();
+							
+//								  var newChats = firebase.database().ref().child('Chats').push();
+//								  console.log(newChats.key);
+//								  newChats.set({
+//									  isseen: false,
+//									  message: context,
+//									  receiver: f_uid,
+//									  sender: "OxI0I1sYuhQkVJnAey7HmJfSjNL2"
+//								  });
+									alert("메세지 전송");
+									
+									$.ajax({	
+										type : "POST",
+										url : "/fcm",
+										dataType : 'json',
+										data : {text:"마 띠끼야"},
+									success : function(data){
+										console.log(data);
+										alert("머고");
+									}
+									});
+							
+									
+									
+									alert("완료 되었습니다.");
+								location.reload();
+								return false;
+								
+								
+					}
+					});
+				}
+//						
+//				
+//				
+				else if(check == "확인"){
+					$('.bP').bPopup().close();
+				}
+			
+			
+		});
+	
 		
 // 확인 닫기 버튼 클릭 시
 		
@@ -188,12 +173,7 @@ $('.tr_list').on('click',function(){
 		$('.exit').on('click',function(){
 			$('.tr_pro').text('');
 			 
-			$('.bP').bPopup().close();
-			dog=null;
-
-			
+			$('.bP').bPopup().close();		
 		});
+});		 
 		
-		 
-		
-	});

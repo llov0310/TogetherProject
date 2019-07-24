@@ -28,6 +28,8 @@
 									<th>예약 상태</th>
 									<th>확인</th>
 									<th>금액</th>
+									<th style="display:none;">업체 명</th>
+									<th style="display:none;">uid</th>
 								</tr>
 							</thead>
 							<tbody class="or_list">
@@ -50,6 +52,8 @@
 										style="color: red">미확인</label> <label th:case="'2'"
 										style="color: green">확인</label></td>
 									<td th:text="${order.price}+'KRW'"></td>
+									<td th:text="${order.etp_nm}" id="etp_nm" style="display:none;" ></td>
+									<td th:text="${order.f_uid}" id="f_uid" style="display:none;" ></td>
 								</tr>
 							</tbody>
 						</table>
@@ -158,6 +162,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script> -->
 	<!-- 팝업창 스크립트  -->
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	<script src="plugin/jquery.bpopup.min.js"></script>
 	<script src="/etpAdmin/js/etpOrderList.js"></script>
 

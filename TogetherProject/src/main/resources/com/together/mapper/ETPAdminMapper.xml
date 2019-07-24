@@ -4,6 +4,14 @@
 <mapper namespace="com.together.mapper.ETPAdminMapper">
 
 	<!-- 업체 관리자 페이지 - 주문현황을 위한 sql문 -->
+	<update id="hoscheck"
+		parameterType="com.together.domain.HospitalOrdersVO">
+		update hospitalorders set hor_check = '2' ,hor_stat = '2'
+		where
+		hor_cd = #{hor_cd}
+	</update>
+	
+	
 	<select id="hospital_order_detail" resultType="com.together.domain.HospitalOrdersVO">
 	select h.hor_cd, m.f_uid ,d.hod_canser , h.hor_pet_cd
 	from hospitalorders h , member m , hospitalordersdetail d
@@ -11,11 +19,11 @@
 	</select>
 	
 	<select id="hospital_order_list" resultType="com.together.domain.HospitalOrdersVO">
-	select h.*,to_char(h.hor_dt_f,'YY-MM-DD HH24:MI:SS') hor_dt_cf,
-	to_char(h.hor_dt_l,'YY-MM-DD HH24:MI:SS') hor_dt_cl,
-	m.user_nm,m.ph_no from hospitalorders h , member m
+	select h.*,to_char(h.hor_dt_f,'YY-MM-DD HH24:MI') hor_dt_cf,
+	to_char(h.hor_dt_l,'YY-MM-DD HH24:MI') hor_dt_cl,
+	m.user_nm,m.ph_no,m.f_uid,e.etp_nm from hospitalorders h , member m ,enterprise e
 	where h.etp_cd = (select etp_cd from enterprise where user_id=#{user_id})
-	and h.user_id=m.user_id
+	and h.user_id=m.user_id and  e.etp_cd = h.etp_cd 
 	</select>
 	
 	
@@ -23,10 +31,10 @@
 	<select id="select_order_list"
 		resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	select m.user_id,m.ph_no,m.user_nm,e.user_id,e.etp_cd,p.*,o.*,to_char(o.or_dt ,'YYYY-MM-DD') as chardate ,
+	select m.user_id,m.f_uid,m.ph_no,m.user_nm,e.user_id,e.etp_cd,p.*,o.*,to_char(o.or_dt ,'YYYY-MM-DD') as chardate ,
 	to_char(o.or_dt2 , 'YYYY-MM-DD') as chardate2 , 
 	to_char(o.th_dt, 'YYYY-MM-DD HH24:MI:SS') as charthisdate,
-	to_char(o.or_price, '99,999,999') as price
+	to_char(o.or_price, '99,999,999') as price,e.etp_nm
 	from member m , enterprise e, orders o , product p
 	where e.etp_cd = p.etp_cd 
 	and m.user_id=o.user_id
@@ -72,7 +80,7 @@
 		user_id = #{user_id}
 		and or_dt = to_timestamp(#{day},'YY-MM-DD HH24:MI:SS') 
 		and or_dt2 = to_timestamp(#{day2},'YY-MM-DD HH24:MI:SS') 
-		and th_dt = to_timestamp(#{t_day},'YY-MM-DD HH24:MI:SS')	
+		and to_timestamp(to_char(th_dt,'YY-MM-DD HH24:MI'),'YY-MM-DD HH24:MI') =  to_timestamp(#{t_day},'YY-MM-DD HH24:MI')	
 	</update>
 
 
@@ -133,8 +141,7 @@
 		update enterprise_info set etp_if_info = #{etp_if_info},
 		etp_if_intro = #{etp_if_intro},
 		etp_if_time1 = #{time1},
-		etp_if_time2 =
-		#{time2},
+		etp_if_time2 = #{time2},
 		etp_if_img_path = #{etp_if_img_path}
 		where etp_cd = #{etp_cd}
 	</update>
@@ -161,19 +168,21 @@
 	<!-- 업체 관리자 페이지(장례) : 주문 현황 -->
 	<select id="etpFuneralOrderList" resultType="com.together.domain.EnterpriseVO" >
 		<![CDATA[
-			select DISTINCT o.user_id,to_char(o.or_dt,'YYYY-MM-DD HH24:MI:SS') as s_or_dt1 ,to_char(o.or_dt2,'YYYY-MM-DD HH24:MI:SS') as s_or_dt2 ,o.or_stat,o.or_check,p.etp_cd,sum(or_price) as or_price,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD') as funeral_th_dt
-			from orders o, product p , member m
+			select DISTINCT o.user_id,to_char(o.or_dt,'YYYY-MM-DD HH24:MI:SS') as s_or_dt1 ,to_char(o.or_dt2,'YYYY-MM-DD HH24:MI:SS') as s_or_dt2 ,
+o.or_stat,o.or_check,p.etp_cd,sum(or_price) as or_price,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD') as funeral_th_dt,e.etp_nm,m.f_uid
+			from orders o, product p , member m ,enterprise e
 			where o.pd_cd = p.pd_cd
 			and o.user_id = m.user_id
+            and p.etp_cd = e.etp_cd
 			and p.etp_cd = #{code}
-			group by o.user_id,to_char(o.or_dt,'YYYY-MM-DD HH24:MI:SS'),to_char(o.or_dt2,'YYYY-MM-DD HH24:MI:SS'),o.or_stat,o.or_check,p.etp_cd,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD')
+			group by o.user_id,to_char(o.or_dt,'YYYY-MM-DD HH24:MI:SS'),to_char(o.or_dt2,'YYYY-MM-DD HH24:MI:SS'),o.or_stat,o.or_check,p.etp_cd,m.user_nm,m.ph_no,to_char(th_dt,'YY/MM/DD'),e.etp_nm,m.f_uid
 		]]>
 	</select>
 	
 	<!-- 업체 관리자 페이지(장례) : bP 팝업 -> 상세 주문 내역  -->
 	<select id="selectDetail" resultType="com.together.domain.OrdersVO">
 		<![CDATA[
-			select o.user_id, o.or_stat, o.or_check, to_char(o.th_dt,'YY-MM-DD HH24:MI:SS') as s_th_dt, p.pd_nm, p.etp_cd, p.pd_price,to_char(o.or_dt,'YY-MM-DD HH24:MI:SS') as s_or_dt1 ,to_char(o.or_dt2,'YY-MM-DD HH24:MI:SS') as s_or_dt2 
+			select o.user_id, o.or_stat, o.or_check, to_char(o.th_dt,'YY-MM-DD HH24:MI') as s_th_dt, p.pd_nm, p.etp_cd, p.pd_price,to_char(o.or_dt,'YY-MM-DD HH24:MI') as s_or_dt1 ,to_char(o.or_dt2,'YY-MM-DD HH24:MI:SS') as s_or_dt2 
 			from orders o,product p
 			where or_dt = to_timestamp(#{day},'YYYY/MM/DD HH24:MI:SS')
 			and or_dt2 = to_timestamp(#{day2},'YYYY/MM/DD HH24:MI:SS')
