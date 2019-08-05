@@ -5,6 +5,10 @@
 
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
 	
+	<select id="dimg" resultType="com.together.domain.EnterpriseVO">
+		select * from Enterpriseattach where etp_cd = #{etpcd}
+	</select>
+	
 	<!-- register_dt를 가져오는 sql문 -->
 	<select id="register_dt" resultType="com.together.domain.MemberVO">
 		select register_dt
@@ -310,7 +314,7 @@
 	<!--업체 신청 관리 : 클릭 시 상세 정보  -->
 	<select id="etpDetail" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	select m.ph_no, m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content, e.etp_apply_dt
+	select m.ph_no, m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr,e.etp_cd, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content, e.etp_apply_dt
 	from member m, enterprise e
 	where m.user_id = e.user_id and m.authority_no = 3 and e.user_id = #{user_id}
 	order by e.etp_apply_dt
