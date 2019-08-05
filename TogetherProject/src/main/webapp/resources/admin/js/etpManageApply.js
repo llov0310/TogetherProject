@@ -34,15 +34,16 @@ $(document).ready(function(){
 						opacity : 0.6,
 						positionStyle : 'fixed'
 					});
-					
-					
+										
 					if(data[0].etp_cd_substr == "h"){
 						$('.etp_cd_substr').text("호텔");
+						$('#ja').hide();
 					}else if(data[0].etp_cd_substr == "f"){
 						$('.etp_cd_substr').text("장례");
+						$('#ja').hide();
 					}else if(data[0].etp_cd_substr == "d"){
 						$('.etp_cd_substr').text("병원");
-				
+						$('#ja').show();
 					};
 				
 					$('.user_id').text(data[0].user_id);
@@ -53,9 +54,15 @@ $(document).ready(function(){
 					$('.etp_license_no').text(data[0].etp_license_no);
 					$('.etp_nm').text(data[0].etp_nm);
 					$('.ph_no').text(data[0].ph_no);
+<<<<<<< HEAD
 					$('#asd').text(data[0].ph_no);
+=======
+					
+					$('#asd').attr("src",data[0].etp_ex_path);
+>>>>>>> branch 'master' of https://github.com/llov0310/TogetherProject.git
 			
-//					console.log(data);	
+
+					console.log(data);	
 					
 				},
 				error:function(jqXHR, textStatus, errorThrown){

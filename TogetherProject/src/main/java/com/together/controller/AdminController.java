@@ -854,8 +854,22 @@ public class AdminController {
 //		System.out.println(user_id);
 		
 		ArrayList<EnterpriseVO> etpDetail = adminService.etpDetail(user_id);
-
+		
+		String etpcd = etpDetail.get(0).getEtp_cd();
+		System.out.println("이거뜨니"+etpcd);
+		
+		ArrayList<EnterpriseVO> imgsrc = adminService.dimg(etpcd);
+		
+		if(etpDetail.get(0).getEtp_cd_substr().equals("d")) {
+			String path = imgsrc.get(0).getEtp_ex_path();
+			etpDetail.get(0).setEtp_ex_path(path);
+			return etpDetail;
+		}
+//		etpDetail.get(0).setEtp_ex_path(etp_ex_path);
 		System.out.println(etpDetail);
+		System.out.println("렬루"+imgsrc);
+		
+		
 		return etpDetail;
 	}
 
