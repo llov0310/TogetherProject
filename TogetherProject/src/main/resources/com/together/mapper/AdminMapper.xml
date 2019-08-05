@@ -3,7 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.together.mapper.AdminMapper">
 
+	<select id="dimg" resultType="com.together.domain.MemberVO">
+	
+	</select>
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
+	
+
 	
 	<!-- register_dt를 가져오는 sql문 -->
 	<select id="register_dt" resultType="com.together.domain.MemberVO">

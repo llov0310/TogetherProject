@@ -37,6 +37,7 @@
 								<tr class="tr_list" th:each="order : ${hos_oredr_list}">
 									<td th:text="${order.hor_cd}"></td>
 									<td th:text="${order.user_id}"></td>
+									
 										<td th:text="${order.user_nm}"></td>
 									<td th:text="${order.ph_no}"></td> 
 									
@@ -59,6 +60,7 @@
 									<td th:text="${order.hor_pet_cd}" id="pet_cd" style="display:none;" ></td>
 									<td th:text="${order.f_uid}" id="pet_cd" style="display:none;" ></td>
 									<td th:text="${order.etp_nm}" id="pet_cd" style="display:none;" ></td>
+									
 								</tr>
 							</tbody>
 						</table>
@@ -95,6 +97,7 @@
 				<h3>
 					<span class="badge badge-dark bp_span_label" style="font-size:1em;">구매자 이름</span>
 					<span class="user_nm"></span>
+					<span id="tokenId" style="display:none;"></span>
 				</h3>
 				
 				<h3>

@@ -53,7 +53,7 @@ $(document).ready(function(){
 					$('.etp_license_no').text(data[0].etp_license_no);
 					$('.etp_nm').text(data[0].etp_nm);
 					$('.ph_no').text(data[0].ph_no);
-					
+					$('#asd').text(data[0].ph_no);
 			
 //					console.log(data);	
 					

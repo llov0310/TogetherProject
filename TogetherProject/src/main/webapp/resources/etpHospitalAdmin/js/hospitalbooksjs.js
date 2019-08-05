@@ -50,8 +50,8 @@ $('.tr_list').on('click',function(){
 					  			
 // var userId = firebase.auth().onAuthStateChanged();
 					  var dbRef = firebase.database().ref().child('Pets').child(f_uid).child(hor_pet_cd);
-					
-			
+					  
+					  
 					  dbRef.on("value", function(snapshot) {
 						  var dog = "";
 						  var dog_disease = "";
@@ -96,8 +96,11 @@ $('.tr_list').on('click',function(){
 		
 		
 		$('.success').click(function(){
+			
+			
+			
 			var dname = $(".dogname").text();
-			var dogdi = $(".dogdi").text(",");
+			var dogdi = $(".dogdi").text();
 			var context = "[Together]\n"
 		  		context += "예약 해주셔서 감사합니다.\n"
 		  		context += "[" + user_nm + "] 고객님께서 예약이 접수처리가 완료되었습니다.\n"
@@ -125,31 +128,40 @@ $('.tr_list').on('click',function(){
 						$('.tr_pro').text('');
 								$('.bP').bPopup().close();
 							
-//								  var newChats = firebase.database().ref().child('Chats').push();
-//								  console.log(newChats.key);
-//								  newChats.set({
-//									  isseen: false,
-//									  message: context,
-//									  receiver: f_uid,
-//									  sender: "OxI0I1sYuhQkVJnAey7HmJfSjNL2"
-//								  });
-									alert("메세지 전송");
-									
+								  var newChats = firebase.database().ref().child('Chats').push();
+								  console.log(newChats.key);
+								  newChats.set({
+									  isseen: false,
+									  message: context,
+									  receiver: f_uid,
+									  sender: "3PTCMHLT3wO0Z0BmVUAHDQt0KGs2"
+								  });
+								  
+								  var TokenKey = firebase.database().ref().child('Tokens').child(f_uid).child('TokenUid');
+								  
+								  
+								  TokenKey.on("value", function(snapshot) {
+									  var TokenId = ""
+										  TokenId = snapshot.val();
+									  var Tokenkey = TokenId.token;
+								  
+								  
 									$.ajax({	
 										type : "POST",
 										url : "/fcm",
 										dataType : 'json',
-										data : {text:"마 띠끼야"},
-									success : function(data){
-										console.log(data);
-										alert("머고");
-									}
+										data : {token:Tokenkey},
+										success : function(data){
+										console.log("들어옴???");
+										}
+										
 									});
+									location.reload();
 							
+								  });
+								  
 									
-									
-									alert("완료 되었습니다.");
-								location.reload();
+//								
 								return false;
 								
 								
