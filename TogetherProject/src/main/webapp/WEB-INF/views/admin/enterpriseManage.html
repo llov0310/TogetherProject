@@ -134,60 +134,46 @@
 	<div id="bP" class="bP">
 		<h1>업체 상세 정보</h1>
 		<hr/>
-		
+		<br>
+		<div style="display: inline-block; margin-left: 70px">
 		<h2>
 			<span class="badge badge-dark bp_span_label">업체 구분</span>
 			<span class="etp_cd_substr"></span>
 		</h2>
+		<table>
 		
-		<h2>
-			<span class="badge badge-dark bp_span_label">아이디</span>
-			<span class="user_id"></span>
-		</h2>
+		<tr>
+		<th><h2><span class="badge badge-dark bp_span_label">업체이름</span></h2></th>
+		<th><h3><span class="etp_nm"></span></h3></th>
+		</tr>
+		<tr>
+		<td><h2><span class="badge badge-dark bp_span_label">이름</span></h2></td>
+		<td><h3><span class="user_nm"></span></h3></td>
+		</tr>
+			
+		<tr>
+		<td><h2><span class="badge badge-dark bp_span_label">이메일</span></h2></td>
+		<td><h3><span class="etp_email"></span></h3></td>
+		</tr>
+		<tr>
+		<td><h2><span class="badge badge-dark bp_span_label">연락처</span></h2></td>
+		<td><h3><span class="etp_ph_no"></span></h3></td>
+		</tr>
+		<tr>
+		<td><h2><span class="badge badge-dark bp_span_label">주소</span></h2></td>
+		<td><h3><span class="etp_addr"></span></h3></td>
+		</tr>
+		<tr>
+		<td><h2><span class="badge badge-dark bp_span_label">사업자번호</span></h2></td>
+		<td><h3><span class="etp_license_no"></span></h3></td>
+		</tr>
+		</table>
+		</div>
 		
-		<h2>
-			<span class="badge badge-dark bp_span_label">이름</span>
-			<span class="user_nm"></span>
-		</h2>
-	
-		<h2>		
-			<span class="badge badge-dark bp_span_label">업체 이메일</span>
-			<span class="etp_email"></span>
-		</h2>
-		
-		<h2>
-			<span class="badge badge-dark bp_span_label">업체 연락처</span>
-			<span class="etp_ph_no"></span>
-		</h2>
-		
-		<h2>
-			<span class="badge badge-dark bp_span_label">업체 주소</span>
-			<span class="etp_addr"></span>
-		</h2>
-		
-		<h2>
-			<span class="badge badge-dark bp_span_label">사업자 번호</span>
-			<span class="etp_license_no"></span> <br/>
-		</h2>
-		
-		<h2>
-			<span class="badge badge-dark bp_span_label">업체 이름</span>
-			<span class="etp_nm"></span>
-		</h2>
-		
-		<h2>
-			<span class="badge badge-dark bp_span_label">휴대폰 번호</span>
-			<span class="ph_no"></span>
-		</h2>
-		
-		<h2>
-<<<<<<< HEAD
-		<span class="badge badge-dark bp_span_label" id="ja">면허사진</span>
-=======
-		<span class="badge badge-dark bp_span_label" id="ja" style="display: none;">자격증</span>
->>>>>>> branch 'master' of https://github.com/llov0310/TogetherProject.git
-		</h2>
+		<div style="float: right; margin-right: 50px" >
+		<h2><span class="badge badge-dark bp_span_label" id="ja">면허사진</span></h2><br>
 		<img alt="" src="" id="asd" style="  width: autol; height: auto; max-width: 500px; max-height: 500px;">
+		</div>
 	</div>
 	
 </th:block>
