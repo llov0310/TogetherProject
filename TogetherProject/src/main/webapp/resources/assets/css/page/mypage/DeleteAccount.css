@@ -1,9 +1,9 @@
 .delmain{
-		border: 1px solid gray;
+	padding-left: 14%;
+	padding-top:4%;
 	float: left;
     width: 70%;
-    margin-top: 110px;
-    padding-bottom: 50px;
+ 
 }
 .scro_br {
 	font-size:14px;

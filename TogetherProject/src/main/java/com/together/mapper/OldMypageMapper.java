@@ -18,12 +18,7 @@ public interface OldMypageMapper {
 	  public Integer passNew(@Param("user_id") String user_id, @Param("password")String password);
 
 
-	public Integer infoNew(@Param("user_id") String user_id,
-			@Param("email") String email, 
-			@Param("addr_ji") String addr_ji, 
-			@Param("addr_dong") String addr_dong, 
-			@Param("phon") String phon
-			);
+	public Integer infoNew(@Param("user_id") String user_id,@Param("phon") String phon);
 
 
 	public ArrayList<DogsVO> petlist(@Param("user_id") String user_id);

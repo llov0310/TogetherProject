@@ -22,9 +22,6 @@
 	<update id="infoNew"
 		parameterType="com.together.domain.MemberVO">
 		update member set
-		email = #{email},
-		addr_ji = #{addr_ji},
-		addr_dong = #{addr_dong},
 		ph_no = #{phon}
 		where user_id = #{user_id}
 	</update>

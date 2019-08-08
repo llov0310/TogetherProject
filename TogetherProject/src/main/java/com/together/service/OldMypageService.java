@@ -15,7 +15,7 @@ public interface OldMypageService {
 	//비밀번호 변경
 	public Integer passNew(String user_id, String password);
 	//회원정보수정
-	public Integer infoNew(String user_id, String email, String addr_ji, String addr_dong, String phon);
+	public Integer infoNew(String user_id,  String phon);
 	//개 리스트
 	public ArrayList<DogsVO> petlist(String user_id);
 	// 개추가
