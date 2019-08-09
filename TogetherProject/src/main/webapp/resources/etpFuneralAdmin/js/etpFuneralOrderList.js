@@ -23,6 +23,10 @@ $('.tr_list').on('click',function(){
 		var ph_no =  $(this).find('td').eq(3).text(); //연락처
 		var f_uid =  $(this).find('td').eq(10).text(); //연락처
 		
+		
+	     var TokenKey = firebase.database().ref().child('Tokens').child(f_uid).child('TokenUid');
+		  
+		  console.log(TokenKey);
 		console.log(user_nm);
 		console.log(ph_no);
 		console.log(f_uid);
@@ -134,13 +138,8 @@ $('.tr_list').on('click',function(){
 				  		context += "■ 가격: ["+total_price + "원]\n"
 				  		context += "\n "
 				  			
-				  			
-				  			 const messaging = firebase.messaging();
-						  messaging.requestPermission().then(function(){
-							  console.log("?");
-						  });
 				  	
-				  			console.log(context);
+				  		console.log(context);
 				  			
 					if(check == "미확인"){
 							$.ajax({
@@ -150,7 +149,7 @@ $('.tr_list').on('click',function(){
 								contentType: 'application/json; charset=utf-8',
 								success : function(data){
 									if(data == "success"){
-										alert("확인");
+								
 										
 									$('.tr_pro').text('');
 									$('.bP').bPopup().close();
@@ -163,11 +162,28 @@ $('.tr_list').on('click',function(){
 										  receiver: f_uid,
 										  sender: "3PTCMHLT3wO0Z0BmVUAHDQt0KGs2"
 									  });
+									  
 										alert("메세지 전송");
-										
 										alert("완료 되었습니다.");
-									location.reload();
-									return false;
+										
+										TokenKey.on("value", function(snapshot) {
+											  var TokenId = ""
+												  TokenId = snapshot.val();
+											  var Tokenkey = TokenId.token;
+										  										  
+											$.ajax({	
+												type : "POST",
+												url : "/fcm",
+												dataType : 'json',
+												data : {token:Tokenkey},
+												success : function(data){
+												console.log("들어옴???");
+												}
+												
+											});
+											location.reload();
+									
+										  });
 									}
 								}
 							});

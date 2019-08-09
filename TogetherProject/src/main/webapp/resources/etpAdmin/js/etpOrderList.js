@@ -27,7 +27,9 @@ $('.tr_list').on('click',function(){
 		
 		console.log(etp_nm);
 		console.log(f_uid);
-		
+	     var TokenKey = firebase.database().ref().child('Tokens').child(f_uid).child('TokenUid');
+		  
+		  console.log(TokenKey);
 		
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
@@ -99,8 +101,47 @@ $('.tr_list').on('click',function(){
 									alert("메세지 전송");
 								
 								alert("완료 되었습니다.");
-						        window.location.href="/etpOrderList";
+								
+								 TokenKey.on("value", function(snapshot) {
+									  var TokenId = ""
+										  TokenId = snapshot.val();
+									  var Tokenkey = TokenId.token;
+								  
+								  
+									$.ajax({	
+										type : "POST",
+										url : "/fcm",
+										dataType : 'json',
+										data : {token:Tokenkey},
+										success : function(data){
+										console.log("들어옴???");
+										}
+										
+									});
+									location.reload();
+							
+								  });
+								
+//						        window.location.href="/etpOrderList";
 						    
+						   
+//								  TokenKey.on("value", function(snapshot) {
+//									  var TokenId = ""
+//										  TokenId = snapshot.val();
+//									  var Tokenkey = TokenId.token;
+//								  });
+								  
+//									$.ajax({	
+//										type : "POST",
+//										url : "/fcm",
+//										dataType : 'json',
+//										data : {token:Tokenkey},
+//										success : function(data){
+//										console.log("들어옴???");
+//										}
+//						        
+						        
+						        
 						        
 //								// 닫기 전에 컨펌 실행
 //								if(confirm("주문자에게 주문 확인 SMS를 보내시겠습니까?")){
