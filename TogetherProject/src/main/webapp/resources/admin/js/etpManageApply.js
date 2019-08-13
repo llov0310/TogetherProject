@@ -33,17 +33,23 @@ $(document).ready(function(){
 						follow : [false, false],
 						opacity : 0.6,
 						positionStyle : 'fixed'
-					});
-					
-					
+							
+					}).reposition(500);
+										
 					if(data[0].etp_cd_substr == "h"){
 						$('.etp_cd_substr').text("호텔");
+						$('#ja').hide();
+						$(".bP").css({ width: "700px"});
+					
 					}else if(data[0].etp_cd_substr == "f"){
 						$('.etp_cd_substr').text("장례");
+						$('#ja').hide();
+						$(".bP").css({ width: "700px"});
 					}else if(data[0].etp_cd_substr == "d"){
 						$('.etp_cd_substr').text("병원");
-				
-					};
+						$('#ja').show();
+						$(".bP").css({ width: "1200px"});
+						};
 				
 					$('.user_id').text(data[0].user_id);
 					$('.user_nm').text(data[0].user_nm);
@@ -53,9 +59,15 @@ $(document).ready(function(){
 					$('.etp_license_no').text(data[0].etp_license_no);
 					$('.etp_nm').text(data[0].etp_nm);
 					$('.ph_no').text(data[0].ph_no);
+
+					$('#asd').text(data[0].ph_no);
+
 					
+					$('#asd').attr("src",data[0].etp_ex_path);
+
 			
-//					console.log(data);	
+
+					console.log(data);	
 					
 				},
 				error:function(jqXHR, textStatus, errorThrown){

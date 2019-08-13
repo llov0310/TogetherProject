@@ -3,7 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.together.mapper.AdminMapper">
 
+
 	<!--  select시 셀렉트문  insert시 태그를 각자 맞는 sql문을 쓴다 -->
+	
+	<select id="dimg" resultType="com.together.domain.EnterpriseVO">
+		select * from Enterpriseattach where etp_cd = #{etpcd}
+	</select>
+
 	
 	<!-- register_dt를 가져오는 sql문 -->
 	<select id="register_dt" resultType="com.together.domain.MemberVO">
@@ -286,7 +292,7 @@
 	<!-- 업체 리스트 검색을 위해 사용하는 sql문 -->
 	<select id="etpListSearch" resultType="com.together.domain.EtpListVO">
 	<![CDATA[
-	select e.*, substr(e.etp_cd, 1,1) as etp_cd_substr, m.password, m.ph_no, m.email, m.user_nm, m.register_dt, m.authority_no, m.birth_dt, m.sign_no, m.addr_ji, m.addr_dong
+	select e.*, substr(e.etp_cd, 1,1) as etp_cd_substr, m.password, m.ph_no, m.user_nm, m.register_dt, m.authority_no, m.birth_dt
 	from enterprise e, member m
 	where e.user_id = m.user_id and m.authority_no = 2 and ${searchType} like '%' || '${keyword}' || '%'
 	order by e.user_id
@@ -298,7 +304,7 @@
 	<![CDATA[
 	select x.rnum, x.*
 	from (select rownum as rnum, before_ord.*
-    	from (select e.*, substr(e.etp_cd, 1,1) as etp_cd_substr, m.password, m.ph_no, m.email, m.user_nm, m.register_dt, m.authority_no, m.birth_dt, m.sign_no, m.addr_ji, m.addr_dong
+    	from (select e.*, substr(e.etp_cd, 1,1) as etp_cd_substr, m.password, m.ph_no, m.user_nm, m.register_dt, m.authority_no, m.birth_dt
 					from enterprise e, member m
 					where e.user_id = m.user_id and m.authority_no = 2 and ${Search.searchType} like '%' || '${Search.keyword}' || '%' order by e.user_id ) before_ord
     		where rownum < #{Paging.endNum}) x
@@ -310,7 +316,7 @@
 	<!--업체 신청 관리 : 클릭 시 상세 정보  -->
 	<select id="etpDetail" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[
-	select m.ph_no, m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content, e.etp_apply_dt
+	select m.ph_no, m.user_nm, m.authority_no, substr(e.etp_cd, 1,1) as etp_cd_substr,e.etp_cd, e.etp_email, e.user_id, e.etp_addr, e.etp_ph_no, e.etp_license_no, e.etp_nm, e.etp_content, e.etp_apply_dt
 	from member m, enterprise e
 	where m.user_id = e.user_id and m.authority_no = 3 and e.user_id = #{user_id}
 	order by e.etp_apply_dt

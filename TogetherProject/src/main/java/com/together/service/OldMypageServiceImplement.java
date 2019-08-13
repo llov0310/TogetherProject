@@ -32,9 +32,9 @@ public class OldMypageServiceImplement implements OldMypageService {
 
 
 	@Override
-	public Integer infoNew(String user_id ,String email, String addr_ji, String addr_dong, String phon) {
+	public Integer infoNew(String user_id ,String phon) {
 		// TODO Auto-generated method stub
-		return myMapper.infoNew(user_id,email ,addr_ji,addr_dong, phon);
+		return myMapper.infoNew(user_id, phon);
 	}
 
 

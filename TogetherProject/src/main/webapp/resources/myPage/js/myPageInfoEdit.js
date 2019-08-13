@@ -1,4 +1,4 @@
-var path = null;
+/*var path = null;
 $(document).ready(function(){
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -78,11 +78,46 @@ fileButton.addEventListener('change',function(e) {
 														});
 									});
 
-				});
+				});*/
 
 
 
+	
 	$("#editBtn").on('click',function(){
+		
+			if ($("#newphon").val() == "") {
+				var phon = $(".phon").text();
+			} else {
+				var phon = $("#newphon").val();
+			}
+			
+			$.ajax({
+				url : "/member_info_new",
+				type : "POST",
+				dataType : 'text',
+				data : {
+				
+					phon : phon
+				},
+				success : function(data) {
+					if(data== "success"){
+						alert("변경완료");
+						location.replace("/myPageInfoEdit");
+
+						
+					}else {
+						alert("실패");
+					}
+					
+				}
+			});
+	});
+
+
+
+	
+	
+	/*$("#editBtn").on('click',function(){
 		// 이메일 -> 변수 추가 해야 함
 		// 휴대폰 -> 변수 추가 해야 함
 		// 주소 -> 변수 추가 해야 함
@@ -109,7 +144,6 @@ fileButton.addEventListener('change',function(e) {
 				}
 			}); // ajax END
 		}
-	});
+	});*/
 
-});
 	

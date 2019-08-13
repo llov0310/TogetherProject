@@ -7,6 +7,7 @@
 	
 <!-- CSS -->
 <th:block layout:fragment="page_css">
+<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
 	<link href="myPage/css/myPageInfoEdit.css" rel="stylesheet"
 		type="text/css">
 </th:block>
@@ -32,12 +33,12 @@
 	<hr />
 
 	<!-- page-inner 안 왼쪽 div -->
-	<div id="left">
+	 	<div id="left">
 		<h2 style="text-align: center;">회원 프로필</h2>
-		<hr style="width: 60%" />
+		<hr style="width: 60%" /> 
 
-		<!-- 사진 등록 DIV -->
-		<span id="imgsrccode" style="display: none"></span> <!-- 사진 등록에 필요한 태그 -->
+		<!-- 사진 등록 DIV
+		<span id="imgsrccode" style="display: none"></span> 사진 등록에 필요한 태그
 		
 		<div>
 			<div>
@@ -50,26 +51,35 @@
 			</div>
 
 
-		</div>
+		</div> -->
 
 
 		<!-- 고정값 DIV -->
+	<div class="font" id="info" th:each="memberinfo : ${memberinfo}">
 		<div>
-			<span>아이디 : </span><br/>
-			<span>이름 : </span><br/>
-			<span>생년월일 : </span>
-		
+			아이디 : <span id="font" class="id" th:text="${memberinfo.user_id}"></span>
 		</div>
+		<p>
+		<div>
+			이름 : <span id="font" th:text="${memberinfo.user_nm}"></span>
+		</div>
+		<p>
+		<div>
+			생년월일 : <span id="font" th:text="${memberinfo.birth_dt}"></span>
+		</div>
+		<p>
+		<div>
+			휴대전화 <span class="phon" th:text="${memberinfo.ph_no}"></span>
+		</div>
+	</div>
 
 		<!-- 프로필이 수정 될 DIV -->
-		<div class="form-inline form-group">
-			<label>이메일 : </label>
-			<input type="text" class="form-control"/> <br/>
+		<div class="form-inline form-group" id="infoup">
 		
-			<label>휴대폰 번호 : </label>
-			<input type="text" class="form-control"/> <br/>
+			<span class="font">휴대전화 : </span>
+			<input type="text" id="newphon" class="form-control"  maxlength="11"/> <br/>
 			
-			<label>주소 : </label>
+			<span class="font">주소 : </span>
 			<input type="text" class="form-control"/> <br/>
 			
 			
@@ -79,18 +89,18 @@
 		<!-- 수정 완료 버튼 -->
 		<input type="button" id="editBtn" value="수정" class="btn btn-info" />
 	
-		<hr style="width: 60%" />
+	
 	</div>
 	<!-- left div END -->
 
 
 	<!-- page-inner 안 오른쪽 div -->
-	<div id="right">
+<!-- 	<div id="right">
 		<h2 style="text-align: center;">비밀번호 변경</h2>
 		<hr style="width: 60%" />
-		<br /> <br /> <br /> <br />
+		<br /> <br /> <br /> <br /> -->
 
-		<div class="form-inline form-group">
+<!-- 		<div class="form-inline form-group">
 			<label>변경할 비밀번호 : </label> <input type="password"
 				class="form-control" id="password_01" name="password_01"> <br />
 
@@ -99,7 +109,7 @@
 				class="form-control" id="password_02" name="password_02"> <br />
 
 			<input type="button" id="passWordBtn" value="변경" class="btn btn-info" />
-		</div>
+		</div> -->
 
 		<br /> <br /> <br /> <br />
 

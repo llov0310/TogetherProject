@@ -234,26 +234,26 @@ public class OldMyPageController {
 	}
 
 	// 패스워드 값을 비교하는 구문
-	@RequestMapping(value = "/member_pass_cheak", method = RequestMethod.POST)
-	@ResponseBody
-	public String member_pass_cheak(Model model, HttpSession session, HttpServletRequest request,
-			@RequestParam String password) {
-		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-		ArrayList<MemberVO> pass_cheak = new ArrayList<MemberVO>();
-		System.out.println(password +"비밀번호1");
-		System.out.println(user_id + "아이디");
-		pass_cheak = mypage.passCheak(user_id);
-
-		String a = pass_cheak.get(0).getPassword();
-
-		if (a.equals(password)) {
-			return "success";
-		} else {
-			return "fail";
-
-		}
-
-	}
+//	@RequestMapping(value = "/member_pass_cheak", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String member_pass_cheak(Model model, HttpSession session, HttpServletRequest request,
+//			@RequestParam String password) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		ArrayList<MemberVO> pass_cheak = new ArrayList<MemberVO>();
+//		System.out.println(password +"비밀번호1");
+//		System.out.println(user_id + "아이디");
+//		pass_cheak = mypage.passCheak(user_id);
+//
+//		String a = pass_cheak.get(0).getPassword();
+//
+//		if (a.equals(password)) {
+//			return "success";
+//		} else {
+//			return "fail";
+//
+//		}
+//
+//	}
 
 	//강아지 리스트
 	  @RequestMapping(value = "/mypet_info", method=RequestMethod.GET) 
@@ -602,40 +602,40 @@ public class OldMyPageController {
 
 	// 비빌번호 변경
 
-	@RequestMapping(value = "/member_pass_new", method = RequestMethod.POST)
-	@ResponseBody
-	public String member_pass_new(Model model, HttpSession session, HttpServletRequest request,
-			@RequestParam String password) {
-		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-		System.out.println(user_id+"변경확인아이디");
-		System.out.println(password+"변경확인비번");
-
-		Integer update = mypage.passNew(user_id, password);
-		System.out.println(update);
-
-		
-		return "success";
-	}
+//	@RequestMapping(value = "/member_pass_new", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String member_pass_new(Model model, HttpSession session, HttpServletRequest request,
+//			@RequestParam String password) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		System.out.println(user_id+"변경확인아이디");
+//		System.out.println(password+"변경확인비번");
+//
+//		Integer update = mypage.passNew(user_id, password);
+//		System.out.println(update);
+//
+//		
+//		return "success";
+//	}
 
 	// 회원 정보수정
 
-	@RequestMapping(value = "/member_info_new", method = RequestMethod.POST)
-	@ResponseBody
-	public String member_info_new(Model model, HttpSession session, HttpServletRequest request,
-			@RequestParam String email, @RequestParam String addr_ji, @RequestParam String addr_dong,
-			@RequestParam String phon) {
-		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-		System.out.println(user_id + "다시넘겨온 아이디");
-		System.out.println(email + "이메일");
-		System.out.println(phon + "폰");
-		System.out.println(addr_ji + "주소1");
-		System.out.println(addr_dong + "주소2");
-		System.out.println("====================");
-		Integer update = mypage.infoNew(user_id, email, addr_ji, addr_dong, phon);
-
-		System.out.println(update);
-		return "success";
-	}
+//	@RequestMapping(value = "/member_info_new", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String member_info_new(Model model, HttpSession session, HttpServletRequest request,
+//			@RequestParam String email, @RequestParam String addr_ji, @RequestParam String addr_dong,
+//			@RequestParam String phon) {
+//		String user_id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+//		System.out.println(user_id + "다시넘겨온 아이디");
+//		System.out.println(email + "이메일");
+//		System.out.println(phon + "폰");
+//		System.out.println(addr_ji + "주소1");
+//		System.out.println(addr_dong + "주소2");
+//		System.out.println("====================");
+//		Integer update = mypage.infoNew(user_id, email, addr_ji, addr_dong, phon);
+//
+//		System.out.println(update);
+//		return "success";
+//	}
 
 	//시험용
 	@RequestMapping(value = "/mypagev2", method = RequestMethod.GET)

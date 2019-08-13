@@ -2,7 +2,7 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="nav/mypage/mypageInclude/mypagelayout">
+	layout:decorator="~{myPageInclude/myPageLayout}">
 
 <th:block layout:fragment="page_head">
 	<title>탈퇴하기</title>
@@ -12,6 +12,7 @@
 <th:block layout:fragment="contents">
 <div class="delmain">
 이용약관
+<br>
 <div class="scro_br" style="width:1100px;height:500px;">
 <pre>
 제 1 조 (목적)
@@ -131,9 +132,17 @@
 1. 본 약관은 2019년 05월 01일부터 시행됩니다. 
 </pre>
 </div>
+<br>
 <input type="checkbox" name="del">약관 동의하기
 <button id="delok">확인</button>
+<hr>
+<div id="chmember">
+아이디 <input type="text" id="did" th:value="${session.user.user_id}" readonly="readonly">
+비밀번호<input type="password" id="dpw">
+<button id="delbt">탈퇴하기</button>
 </div>
+</div>
+
 
 </th:block>
 
@@ -146,7 +155,7 @@
 <th:block layout:fragment="page_js">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="assets/js/mypagejs/myreservation.js"></script>
+	<script src="assets/js/mypagejs/DeleteAccount.js"></script>
 </th:block>
 
 

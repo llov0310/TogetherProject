@@ -28,6 +28,9 @@
 									<th>확인 상태</th>
 									<th>총 금액</th>
 									<th style="display:none;">업체 코드</th>
+									<th style="display:none;">업체 명</th>
+									<th style="display:none;">uid</th>
+									<th style="display:none;">주문코드</th>
 								</tr>
 							</thead>
 							<tbody class="or_list">
@@ -47,12 +50,15 @@
 												th:case="'3'" style="color: blue">취소 대기중</label>
 										</div>
 									</td>
-									<td th:switch="${order.or_check}"><label th:case="'1'"
-										style="color: red">미확인</label> <label th:case="'2'"
-										style="color: green">확인</label></td>
+									<td th:switch="${order.or_check}">
+									<label th:case="'1'" style="color: red">미확인</label> 
+									<label th:case="'2'" style="color: green">확인</label></td>
 									<td th:text="|${order.or_price} 원|"></td>
 									
 									<td th:text="${order.etp_cd}" id="etp_cd" style="display:none;" ></td>
+									<td th:text="${order.etp_nm}" id="etp_nm" style="display:none;" ></td>
+									<td th:text="${order.f_uid}" id="f_uid" style="display:none;" ></td>
+									<td th:text="${order.or_cd}" id="f_uid" style="display:none;" ></td>
 								</tr>
 							</tbody>
 						</table>
@@ -123,6 +129,7 @@
   
 <!-- 	<script src="/etpAdmin/vendor/jquery/jquery.min.js"></script> -->
 	<!-- 팝업창 스크립트  -->
+		<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	<script src="plugin/jquery.bpopup.min.js"></script>
 	<script src="/etpFuneralAdmin/js/etpFuneralOrderList.js"></script>
 

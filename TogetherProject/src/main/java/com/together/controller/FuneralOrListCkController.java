@@ -31,12 +31,12 @@ public class FuneralOrListCkController { //장례 주문 리스트 확인 전용
 	@RequestMapping(value = "/etpFuneralOrderListCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String etpFuneralOrderListCheck(@RequestBody String param, HttpSession session) {
-		
-		System.out.println(param);
+		System.out.println("체크");
+		System.out.println("1"+param);
 		List<Map<String,Object>> paymentMap = new ArrayList<Map<String,Object>>();
 	    paymentMap = JSONArray.fromObject(param);
 	    
-	    System.out.println(paymentMap);
+	    System.out.println("2"+paymentMap);
 	    
 	    for(int i=0; i<paymentMap.size(); i++) {
 	    	JSONObject jobj = (JSONObject) paymentMap.get(i);
@@ -45,9 +45,11 @@ public class FuneralOrListCkController { //장례 주문 리스트 확인 전용
 	    	String or_dt = (String) jobj.get("s_or_dt1");
 	    	String or_dt2 = (String) jobj.get("s_or_dt2");
 	    	String th_dt = (String) jobj.get("s_th_dt");
-	    	
+	    	System.out.println(or_dt);
+	    	System.out.println(or_dt2);
+	    	System.out.println(th_dt);
 	    	int or_check = etpAdminService.or_checkUpdate(user_id,or_dt,or_dt2,th_dt);
-	    
+	    System.out.println(or_check);
 	    }
 	    
 

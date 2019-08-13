@@ -110,5 +110,7 @@ public interface AdminMapper {
    
    // 
    public ArrayList<MemberVO> register_dt(String user_id);
+
+public ArrayList<EnterpriseVO> dimg(String etpcd);
    
 }

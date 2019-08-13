@@ -247,5 +247,11 @@ public class AdminServiceImplement implements AdminService {
 		return mapper.register_dt(user_id);
 	}
 
+	@Override
+	public ArrayList<EnterpriseVO> dimg(String etpcd) {
+		// TODO Auto-generated method stub
+		return mapper.dimg(etpcd);
+	}
+
 
 }

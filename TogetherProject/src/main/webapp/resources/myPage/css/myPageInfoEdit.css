@@ -2,13 +2,13 @@
 
 #left{
 	float: left;
-	width: 50%;
-}
-
-#right{
-	float: right;
-	width: 50%;
-}
+	width: 90%;}
+	
+#left #editBtn{margin-left: 47%; margin-top: 2%;}
+#info{margin-left: 38%; margin-top: 5%;}
+#infoup{margin-left: 38%; margin-top: 5%;}
+.font{font-family: 'Hanna', sans-serif;
+		font-size: 30px;}
 
 
 .filebox label {

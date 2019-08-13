@@ -108,7 +108,9 @@ public interface AdminService {
 	public int memManage_04(String user_id);
 	
 	// 가입 일시를 가져오는 함수 추가
-	public ArrayList<MemberVO> register_dt(String user_id); 
+	public ArrayList<MemberVO> register_dt(String user_id);
+
+	public ArrayList<EnterpriseVO> dimg(String etpcd); 
 	
 	
 }
