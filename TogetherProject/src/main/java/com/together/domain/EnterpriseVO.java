@@ -20,6 +20,8 @@ public class EnterpriseVO {
 	private String etp_lat;
 	private String etp_lnt;
 	
+	private Float km;
+	
 	
 	// 업체 정보를 볼때 추가적으로 필요한 변수를 선언 (etpManage 페이지)
 	private String user_nm;

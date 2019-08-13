@@ -5,7 +5,8 @@
 
 	<select id="hotelList" resultType="com.together.domain.EnterpriseVO">
 	<![CDATA[	
-	 select DISTINCT p.etp_cd,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm,i.etp_if_img_path,to_char(e.etp_content) etp_content,e.etp_lat,e.etp_lnt
+	 select DISTINCT p.etp_cd,i.etp_if_time1,i.etp_if_time2,e.etp_addr,e.etp_nm,i.etp_if_img_path,to_char(e.etp_content) etp_content,e.etp_lat,e.etp_lnt,
+	trunc(DISTNACE_WGS84(#{localLat}, #{localLnt}, to_number(trunc(etp_lat,6)), to_number(trunc(etp_lnt,6))),2) km
     from(select s.pd_cd
         from stock s
         where to_date(substr(s.st_cd,-5), 'MM-DD') between to_date(#{in}, 'MM-DD') and to_date(#{out}, 'MM-DD')
@@ -21,6 +22,11 @@
     and e.etp_cd like 'h'||'%'
 	]]>
 	</select>
+	
+	<insert id="signup" parameterType="com.together.domain.MemberVO">
+		insert into member values 
+		(#{user_id},#{password},#{ph_no},#{user_nm},sysdate,3,#{birth_dt},#{f_uid})
+	</insert>
 	
 	<select id="hotelinfoList" resultType="com.together.domain.EnterpriseVO">
 	select e.*,i.etp_if_info,i.etp_if_intro,m.user_nm from enterprise e ,enterprise_info i,member m
@@ -132,7 +138,7 @@
 	</select>
 	
 	<select id="funeral_review" resultType="com.together.domain.ReviewBoardVO">
-	select r.user_id,m.user_nm,r.rb_contents,to_char(r.rb_dt,'YY/MM/DD HH24:mi:ss') rb_dt_char,r.rb_avg 
+	select r.user_id,m.user_nm,r.rb_contents,to_char(r.rb_dt,'YY/MM/DD HH24:mi:ss') rb_dt_char,r.rb_avg,m.f_uid
 	from reviewboard r,member m 
 	where m.user_id = r.user_id  and etp_cd = #{decodeResult}
 	</select>
@@ -201,16 +207,13 @@
 	<select id="getHospitalList" resultType="com.together.domain.EnterpriseVO">
 	select DISTINCT e.etp_cd, e.etp_addr,e.etp_nm,
 	e.etp_lat,e.etp_lnt,i.etp_if_img_path,i.etp_if_time1,
-	i.etp_if_time2,to_char(e.etp_content) etp_content
+	i.etp_if_time2,to_char(e.etp_content) etp_content,
+	trunc(DISTNACE_WGS84(#{localLat}, #{localLnt}, to_number(trunc(e.etp_lat,6)), to_number(trunc(e.etp_lnt,6))),2) km
 	from enterprise e, hospitalcategory h, enterprise_info i
 	where i.etp_cd = e.etp_cd
 	and h.etp_cd = e.etp_cd
-	and (
-	h.etp_ct = #{item1} or h.etp_ct = #{item2} or
-	h.etp_ct = #{item3} or h.etp_ct = #{item4} or
-	h.etp_ct = #{item5} or h.etp_ct = #{item6} or
-	h.etp_ct = #{item7}
-	)
+	and h.etp_ct = #{item}
+    and e.etp_addr like #{Address}||'%'
 	order by e.etp_cd
 	</select>
 	
@@ -254,6 +257,56 @@
 	('DE'||HOS_DETAIL_SEQ.nextval,#{hor_cd},#{canser})
 	</insert>
 	
+	<select id="getCalList" resultType="com.together.domain.PetDiaryVO">
+	select pet_dia_type,pet_dia_content,to_char(pet_dia_settime1,'YYYY-MM-DD HH24:MI') as pet_dia_settime1_char,
+	to_char(pet_dia_settime2,'YYYY-MM-DD HH24:MI') as pet_dia_settime2_char 
+	from petdiary
+	where pet_dia_petcode = #{petcode}
+	</select>
+	
+	<insert id="insertDiary" parameterType="com.together.domain.PetDiaryVO">
+	insert into petdiary values
+	('PET'||to_char(sysdate,'YYYYMMDD')||PET_DIARY_SEQ.nextval,
+	#{user_id},
+	to_timestamp(#{pet_dia_settime1_char},'yyyy-mm-dd HH24:MI:SS'),
+	to_timestamp(#{pet_dia_settime1_char},'yyyy-mm-dd HH24:MI:SS'),
+	#{pet_dia_petcode},
+	#{pet_dia_content},
+	'1'
+	)
+	</insert>
+	
+	<select id="UserOrder_list" resultType="com.together.domain.UserOrderVO">
+	<![CDATA[
+	select * from (select to_char(o.or_cd) or_cd,o.or_stat or_stat,to_char(o.or_dt,'yy/mm/dd hh24:mi') or_dt,to_char(o.or_dt2,'yy/mm/dd hh24:mi') or_dt2,
+	o.or_price or_price,to_char(o.th_dt,'yy/mm/dd') th_dt,e.etp_cd etp_cd,e.etp_nm etp_nm 
+	from orders o,product p,enterprise e
+	where o.user_id = #{id}
+	and e.etp_cd like 'h'||'%'
+	and o.pd_cd = p.pd_cd
+	and p.etp_cd = e.etp_cd
+	UNION
+	select to_char(ROWNUM) or_cd,X.* 
+	FROM(select o.or_stat or_stat,to_char(o.or_dt,'yy/mm/dd hh24:mi') or_dt,to_char(o.or_dt2,'yy/mm/dd hh24:mi') or_dt2,
+	sum(o.or_price) or_price,to_char(o.th_dt,'yy/mm/dd') th_dt,e.etp_cd etp_cd,e.etp_nm etp_nm
+	from orders o,product p,enterprise e
+	where o.user_id = #{id}
+	and e.etp_cd like 'f'||'%'
+	and o.pd_cd = p.pd_cd
+	and p.etp_cd = e.etp_cd
+	group by o.or_stat,to_char(o.or_dt,'yy/mm/dd hh24:mi'),to_char(o.or_dt2,'yy/mm/dd hh24:mi'),
+	to_char(o.th_dt,'yy/mm/dd'),e.etp_cd,e.etp_nm
+	order by to_char(o.th_dt,'yy/mm/dd') desc) X
+	UNION
+	select to_char(h.hor_cd) or_cd,h.hor_stat or_stat,to_char(h.hor_dt_f,'yy/mm/dd hh24:mi') or_dt,
+	to_char(h.hor_dt_l,'yy/mm/dd hh24:mi') or_dt2,NVL(null,0) or_price,
+	to_char(to_date(substr(h.hor_cd,3,8)),'yy/mm/dd') th_dt,h.etp_cd etp_cd,e.etp_nm etp_nm
+	from hospitalorders h,enterprise e
+	where h.user_id = #{id}
+	and h.etp_cd = e.etp_cd) a
+	order by a.th_dt desc
+	]]>
+	</select>
 	
 	
 </mapper>

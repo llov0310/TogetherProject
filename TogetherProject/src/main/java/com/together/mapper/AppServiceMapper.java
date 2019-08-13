@@ -7,11 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 import com.together.domain.MemberVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ReviewBoardVO;
+import com.together.domain.UserOrderVO;
 
 public interface AppServiceMapper {
 
-	public ArrayList<EnterpriseVO> hotelList(@Param("in") String in, @Param("out") String out, @Param("address") String Address);
+	public ArrayList<EnterpriseVO> hotelList(@Param("in") String in, @Param("out") String out, @Param("address") String Address
+			,@Param("localLat") String localLat,@Param("localLnt") String localLnt);
 
 	public ArrayList<EnterpriseVO> hotelinfoList(@Param("name") String etpName, @Param("addr") String etpAddr);
 
@@ -64,10 +67,8 @@ public interface AppServiceMapper {
 	public ArrayList<EnterpriseVO> resultOrder(@Param("day") String order_day,@Param("code") String code, @Param("user") String user_id);
 
 	public ArrayList<EnterpriseVO> getHospitalList(@Param("day") String day, 
-			@Param("item1") String item1, @Param("item2") String item2, 
-			@Param("item3") String item3, @Param("item4") String item4,
-			@Param("item5") String item5, @Param("item6") String item6, 
-			@Param("item7") String item7);
+			@Param("item") String item, @Param("Address") String Address,
+			@Param("localLat") String lat,@Param("localLnt") String lnt);
 
 	public ArrayList<EnterpriseVO> detail_getHosList(String etp_nm);
 
@@ -83,7 +84,15 @@ public interface AppServiceMapper {
 	public int HosDetail(@Param("hor_cd") String hor_cd, 
 			@Param("canser") String canser);
 
-	public ArrayList<EnterpriseVO> Recommend_list(); 
+	public ArrayList<EnterpriseVO> Recommend_list();
+	
+	public ArrayList<PetDiaryVO> getCalList(String petcode);
+
+	public int insertDiary(PetDiaryVO setVO);
+
+	public int signup(MemberVO ins);
+
+	public ArrayList<UserOrderVO> UserOrder_list(String id); 
 
 	
 

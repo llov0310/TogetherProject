@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 import com.together.domain.MemberVO;
+import com.together.domain.OrdersVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ReviewBoardVO;
+import com.together.domain.UserOrderVO;
 
 public interface AppService {
 
 	
 	//앱 호텔 리스트 불러오기
-	public ArrayList<EnterpriseVO> hotelList(String in, String out, String address);
+	public ArrayList<EnterpriseVO> hotelList(String in, String out, String address,String localLat,String localLnt);
 	
 	//앱 지정 호텔 정보 
 	public ArrayList<EnterpriseVO> ProductList(String etpName, String etpAddr);
@@ -77,8 +80,7 @@ public interface AppService {
 
 	
 	//병원 카테고리 검색별로 나타나는 리스트
-	public ArrayList<EnterpriseVO> getHospitalList(String day, String item1, String item2, String item3, String item4,
-			String item5, String item6, String item7);
+	public ArrayList<EnterpriseVO> getHospitalList(String day, String item, String Address,String lat,String lnt);
 
 	//병원업체 최초로 정보 몇가지 가져오기
 	public ArrayList<EnterpriseVO> detail_getHosList(String etp_nm);
@@ -95,5 +97,16 @@ public interface AppService {
 
 	//추천 장례업체 정보
 	public ArrayList<EnterpriseVO> Recommend_list();
+
+	//캘린더에있는 정보 긁어오기
+	public ArrayList<PetDiaryVO> getCalList(String petcode);
+
+	//캘린더 작성
+	public int insertDiary(PetDiaryVO setVO);
+
+	public int signup(MemberVO ins);
+
+	//유저 전체 주문리스트
+	public ArrayList<UserOrderVO> UserOrder_list(String id);
 
 }

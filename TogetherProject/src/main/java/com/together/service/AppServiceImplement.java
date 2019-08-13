@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 import com.together.domain.MemberVO;
+import com.together.domain.OrdersVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ReviewBoardVO;
+import com.together.domain.UserOrderVO;
 import com.together.mapper.AppServiceMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,9 +22,9 @@ public class AppServiceImplement implements AppService {
 	private AppServiceMapper mapper;
 	
 	@Override
-	public ArrayList<EnterpriseVO> hotelList(String in, String out, String Address) {
+	public ArrayList<EnterpriseVO> hotelList(String in, String out, String Address,String localLat,String localLnt) {
 		// TODO Auto-generated method stub
-		return mapper.hotelList(in,out,Address);
+		return mapper.hotelList(in,out,Address,localLat,localLnt);
 	}
 
 	@Override
@@ -151,11 +154,9 @@ public class AppServiceImplement implements AppService {
 
 	
 	@Override
-	public ArrayList<EnterpriseVO> getHospitalList(String day, String item1, String item2, String item3, String item4,
-			String item5, String item6, String item7) {
+	public ArrayList<EnterpriseVO> getHospitalList(String day, String item, String Address,String lat,String lnt) {
 		// TODO Auto-generated method stub
-		return mapper.getHospitalList(day,item1,item2,item3, item4,
-				item5,item6, item7);
+		return mapper.getHospitalList(day,item,Address,lat,lnt);
 	}
 
 	@Override
@@ -192,6 +193,32 @@ public class AppServiceImplement implements AppService {
 	public ArrayList<EnterpriseVO> Recommend_list() {
 		// TODO Auto-generated method stub
 		return mapper.Recommend_list();
+	}
+	
+	
+	//여기서부터 마이페이지 부분
+	@Override
+	public ArrayList<PetDiaryVO> getCalList(String petcode) {
+		// TODO Auto-generated method stub
+		return mapper.getCalList(petcode);
+	}
+
+	@Override
+	public int insertDiary(PetDiaryVO setVO) {
+		// TODO Auto-generated method stub
+		return mapper.insertDiary(setVO);
+	}
+
+	@Override
+	public int signup(MemberVO ins) {
+		// TODO Auto-generated method stub
+		return mapper.signup(ins);
+	}
+
+	@Override
+	public ArrayList<UserOrderVO> UserOrder_list(String id) {
+		// TODO Auto-generated method stub
+		return mapper.UserOrder_list(id);
 	}
 
 }
