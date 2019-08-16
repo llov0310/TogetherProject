@@ -77,5 +77,12 @@ public interface ETPAdminMapper {
 //병원 체크
 	public Integer hoscheck(@Param("hor_cd") String hor_cd);
 
+	public int updatecancle(@Param("day1") String day1, @Param("day2") String day2,
+			@Param("check_val") String check_val, @Param("member_id") String member_id, @Param("day_th") String day_th);
+
+	public Integer hoscancle(@Param("hor_cd") String hor_cd);
+
+	public int updatecancle3(@Param("user_id") String user_id, @Param("day") String or_dt, @Param("day2") String or_dt2, @Param("t_day") String th_dt);
+
 
 }

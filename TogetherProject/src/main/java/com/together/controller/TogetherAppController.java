@@ -1058,5 +1058,25 @@ public class TogetherAppController {
 		return jobj;
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/Order_cancle", method = RequestMethod.POST)
+	public JSONObject Order_cancle(@RequestBody String a) {
+
+		String user_info = URLDecoder.decode(a);
+
+		JSONObject Map = new JSONObject();
+		Map = JSONObject.fromObject(user_info);
+
+		System.out.println(Map);
+		
+		// 현재 값을 받아오는 작업은 끝내놓음
+		JSONObject jobj = new JSONObject(); // 최종적인 반환형태
+
+		
+
+		return jobj;
+
+	}
 
 }

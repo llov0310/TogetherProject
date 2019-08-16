@@ -146,6 +146,20 @@ public class ETPAdminController {
 
 		return "success";
 	}
+	//취소하기
+	@RequestMapping(value = "/etpOrderListcancle", method = RequestMethod.POST)
+	@ResponseBody
+	public String ordercancle(Model model, @RequestParam String day1, @RequestParam String day2, @RequestParam String nm,
+			@RequestParam String check_val, @RequestParam String day_th) {
+
+		ArrayList<OrdersVO> updateCheck = etpAdminService.newinfo(nm);
+
+		String member_id = updateCheck.get(0).getUser_id();
+
+		int up = etpAdminService.updatecancle(day1, day2, check_val, member_id, day_th);
+
+		return "success";
+	}
 	
 	
 	
@@ -409,6 +423,17 @@ public class ETPAdminController {
 		System.out.println(hor_cd);
 		Integer check = etpAdminService.hoscheck(hor_cd);
 	        return "good";
+	}
+	@RequestMapping(value = "/etphospitalcancle", method = RequestMethod.POST)
+	@ResponseBody
+	public String etphospitalcancle(Model model, HttpServletRequest request, HttpSession session ,@RequestParam String hor_cd){
+
+		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
+
+		System.out.println("여기오니");
+		System.out.println(hor_cd);
+		Integer check = etpAdminService.hoscancle(hor_cd);
+		return "success";
 	}
 	
 }

@@ -5,7 +5,7 @@
 	layout:decorator="include/layout">
 
 <th:block layout:fragment="page_head">
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Jua|Single+Day&display=swap&subset=korean" rel="stylesheet">
 	<style>
 #fow1 {
 	position: absolute;
@@ -18,6 +18,9 @@
 #etpup {
 	opacity: 1.4;
 	filter: alpha(opacity = 50); /* For IE8 and earlier */
+}
+.mb-3{
+font-family: 'Jua', sans-serif; font-size: 28px;
 }
 </style>
 <!-- 스크롤시 상단바 색깔 변경되는 js -->
@@ -56,7 +59,7 @@
 
 
 						<!-- Subheading -->
-						<p class="lead text-white text-center mb-5">
+						<p class="lead text-white text-center mb-5" style="font-family: 'Noto Sans KR', sans-serif; font-size: 18px;">
 							반려견에 대한 통합서비스가 주인 투개더에서는 사용자의 편의성과 함께 <br> <br>새로운 서비스를
 							제공하고 있습니다 분양/짝찾기/병원/장례 등 <br> <br>정보를 확인할수 있으며 커뮤니티를 통해
 							<br> <br>쉽게 알고자하는 정보를 획득할수 있습니다. <br> <br>반려견과
@@ -100,7 +103,7 @@
 				<div class="col-md-8 col-lg-6 text-center">
 
 					<!-- Heading -->
-					<h2 class="lg-title mb-2">반려견을 위한 곳</h2>
+					<h2 class="lg-title mb-2">반려견을 위한 서비스</h2>
 
 					<!-- Subheading -->
 					<p class="mb-5 ">1000만 반려동물시대에 맞춘 최적화 플랫폼</p>
@@ -110,8 +113,17 @@
 			<!-- / .row -->
 
 			<div class="row justy-content-center">
-				<div class="col-lg-3 col-md-6" id="Hotel"
-					onclick="window.location.href='/hotel'" style="cursor: pointer;">
+			
+			<div class="col-lg-3 col-md-6">
+					<div class="text-center feature-block" id="memorialGallery">
+						<div class="img pet goodbye">
+							<img src="assets/img/dog2.jpg" style="	border-radius: 50%;">
+						</div>
+						<h4 class="mb-3" style="padding-top: 10px;">펫칭</h4>
+					</div>
+				</div>
+			
+				<div class="col-lg-3 col-md-6" id="Hotel">
 					<div class="text-center feature-block">
 						<div class="img petching">
 							<img src="assets/img/petHotel.png">
@@ -120,11 +132,8 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 col-md-6" id="Hospital"
-					onclick="window.location.href='/HospitalLink'"
-					style="cursor: pointer;">
-
-					<div class="text-center feature-block">
+				<div class="col-lg-3 col-md-6" id="Hospital">
+				<div class="text-center feature-block">
 						<div class="img pet hospital">
 							<img src="assets/img/petHospital.png">
 						</div>
@@ -134,9 +143,7 @@
 				</div>
 
 				<div class="col-lg-3 col-md-6">
-					<div class="text-center feature-block" id="goodbye1"
-						onclick="window.location.href='/goodbye1'"
-						style="cursor: pointer;">
+					<div class="text-center feature-block" id="goodbye1">
 						<div class="img pet community">
 							<img src="assets/img/goodByePet.png">
 						</div>
@@ -144,16 +151,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 col-md-6">
-					<div class="text-center feature-block" id="memorialGallery"
-						onclick="window.location.href='/memorialGallery'"
-						style="cursor: pointer;">
-						<div class="img pet goodbye">
-							<img src="assets/img/rainbow.png">
-						</div>
-						<h4 class="mb-3" style="padding-top: 10px;">추모소(무지개다리)</h4>
-					</div>
-				</div>
+				
 
 
 			</div>
@@ -177,14 +175,12 @@
 					<div class="about-content">
 						<h2 class="display-5">펫칭(PetChing)</h2>
 						<p>펫칭은 신개념 매칭 서비스 입니다. 반려견의 정보를 한눈에 알아보고 자신이 원하는 반려견을 찾아내어 매칭이
-							가능하도록 만들어줍니다 사용자는 편의성과 함께 시간을 단축 할수 있습니다.</p>
+							가능하도록 만들어줍니다 사용자는 편의성과 함께 시간을 단축 할수 있는 서비스 입니다.</p>
 
 
 						<ul class="list-unstyled skill-list ">
 							<li>반려견 짝 찾기 서비스</li>
 							<li>분양/입양 센터 서비스</li>
-							<li>인기펫 서비스</li>
-							<li>펫 이상형 월드컵</li>
 						</ul>
 
 					</div>
@@ -242,7 +238,6 @@
 						<ul class="list-unstyled skill-list ">
 							<li>통합 서비스 연계</li>
 							<li>사진 커뮤니티 서비스</li>
-							<li>모임 구현</li>
 							<li>메세지 기능 구현</li>
 
 						</ul>
@@ -303,7 +298,6 @@
 
 						<ul class="list-unstyled skill-list ">
 							<li>장례 업체 정보 제공</li>
-							<li>온라인 분향소 서비스 제공</li>
 							<li>너와 함께 한 추억 다이어리 서비스</li>
 
 
