@@ -1035,6 +1035,7 @@ public class TogetherAppController {
 		
 		Userorder = App.UserOrder_list(id);
 		
+		if(Userorder.size() != 0) {
 		for(int i=0; i<Userorder.size(); i++) {
 			Map<String,Object> map = new HashMap<>();
 			map.put("or_cd",Userorder.get(i).getOr_cd());
@@ -1048,12 +1049,73 @@ public class TogetherAppController {
 			
 			jarry.add(map);
 		
-		}
+			}
 		
-		jobj.put("result",jarry);
+
+			jobj.put("result",jarry);
+			
+		}
 		
 		System.out.println(jobj);
 
+
+		return jobj;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/Order_cancle", method = RequestMethod.POST)
+	public JSONObject Order_cancle(@RequestBody String a) {
+
+		String user_info = URLDecoder.decode(a);
+
+		JSONObject Map = new JSONObject();
+		Map = JSONObject.fromObject(user_info);
+
+		System.out.println(Map);
+		
+		String or_cd =Map.optString("or_cd");
+		String code = Map.optString("etp_cd");
+		String day = Map.optString("day");
+		String day2 = Map.optString("day2");
+		
+		
+
+		JSONObject jobj = new JSONObject(); // 최종적인 반환형태
+		
+		if(code.substring(0,1).equals("h")) {
+		
+			int h_update = App.order_cancle(or_cd,code,day,day2);
+			if(h_update != 0) {
+				jobj.put("result","success");
+			}else {
+				jobj.put("result","false");
+			}
+			
+		}else if(code.substring(0,1).equals("f")){
+			
+			int f_update = App.forder_cancle(or_cd,code,day,day2);
+			if(f_update != 0) {
+				jobj.put("result","success");
+			}else {
+				jobj.put("result","false");
+			}
+			
+		}else {
+			
+			int d_update = App.horder_cancle(or_cd,code,day,day2);
+			if(d_update != 0) {
+				jobj.put("result","success");
+			}else {
+				jobj.put("result","false");
+			}
+		}
+		
+		// 현재 값을 받아오는 작업은 끝내놓음
+		
+		
+
+		
 
 		return jobj;
 

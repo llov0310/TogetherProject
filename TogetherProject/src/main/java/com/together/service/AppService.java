@@ -109,4 +109,13 @@ public interface AppService {
 	//유저 전체 주문리스트
 	public ArrayList<UserOrderVO> UserOrder_list(String id);
 
+	// 호텔  예약취소
+	public int order_cancle(String or_cd ,String code, String day, String day2);
+
+	// 병원 예약취소
+	public int horder_cancle(String or_cd,String code, String day, String day2);
+
+	// 장례 예약취소
+	public int forder_cancle(String or_cd, String code, String day, String day2);
+
 }

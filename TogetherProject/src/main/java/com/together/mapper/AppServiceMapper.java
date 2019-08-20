@@ -92,7 +92,24 @@ public interface AppServiceMapper {
 
 	public int signup(MemberVO ins);
 
-	public ArrayList<UserOrderVO> UserOrder_list(String id); 
+	public ArrayList<UserOrderVO> UserOrder_list(String id);
+
+	public int order_cancle(
+			@Param("or_cd") String or_cd,
+			@Param("code") String code, 
+			@Param("day") String day, 
+			@Param("day2") String day2);
+
+	public int horder_cancle(
+			@Param("or_cd") String or_cd,
+			@Param("code") String code, 
+			@Param("day") String day, 
+			@Param("day2") String day2);
+
+	public int forder_cancle(@Param("or_cd") String or_cd,
+			@Param("code") String code, 
+			@Param("day") String day, 
+			@Param("day2") String day2); 
 
 	
 

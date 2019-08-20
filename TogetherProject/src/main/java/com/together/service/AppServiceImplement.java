@@ -221,4 +221,22 @@ public class AppServiceImplement implements AppService {
 		return mapper.UserOrder_list(id);
 	}
 
+	@Override
+	public int order_cancle(String or_cd, String code, String day, String day2) {
+		// TODO Auto-generated method stub
+		return mapper.order_cancle(or_cd,code,day,day2);
+	}
+
+	@Override
+	public int horder_cancle(String or_cd, String code, String day, String day2) {
+		// TODO Auto-generated method stub
+		return mapper.horder_cancle(or_cd,code,day,day2);
+	}
+
+	@Override
+	public int forder_cancle(String or_cd, String code, String day, String day2) {
+		// TODO Auto-generated method stub
+		return mapper.forder_cancle(or_cd,code,day,day2);
+	}
+
 }

@@ -112,7 +112,7 @@
     <select id="funeralList" resultType="com.together.domain.EnterpriseVO">
     <![CDATA[
     select DISTINCT e.etp_nm,e.etp_addr,e.etp_ph_no,e.etp_lat,e.etp_lnt,to_char(e.etp_content) etp_content,i.etp_if_img_path,i.etp_if_time1,i.etp_if_time2,e.etp_cd
- 	from enterprise e , product po , orders o ,enterprise_info i
+ 	from enterprise e , product po ,enterprise_info i
  	where po.etp_cd = e.etp_cd 
     and e.etp_cd = i.etp_cd
  	and e.etp_addr like '%'||#{location}||'%'
@@ -307,6 +307,32 @@
 	order by a.th_dt desc
 	]]>
 	</select>
+	
+	<update id="order_cancle" parameterType="com.together.domain.OrdersVO">
+	update (select o.or_cd,o.or_check ,o.or_stat,o.or_dt,o.or_dt2,e.etp_cd from orders o,product p ,enterprise e where o.pd_cd = p.pd_cd and p.etp_cd = e.etp_cd) x
+	set x.or_stat = '3' , x.or_check = '1'
+	where x.or_dt = to_date(#{day},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and x.or_dt2 = to_date(#{day2},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and x.etp_cd = #{code}
+	and x.or_cd = #{or_cd}
+	</update>
+	
+	<update id="forder_cancle" parameterType="com.together.domain.OrdersVO">
+	update (select o.or_stat,o.or_check,o.or_dt,o.or_dt2,e.etp_cd from orders o,product p ,enterprise e where o.pd_cd = p.pd_cd and p.etp_cd = e.etp_cd) x
+	set x.or_stat = '3' , x.or_check = '1'
+	where x.or_dt = to_date(#{day},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and x.or_dt2 = to_date(#{day2},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and x.etp_cd = #{code}
+	</update>
+	
+	<update id="horder_cancle" parameterType="com.together.domain.HospitalOrdersVO">
+	update hospitalorders
+	set hor_stat = '3' , hor_check = '1'
+	where hor_dt_f = to_date(#{day},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and hor_dt_l = to_date(#{day2},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and etp_cd = #{code}
+	and hor_cd = #{or_cd}
+	</update>
 	
 	 
 </mapper>
