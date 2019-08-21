@@ -57,6 +57,12 @@ public interface ETPAdminService {
 	public ArrayList<HospitalOrdersVO> hospital_order_detail(String hor_cd);
 	//병원 체크
 	public Integer hoscheck(String hor_cd);
+	//호텔주문취소
+	public int updatecancle(String day1, String day2, String check_val, String member_id, String day_th);
+	//병원주문취소
+	public Integer hoscancle(String hor_cd);
+	//장례 주문취소
+	public int updatecancle3(String user_id, String or_dt, String or_dt2, String th_dt);
 	
 	
 }

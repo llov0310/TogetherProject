@@ -11,6 +11,8 @@ var firebaseConfig = {
 					  firebase.initializeApp(firebaseConfig);
 					  var database = firebase.database();	
 
+					  
+					  
 $('.tr_list').on('click',function(){
 		
 		var t_day = $(this).find('td').eq(1).text(); //구매일
@@ -31,6 +33,7 @@ $('.tr_list').on('click',function(){
 		  
 		  console.log(TokenKey);
 		
+		
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
 					positionStyle : 'fixed'});
@@ -46,7 +49,11 @@ $('.tr_list').on('click',function(){
 		$('.check').text(check);
 		$('.to_price').text(price);
 		
-		
+		if(book_stat == "취소 대기중"){
+			$('.success').text("취소");
+		}else{
+			$('.success').text("확인");
+		}
 		$('.success').click(function(){
 			
 			var day1 = $(this).parent().parent().find('.fir').text(); // 첫날
@@ -70,7 +77,8 @@ $('.tr_list').on('click',function(){
 			console.log(day2);
 			console.log(day_th);
 			
-			
+			if(book_stat == "예약 대기중"){
+				
 			if(check == "미확인"){
 				
 					$.ajax({
@@ -121,68 +129,6 @@ $('.tr_list').on('click',function(){
 									location.reload();
 							
 								  });
-								
-//						        window.location.href="/etpOrderList";
-						    
-						   
-//								  TokenKey.on("value", function(snapshot) {
-//									  var TokenId = ""
-//										  TokenId = snapshot.val();
-//									  var Tokenkey = TokenId.token;
-//								  });
-								  
-//									$.ajax({	
-//										type : "POST",
-//										url : "/fcm",
-//										dataType : 'json',
-//										data : {token:Tokenkey},
-//										success : function(data){
-//										console.log("들어옴???");
-//										}
-//						        
-						        
-						        
-						        
-//								// 닫기 전에 컨펌 실행
-//								if(confirm("주문자에게 주문 확인 SMS를 보내시겠습니까?")){
-//									
-//									var alarm_content = 'Together' + '\n'
-//									+ order_nm + '님의 예약이 완료 되었습니다.' + '\n'
-//									+ '주문 일시 : ' + t_day + '\n'
-//									+ '상품 명 : ' + product_nm + '\n'
-//									+ '예약 날짜 : ' + first_day + ' ~ ' + last_day
-//									
-//									console.log(alarm_content);
-//									console.log(order_ph);
-//									
-//									var query = {
-//										alarm_content : alarm_content,
-//										order_ph : order_ph
-//									}
-//									
-//									var data = JSON.stringify(query);
-//									
-//									$.ajax({
-//										type: "POST",
-//										url : "SMS_Service",
-//										data : data,
-//										contentType: 'application/json; charset=utf-8',
-//										success : function(data){
-//											if(data == "success"){
-//												alert("완료 되었습니다.");
-//										        window.location.href="/etpOrderList";
-//											}else{
-//												alert("SMS 서비스 오류");
-//											}
-//										}
-//										
-//									}); // ajax END  
-//							    }
-//								else{
-//									$('.bP').bPopup().close();
-//									window.location.href="/etpOrderList";
-//									//취소를 누르면 바로 window.location.href="/etpOrderList" 로 보내 면 될듯
-//								}
 							return false;						
 							}
 						}
@@ -201,11 +147,89 @@ $('.tr_list').on('click',function(){
 				$('.to_price').text('');
 				
 				$('.bP').bPopup().close();
-			}
+			}//======예약 확정 ======
 			
+			}if(book_stat == "취소 대기중"){
+				
+				var context = "[Together]\n"
+			  		context += "[" + order_nm + "] 고객님 예약이 취소처리가 완료되었습니다.\n"
+			  		context += "■ 예약일시 : ["+first_day +"~"+last_day+"]\n"
+			  		context += "■ 매장명 : ["+etp_nm+"]\n"
+			  		context += "■ 주문상품 : ["+product_nm+"]\n"
+			  		context += "■ 가격:["+price+"]\n"
+			  		context += "\n "
+				  	context += "감사합니다."
+			  		console.log(context);	
+				
+				$.ajax({
+					url : "/etpOrderListcancle",
+					type : "POST",
+					dataType : "text",
+					data : {day1,day2,nm,check_val,day_th},
+					success : function(data){
+						if(data == "success"){
+							$('.this_day').text('');
+							$('.pro_nm').text('');
+							$('.nm').text('');
+							$('.ph').text('');
+							$('.fir').text('');
+							$('.la').text('');
+							$('.stat').text('');
+							$('.check').text('');
+							$('.to_price').text('');
+							
+							var newChats = firebase.database().ref().child('Chats').push();
+							  console.log(newChats.key);
+							  newChats.set({
+								  isseen: false,
+								  message: context,
+								  receiver: f_uid,
+								  sender: "3PTCMHLT3wO0Z0BmVUAHDQt0KGs2"
+							  });
+								alert("메세지 전송");
+							
+							alert("완료 되었습니다.");
+							
+							 TokenKey.on("value", function(snapshot) {
+								  var TokenId = ""
+									  TokenId = snapshot.val();
+								  var Tokenkey = TokenId.token;
+								  var cancle = "1";
+							  
+								$.ajax({	
+									type : "POST",
+									url : "/fcm",
+									dataType : 'json',
+									data : {token:Tokenkey,
+											cancle:cancle},
+									success : function(data){
+									console.log("들어옴???");
+									}
+									
+								});
+								location.reload();
+						
+							  });
+						return false;						
+						}
+					}
+				});
+		}else if(check == "확인"){
+			$('.this_day').text('');
+			$('.pro_nm').text('');
+			$('.nm').text('');
+			$('.ph').text('');
+			$('.fir').text('');
+			$('.la').text('');
+			$('.stat').text('');
+			$('.check').text('');
+			$('.to_price').text('');
+			
+			$('.bP').bPopup().close();
+		}
 			
 		});
-		
+		//=====취소확정
 		$('.exit').on('click',function(){
 			
 			$('.this_day').text('');

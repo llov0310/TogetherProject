@@ -26,11 +26,20 @@ $('.tr_list').on('click',function(){
 		var f_uid = $(this).find('td').eq(10).text();
 		user_nm = $(this).find('td').eq(2).text();
 		etp_nm = $(this).find('td').eq(11).text();
-		console.log(user_id);
+		var stat = $(this).find('label').eq(2).text();
+		
+		console.log(stat);
 		console.log(hor_cd);
 		console.log(hor_pet_cd);
 		console.log(f_uid);
 		// 팝업창
+		
+		if(stat == "취소 대기중"){
+			$('.success').text("취소");
+		}else{
+			$('.success').text("확인");
+		}
+		
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
 					positionStyle : 'fixed'});
@@ -96,9 +105,7 @@ $('.tr_list').on('click',function(){
 		
 		
 		$('.success').click(function(){
-			
-			
-			
+						
 			var dname = $(".dogname").text();
 			var dogdi = $(".dogdi").text();
 			var context = "[Together]\n"
@@ -116,6 +123,8 @@ $('.tr_list').on('click',function(){
 		  			console.log(user_nm);
 		  			console.log(dogdi);	
 		  			
+			if(stat == "예약 대기중"){
+				
 				if(check == "미확인"){
 					$.ajax({	
 						type : "POST",
@@ -167,15 +176,78 @@ $('.tr_list').on('click',function(){
 								
 					}
 					});
-				}
-//						
-//				
-//				
-				else if(check == "확인"){
+				
+				}else if(check == "확인"){
 					$('.bP').bPopup().close();
 				}
-			
-			
+			}if(stat == "취소 대기중"){
+				var dname = $(".dogname").text();
+				var dogdi = $(".dogdi").text();
+				var context = "[Together]\n"
+			  		context += "[" + user_nm + "] 고객님께서 예약이 취소처리가 완료되었습니다.\n"
+			  		context += "■ 예약일시 : ["+or_dt1+"]\n"
+			  		context += "■ 매장명 : ["+etp_nm+"]\n"
+			  		context += "■ 예약견 : ["+dname+"]\n"
+			  		context += "■ 접수내역 : ["+dogdi+"]\n"
+			  		context += "\n "
+			  		context += "감사합니다."
+			  
+			 if(check == "미확인"){
+				 $.ajax({	
+						type : "POST",
+						url : "/etphospitalcancle",
+						dataType : 'text',
+						data : {hor_cd},
+					success : function(data){
+						alert("예약취소 확인");
+						console.log(context);
+						$('.tr_pro').text('');
+								$('.bP').bPopup().close();
+							
+								  var newChats = firebase.database().ref().child('Chats').push();
+								  console.log(newChats.key);
+								  newChats.set({
+									  isseen: false,
+									  message: context,
+									  receiver: f_uid,
+									  sender: "3PTCMHLT3wO0Z0BmVUAHDQt0KGs2"
+								  });
+								  
+								  var TokenKey = firebase.database().ref().child('Tokens').child(f_uid).child('TokenUid');
+								  
+								  
+								  TokenKey.on("value", function(snapshot) {
+									  var TokenId = ""
+										  TokenId = snapshot.val();
+									  var Tokenkey = TokenId.token;
+									  var cancle = "1";
+								  
+									$.ajax({	
+										type : "POST",
+										url : "/fcm",
+										dataType : 'json',
+										data : {token:Tokenkey,
+												cancle:cancle},
+										success : function(data){
+										console.log("들어옴???");
+										}
+										
+									});
+									location.reload();
+							
+								  });
+								  
+									
+//								
+								return false;
+						}
+					});
+				 
+				 
+			 }
+				}else if(check == "확인"){
+					$('.bP').bPopup().close();
+				}				
 		});
 	
 		

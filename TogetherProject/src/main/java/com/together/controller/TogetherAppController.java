@@ -1074,6 +1074,7 @@ public class TogetherAppController {
 
 		System.out.println(Map);
 		
+	
 		String or_cd =Map.optString("or_cd");
 		String code = Map.optString("etp_cd");
 		String day = Map.optString("day");
@@ -1111,12 +1112,6 @@ public class TogetherAppController {
 			}
 		}
 		
-		// 현재 값을 받아오는 작업은 끝내놓음
-		
-		
-
-		
-
 		return jobj;
 
 	}

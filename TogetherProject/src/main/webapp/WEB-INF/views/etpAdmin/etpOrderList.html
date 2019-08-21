@@ -44,8 +44,9 @@
 									<td>
 										<div th:switch="${order.or_stat}">
 											<label th:case="'1'" style="color: black">예약 대기중</label> <label
-												th:case="'2'" style="color: red">예약 확정</label> <label
-												th:case="'3'" style="color: blue">취소 대기중</label>
+												th:case="'2'" style="color: red">예약 확정</label> 
+												<label th:case="'3'" style="color: green">취소 대기중</label>
+												<label th:case="'4'" style="color: blue">취소 확정</label>
 										</div>
 									</td>
 									<td th:switch="${order.or_check}"><label th:case="'1'"

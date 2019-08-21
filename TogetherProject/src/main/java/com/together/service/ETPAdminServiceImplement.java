@@ -163,6 +163,24 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 		return mapper.hoscheck(hor_cd);
 	}
 
+	@Override
+	public int updatecancle(String day1, String day2, String check_val, String member_id, String day_th) {
+		// TODO Auto-generated method stub
+		return mapper.updatecancle(day1, day2, check_val, member_id, day_th);
+	}
+
+	@Override
+	public Integer hoscancle(String hor_cd) {
+		// TODO Auto-generated method stub
+		return mapper.hoscancle(hor_cd);
+	}
+
+	@Override
+	public int updatecancle3(String user_id, String or_dt, String or_dt2, String th_dt) {
+		// TODO Auto-generated method stub
+		return mapper.updatecancle3(user_id,or_dt,or_dt2,th_dt);
+	}
+
 
 	
 	

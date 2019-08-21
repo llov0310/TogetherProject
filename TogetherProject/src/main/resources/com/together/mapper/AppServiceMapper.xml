@@ -300,7 +300,7 @@
 	UNION
 	select to_char(h.hor_cd) or_cd,h.hor_stat or_stat,to_char(h.hor_dt_f,'yy/mm/dd hh24:mi') or_dt,
 	to_char(h.hor_dt_l,'yy/mm/dd hh24:mi') or_dt2,NVL(null,0) or_price,
-	to_char(to_date(substr(h.hor_cd,3,8)),'yy/mm/dd') th_dt,h.etp_cd etp_cd,e.etp_nm etp_nm
+	to_char(to_date(substr(h.hor_cd,3,8),'yy/mm/dd','NLS_DATE_LANGUAGE=AMERICAN'),'yy/mm/dd') th_dt,h.etp_cd etp_cd,e.etp_nm etp_nm
 	from hospitalorders h,enterprise e
 	where h.user_id = #{id}
 	and h.etp_cd = e.etp_cd) a

@@ -27,10 +27,10 @@ public class FirebaseFcmController {
 
 	@ResponseBody
 	@RequestMapping(value = "/fcm")
-	public String member_info(Model model, HttpSession session, HttpServletRequest request, @RequestParam String token)
+	public String member_info(Model model, HttpSession session, HttpServletRequest request, @RequestParam String token,@RequestParam String cancle)
 			throws Exception {
 		System.out.println("여긴오냐 시발럼아  엉 엉어ㅓ어엉");
-
+		System.out.println(cancle);
 		System.out.println(token);
 		/*
 		 * List<MobileTokenVO> tokenList = fcmService.loadFCMInfoList(vo);
@@ -47,13 +47,17 @@ public class FirebaseFcmController {
 		conn.setRequestProperty("Authorization", "key=" + apiKey);
 
 		conn.setDoOutput(true);
-
+		String input;
 //        String userId =(String) request.getSession().getAttribute("ssUserId");
-
+		if(cancle.equals("1")) {
+			input = "{\"notification\" : {\"title\" : \"[Together] \", \"body\" : \"예약이 취소되었습니다.\"}, \"to\":\""
+					+ token + "\"}";
+		}else {
 		// 이렇게 보내면 주제를 ALL로 지정해놓은 모든 사람들한테 알림을 날려준다.
-		String input = "{\"notification\" : {\"title\" : \"[Together] \", \"body\" : \"예약이 완료되었습니다.\"}, \"to\":\""
+			input = "{\"notification\" : {\"title\" : \"[Together] \", \"body\" : \"예약이 완료되었습니다.\"}, \"to\":\""
 				+ token + "\"}";
-
+		}
+		
 		// 이걸로 보내면 특정 토큰을 가지고있는 어플에만 알림을 날려준다 위에 둘중에 한개 골라서 날려주자
 //        String input = "{\"notification\" : {\"title\" : \" 여기다 제목넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\" 여기가 받을 사람 토큰  \"}";
 
