@@ -34,12 +34,17 @@ $('.tr_list').on('click',function(){
 		console.log(f_uid);
 		// 팝업창
 		
+		
 		if(stat == "취소 대기중"){
 			$('.success').text("취소");
-		}else{
+			$('.no').hide();
+		}if(stat == "예약 확정"){
 			$('.success').text("확인");
+			$('.no').hide();
+		}if(stat == "예약 대기중"){
+			$('.success').text("확인");
+			$('.no').show();
 		}
-		
 		$('.bP').bPopup({follow : [false,false],
 			opacity : 0.6,
 					positionStyle : 'fixed'});
@@ -122,6 +127,7 @@ $('.tr_list').on('click',function(){
 					console.log(dname);
 		  			console.log(user_nm);
 		  			console.log(dogdi);	
+		  			console.log(hor_pet_cd);
 		  			
 			if(stat == "예약 대기중"){
 				
@@ -130,7 +136,12 @@ $('.tr_list').on('click',function(){
 						type : "POST",
 						url : "/etphospitalOrdercheck",
 						dataType : 'text',
-						data : {hor_cd},
+						data : {hor_cd,
+							petcode:hor_pet_cd,
+							user_id,
+							settime1:or_dt1,
+							settime2:or_dt2,
+							content:dogdi,etp_nm},
 					success : function(data){
 						alert("예약 확인");
 						console.log(context);
@@ -159,7 +170,8 @@ $('.tr_list').on('click',function(){
 										type : "POST",
 										url : "/fcm",
 										dataType : 'json',
-										data : {token:Tokenkey},
+										data : {token:Tokenkey,
+										    cancle:"3"},
 										success : function(data){
 										console.log("들어옴???");
 										}

@@ -9,6 +9,7 @@ import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 
 import com.together.domain.OrdersVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ProductVO;
 
 public interface ETPAdminMapper {
@@ -83,6 +84,8 @@ public interface ETPAdminMapper {
 	public Integer hoscancle(@Param("hor_cd") String hor_cd);
 
 	public int updatecancle3(@Param("user_id") String user_id, @Param("day") String or_dt, @Param("day2") String or_dt2, @Param("t_day") String th_dt);
+
+	public int hosdiarys(PetDiaryVO insPet);
 
 
 }

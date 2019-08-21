@@ -9,6 +9,7 @@ import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 
 import com.together.domain.OrdersVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ProductVO;
 import com.together.mapper.ETPAdminMapper;
 
@@ -179,6 +180,12 @@ public class ETPAdminServiceImplement implements ETPAdminService {
 	public int updatecancle3(String user_id, String or_dt, String or_dt2, String th_dt) {
 		// TODO Auto-generated method stub
 		return mapper.updatecancle3(user_id,or_dt,or_dt2,th_dt);
+	}
+
+	@Override
+	public int hosdiarys(PetDiaryVO insPet) {
+		// TODO Auto-generated method stub
+		return mapper.hosdiarys(insPet);
 	}
 
 

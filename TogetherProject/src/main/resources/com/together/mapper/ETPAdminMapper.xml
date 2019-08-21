@@ -221,6 +221,13 @@ o.or_stat,o.or_check,p.etp_cd,sum(or_price) as or_price,m.user_nm,m.ph_no,to_cha
 		]]>
 	</select>
 
+	<insert id="hosdiarys" parameterType="com.together.domain.PetDiaryVO">
+		insert into petdiary values 
+		('PET'||to_char(sysdate,'yyyymmdd')||PET_DIARY_SEQ.nextval,#{user_id},
+        to_timestamp(#{pet_dia_settime1_char},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN'),
+        to_timestamp(#{pet_dia_settime2_char},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN'),
+        #{pet_dia_petcode},#{pet_dia_content},2)
+	</insert>
 	
 	
 </mapper>

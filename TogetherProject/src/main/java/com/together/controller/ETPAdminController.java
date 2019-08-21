@@ -35,6 +35,7 @@ import com.together.domain.HospitalOrdersVO;
 
 import com.together.domain.MemberVO;
 import com.together.domain.OrdersVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ProductVO;
 import com.together.service.ETPAdminService;
 
@@ -415,15 +416,26 @@ public class ETPAdminController {
 	//병원 상세페이지 확인클릭시
 	@RequestMapping(value = "/etphospitalOrdercheck", method = RequestMethod.POST)
 	@ResponseBody
-	public String etphospitalOrdercheck(Model model, HttpServletRequest request, HttpSession session ,@RequestParam String hor_cd) {
+	public String etphospitalOrdercheck(Model model, HttpServletRequest request,@RequestParam String hor_cd,
+			@RequestParam String petcode,@RequestParam String user_id,@RequestParam String settime1,@RequestParam String settime2,
+			@RequestParam String content,@RequestParam String etp_nm) {
 	
-		String id = ((MemberVO) request.getSession().getAttribute("user")).getUser_id();
-
-		System.out.println("여기오니");
-		System.out.println(hor_cd);
+		
 		Integer check = etpAdminService.hoscheck(hor_cd);
+		
+		PetDiaryVO insPet = new PetDiaryVO();
+		insPet.setUser_id(user_id);
+		insPet.setPet_dia_settime1_char(settime1);
+		insPet.setPet_dia_settime2_char(settime2);
+		insPet.setPet_dia_petcode(petcode);
+		String contents ="["+etp_nm+"]\n" +"[진단내역]\n"+content; 
+		insPet.setPet_dia_content(contents);
+		
+		int diary = etpAdminService.hosdiarys(insPet);
+		
 	        return "good";
 	}
+	
 	@RequestMapping(value = "/etphospitalcancle", method = RequestMethod.POST)
 	@ResponseBody
 	public String etphospitalcancle(Model model, HttpServletRequest request, HttpSession session ,@RequestParam String hor_cd){

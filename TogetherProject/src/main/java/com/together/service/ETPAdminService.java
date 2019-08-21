@@ -7,6 +7,7 @@ import com.together.domain.EnterpriseVO;
 import com.together.domain.HospitalOrdersVO;
 
 import com.together.domain.OrdersVO;
+import com.together.domain.PetDiaryVO;
 import com.together.domain.ProductVO;
 
 public interface ETPAdminService {
@@ -63,6 +64,8 @@ public interface ETPAdminService {
 	public Integer hoscancle(String hor_cd);
 	//장례 주문취소
 	public int updatecancle3(String user_id, String or_dt, String or_dt2, String th_dt);
+	
+	public int hosdiarys(PetDiaryVO insPet);
 	
 	
 }
