@@ -28,7 +28,7 @@ import java.io.InputStreamReader;
 public class FirebaseFcmController {
 
 	@ResponseBody
-	@RequestMapping(value = "/fcm")
+	@RequestMapping(value = "/fcm" ,method=RequestMethod.POST)
 	public String member_info(Model model, HttpSession session, HttpServletRequest request, @RequestParam String token,@RequestParam String cancle)
 			{
 		System.out.println("여긴오냐 시발럼아  엉 엉어ㅓ어엉");

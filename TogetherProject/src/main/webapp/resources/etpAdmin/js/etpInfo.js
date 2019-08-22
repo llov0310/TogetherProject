@@ -1,6 +1,5 @@
 var path = null; // 파일 업로드를 위한 변수 선언
 
-$(document).ready(function(){
 	var img_src = $('#img_div > img').attr('src');
 	// 파이어베이스를 이용한 파일 업로드 부분
 	// Your web app's Firebase configuration
@@ -123,4 +122,3 @@ $(document).ready(function(){
 	
 		});
 	
-});

@@ -1,4 +1,3 @@
-	$(document).ready(function() {
  		$("#chmember").hide(); 
 		$("#delok").click(function() {
 			if ($("input:checkbox[name='del']").is(":checked") == true){
@@ -43,5 +42,5 @@
 					}); 
 			}
 		});
-	});
+
 	

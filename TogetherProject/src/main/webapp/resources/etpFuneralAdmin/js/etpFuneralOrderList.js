@@ -36,8 +36,13 @@ $('.tr_list').on('click',function(){
 		
 		if(book_stat == "취소 대기중"){
 			$('.success').text("취소");
-		}else{
+			$('.no').hide();
+		}if(book_stat == "예약 확정"){
 			$('.success').text("확인");
+			$('.no').hide();
+		}if(book_stat == "예약 대기중"){
+			$('.success').text("확인");
+			$('.no').show();
 		}
 		
 		$('.bP').bPopup({follow : [false,false],
@@ -184,7 +189,7 @@ $('.tr_list').on('click',function(){
 												type : "POST",
 												url : "/fcm",
 												dataType : 'json',
-												data : {token:Tokenkey},
+												data : {token:Tokenkey,cancle:"2"},
 												success : function(data){
 												console.log("들어옴???");
 												}
