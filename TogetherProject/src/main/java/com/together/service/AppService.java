@@ -118,4 +118,9 @@ public interface AppService {
 	// 장례 예약취소
 	public int forder_cancle(String or_cd, String code, String day, String day2);
 
+	
+	//캘린더 수정 삭제
+	public int updateCal(PetDiaryVO diary);
+	public int deleteCal(PetDiaryVO diary);
+
 }

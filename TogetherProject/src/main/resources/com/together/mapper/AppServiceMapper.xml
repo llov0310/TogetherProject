@@ -334,5 +334,23 @@
 	and hor_cd = #{or_cd}
 	</update>
 	
+	<update id="updateCal" parameterType="com.together.domain.PetDiaryVO">
+	update petdiary set pet_dia_content= #{pet_dia_content},
+	pet_dia_settime1 = to_timestamp(#{pet_dia_settime1_char},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN'),
+	pet_dia_settime2 = to_timestamp(#{pet_dia_settime2_char},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN'),
+	user_id = #{user_id}
+	where pet_dia_settime1 = to_timestamp(#{b_time1},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and pet_dia_settime2 = to_timestamp(#{b_time2},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN')
+	and pet_dia_content= #{b_content}
+	</update>
+	
+	<delete id="deleteCal" parameterType="com.together.domain.PetDiaryVO">
+	DELETE from petdiary 
+	where pet_dia_content= #{pet_dia_content} and
+	pet_dia_settime1 = to_timestamp(#{pet_dia_settime1_char},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN') and
+	pet_dia_settime2 = to_timestamp(#{pet_dia_settime2_char},'yy/mm/dd hh24:mi','NLS_DATE_LANGUAGE=AMERICAN') and
+	user_id = #{user_id}
+	</delete>
+	
 	 
 </mapper>

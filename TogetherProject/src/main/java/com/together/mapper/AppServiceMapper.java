@@ -109,7 +109,11 @@ public interface AppServiceMapper {
 	public int forder_cancle(@Param("or_cd") String or_cd,
 			@Param("code") String code, 
 			@Param("day") String day, 
-			@Param("day2") String day2); 
+			@Param("day2") String day2);
+
+	public int updateCal(PetDiaryVO diary);
+
+	public int deleteCal(PetDiaryVO diary); 
 
 	
 

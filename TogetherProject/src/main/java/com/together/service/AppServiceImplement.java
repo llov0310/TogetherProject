@@ -239,4 +239,16 @@ public class AppServiceImplement implements AppService {
 		return mapper.forder_cancle(or_cd,code,day,day2);
 	}
 
+	@Override
+	public int updateCal(PetDiaryVO diary) {
+		// TODO Auto-generated method stub
+		return mapper.updateCal(diary);
+	}
+
+	@Override
+	public int deleteCal(PetDiaryVO diary) {
+		// TODO Auto-generated method stub
+		return mapper.deleteCal(diary);
+	}
+
 }

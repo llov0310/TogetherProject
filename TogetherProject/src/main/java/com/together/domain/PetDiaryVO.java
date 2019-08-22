@@ -26,4 +26,9 @@ public class PetDiaryVO {
 	private String birth_dt;
 	private String f_uid; //파이어베이스 아이디가 만들어질 때 생성되는 uid
 	
+	//업데이트를 위한 이전 날짜 변수
+	private String b_content;
+	private String b_time1;
+	private String b_time2;
+	
 }

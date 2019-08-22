@@ -1115,5 +1115,58 @@ public class TogetherAppController {
 		return jobj;
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/UpdateCalendar", method = RequestMethod.POST)
+	public JSONObject UpdateCalendar(@RequestBody String a) {
+
+		String user_info = URLDecoder.decode(a);
+
+		JSONObject Map = new JSONObject();
+		Map = JSONObject.fromObject(user_info);
+		
+		
+		PetDiaryVO diary = new PetDiaryVO();
+		JSONObject jobj = new JSONObject(); // 최종적인 반환형태
+		
+		String Type = Map.optString("Type");
+		
+		 if(Type.equals("1")) { // 수정
+			 
+			 	diary.setB_content(Map.optString("Excontent"));
+			 	diary.setB_time1(Map.optString("ExTime"));
+			 	diary.setB_time2(Map.optString("ExTime2"));
+			 	diary.setPet_dia_content(Map.optString("content"));
+				diary.setPet_dia_settime1_char(Map.optString("first"));
+				diary.setPet_dia_settime2_char(Map.optString("last"));
+				diary.setUser_id(Map.optString("userUid"));
+				
+				int UpdateCal = App.updateCal(diary);
+				
+				jobj.put("result","update");
+				return jobj;
+			 
+		 }else { // 삭제
+			 
+			 
+			 	diary.setPet_dia_content(Map.optString("content"));
+				diary.setPet_dia_settime1_char(Map.optString("first"));
+				diary.setPet_dia_settime2_char(Map.optString("last"));
+				diary.setUser_id(Map.optString("userUid"));
+				
+				int DeleteCal = App.deleteCal(diary);
+				jobj.put("result","delete");
+				return jobj;
+		 }
+		
+		 
+		 
+		
+		
+		
+		
+	}
+	
+	
 
 }
