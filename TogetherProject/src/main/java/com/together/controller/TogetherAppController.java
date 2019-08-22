@@ -1154,7 +1154,7 @@ public class TogetherAppController {
 				diary.setPet_dia_settime2_char(Map.optString("last"));
 				diary.setUser_id(Map.optString("userUid"));
 				
-				int DeleteCal = App.deleteCal(diary);
+				int DeleteCal = App.deleteCal(diary); 
 				jobj.put("result","delete");
 				return jobj;
 		 }
